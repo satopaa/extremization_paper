@@ -1,4 +1,4 @@
-\begin{thebibliography}{17}
+\begin{thebibliography}{18}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -42,6 +42,12 @@ C.~Genest and J.~V. Zidek.
 \newblock Combining probability distributions: A critique and an annotated
   bibliography.
 \newblock \emph{Statistical Science}, 1\penalty0 (1):\penalty0 114--148, 1986.
+
+\bibitem[Hong and Page(2009)]{hong2009interpreted}
+Lu~Hong and Scott Page.
+\newblock Interpreted and generated signals.
+\newblock \emph{Journal of Economic Theory}, 144\penalty0 (5):\penalty0
+  2174--2196, 2009.
 
 \bibitem[Pepe(2003)]{pepe2003statistical}
 Margaret~Sullivan Pepe.
