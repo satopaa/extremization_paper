@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  19 FEB 2014 16:19
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  19 FEB 2014 17:14
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -421,39 +421,39 @@ File: regression.png Graphic file (type png)
  <use regression.png>
 Package pdftex.def Info: regression.png used on input line 127.
 (pdftex.def)             Requested size: 260.17464pt x 138.38658pt.
- [3 <./regression.png>] [4] <N=2.png, id=29, 595.826pt x 248.127pt>
+ [3 <./regression.png>] [4] <N=2.png, id=22, 595.826pt x 248.127pt>
 File: N=2.png Graphic file (type png)
  <use N=2.png>
-Package pdftex.def Info: N=2.png used on input line 190.
+Package pdftex.def Info: N=2.png used on input line 191.
 (pdftex.def)             Requested size: 433.62pt x 180.57841pt.
- [5 <./N=2.png>] <N=N.png, id=37, 595.826pt x 293.898pt>
+ [5]
+<N=N.png, id=38, 595.826pt x 293.898pt>
 File: N=N.png Graphic file (type png)
  <use N=N.png>
-Package pdftex.def Info: N=N.png used on input line 213.
+Package pdftex.def Info: N=N.png used on input line 214.
 (pdftex.def)             Requested size: 433.62pt x 213.88899pt.
- [6 <./N=N.png>]
+ [6 <./N=2.png> <./N=N.png>]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 275.
-
-[7]
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 276.
+ [7]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 321.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 322.
  [8] <ExtremeN2.jpeg, id=52, 481.8pt x 481.8pt>
 File: ExtremeN2.jpeg Graphic file (type jpg)
  <use ExtremeN2.jpeg>
-Package pdftex.def Info: ExtremeN2.jpeg used on input line 467.
+Package pdftex.def Info: ExtremeN2.jpeg used on input line 468.
 (pdftex.def)             Requested size: 143.09283pt x 143.09283pt.
 
 <ExtremeN5.jpeg, id=53, 481.8pt x 481.8pt>
 File: ExtremeN5.jpeg Graphic file (type jpg)
  <use ExtremeN5.jpeg>
-Package pdftex.def Info: ExtremeN5.jpeg used on input line 473.
+Package pdftex.def Info: ExtremeN5.jpeg used on input line 474.
 (pdftex.def)             Requested size: 143.09283pt x 143.09283pt.
 
 <ExtremeN10.jpeg, id=54, 481.8pt x 481.8pt>
 File: ExtremeN10.jpeg Graphic file (type jpg)
  <use ExtremeN10.jpeg>
-Package pdftex.def Info: ExtremeN10.jpeg used on input line 479.
+Package pdftex.def Info: ExtremeN10.jpeg used on input line 480.
 (pdftex.def)             Requested size: 143.09283pt x 143.09283pt.
  [9]
 (./ExtremizingPaper.bbl [10 <./ExtremeN2.jpeg> <./ExtremeN5.jpeg> <./ExtremeN10
@@ -488,7 +488,7 @@ b></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/lo
 cal/texlive/2011/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texliv
 e/2011/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2011/tex
 mf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on ExtremizingPaper.pdf (11 pages, 342289 bytes).
+Output written on ExtremizingPaper.pdf (11 pages, 342598 bytes).
 PDF statistics:
  119 PDF objects out of 1000 (max. 8388607)
  79 compressed objects within 1 object stream
