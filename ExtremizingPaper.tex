@@ -32,9 +32,10 @@
 \usepackage{rotating}
 \usepackage{geometry}
 \usepackage{fix-cm}
-\usepackage{subfigure}
+%\usepackage{subfigure}
 \usepackage{natbib}
-
+\usepackage{caption}
+\usepackage{subcaption}
 
 \renewcommand{\baselinestretch}{1.2}
 \setlength{\topmargin}{-0.3in}
@@ -62,7 +63,9 @@
 \newcommand{\E}{\mathbb{E}}
 \newtheorem{defi}{Definition}
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{lemma}[theorem]{Observation}
+\newtheorem{observation}[theorem]{Observation}
+
 
 \newcommand{\myfunction}[3]
 {${#1} : {#2} \rightarrow {#3}$ }
@@ -78,7 +81,7 @@
 
 \begin{document}
 
-\title{Information Theoretic Alternative to Subjective Response Generation with an Application to Probability Extremization}
+\title{Information Theoretic Model for Subjective Response Data with an Application to Probability Extremization}
 %\title{A Novel Framework for Analyzing Subjective Response Data}
 \author{
 Ville A. Satop\"a\"a, Robin Pemantle, and Lyle H. Ungar\\
@@ -100,25 +103,89 @@ Typically randomness in scientific estimation is assumed to arise from unmeasure
 
 
 \section{Introduction}
-Experts are often required to form estimates under incomplete information. These estimates can be made in several ways. Currently the two main approaches classify the estimates either as \textit{generated} or \textit{interpreted} (\cite{hong2009interpreted}). An estimate is considered generated if the expert draws it from a given probability distribution. For instance, estimating the length of an object with a ruler can be assumed to be equivalent to drawing a value from a symmetric distribution, such as the Gaussian distribution, that is centered at the true length. An estimate is said to be interpreted if the expert first filters reality into set of categories and then makes an estimate by applying active cognitive effort to these categories. For instance, the score given by an Olympic judge on a figure skating performance can be considered interpreted. The judge has his personal set of criteria (categories) that ultimately decides the score. 
+Consulting experts are often asked to make estimates under incomplete information. If the experts form their estimates independently of each other, their estimates are likely to be different. To analyze the estimates with  statistical methodology, it is mathematically convenient and often necessary to assume that these differences  arise from a probability distribution. For instance, consider a group of experts who aim to eyeball the height of a building. Their estimates can be modeled as independent draws from a Gaussian distribution that is centered at the true height. Even though distributional assumptions clearly oversimplify the reality, they are typically useful enough to improve our understanding of the world. 
 
-The interpretation framework is clearly a more realistic model for subjective response data. Given that this kind of data is very common in real-world applications, such as product reviews, online auctions, and voting, this framework is a great advance in understanding the gap between experimental and real-world results. Unfortunately, it is too general to be useful in developing novel methodology. First,  interpretations differ between individuals and arise from a complex cognitive process that can be very difficult to estimate. Second, it is unclear how to construct the model to incorporate all the information that is used in making these interpretations.
+Unfortunately, this is unlikely to be the case with subjective response data such as experts' beliefs. \cite{hong2009interpreted} explain how standard distributional assumptions can be dramatically misaligned  with the process that generates subjective responses. As an alternative to the aforementioned process of  \textit{generating} estimates from a probability distribution, they introduce the idea of  \textit{interpreted} estimates. An estimate is said to be interpreted if the expert first filters reality into set of categories and then makes an estimate by applying active cognitive effort to these categories. For instance, consider an Olympic judge who is evaluating a figure skating performance. The judge first interprets the performance with the aid of categories, and then scrutinizes that experience into a final score. Therefore any differences between estimates is assumed to arise from cognitive diversity instead of an underlying probability distribution.
+
+%The observation that people use categories to interpret the world is well-established in the psychology literature (see, e.g, \citet{fryer2008categorical, page2008difference}).  
+
+The interpretive framework is clearly a more realistic model for subjective response data. Given that this kind of data is very common in real-world applications, such as product reviews, online auctions, and voting, this framework shows great potential in improving our understanding of many experimental results. Unfortunately, the interpretive framework is more of an abstract concept than a concrete model for subjective response data. Therefore it is not clear how this framework can be applied in complex real world situations. 
+%The framework does, however, offer  some novel and useful directions.
 
 
-The first contribution of this paper is to introduce a novel framework for signal generation. This framework, that is considered \textit{information theoretic}, is based on the distribution of information among the experts. The expert is assumed to give an optimal estimate conditional on his personal information set. Two experts with overlapping information sets are assumed to produce positively correlated estimates. By abstracting away the intractable components of the interpretation framework, the information theoretic framework arrives at a good compromise between psychological and analytical models. This makes it highly attractive for development of future methodology.
+The first contribution of this paper is to introduce a concrete model that can be used to analyze subjective response data in a real-world situation. 
+%This model shares several key characteristics with the interpretive framework and therefore ends up supporting many of the observations made in \cite{hong2009interpreted}. 
+The model is considered \textit{information theoretic} as it is based on the distribution of information among the experts. The information structure is completely characterized by the amount of information known by each expert and the amount information shared between any two experts. For instance, experts $A$ and $B$ may know 10\% and 5\%  of the full information, respectively. If they share 2.5\% of the full information, then their information sets overlap and their estimates are assumed to be positively correlated. The experts are assumed to give optimal estimates conditional on their private information sets. This means that a larger information set typically leads to a more accurate estimate, and two identical information sets lead to the same estimate. Similarly to the interpretative framework, any heterogeneity in the estimates arises from cognitive diversity. In reality experts, however, do not typically make optimal use of their information. Therefore the information theoretic framework is a simplification of the psychological nature of the process that generates subjective responses. It does, however, offer a compromise that strikes a good balance between psychological realism and analytical convenience. Therefore it is a platform that is particularly convenient for development of future methodology.
 
-The second contribution of this paper is to illustrate the information theoretic framework  on probability aggregation. Combining multiple probability forecasts is an important problem with many applications including medical diagnosis (\citet{wilson1998prediction, pepe2003statistical}), political and socio-economic foresight (\citet{tetlock2005expert}), and meteorology (\citet{sanders1963subjective, vislocky1995improved, baars2005performance}). There is strong empirical evidence that bringing together the strengths of different experts by combining their probability forecasts into a single consensus, known as the \textit{crowd belief},  improves predictive performance. The naive approach is to simply average the individual probability forecasts. Recent developments, however, suggest that shifting the average probability closer to its nearest extreme (0.0 or 1.0), known as \textit{extremizing}, yields improved forecasting performance. For instance, \citet{satopaa} uses a linear regression model in the logit-space to derive an extremizing aggregator that performs well on real-world data. \citet{Ranjan08} propose transforming the average probability with the CDF of a beta distribution. If both the shape and scale of this beta distribution are equal and constrained to be at least 1.0,  the aggregator extremizes and has some attractive theoretical properties (\cite{Wallsten2001}).  \citet{Baron} provide  two intuitive justifications for extremizing.
+The second contribution of this paper is to apply the information theoretic framework  on probability aggregation. Combining multiple probability forecasts is an important problem with many applications including medical diagnosis (\citet{wilson1998prediction, pepe2003statistical}), political and socio-economic foresight (\citet{tetlock2005expert}), and meteorology (\citet{sanders1963subjective, vislocky1995improved, baars2005performance}). There is strong empirical evidence that bringing together the strengths of different experts by combining their probability forecasts into a single consensus, known as the \textit{crowd belief},  improves predictive performance. For instance, consider the aforementioned experts $A$ and $B$. The union of their information sets covers 12.5\% of the full information. Therefore it seems plausible that some combination of their probability forecasts is more informed than either one of the individual probabilities. The naive approach is to simply average the individual probability forecasts. To see why this approach can be problematic, recall that $A$'s forecast is based on a larger information set and hence typically more accurate than $B$'s forecast. Therefore $A$'s forecast is on average closer to the actual outcome of the event ($0$ if it does not happen and $1$ if it does happen) and should be given a higher weight in the final aggregate.  The average of the forecast, however, gives each forecast equal weight in the final aggregate and hence ends up being necessarily too close to 0.5. Recent developments suggest that shifting the average probability closer to its nearest extreme (0.0 or 1.0), known as \textit{extremizing}, yields improved forecasting performance. For instance, \citet{satopaa} uses a linear regression model in the logit-space to derive an extremizing aggregator that performs well on real-world data. \citet{Ranjan08} propose transforming the average probability with the cumulative distribution function of a beta distribution. If both the shape and scale of this beta distribution are equal and constrained to be at least 1.0,  the aggregator extremizes and has some attractive theoretical properties (\cite{Wallsten2001}).  \citet{Baron} provide yet another extremizing aggregation in addition to two intuitive justifications for extremizing.
 
 %To give an intuitive justification for extremization,  consider a binary event whose outcome is still uncertain.  For the sake of illustration, assume that 0.9 is the most informed probability forecast that could be given based on all the available information. Before having any knowledge of the event, a rational forecaster aiming to minimize a reasonable loss function, such as the Brier score, has no reason to give anything but 0.5 as his probability forecast. In the Bayesian terminology, this estimate can be viewed as his prior belief. As he acquires more information, he updates his prior belief accordingly.  This updated belief, which can be viewed as his posterior belief, is a compromise between his prior belief and the information acquired. Because he does not have all the available information, his estimate is conservative and necessarily too close to 0.5. If most forecasters fall somewhere on this spectrum between ignorance and full information, their average forecast tends to fall strictly between 0.5 and 0.9. It this difference between the ``true probability" and the average forecast that extremization aims to close. 
 
-Many of the current extremizing aggregators, however, are overly simplistic or too detached from the psychology literature to provide the researcher any insight beyond the aggregate probability. It is mainly for this reason that it is still not well-understood when and how much the average probability should be extremized. Therefore it is necessary to learn the amount of extremizing from a separate training dataset. Furthermore, many of these aggregators assume that the individual probability forecasts arise from the generative framework. Under this assumption the optimal aggregation is accessible by weighted averaging (\cite{parunak2013characterizing}). However, given that extremizing is known to improve the performance of the aggregate, it is unlikely that the generative framework is appropriate for probability aggregation. These shortcomings are remedied by developing an aggregator based on our information theoretic framework. Under this model the average forecast is always extremized, and the amount of extremization is available in a closed-form. Given that this form depends on three intuitive parameters, it allows us to investigate when and how much extremization should be performed. 
+These aggregators, however, are based on ad hoc techniques that learn the amount of extremization by optimizing a scoring rule over a separate training set (\citet{Gneiting04strictlyproper}). It is concerning that extremization does not arise naturally from the underlying model. These aggregators are also too detached from the psychology literature to provide any insight beyond the aggregate probability. Therefore it is still not well-understood when and how much the average probability should be extremized. 
+%Therefore it is necessary to learn the amount of extremizing from a separate training dataset. Furthermore, many of these aggregators assume that the individual probability forecasts arise from the generative framework. Under this assumption the optimal aggregation is accessible by weighted averaging (\cite{parunak2013characterizing}). However, given that extremizing is known to improve the performance of the aggregate, it is unlikely that the generative framework is appropriate for probability aggregation. 
+This paper remedies these shortcomings by developing an aggregator that is based on the information theoretic framework. Under this model the average forecast is always extremized. The amount of extremization is given in a closed-form expression that can be applied to any number of experts with any given information structure. By assuming a simplified information structure, the amount of extremization can be made to depend only on three intuitive parameters. This allows us to visualize extremization and make concrete statements on when and how much extremization should be performed. 
 
-This paper is structured as follows. The first section introduces our information theoretic framework and  compares it with the generated and interpreted frameworks. The framework is then illustrated on probability aggregation. After deriving a closed-form expression for the amount of extremization, this form is analyzed in full generality and under a compound symmetric information structure. This simplified structure allows us to discuss and understand extremization in terms of a few intuitive parameters. The paper concludes with a discussion of  model limitations and future directions. 
+This paper is structured as follows. The first section introduces our information theoretic framework and  compares it with the generative and interpretive frameworks. The second section applies the framework on probability aggregation. The third section derives a closed-form expression for the amount of extremization and analyzes this expression under unstructured and a compound symmetric information structure. The paper concludes with a discussion of  model limitations and future directions. 
 
 
 
 \section{Information Theoretic Framework}
-This section illustrates the information theoretic framework. The framework is discussed in comparison with the generative and interpretation frameworks. This comparison is by no means comprehensive as signal generation is a large part of the statistical literature.
+This section discusses the information theoretic framework in comparison with the generative and interpretive frameworks. This comparison is by no means comprehensive as signal generation is a large part of the statistical literature. The first subsection builds  intuition via a simple example. The second subsection provides a technical comparison. 
+
+\subsection{Example}
+Consider two experts $1$ and $2$ who are observing a hockey tournament. The tournament consists of three games played between teams RED and BLUE. After seeing the outcome of the first game, the experts are asked to report the probability of RED winning the tournament. Assume that RED wins if $G_1 + G_2 + G_3 \geq 0$, where $G_k \in \{-1,1\}$ indicates whether RED won the $k$th game. Suppose that all 8 possible combinations are equally likely. 
+%Therefore the true probability of team RED winning the tournament is 1/2.
+
+\begin{enumerate}
+\item[] \textit{Generated Estimate:} Based on the first game, the $i$th expert believes that RED has an independent chance of $q_i$ winning any of the two remaining games. This probability is assumed to arise from a probability distribution defined on the unit interval. Therefore any individual differences in the way the experts process the first game and turn the acquired information into a probability $q_i$ are assumed to arise from the probability distribution. The $i$th expert reports
+\begin{align}
+p_i &= \begin{cases}
+q_i(2-q_i) & \text{ if } G_1 = 1\\
+q_i^2 & \text{ otherwise } 
+\end{cases}
+\label{basisP}
+\end{align}
+
+\item[] \textit{Interpreted Estimate:} Interpretations are different ways of seeing the first game. Assume that RED's performance in the first game can be attributed entirely to its \textit{defense} $D$ and \textit{offense} $O$ that are equally likely to be either good 1 or bad -1. Expert 1 follows only the defense and Expert 2 looks only at the offensive play. Based on these attributes the experts construct their final predictive models. If RED wins a game when $D + 2O \geq 2$, the experts report (\ref{basisP}) but with
+\begin{align*}
+q_1 &= \begin{cases}
+1/2 & \text{ if } D = 1\\
+0 & \text{ otherwise }
+\end{cases}
+\end{align*}
+and
+\begin{align*}
+q_2 &= \begin{cases}
+1 & \text{ if } O = 1\\
+0 & \text{ otherwise }
+\end{cases}
+\end{align*}
+%
+%
+%It is not necessary for the experts to have the same knowledge. This example illustrates that even under the same information, they can choose to give different probability forecasts. The differences then arise from their personal interpretations of the importance of the first game.
+
+\item[] \textit{Information Theoretic Estimate:} The experts know that RED has a 1/2 chance of winning any given game. If expert 1 knows 2/3 of the full information, i.e. the value of $X_1 = G_j + G_k$ for some $j,k \in \{1, 2, 3\}$ with $j \neq k$, then it is optimal to report 
+\begin{align*}
+p_1 &= \begin{cases}
+0 & \text{ if } X_1 = -2\\
+1/2 & \text{ if } X_1 = 0\\
+1 & \text{ if } X_1 = 2\\
+\end{cases}
+\end{align*}
+If expert 2 only knows 1/3 of the full information, i.e. the value of $X_2 = P_j$ for some $j \in \{1, 2, 3\}$, then 
+\begin{align*}
+p_2 &= \begin{cases}
+1/4 & \text{ if } X_2 = -1\\
+3/4 & \text{ if } X_2 = 1\\
+\end{cases}
+\end{align*}
+If all the information known by expert 2 is also known by expert 1, their forecasts are positively correlated. In this example the correlation would be $\sqrt{2}/2 \approx 0.71$.
+
+
+\end{enumerate}
+
+
+\subsection{Technical Comparison}
 
 Generated estimates can be considered as noisy or distorted versions of the target value. To make this more specific, let $\Omega$ be a set of states of the world. The set of possible outcomes is denoted with $S$. For illustrative purposes, this is assumed to be $S = \{G, B\}$, where $G$ and $B$ denote good and bad outcomes, respectively. The outcome function, $F: \Omega \to S$, maps the state of the world deterministically to the true outcome. If $p$ is the true probability for a good outcome, then a generated probability forecast is realized by $\xi(p)$, where $\xi: [0,1] \to [0,1]$ is a function that randomly distorts the true probability. Therefore any estimate heterogeneity stems from randomness that is typically assumed to be caused by uncontrolled or unmeasured factors. Even though this framework is mathematically convenient, it can be drastically misaligned with the psychology literature and hence lead to results that are not reflective of the actual environment that produces the estimates.
 
@@ -251,8 +318,8 @@ Let $\alpha$ represents the amount of extremization that is performed for the av
 \end{align}
 Even though this expression assumes no structure on $\Sigma_{22}$ and depends on $N +\frac{N(N-1)}{2}$ unknown parameters, it can be used to gain insight on the behavior of the extremizing constant, $\alpha$. One useful development is to determine the amount of information in $\boldsymbol{X}$. 
 
-\begin{lemma}
-\label{infoLemma}
+\begin{observation}
+\label{infoObservation}
 If $\delta_0$ denotes the information in $\boldsymbol{X}$, then 
 \begin{align*}
 %\frac{N \Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\left(\boldsymbol{1}_N' \boldsymbol{X} \right) \sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}} &= \alpha\\
@@ -261,7 +328,7 @@ If $\delta_0$ denotes the information in $\boldsymbol{X}$, then
 %\frac{1}{\sqrt{1-\delta_0}} &= \frac{\frac{N}{(N-1)\rho +1}}{\sqrt{1- \frac{N\delta}{(N-1)\rho +1} }} \\
 \alpha &= \frac{1}{\sqrt{1-\delta_0}} &\Leftrightarrow&& \delta_0 &=1-\alpha^{-2}
 \end{align*}
-\end{lemma}
+\end{observation}
 \begin{proof}
 Let $\alpha_N$ denote the extremizing constant for $\boldsymbol{X}$. Consider a single expert whose probit forecast is $\bar{X}$. Denote the size of his information set by $\delta_0$. The extremizing constant for his forecast, as is given by (\ref{alpha}), simplifies to
 \begin{align*}
@@ -271,20 +338,20 @@ Setting $\alpha_1 = \alpha_N$ gives us the final result.
 
 \end{proof}
 
-Based on Lemma \ref{infoLemma} there is a monotonic and positive relationship between $\alpha$ and $\delta_0$. This means that the more the sample average is extremized the more information its corresponding $\boldsymbol{X}$ contains, and \textit{vice versa}. Lemma \ref{infoLemma}  is interesting for two reasons: (a) it allows the researcher to use black-box models from existing literature to determine the extremizing constant and then use it to analyze the amount of information in $\boldsymbol{X}$, and (b) it allows us to easily show that $\alpha \geq 1$ under any information structure.
+Based on Observation \ref{infoObservation} there is a monotonic and positive relationship between $\alpha$ and $\delta_0$. This means that the more the sample average is extremized the more information its corresponding $\boldsymbol{X}$ contains, and \textit{vice versa}. Observation \ref{infoObservation}  is interesting for two reasons: (a) it allows the researcher to use black-box models from existing literature to determine the extremizing constant and then use it to analyze the amount of information in $\boldsymbol{X}$, and (b) it allows us to easily show that $\alpha \geq 1$ under any information structure.
 
-\begin{theorem}
+\begin{observation}
 \label{positiveThm}
 Under the model described in Section \ref{Model}, the extremizing factor, $\alpha$, is always greater or equal to 1. This means that the average probit forecast is always extremized. 
-\end{theorem}
+\end{observation}
 \begin{proof} 
-By Lemma \ref{infoLemma} we have that 
+By Observation \ref{infoObservation} we have that 
 \begin{align*}
 \alpha &= \frac{1}{\sqrt{1-\delta_0}} 
 \end{align*}
 Given that $\delta_0 \in [0,1]$, it follows that $\alpha \in [1, \infty)$. 
 
-%By Lemma \ref{infoLemma}, the extremizing constant $\alpha$ is the smallest when the sample $\boldsymbol{X}$ has the least amount of information. This happens when all the experts know the same information, and the amount of this information is very small. Assume without loss of generality that $\delta_j = \delta$. Then $\rho_{i,j} = \delta$ and
+%By Observation \ref{infoObservation}, the extremizing constant $\alpha$ is the smallest when the sample $\boldsymbol{X}$ has the least amount of information. This happens when all the experts know the same information, and the amount of this information is very small. Assume without loss of generality that $\delta_j = \delta$. Then $\rho_{i,j} = \delta$ and
 %\begin{align*}
 % \alpha  &= \frac{N \Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\left(\boldsymbol{1}_N' \boldsymbol{X} \right) \sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}} = \frac{1}{\sqrt{1- \delta }} \downarrow 1
 %\end{align*}
@@ -440,36 +507,62 @@ Notice, however, that $N\delta - 1 > N - \delta^{-1}$ only when $\delta < 1/N$. 
 %dev.off()
 %\end{verbatim}
 
+%
+%
+%\begin{figure}[hbt!]
+%\begin{minipage}[t]{0.33\textwidth}
+%\centering
+%\includegraphics[width=\textwidth, height = \textwidth]{ExtremeN2.jpeg}
+%\caption{N = 2}
+%\label{ExtremeN5}
+%\end{minipage}
+%\begin{minipage}[t]{0.33\textwidth}
+%\centering
+%\includegraphics[width=\textwidth, height = \textwidth]{ExtremeN5.jpeg}
+%\caption{N = 5}
+%\label{ExtremeN10}
+%\end{minipage}
+%\begin{minipage}[t]{0.33\textwidth}
+%\centering
+%\includegraphics[width=\textwidth, height = \textwidth]{ExtremeN10.jpeg}
+%\caption{N = 10}
+%\label{ExtremeN30}
+%\end{minipage}
+%\end{figure}
 
 
-\begin{figure}[hbt!]
-\begin{minipage}[t]{0.33\textwidth}
-\centering
-\includegraphics[width=\textwidth, height = \textwidth]{ExtremeN2.jpeg}
-\caption{N = 2}
+\begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.32\textwidth}
+                \includegraphics[width=\textwidth]{ExtremeN2.jpeg}
+\caption{N = 2}	
 \label{ExtremeN5}
-\end{minipage}
-\begin{minipage}[t]{0.33\textwidth}
-\centering
-\includegraphics[width=\textwidth, height = \textwidth]{ExtremeN5.jpeg}
+        \end{subfigure}%
+        ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+          %(or a blank line to force the subfigure onto a new line)
+        \begin{subfigure}[b]{0.32\textwidth}
+                \includegraphics[width=\textwidth]{ExtremeN5.jpeg}
 \caption{N = 5}
 \label{ExtremeN10}
-\end{minipage}
-\begin{minipage}[t]{0.33\textwidth}
-\centering
-\includegraphics[width=\textwidth, height = \textwidth]{ExtremeN10.jpeg}
+        \end{subfigure}
+        ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+          %(or a blank line to force the subfigure onto a new line)
+        \begin{subfigure}[b]{0.32\textwidth}
+                \includegraphics[width=\textwidth]{ExtremeN10.jpeg}
 \caption{N = 10}
 \label{ExtremeN30}
-\end{minipage}
+        \end{subfigure}
+        \caption{ The amount of log-extremization, $\log(\alpha)$ under different combinations of $N$ (the number of experts), $\delta$ (the amount of information known by one expert), and $\rho$ (the amount of information shared by any two experts)}
 \end{figure}
 
-Expression (\ref{CompoundAlpha}) is particularly convenient because it only depends on three intuitive parameters. Therefore it can be examined graphically. Figures \ref{ExtremeN5} to \ref{ExtremeN30} describe the amount of log-extremization, $\log(\alpha)$, under different values of $\rho, \delta$, and $N$. By Theorem \ref{positiveThm} the amount of extremizing is always greater or equal to 1.0. Notice that most extremization occurs when $\delta = 1.0$ and $\rho = 1$, or when  $\delta = 1/N$ and $\rho = 0$. In the first case, all $N$ experts know whether the event $A$ materializes or not. In the second case, each expert holds an independent set of information such that the group knows all the information. Such a group of experts can re-construct $X_S$ by simply adding up their individual probit forecasts. This means that aggregation becomes voting: if the sum of the probit forecasts is above 0, the event $A$ materializes; else it does not. A similar observation has been made under the interpreted framework (see the example on information aggregation in \cite{hong2009interpreted}). Therefore in the real-world, voting can be expected to work well when the voters form a very knowledgable and diverse group of people. 
 
 
- As we move from these two extreme points towards the upper left corner, where $\delta = 0.0$ and $\rho = 1.0$, the amount of extremizing decreases monotonically to $1.0$. This trend can be deduced directly from Lemma \ref{infoLemma}. The decrease in the amount of information in $\boldsymbol{X}$  is caused by a combination of (i) decrease in the amount of information that each individual expert holds and (ii) increase in the amount of shared information. Therefore the more knowledgable and diverse the group of experts is, the more their average probit forecast should be extremized. Contrast this with the generated framework where higher variance is typically considered negative. Under the information theoretic and interpreted frameworks, however, higher variance implies broader diversity among the experts and hence is considered helpful. 
+Expression (\ref{CompoundAlpha}) is particularly convenient because it only depends on three intuitive parameters. Therefore it can be analyzed graphically. Figures \ref{ExtremeN5} to \ref{ExtremeN30} describe the amount of log-extremization, $\log(\alpha)$, under different values of $\rho, \delta$, and $N$. By Theorem \ref{positiveThm} the amount of extremizing is always greater or equal to 1.0. Notice that most extremization occurs when $\delta = 1.0$ and $\rho = 1$, or when  $\delta = 1/N$ and $\rho = 0$. In the first case, all $N$ experts know whether the event $A$ materializes or not. In the second case, each expert holds an independent set of information such that the group knows all the information. Such a group of experts can re-construct $X_S$ by simply adding up their individual probit forecasts. This means that aggregation becomes voting: if the sum of the probit forecasts is above 0, the event $A$ materializes; else it does not. A similar observation has been made under the interpreted framework (see the example on information aggregation in \cite{hong2009interpreted}). Therefore in the real-world, voting can be expected to work well when the voters form a very knowledgable and diverse group of people. 
 
-From Figures \ref{ExtremeN5} to \ref{ExtremeN30} it is clear that the feasible set of $(\delta, \rho)$-values becomes smaller as $N$ increases. This limitation arises from assuming a compound symmetric overlap structure. Having many experts, each with a considerable amount of information, simply leads to unavoidable overlap in the information sets. 
 
+ As we move from these two extreme points towards the upper left corner, where $\delta = 0.0$ and $\rho = 1.0$, the amount of extremizing decreases monotonically to $1.0$. This trend can be deduced directly from Observation \ref{infoObservation}. The decrease in the amount of information in $\boldsymbol{X}$  is caused by a combination of (i) decrease in the amount of information that each individual expert holds and (ii) increase in the amount of shared information. Therefore the more knowledgable and diverse the group of experts is, the more their average probit forecast should be extremized. Contrast this with the generated framework where higher variance is typically considered negative. Under the information theoretic and interpreted frameworks, however, higher variance implies broader diversity among the experts and hence is considered helpful. 
+
+From Figures \ref{ExtremeN5} to \ref{ExtremeN30} it is clear that the feasible set of $(\delta, \rho)$-values becomes smaller as $N$ increases. This limitation arises from assuming a compound symmetric overlap structure. Having many experts, each with a considerable amount of information, simply leads to unavoidable overlap in the information sets. From the domain restriction on $\rho$, it is clear that $\rho \to 1$ as $N \to \infty$. Therefore in the limit the group of experts is equivalent to a single expert. This is clearly an unrealistic result. When $N = 2$, on other hand, the compound symmetric overlap is completely general. Therefore assuming a compound symmetric information structure can be appropriate for small numbers of experts but becomes overly restrictive as more experts enter the group. 
 
 %\subsection{Information in the Sample Average}
 %It is possible to determine the amount of information in the sample average. This is done by first computing the aggregate probability for the sample average, and then finding the amount of information that a single expert should have in order for his aggregate probability to match with the aggregate probability of the sample average. That is, if $\delta_0$ denotes the information in the sample average, then 

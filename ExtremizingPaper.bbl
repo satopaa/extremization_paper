@@ -24,19 +24,17 @@ Kevin Dobbin and Richard Simon.
   comparison and prognostic classification.
 \newblock \emph{Biostatistics}, 6\penalty0 (1):\penalty0 27--38, 2005.
 
+\bibitem[Gneiting and Raftery(2007)]{Gneiting04strictlyproper}
+Tilmann Gneiting and Adrian~E. Raftery.
+\newblock Strictly proper scoring rules, prediction, and estimation.
+\newblock \emph{Journal of the American Statistical Association}, 102:\penalty0
+  359--378, 2007.
+
 \bibitem[Hong and Page(2009)]{hong2009interpreted}
 Lu~Hong and Scott Page.
 \newblock Interpreted and generated signals.
 \newblock \emph{Journal of Economic Theory}, 144\penalty0 (5):\penalty0
   2174--2196, 2009.
-
-\bibitem[Parunak et~al.(2013)Parunak, Brueckner, Hong, Page, and
-  Rohwer]{parunak2013characterizing}
-H~Parunak, Sven~A Brueckner, Lu~Hong, Scott~E Page, and Richard Rohwer.
-\newblock Characterizing and aggregating agent estimates.
-\newblock In \emph{Proceedings of the 2013 international conference on
-  Autonomous agents and multi-agent systems}, pages 1021--1028. International
-  Foundation for Autonomous Agents and Multiagent Systems, 2013.
 
 \bibitem[Pepe(2003)]{pepe2003statistical}
 Margaret~Sullivan Pepe.
