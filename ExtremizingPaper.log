@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  3 MAR 2014 14:17
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  4 MAR 2014 12:46
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -421,79 +421,72 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
 {/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 135.
- [4]
-Overfull \hbox (10.56392pt too wide) in paragraph at lines 193--194
-\OT1/ptm/m/n/10.95 overlapping sub-sets. This par-ti-tion, know as an \OT1/ptm/
-m/it/10.95 in-ter-pre-ta-tion\OT1/ptm/m/n/10.95 , is de-noted with $\OT1/cmr/m/
-n/10.95 ^^E[] = \OMS/cmsy/m/n/10.95 f\OML/cmm/m/it/10.95 ^^Y[]; ^^Y[]; [] ; ^^Y
-[]\OMS/cmsy/m/n/10.95 g$\OT1/ptm/m/n/10.95 ,
- []
-
-[5] [6] <N=2.png, id=35, 595.826pt x 248.127pt>
+ [4] [5]
+<N=2.png, id=30, 595.826pt x 248.127pt>
 File: N=2.png Graphic file (type png)
  <use N=2.png>
-Package pdftex.def Info: N=2.png used on input line 237.
+Package pdftex.def Info: N=2.png used on input line 223.
 (pdftex.def)             Requested size: 433.62pt x 180.57841pt.
-
-<N=N.png, id=37, 595.826pt x 293.898pt>
+ [6]
+<N=N.png, id=38, 595.826pt x 293.898pt>
 File: N=N.png Graphic file (type png)
  <use N=N.png>
-Package pdftex.def Info: N=N.png used on input line 260.
+Package pdftex.def Info: N=N.png used on input line 252.
 (pdftex.def)             Requested size: 433.62pt x 213.88899pt.
- [7 <./N=2.png>] [8 <./N=N.png>]
+ [7 <./N=2.png>]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 322.
- [9] [10] <ExtremeN2.jpeg, id=56, 481.8pt x 481.8pt>
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 317.
+ [8 <./N=N.png>] [9] <ExtremeN2.jpeg, id=53, 481.8pt x 481.8pt>
 File: ExtremeN2.jpeg Graphic file (type jpg)
-
-<use ExtremeN2.jpeg>
-Package pdftex.def Info: ExtremeN2.jpeg used on input line 537.
+ <use ExtremeN2.jpeg>
+Package pdftex.def Info: ExtremeN2.jpeg used on input line 532.
 (pdftex.def)             Requested size: 138.76157pt x 138.75534pt.
- <ExtremeN5.jpeg, id=57, 481.8pt x 481.8pt>
+
+<ExtremeN5.jpeg, id=54, 481.8pt x 481.8pt>
 File: ExtremeN5.jpeg Graphic file (type jpg)
-
-<use ExtremeN5.jpeg>
-Package pdftex.def Info: ExtremeN5.jpeg used on input line 544.
+ <use ExtremeN5.jpeg>
+Package pdftex.def Info: ExtremeN5.jpeg used on input line 539.
 (pdftex.def)             Requested size: 138.76157pt x 138.75534pt.
- <ExtremeN10.jpeg, id=58, 481.8pt x 481.8pt>
+
+<ExtremeN10.jpeg, id=55, 481.8pt x 481.8pt>
 File: ExtremeN10.jpeg Graphic file (type jpg)
-
-<use ExtremeN10.jpeg>
-Package pdftex.def Info: ExtremeN10.jpeg used on input line 551.
+ <use ExtremeN10.jpeg>
+Package pdftex.def Info: ExtremeN10.jpeg used on input line 546.
 (pdftex.def)             Requested size: 138.76157pt x 138.75534pt.
- [11 <./ExtremeN2.jpeg> <./ExtremeN5.jpeg> <./ExtremeN10.jpeg>] [12] (./Extremi
-zingPaper.bbl [13]
+ [10] [11 <./ExtremeN2.jpeg> <./ExtremeN5.jpeg> <./ExtremeN10.jpeg>] (./Extremi
+zingPaper.bbl
+[12]
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
-) [14] (./ExtremizingPaper.aux) ) 
+ [13]) [14] (./ExtremizingPaper.aux) ) 
 Here is how much of TeX's memory you used:
  5472 strings out of 493633
  81163 string characters out of 3143378
- 150414 words of memory out of 3000000
+ 151414 words of memory out of 3000000
  8641 multiletter control sequences out of 15000+200000
  31973 words of font info for 72 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
  38i,19n,43p,2374b,426s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/local/texlive/2011/texmf-dist/fonts/enc/
-dvips/base/8r.enc}</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmbx10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmex10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmmi10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmmi6.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmmi8.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mmib10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-6.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.p
-fb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
-b></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb>
-</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></
-usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pf
-b></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/lo
-cal/texlive/2011/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texliv
-e/2011/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2011/tex
-mf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on ExtremizingPaper.pdf (14 pages, 324687 bytes).
+{/usr/local/texlive/2011/texmf-dist/fonts
+/enc/dvips/base/8r.enc}</usr/local/texlive/2011/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmbx10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmex10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmmi10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmmi6.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmmi8.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmmib10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr6.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr8.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
+10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6
+.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.p
+fb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm
+10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></u
+sr/local/texlive/2011/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/t
+exlive/2011/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/201
+1/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on ExtremizingPaper.pdf (14 pages, 323137 bytes).
 PDF statistics:
  127 PDF objects out of 1000 (max. 8388607)
  86 compressed objects within 1 object stream

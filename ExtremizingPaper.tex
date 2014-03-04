@@ -125,102 +125,88 @@ These aggregators, however, are based on ad hoc techniques that learn the amount
 %Therefore it is necessary to learn the amount of extremizing from a separate training dataset. Furthermore, many of these aggregators assume that the individual probability forecasts arise from the generative framework. Under this assumption the optimal aggregation is accessible by weighted averaging (\cite{parunak2013characterizing}). However, given that extremizing is known to improve the performance of the aggregate, it is unlikely that the generative framework is appropriate for probability aggregation. 
 This paper remedies these shortcomings by developing an aggregator that is based on the information theoretic framework. Under this model the average forecast is always extremized. The amount of extremization is given in a closed-form expression that can be applied to any number of experts with any given information structure. By assuming a simplified information structure, the amount of extremization can be made to depend only on three intuitive parameters. This allows us to visualize extremization and make concrete statements on when and how much extremization should be performed. 
 
-This paper is structured as follows. The first section introduces our information theoretic framework and  compares it with the generative and interpretive frameworks. The second section applies the framework on probability aggregation. The third section derives a closed-form expression for the amount of extremization and analyzes this expression under unstructured and a compound symmetric information structure. The paper concludes with a discussion of  model limitations and future directions. 
+This paper is structured as follows. The first section introduces our information theoretic framework and  compares it with the generative and interpretive frameworks. The second section applies the framework to probability forecasts. The third section derives a closed-form expression for the amount of extremization and analyzes this expression under unstructured and a compound symmetric information structure. The paper concludes with a discussion of  model limitations and future directions. 
 
 
 
 \section{Information Theoretic Framework}
 This section discusses the information theoretic framework in comparison with the generative and interpretive frameworks. This comparison is by no means comprehensive as signal generation is a large part of the statistical literature. The first subsection builds  intuition via a simple example. The second subsection provides a technical comparison. 
 
-\subsection{Example}
+\subsection{Simple Example}
 Consider two experts $1$ and $2$ who are observing a hockey tournament. The tournament consists of three games played between teams RED and BLUE. After seeing the outcome of the first game, the experts are asked to report the probability of RED winning the tournament. Assume that RED wins if $G_1 + G_2 + G_3 \geq 0$, where $G_k \in \{-1,1\}$ indicates whether RED won the $k$th game. Suppose that all 8 possible combinations are equally likely. 
 %Therefore the true probability of team RED winning the tournament is 1/2.
 
 \begin{enumerate}
-\item[] \textit{Generated Estimate:} Based on the first game, the $i$th expert believes that RED has an independent chance of $q_i$ winning any of the two remaining games. This probability is assumed to arise from a probability distribution defined on the unit interval. Therefore any individual differences in the way the experts process the first game and turn the acquired information into a probability $q_i$ are assumed to arise from the probability distribution. The $i$th expert reports
+\item[] \textit{Generated Estimate:} Based on the first game, the $i$th expert believes that RED has an independent chance of $q_i$ winning any of the two remaining games. This likelihood is assumed to arise from a probability distribution defined on the unit interval. Therefore any individual differences in the way the experts process the first game and turn the acquired information into probabilities $q_1$ and $q_2$ are assumed to arise from a probability distribution. The exports report
 \begin{align}
 p_i &= \begin{cases}
 q_i(2-q_i) & \text{ if } G_1 = 1\\
-q_i^2 & \text{ otherwise } 
+q_i^2 & \text{ if } G_1 = -1
 \end{cases}
 \label{basisP}
 \end{align}
 
-\item[] \textit{Interpreted Estimate:} Interpretations are different ways of seeing the first game. Assume that RED's performance in the first game can be attributed entirely to its \textit{defense} $D$ and \textit{offense} $O$ that are equally likely to be either good 1 or bad -1. Expert 1 follows only the defense and Expert 2 looks only at the offensive play. Based on these attributes the experts construct their final predictive models. If RED wins a game when $D + 2O \geq 2$, the experts report (\ref{basisP}) but with
+\item[] \textit{Interpreted Estimate:} Interpretations are different ways of seeing the first game. Assume that RED's performance can be attributed entirely to its \textit{defense} $D$ and \textit{offense} $O$ that are equally likely to be either good 1 or bad -1. Expert 1 follows only the defense and Expert 2 looks only at the offensive play. Based on these attributes the experts construct their final predictive models. Under the generative framework the details of these predictive models were abstracted into a probability distribution. Under the interpretive framework, however, the details are fixed and known. For instance, the experts may report (\ref{basisP}) with
+%If RED wins a game when $D + 2O \geq 2$, the experts report (\ref{basisP}) but with
 \begin{align*}
-q_1 &= \begin{cases}
-1/2 & \text{ if } D = 1\\
-0 & \text{ otherwise }
+q_1 = \begin{cases}
+2/3 & \text{ if } D = 1\\
+1/3 &  \text{ if } D = -1
+\end{cases}
+&& q_2 &= \begin{cases}
+3/5 & \text{ if } O = 1\\
+2/5 & \text{ if } O = -1
 \end{cases}
 \end{align*}
-and
-\begin{align*}
-q_2 &= \begin{cases}
-1 & \text{ if } O = 1\\
-0 & \text{ otherwise }
-\end{cases}
-\end{align*}
-%
-%
-%It is not necessary for the experts to have the same knowledge. This example illustrates that even under the same information, they can choose to give different probability forecasts. The differences then arise from their personal interpretations of the importance of the first game.
+Each expert interprets the available information independently and subjectively.  Therefore even if the experts observed the same attributes of the game, their probability forecasts do not need to be the same. 
 
-\item[] \textit{Information Theoretic Estimate:} The experts know that RED has a 1/2 chance of winning any given game. If expert 1 knows 2/3 of the full information, i.e. the value of $X_1 = G_j + G_k$ for some $j,k \in \{1, 2, 3\}$ with $j \neq k$, then it is optimal to report 
+
+\item[] \textit{Information Theoretic Estimate:} The experts know that RED has a 1/2 chance of winning any given game. Suppose that expert 1 knows the number of wins in the first two games, i.e. the value of $G_1 + G_2$, but not necessarily the separate outcomes of the two games. Assume that expert 2 only knows the outcome of the first game $G_1$. Then,
 \begin{align*}
-p_1 &= \begin{cases}
-0 & \text{ if } X_1 = -2\\
-1/2 & \text{ if } X_1 = 0\\
-1 & \text{ if } X_1 = 2\\
+p_1 = \begin{cases}
+0 & \text{ if } G_1 + G_2 = -2\\
+1/2 & \text{ if } G_1 + G_2 = 0\\
+1 & \text{ if } G_1 + G_2 = 2\\
+\end{cases}
+&& p_2 = \begin{cases}
+1/4 & \text{ if } G_1 = -1\\
+3/4 & \text{ if } G_1 = 1\\
 \end{cases}
 \end{align*}
-If expert 2 only knows 1/3 of the full information, i.e. the value of $X_2 = P_j$ for some $j \in \{1, 2, 3\}$, then 
-\begin{align*}
-p_2 &= \begin{cases}
-1/4 & \text{ if } X_2 = -1\\
-3/4 & \text{ if } X_2 = 1\\
-\end{cases}
-\end{align*}
-If all the information known by expert 2 is also known by expert 1, their forecasts are positively correlated. In this example the correlation would be $\sqrt{2}/2 \approx 0.71$.
+Experts 1 and 2 know 2/3 and 1/3 of the full information, respectively. Their predictive models are completely determined by the size of their private information sets. As their information sets overlap by 1/3 of the full information, their probability forecasts are positively correlated. In this example, the correlation coefficient for their forecasts is $\sqrt{2}/2$.  
 
 
 \end{enumerate}
 
 
-\subsection{Technical Comparison}
+\subsection{Technical Details}
+Let  $(\Omega, \mathcal{F}, \P)$ be a probability space, where the set $\Omega$ contains all possible states of the world, the $\sigma$-field $\mathcal{F}$ consists of all subsets of $\Omega$, and $\P$ is a probability measure. Let $A \in \mathcal{F}$ denote an event of interest. 
+%The set of possible outcomes is denoted with $S$. For the sake of illustration, assume that  $S = \{G, B\}$, where $G$ and $B$ denote good and bad outcomes, respectively. The outcome function $F: \Omega \to S$ is a random variable that maps the state of the world to the true outcome. 
+The experts aim to forecast the probability of $A$ occurring $p = \P(A)$. Even though this paper focuses on probability estimates, the following discussion can be easily generalized to different types of estimates. 
 
-Generated estimates can be considered as noisy or distorted versions of the target value. To make this more specific, let $\Omega$ be a set of states of the world. The set of possible outcomes is denoted with $S$. For illustrative purposes, this is assumed to be $S = \{G, B\}$, where $G$ and $B$ denote good and bad outcomes, respectively. The outcome function, $F: \Omega \to S$, maps the state of the world deterministically to the true outcome. If $p$ is the true probability for a good outcome, then a generated probability forecast is realized by $\xi(p)$, where $\xi: [0,1] \to [0,1]$ is a function that randomly distorts the true probability. Therefore any estimate heterogeneity stems from randomness that is typically assumed to be caused by uncontrolled or unmeasured factors. Even though this framework is mathematically convenient, it can be drastically misaligned with the psychology literature and hence lead to results that are not reflective of the actual environment that produces the estimates.
+Generated estimates can be considered as noisy or distorted versions of $p$. In other words, if $\xi: [0,1] \to [0,1]$ is a noise function that randomly distorts a probability, then a generated probability forecasts is realized by $p_i = \xi(p)$. Due to its mathematical convenience, this framework is typically applied to subjective response data. Unfortunately, it can be drastically misaligned with the psychology literature and hence lead to results that are not reflective of the actual process that generates the estimates.
+
+%Therefore any heterogeneity in the estimates stems from randomness that is typically assumed to be caused by uncontrolled or unmeasured factors. 
+%Even though this framework is mathematically convenient, it can be drastically misaligned with the psychology literature and hence lead to results that are not reflective of the actual environment that produces the estimates.
+%The interoperation framework aims to correct these shortcomings by proposing a model that is more cognitive based. See \cite{hong2009interpreted} for the original introduction. 
+Under the interpretive framework, the set of states $\Omega$ is assume to be finite. The expert partitions $\Omega$ into non-overlapping subsets. This partition, know as the \textit{interpretation}, is denoted with $\Pi^i = \{\pi_1^i, \pi_2^i, \dots, \pi_{n_i}^i\}$, where $\bigcup_{j=1}^{n_i} \pi_j^i = \Omega$ and  $\pi_j^i \cap \pi_k^i = \emptyset$ for $j \neq k$. The expert can only associate a state $\omega \in \Omega$ with a set in his partition. Therefore his information is incomplete as long as not all the sets of his partition are singletons. To make probability forecasts, the expert specifies a map $\phi_i: \Omega \to [0, 1]$ that is measurable with respect to $\Pi^i$. 
+%Therefore any differences in estimates stem from cognitive diversity of the experts. 
+Unfortunately, \cite{hong2009interpreted} does not specify how the expert constructs the map $\phi_i$. It is also not clear how to the set of states $\Omega$ should be specified in complex real-world applications.  
 
 
-The interoperation framework aims to correct these shortcomings by proposing a model that is more cognitive based. See \cite{hong2009interpreted} for the original introduction. Under this framework, the set of states, $\Omega$, is assume to be finite. The expert then partitions this set into non-overlapping subsets. This partition, know as an \textit{interpretation}, is denoted with $\Pi^i = \{\pi_1^i, \pi_2^i, \dots, \pi_{n_i}^i\}$, where $\bigcup_{j=1}^{n_i} \pi_j^i = \Omega$ and  $\pi_j^i \cap \pi_k^i = \emptyset$ for $j \neq k$. The expert can only associate a state, $\omega \in \Omega$, with a set in his partition. Therefore his information is incomplete as long as not all the sets of his partition are singletons. To make probability forecasts, the expert specifies a map $\phi_i: \Omega \to [0, 1]$ that is measurable with respect to $\Pi^i$. Therefore any differences in estimates stem from cognitive diversity of the experts. Unfortunately, \cite{hong2009interpreted} does not specify how the expert constructs the map $\phi_i$. It is also not clear how to the set of states, $\Omega$, should be specified in complex real-world applications.  
 
+The information theoretic framework removes these intractable components and provides a model that can be applied in practice. It does not assume detailed knowledge of the expert interpretations nor pose any structure or cardinality restrictions on $\Omega$.  Each expert simply forecasts $p_i = \P\left(A | \mathcal{F}_i\right)$ based on a private information set $\mathcal{F}_i \subseteq \mathcal{F}$. 
+%If the set $\Omega$ is finite, the information set $\mathcal{F}_i$ can be considered equivalent to the $\sigma$-field generated by the interpretation $\Pi^i$. 
+If two experts $i$ and $j$ share information such that $\mathcal{F}_i \cap \mathcal{F}_j \neq \emptyset$, then the correlation of their forecasts $p_i$ and $p_j$ is positive and proportional to the overlap in their information sets. This means that, similarly to the interpretive framework, any heterogeneity in the estimates stems from cognitive diversity. As the details of the information set $\mathcal{F}_i$ cannot be known in practice, the information known by the $i$th expert is quantified as a fraction of the full information. 
+%For instance, expert $i$ may know 15\% of the full information while expert $j$ knows only 8\% of the full information. If in addition we specify that their shared information is, say, 3\% of the full information, we have established an information structure for these  experts. 
+This leads to a compromise that is mathematically convenient and psychologically reasonable. 
 
-
-The information theoretic framework abstracts away the intractable components of the interpretation framework. It does not assume expert interpretations nor place restrictions on the cardinality of $\Omega$. To describe this framework in more detail, let $(\Omega', \mathcal{F}, \P)$ be a probability space. Each expert is given a set of information $\mathcal{F}_i \subseteq \mathcal{F}$. If the set $\Omega'$ has a finite cardinality, $\mathcal{F}_i$ can be considered equivalent to the $\sigma$-field generated by the interpretation $\Pi^i$. Let $V \in S$ be the true outcome. Then the expert forecasts $p_i = \P(V = G | \mathcal{F}_i)$. This means that the expert makes the optimal probability forecasts given his information. If two experts $i$ and $j$ share information such that $\mathcal{F}_i \cap \mathcal{F}_j \neq \emptyset$, then the correlation of their forecasts $p_i$ and $p_j$ is positive and proportional to the overlap in their information sets. This means that, similarly to the interpretation framework, any heterogeneity in the estimates stems from cognitive diversity. As the details of the information set, $\mathcal{F}_i$, cannot be known in practice, the information known by the $i$th expert is quantified relative to the amount of full information. For instance, expert $i$ may know 15\% of the full information while expert $j$ knows only 8\% of the full information. If in addition we specify that their shared information is, say, 3\% of the full information, we have established an information structure for these  experts. Working with this kind of information structures leads to mathematically convenient computations and psychologically valid inference. The following section illustrates this on probability aggregation. 
-
-%\begin{figure}[htbp]
-%   \centering
-%   \includegraphics[width = 0.6\textwidth]{regression} % requires the graphicx package
-%   \caption{Illustrations of the generative (left), information theoretic (middle), and interpretation (right) frameworks.}
-%   \label{framework}
-%\end{figure}
-%
-%
-%Figure \ref{framework} illustrates the generative (left), information theoretic (middle), and interpretation (right) frameworks. In each illustration the large circle represents the set of relevant factors, or simply the universe. This is the same under all frameworks. Consider first the generative framework. From the experimenter's point of view, the universe is divided into controlled (C) and uncontrolled factors (U) that affect the estimate (X). The uncontrolled factors are assumed to have a random effect, typically with mean of zero, on the estimate. Therefore any heterogeneity in repeated estimates arise from the uncontrolled factors. Out of the three frameworks, the generative framework is the most popular due to its analytical tractability. This framework, however, can be drastically misaligned with the psychology literature. Therefore applying it to subjective response data can lead to results that are not descriptive of the actual phenomenon being studied.
-%
-%
-%At the other extreme is the interpretation framework. Under this framework the estimates are generated by first picking a random subset of factors from the universe. These factors are then interpreted by the expert. This is depicted as a rectangle in Figure \ref{framework}. Therefore any heterogeneity in the final estimates (Z)  arises from cognitive diversity among the experts. This framework is clearly more consistent with the psychology literature than the generative framework and hence more accurate in describing subjective response data. Unfortunately, the interpretation framework is overly general. As assuming  knowledge of experts' interpretations is not practically feasible, this framework serves better for illustrative purposes than as a basis for developing real-world methodology.
-%
-%
-%A useful compromise between the generative and interpretation frameworks is given by the information theoretic framework. This framework is able to incorporate much of the psychological insights of the interpretation framework while remaining analytically tractable. Similarly to the interpretation framework, the estimates are generated by first picking a random subset of factors from the universe. This time, however, the expert is not allowed to make a personal interpretation of the factors. Instead, he gives an optimal estimate (Y) based on the given factors.  Therefore any estimation heterogeneity is assumed to arise purely from any differences in the subsets of factors. To make this more concrete, consider an expert aiming to make a forecast  about the closing price of a capital stock. The expert only has partial information about the stock. He, however, processes this information efficiently and produces an answer that is his \textit{personal truth}. There is no noise in this answer. Therefore another expert with the same information set would give the same estimate as his personal truth.
-%
-%This framework is clearly a simplification of the interpretation framework. If, however, the information set of an expert is assumed to include any internal factors, such as personal preferences and personal world-view, this simplification is not too dramatic. More importantly, this simplification makes the framework much more amenable for development of novel methodology. This is illustrated in the following section that introduces an information theoretic framework for analyzing probability forecasts.
-
+%This is shown in following sections where the information theoretic framework is applied to probability forecasts and their aggregation. 
 
 
 \section{Model for Probability Forecasts}
 \label{Model}
-Consider a probability space $(\Omega, \mathcal{F}, \P)$ and an event $A \in \mathcal{F}$ to be forecasted. Expert $j$ knows information $\mathcal{F}_j \subseteq \mathcal{F}$ and forecasts $p_j = \P(A | \mathcal{F}_j)$. The best in-principle forecast given the knowledge of the $N$ forecasters is $P(A | \mathcal{F}')$, where $\mathcal{F}' = \mathcal{F}_1 \cup \mathcal{F}_2 \cup .. \cup \mathcal{F}_N$. This, however, assumes that the experts can pool information optimally with each other. As this is hardly a realistic assumption, the best aggregate probability that can be expected is given by $\P(A | p_1, p_2, \dots, p_N)$.
-
-For illustrative purposes, we first assume only two experts and then generalize the model to $N$ experts. Under our model the event $A$ is determined by a pool of white noise. Experts 1 and 2 see respective $\delta_1$ and $\delta_2$ portions of the noise. These portions form their information sets. The overlap in their information sets is a fixed share $\rho$ of what is seen by either expert. This can be made more precise by letting  $(\Omega, \mathcal{F}, \P)$ be a probability space on which we define a white noise process indexed by the unit interval $S$. A white noise process is a Gaussian process $\{ X_B \}$ indexed by Borel measurable subsets $B$. We endow the unit interval with the uniform measure, $\mu$. This gives the white noise process a covariance structure of $Cov(X_B, X_{B'}) = \mu(B \cap B') = |B \cap B'|$, i.e. the length of the intersection. The target event is defined as $A = \{ X_{S} > 0\}$. Let $I_1, I_2 \subseteq S$ be the information sets observed by experts 1 and 2, respectively. Thus,
+The information theoretic model for probability forecasts is first illustrated with experts 1 and 2. This is then generalized to $N$ number of experts at the end of the section. Under this model the event $A$ is determined by a pool of white noise. Experts 1 and 2 see respective $\delta_1$ and $\delta_2$ portions of the noise. These portions form their information sets. The overlap in these information sets is a fixed share $\rho$ of what is seen by either expert. To make this more precise, let $(\Omega, \mathcal{F}, \P)$ be a probability space. On this space, define a white noise process that is indexed by the unit interval $S = [0,1]$. A white noise process is a Gaussian process $\{ X_B \}$ indexed by Borel measurable subsets $B$. The unit interval is endowed with the uniform measure $\mu$. This gives the white noise process a covariance structure $\text{cov}(X_B, X_{B'}) = \mu(B \cap B') = |B \cap B'|$, i.e. the length of the intersection. The target event is defined as $A = \{ X_{S} > 0\}$. Let $I_1, I_2 \subseteq S$ be the information sets observed by experts 1 and 2, respectively. Then,
 \begin{align*}
 \mu(I_1) = |I_1| &= \delta_1\\
 \mu(I_2) = |I_2| &= \delta_2\\
@@ -230,23 +216,29 @@ Call $X_{I_j}$ the probit forecast of the $j$th expert.  If $\Phi$ denotes the s
 \begin{align*}
 p_j &= \P(A | \mathcal{F}_{I_j}) = \Phi(X_{I_j})
 \end{align*}
-for $j = 1, 2$, and the aggregator is given by $\P(X_{S} > 0 | p_1, p_2)$.
+for $j = 1, 2$. The best in-principle forecast given the knowledge of the two experts is $P(X_{S} > 0 |  \mathcal{F}_1 \cup \mathcal{F}_2)$. This, however, assumes that the experts can pool information optimally with each other. Therefore the best aggregate probability that can be realistically expected is $\P(X_{S} > 0 | p_1, p_2)$.
 
 \begin{figure}[htbp]
 %   \hspace{-2em}
    \includegraphics[width = \textwidth]{N=2} % requires the graphicx package
-   \caption{Illustration of the model with two experts.}
+   \caption{Illustration of the information theoretic model with two experts.}
    \label{diagram2}
 \end{figure}
 
 Figure \ref{diagram2} illustrates the model with $N=2$. The Gaussian process has been partitioned into four parts based on the information sets $I_1$ and $I_2$:
 \begin{align*}
- U &= X_{I_1 / I_2}\\
-M &= X_{I_1 \cap I_2}\\
-V &= X_{I_2 / I_1}\\
-W &= X_{(I_1 \cup I_2)^c}
+ U &= X_{I_1 / I_2}
+& M &= X_{I_1 \cap I_2}\\
+ V &= X_{I_2 / I_1}
+& W &= X_{(I_1 \cup I_2)^c}
 \end{align*}
-Then $X_{I_1} = U + M$, $X_{I_2} = M + V$, and $X_S = U+M+V+W$, where $U, V, M, W$ are independent Gaussians with respective variances $\delta_1-\rho$, $\delta_2-\rho$, $\rho$, $1+\rho-\delta_2 - \delta_3$. This gives $(X_{S}, X_{I_1}, X_{I_2})$ a multivariate normal distribution. More specifically, we have 
+Then,
+\begin{align*}
+X_{I_1} &= U + M\\
+X_{I_2} &= M + V\\
+X_S &= U+M+V+W,
+\end{align*}
+where $U, V, M, W$ are independent Gaussians with respective variances $\delta_1-\rho$, $\delta_2-\rho$, $\rho$, $1+\rho-\delta_1 - \delta_2$. This gives $(X_{S}, X_{I_1}, X_{I_2})$ a multivariate normal distribution. More specifically,  
 \begin{align}
 \left(\begin{matrix} X_S \\ X_{I_1}\\ X_{I_2} \end{matrix}\right) &\sim \mathcal{N}\left(
  \boldsymbol{0},  \left(\begin{matrix} 
@@ -258,13 +250,13 @@ Then $X_{I_1} = U + M$, $X_{I_2} = M + V$, and $X_S = U+M+V+W$, where $U, V, M, 
 
 \begin{figure}[htbp]
    \includegraphics[width = \textwidth]{N=N} % requires the graphicx package
-   \caption{Illustration of the model with $N$ experts.}
+   \caption{Illustration of the information theoretic  model with $N$ experts.}
    \label{diagramN}
 \end{figure}
 
 
 
-Consider now $N$ experts. Let $|I_j| = \delta_j$ be the amount of information known by the $j$th expert, and $|I_i \cap I_j| = \rho_{ij}$ be the information overlap between the $i$th and $j$th experts. Then expression (\ref{twoExperts}) generalizes to the vector $(X_{S}, X_{I_1}, X_{I_2}, \dots, X_{I_N})$. This gives us
+Consider now $N$ experts. Let $|I_j| = \delta_j$ be the amount of information known by the $j$th expert, and $|I_i \cap I_j| = \rho_{ij}$ be the information overlap between the $i$th and $j$th experts. Then expression (\ref{twoExperts}) readily generalizes to the vector $(X_{S}, X_{I_1}, X_{I_2}, \dots, X_{I_N})$. Then,
 \begin{align*}
 \left(\begin{matrix} X_S \\ X_{I_1}\\ \vdots \\ X_{I_N} \end{matrix}\right) &\sim \mathcal{N}\left( \left(\begin{matrix} 
 \mu_1 \\ \boldsymbol{\mu}_2
@@ -282,7 +274,7 @@ Consider now $N$ experts. Let $|I_j| = \delta_j$ be the amount of information kn
 \delta_N & \rho_{N,1} & \rho_{N,2} & \dots & \delta_N\\ 
  \end{array}\right)\right)
 \end{align*}
-This is illustrated in Figure \ref{diagramN}. It is important to notice that the $I_j$ does not have to be contiguous segment of the unit interval. The sub-matrix $\Sigma_{22}$ fully describes the information structure among the experts.  This matrix has some technical conditions such as symmetry and non-singularity. In addition, $\Sigma_{22}$ must describe a coherent information structure. The matrix $\Sigma_{22}$ is coherent if and only if its information can be transformed into a diagram such as the one depicted by Figure \ref{diagramN}.
+This extension illustrated in Figure \ref{diagramN}. It is important to notice that the $I_j$ does not have to be a contiguous segment of the unit interval. The sub-matrix $\Sigma_{22}$ fully describes the information structure among the experts.  This matrix has some technical conditions such as symmetry and non-singularity. In addition, $\Sigma_{22}$ must describe a coherent information structure. The matrix $\Sigma_{22}$ is coherent if and only if its information can be transformed into a diagram such as the one depicted by Figure \ref{diagramN}. It is easy to provide a counter-example which shows that not all covariance matrices of size $N \times N$ give coherent information structures.
 
 
 
@@ -299,7 +291,10 @@ This is illustrated in Figure \ref{diagramN}. It is important to notice that the
 
 
 \section{Extremization}
-Let $\boldsymbol{X}$ be a column vector of length $N$ such that $X_j = X_{I_j}$. If $\Sigma_{22}$ is a coherent overlap structure such that $\Sigma_{22}^{-1}$ exists, then $X_{S} | \boldsymbol{X} \sim \mathcal{N}(\bar{\mu}, \bar{\Sigma})$, where
+
+
+
+Let $\boldsymbol{X}$ be a column vector of length $N$ such that $X_j = X_{I_j}$ for $j = 1, \dots, N$. If $\Sigma_{22}$ is a coherent overlap structure and $\Sigma_{22}^{-1}$ exists, then $X_{S} | \boldsymbol{X} \sim \mathcal{N}(\bar{\mu}, \bar{\Sigma})$, where
 \begin{align}
 \bar{\mu} &= \mu_1 + \Sigma_{12} \Sigma_{22}^{-1} (\boldsymbol{X} - \boldsymbol{\mu}_2) =  \Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X} \label{condMu}
 \end{align}
@@ -312,11 +307,11 @@ See Result 5.2.10 on p. 156 in \cite{ravishanker2001first} for the formulas of a
 \P\left(A  \bigg| \boldsymbol{X}\right)  = \P\left(X_{S} > 0 \bigg| \boldsymbol{X}\right) &= \Phi\left( \frac{\Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}}\right)
 %&= \Phi\left( \frac{\boldsymbol{1}_{N}'  \Sigma_{22}^{-1} \Phi^{-1}(\boldsymbol{p})}{\sqrt{1 - \boldsymbol{1}_{N}' \Sigma_{22}^{-1} \boldsymbol{1}_{N}}}\right)
 \end{align*}
-Let $\alpha$ represents the amount of extremization that is performed for the average probit forecast. If $\bar{X}$ denotes the sample average, then
+Let $\alpha$ represents the amount of extremization that is performed for the average probit forecast. If $\bar{X} = \left( \sum_{j=1}^N X_{I_j} \right)/N$ denotes the average probit forecast, then
 \begin{align}
 \alpha \bar{X}&=  \frac{\Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}}  &\Leftrightarrow&& \alpha  = \frac{N \Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\left(\boldsymbol{1}_N' \boldsymbol{X} \right) \sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}} \label{alpha}
 \end{align}
-Even though this expression assumes no structure on $\Sigma_{22}$ and depends on $N +\frac{N(N-1)}{2}$ unknown parameters, it can be used to gain insight on the behavior of the extremizing constant, $\alpha$. One useful development is to determine the amount of information in $\boldsymbol{X}$. 
+Even though this expression assumes no structure on $\Sigma_{22}$ and depends on $N +\frac{N(N-1)}{2}$ unknown parameters, it can be used to gain insight on the behavior of the extremizing constant $\alpha$. One useful development is to determine the amount of information in $\boldsymbol{X}$. 
 
 \begin{observation}
 \label{infoObservation}
@@ -338,7 +333,7 @@ Setting $\alpha_1 = \alpha_N$ gives us the final result.
 
 \end{proof}
 
-Based on Observation \ref{infoObservation} there is a monotonic and positive relationship between $\alpha$ and $\delta_0$. This means that the more the sample average is extremized the more information its corresponding $\boldsymbol{X}$ contains, and \textit{vice versa}. Observation \ref{infoObservation}  is interesting for two reasons: (a) it allows the researcher to use black-box models from existing literature to determine the extremizing constant and then use it to analyze the amount of information in $\boldsymbol{X}$, and (b) it allows us to easily show that $\alpha \geq 1$ under any information structure.
+Based on Observation \ref{infoObservation} there is a monotonic and positive relationship between $\alpha$ and $\delta_0$. Therefore the more the sample average is extremized the more information its corresponding $\boldsymbol{X}$ contains, and \textit{vice versa}. Observation \ref{infoObservation}  is interesting for two reasons: (a) it allows the researcher to use black-box models from existing literature to determine the extremizing constant and then use it to analyze the amount of information in $\boldsymbol{X}$, and (b) it allows us to easily show that $\alpha \geq 1$ under any information structure.
 
 \begin{observation}
 \label{positiveThm}
@@ -367,10 +362,10 @@ To continue our analysis of extremization, it is necessary to reduce the number 
 
 \subsection{Compound Symmetric Information Structure}
 
-In this section we assume that any two experts know and share the same amount of information. This gives us the compound symmetric overlap structure.
+This section assumes that each expert knows equally much and that the amount of information shared between any two experts is a constant fraction of their knowledge. This is equivalent to choosing the following compound symmetric overlap structure. 
 % $\rho \in [\max \{(N-T)/(T(N-1)), 0\},1] = A_\rho$. 
 \begin{align*}
-\left(\begin{matrix} S \\ X_1\\ \vdots \\ X_N \end{matrix}\right) &\sim \mathcal{N}\left( \left(\begin{matrix} 
+\left(\begin{matrix} X_{S} \\ X_{I_1}\\ \vdots \\ X_{I_N} \end{matrix}\right) &\sim \mathcal{N}\left( \left(\begin{matrix} 
 \mu_1 \\ \boldsymbol{\mu}_2
  \end{matrix}\right) =
  \boldsymbol{0}, \left(\begin{matrix} 
@@ -386,7 +381,7 @@ In this section we assume that any two experts know and share the same amount of
 \delta & \rho\delta & \rho\delta & \dots & \delta\\ 
  \end{array}\right)\right),
 \end{align*}
-where $\delta \in [0,1]$ and $\rho \in \left[  \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right]$. The lower bound for $\rho$ becomes necessary when $\delta > 1/N$ because then overlap is unavoidable. This minimum can be computed by assuming $\delta > 1/N$ and letting the shared information be the same for all $N$ experts. That is, $|I_{i} \cap I_j| = |I| =  \rho \delta$ for all $i \neq j$. The minimum sharing occurs, when $\rho\delta + N(\delta - \delta\rho) = 1$, which gives us the lower bound. The quantity  $\rho\delta + N(\delta - \delta\rho)$ also describes the maximum coverage of the $N$ experts. That is, $\rho\delta + N(\delta - \delta\rho) = \max | I_1 \cup I_2 \cup \dots \cup I_N|$. 
+where $\delta \in [0,1]$ is the fraction known by each expert and $\rho \in \left[  \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right]$ is the shared proportion of the known knowledge. The lower bound for $\rho$ becomes necessary if $\delta > 1/N$ because then overlap in the information sets is unavoidable. This minimum can be computed by assuming $\delta > 1/N$ and letting the shared information be the same for all $N$ experts. That is, $|I_{i} \cap I_j| = |I| =  \rho \delta$ for all $i \neq j$. The minimum sharing occurs, when $\rho\delta + N(\delta - \delta\rho) = 1$, which gives us the lower bound. The quantity  $\rho\delta + N(\delta - \delta\rho)$ also describes the maximum coverage of the $N$ experts. That is, $\rho\delta + N(\delta - \delta\rho) = \max | I_1 \cup I_2 \cup \dots \cup I_N|$. 
 
 Note that this model constrains the marginal distribution of $p_j = \Phi(X_{I_j})$ to be uniform on $[0,1]$ when $\delta_j = 1$. To see this, recall that if $X_{I_j} \sim \mathcal{N}(0,1)$, then $\Phi(X_{I_j})$ is uniform on $[0,1]$. If this does not hold empirically, it is a sign that the model cannot be correct on the micro-level. If $X_{I_j}$ appears more (respectively less) concentrated about $0.5$, then the model can be adjusted by changing $\delta_{j}$ to a smaller fraction. 
 
