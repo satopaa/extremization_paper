@@ -1,4 +1,4 @@
-\begin{thebibliography}{14}
+\begin{thebibliography}{15}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -47,6 +47,11 @@ R.~Ranjan and T.~Gneiting.
 \newblock Combining probability forecasts.
 \newblock \emph{Journal of the Royal Statistical Society: Series B (Statistical
   Methodology)}, 72:\penalty0 71--91, 2010.
+
+\bibitem[Rao(2009)]{rao2009linear}
+C~Radhakrishna Rao.
+\newblock \emph{Linear statistical inference and its applications}, volume~22.
+\newblock John Wiley \& Sons, 2009.
 
 \bibitem[Ravishanker and Dey(2001)]{ravishanker2001first}
 Nalini Ravishanker and Dipak~K Dey.
