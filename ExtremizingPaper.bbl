@@ -1,4 +1,4 @@
-\begin{thebibliography}{17}
+\begin{thebibliography}{15}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -18,30 +18,23 @@ J.~Baron, L.~H. Ungar, B.~A. Mellers, and P.~E. Tetlock.
 \newblock Manuscript submitted for publication (A copy can be requested by
   emailing Lyle Ungar at ungar@cis.upenn.edu), 2013.
 
-\bibitem[Batchelder et~al.(2010)Batchelder, Strashny, and
-  Romney]{batchelder2010cultural}
-William~H Batchelder, Alex Strashny, and A~Kimball Romney.
-\newblock Cultural consensus theory: Aggregating continuous responses in a
-  finite interval.
-\newblock In \emph{Advances in Social Computing}, pages 98--107. Springer,
-  2010.
-
-\bibitem[Clemen and Winkler(2007)]{clemen2007aggregating}
-Robert~T Clemen and Robert~L Winkler.
-\newblock Aggregating probability distributions.
-\newblock \emph{Advances in Decision Analysis}, pages 154--176, 2007.
-
 \bibitem[Dobbin and Simon(2005)]{dobbin2005sample}
 Kevin Dobbin and Richard Simon.
 \newblock Sample size determination in microarray experiments for class
   comparison and prognostic classification.
 \newblock \emph{Biostatistics}, 6\penalty0 (1):\penalty0 27--38, 2005.
 
-\bibitem[Genest and Zidek(1986)]{Genest}
-C.~Genest and J.~V. Zidek.
-\newblock Combining probability distributions: A critique and an annotated
-  bibliography.
-\newblock \emph{Statistical Science}, 1\penalty0 (1):\penalty0 114--148, 1986.
+\bibitem[Gneiting and Raftery(2007)]{Gneiting04strictlyproper}
+Tilmann Gneiting and Adrian~E. Raftery.
+\newblock Strictly proper scoring rules, prediction, and estimation.
+\newblock \emph{Journal of the American Statistical Association}, 102:\penalty0
+  359--378, 2007.
+
+\bibitem[Hong and Page(2009)]{hong2009interpreted}
+Lu~Hong and Scott Page.
+\newblock Interpreted and generated signals.
+\newblock \emph{Journal of Economic Theory}, 144\penalty0 (5):\penalty0
+  2174--2196, 2009.
 
 \bibitem[Pepe(2003)]{pepe2003statistical}
 Margaret~Sullivan Pepe.
@@ -49,18 +42,16 @@ Margaret~Sullivan Pepe.
   and Prediction}.
 \newblock Oxford University Press Oxford, 2003.
 
-\bibitem[Primo et~al.(2009)Primo, Ferro, Jolliffe, and
-  Stephenson]{primo2009calibration}
-Cristina Primo, Christopher~AT Ferro, Ian~T Jolliffe, and David~B Stephenson.
-\newblock Calibration of probabilistic forecasts of binary events.
-\newblock \emph{Monthly Weather Review}, 137\penalty0 (3):\penalty0 1142--1149,
-  2009.
-
 \bibitem[Ranjan and Gneiting(2010)]{Ranjan08}
 R.~Ranjan and T.~Gneiting.
 \newblock Combining probability forecasts.
 \newblock \emph{Journal of the Royal Statistical Society: Series B (Statistical
   Methodology)}, 72:\penalty0 71--91, 2010.
+
+\bibitem[Rao(2009)]{rao2009linear}
+C~Radhakrishna Rao.
+\newblock \emph{Linear statistical inference and its applications}, volume~22.
+\newblock John Wiley \& Sons, 2009.
 
 \bibitem[Ravishanker and Dey(2001)]{ravishanker2001first}
 Nalini Ravishanker and Dipak~K Dey.
@@ -97,13 +88,6 @@ Robert~L Vislocky and J~Michael Fritsch.
 T.~S. Wallsten and A.~Diederich.
 \newblock Understanding pooled subjective probability estimates.
 \newblock \emph{Mathematical Social Sciences}, 18:\penalty0 1--18, 2001.
-
-\bibitem[Wallsten et~al.(1997)Wallsten, Budescu, and
-  Erev]{Wallsten97evaluatingand}
-Thomas~S. Wallsten, David~V. Budescu, and Ido Erev.
-\newblock Evaluating and combining subjective probability estimates.
-\newblock \emph{Journal of Behavioral Decision Making}, 10:\penalty0 243--268,
-  1997.
 
 \bibitem[Wilson et~al.(1998)Wilson, D’Agostino, Levy, Belanger, Silbershatz,
   and Kannel]{wilson1998prediction}

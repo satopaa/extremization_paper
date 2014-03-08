@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  18 FEB 2014 22:42
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  8 MAR 2014 06:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -243,26 +243,6 @@ Package: fix-cm 2006/09/13 v1.1m fixes to LaTeX
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/ts1enc.def
 File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
 ))
-(/usr/local/texlive/2013/texmf-dist/tex/latex/subfigure/subfigure.sty
-Package: subfigure 2002/03/15 v2.1.5 subfigure package
-\subfigtopskip=\skip62
-\subfigcapskip=\skip63
-\subfigcaptopadj=\dimen123
-\subfigbottomskip=\skip64
-\subfigcapmargin=\dimen124
-\subfiglabelskip=\skip65
-\c@subfigure=\count113
-\c@lofdepth=\count114
-\c@subtable=\count115
-\c@lotdepth=\count116
-
-****************************************
-* Local config file subfigure.cfg used *
-****************************************
-(/usr/local/texlive/2013/texmf-dist/tex/latex/subfigure/subfigure.cfg)
-\subfig@top=\skip66
-\subfig@bottom=\skip67
-)
 (/usr/local/texlive/2013/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 
@@ -270,48 +250,71 @@ Package: natbib 2010/09/13 8.31b (PWD, AO)
 Package natbib Warning: The `cite' package should not be used
 (natbib)                with natbib. Use option `sort' instead.
 
-\bibhang=\skip68
-\bibsep=\skip69
+\bibhang=\skip62
+\bibsep=\skip63
 LaTeX Info: Redefining \cite on input line 694.
 LaTeX Info: Redefining \citenum on input line 708.
-\c@NAT@ctr=\count117
+\c@NAT@ctr=\count113
+) (/usr/local/texlive/2013/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
+
+(/usr/local/texlive/2013/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
+\captionmargin=\dimen123
+\captionmargin@=\dimen124
+\captionwidth=\dimen125
+\caption@tempdima=\dimen126
+\caption@indent=\dimen127
+\caption@parindent=\dimen128
+\caption@hangindent=\dimen129
 )
-\c@defi=\count118
-\c@theorem=\count119
- (./ExtremizingPaper.aux)
+\c@ContinuedFloat=\count114
+Package caption Info: float package is loaded.
+Package caption Info: rotating package is loaded.
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
+\c@subfigure=\count115
+\c@subtable=\count116
+)
+\c@defi=\count117
+\c@theorem=\count118
+
+(./ExtremizingPaper.aux)
 \openout1 = `ExtremizingPaper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 79.
-LaTeX Font Info:    ... okay on input line 79.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 79.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 82.
+LaTeX Font Info:    ... okay on input line 82.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 82.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 (/usr/local/texlive/2013/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count120
-\scratchdimen=\dimen125
+\scratchcounter=\count119
+\scratchdimen=\dimen130
 \scratchbox=\box31
-\nofMPsegments=\count121
-\nofMParguments=\count122
+\nofMPsegments=\count120
+\nofMParguments=\count121
 \everyMPshowfont=\toks33
-\MPscratchCnt=\count123
-\MPscratchDim=\dimen126
-\MPnumerator=\count124
-\makeMPintoPDFobject=\count125
+\MPscratchCnt=\count122
+\MPscratchDim=\dimen131
+\MPnumerator=\count123
+\makeMPintoPDFobject=\count124
 \everyMPtoPDFconversion=\toks34
 ) (/usr/local/texlive/2013/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
@@ -391,76 +394,73 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 89.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    Try loading font information for U+msa on input line 92.
 (/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 89.
+LaTeX Font Info:    Try loading font information for U+msb on input line 92.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 95.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 98.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 102.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 105.
  [1
 
-{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
-<regression.png, id=13, 583.781pt x 435.226pt>
-File: regression.png Graphic file (type png)
- <use regression.png>
-Package pdftex.def Info: regression.png used on input line 121.
-(pdftex.def)             Requested size: 260.17464pt x 193.97711pt.
- [3 <./regression.png>] [4] <N=2.png, id=29, 595.826pt x 248.127pt>
+{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 135.
+ [4] [5]
+<N=2.png, id=30, 595.826pt x 248.127pt>
 File: N=2.png Graphic file (type png)
  <use N=2.png>
-Package pdftex.def Info: N=2.png used on input line 184.
+Package pdftex.def Info: N=2.png used on input line 223.
 (pdftex.def)             Requested size: 433.62pt x 180.57841pt.
- [5 <./N=2.png>] <N=N.png, id=37, 595.826pt x 293.898pt>
+ [6]
+<N=N.png, id=38, 595.826pt x 293.898pt>
 File: N=N.png Graphic file (type png)
  <use N=N.png>
-Package pdftex.def Info: N=N.png used on input line 207.
+Package pdftex.def Info: N=N.png used on input line 252.
 (pdftex.def)             Requested size: 433.62pt x 213.88899pt.
- [6 <./N=N.png>]
+ [7 <./N=2.png> <./N=N.png>] [8]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 269.
-
-[7]
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 315.
- [8] <ExtremeN2.jpeg, id=52, 481.8pt x 481.8pt>
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 325.
+ [9] [10] <ExtremeN2.jpeg, id=56, 481.8pt x 481.8pt>
 File: ExtremeN2.jpeg Graphic file (type jpg)
- <use ExtremeN2.jpeg>
-Package pdftex.def Info: ExtremeN2.jpeg used on input line 461.
-(pdftex.def)             Requested size: 143.09283pt x 143.09283pt.
 
-<ExtremeN5.jpeg, id=53, 481.8pt x 481.8pt>
+<use ExtremeN2.jpeg>
+Package pdftex.def Info: ExtremeN2.jpeg used on input line 566.
+(pdftex.def)             Requested size: 138.76157pt x 138.75534pt.
+ <ExtremeN5.jpeg, id=57, 481.8pt x 481.8pt>
 File: ExtremeN5.jpeg Graphic file (type jpg)
- <use ExtremeN5.jpeg>
-Package pdftex.def Info: ExtremeN5.jpeg used on input line 467.
-(pdftex.def)             Requested size: 143.09283pt x 143.09283pt.
 
-<ExtremeN10.jpeg, id=54, 481.8pt x 481.8pt>
+<use ExtremeN5.jpeg>
+Package pdftex.def Info: ExtremeN5.jpeg used on input line 573.
+(pdftex.def)             Requested size: 138.76157pt x 138.75534pt.
+ <ExtremeN10.jpeg, id=58, 481.8pt x 481.8pt>
 File: ExtremeN10.jpeg Graphic file (type jpg)
- <use ExtremeN10.jpeg>
-Package pdftex.def Info: ExtremeN10.jpeg used on input line 473.
-(pdftex.def)             Requested size: 143.09283pt x 143.09283pt.
- [9]
-(./ExtremizingPaper.bbl [10 <./ExtremeN2.jpeg> <./ExtremeN5.jpeg> <./ExtremeN10
-.jpeg>]
+
+<use ExtremeN10.jpeg>
+Package pdftex.def Info: ExtremeN10.jpeg used on input line 580.
+(pdftex.def)             Requested size: 138.76157pt x 138.75534pt.
+ [11] [12 <./ExtremeN2.jpeg> <./ExtremeN5.jpeg> <./ExtremeN10.jpeg>] (./Extremi
+zingPaper.bbl [13]
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
-) [11] (./ExtremizingPaper.aux) ) 
+) [14] (./ExtremizingPaper.aux) ) 
 Here is how much of TeX's memory you used:
- 4693 strings out of 493315
- 66639 string characters out of 6137904
- 134283 words of memory out of 5000000
- 8012 multiletter control sequences out of 15000+600000
- 30959 words of font info for 70 fonts, out of 8000000 for 9000
+ 5618 strings out of 493315
+ 83973 string characters out of 6137904
+ 153652 words of memory out of 5000000
+ 8936 multiletter control sequences out of 15000+600000
+ 31973 words of font info for 72 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,19n,43p,1167b,291s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,19n,43p,2336b,440s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2013/texmf-dist/fonts/enc/
 dvips/base/8r.enc}</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmbx10.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfont
@@ -479,10 +479,10 @@ b></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/lo
 cal/texlive/2013/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texliv
 e/2013/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2013/tex
 mf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on ExtremizingPaper.pdf (11 pages, 346832 bytes).
+Output written on ExtremizingPaper.pdf (14 pages, 333043 bytes).
 PDF statistics:
- 119 PDF objects out of 1000 (max. 8388607)
- 79 compressed objects within 1 object stream
+ 127 PDF objects out of 1000 (max. 8388607)
+ 86 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -32,9 +32,10 @@
 \usepackage{rotating}
 \usepackage{geometry}
 \usepackage{fix-cm}
-\usepackage{subfigure}
+%\usepackage{subfigure}
 \usepackage{natbib}
-
+\usepackage{caption}
+\usepackage{subcaption}
 
 \renewcommand{\baselinestretch}{1.2}
 \setlength{\topmargin}{-0.3in}
@@ -62,7 +63,9 @@
 \newcommand{\E}{\mathbb{E}}
 \newtheorem{defi}{Definition}
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{lemma}[theorem]{Observation}
+\newtheorem{observation}[theorem]{Observation}
+\DeclareMathOperator*{\argmax}{arg\,max}
 
 \newcommand{\myfunction}[3]
 {${#1} : {#2} \rightarrow {#3}$ }
@@ -78,7 +81,7 @@
 
 \begin{document}
 
-\title{Information Theoretic Alternative to Regression Analysis: A Gaussian Process Model for Principled Probability Extremization}
+\title{Information Theoretic Model for Subjective Response Data with an Application to Probability Extremization}
 %\title{A Novel Framework for Analyzing Subjective Response Data}
 \author{
 Ville A. Satop\"a\"a, Robin Pemantle, and Lyle H. Ungar\\
@@ -89,85 +92,121 @@ Ville A. Satop\"a\"a, Robin Pemantle, and Lyle H. Ungar\\
 \maketitle
 
 \pagestyle{myheadings}
-\markboth{Information Theoretic Framework for Principled Probability Extremization}{Satop\"a\"a et al.}
+\markboth{Information Theoretic Model for Subjective Reponse Data}{Satop\"a\"a et al.}
 \thispagestyle{empty}
 
 \begin{abstract}
-Typically randomness in scientific measurements is assumed to arise from unmeasured or uncontrolled factors. This paper presents an information theoretic framework that introduces an alternative source of randomness. This framework, which is particularly appropriate for subjective response data, is illustrated on probability aggregation. The probabilities are given by a group of experts who forecast whether an event will occur or not. Our aggregator uses the distribution of information among the experts and depends on easily interpretable parameters. Even though shifting the average probability forecasts closer to its nearest extreme, known as \textit{extremizing}, is known to yield improved forecast performance, it is much less understood when and how much the average forecast should be extremized. By assuming a simplified information structure in our model, the amount of extremizing is studied closely under different values of  the parameters. This leads to novel observations and a more principled understanding of extremization.
+Typically randomness in scientific estimation is assumed to arise from unmeasured or uncontrolled factors. Recent developments, however, show that heterogeneity stemming from cognitive diversity is more appropriate for subjective response data. This paper presents an information theoretic framework that generates estimate heterogeneity from cognitive diversity while remaining mathematically convenient. The framework is illustrated on probability aggregation. The probabilities are given by a group of experts who forecast whether an event will occur or not. Our aggregator uses the distribution of information among the experts and depends on easily interpretable parameters. Even though shifting the average probability forecast closer to its nearest extreme, known as \textit{extremizing}, has been acknowledged to yield improved forecast performance, it is much less understood when and how much the average forecast should be extremized. By assuming a simplified information structure, the amount of extremization is studied closely under different kinds of expert groups. This leads to novel observations and a more principled understanding of extremization.
 \end{abstract}
 
 %data generative process. 
 
 
 \section{Introduction}
-There is strong empirical evidence that bringing together the strengths of different experts by combining their probability forecasts into a single consensus, known as the \textit{crowd belief},  improves predictive performance. Prompted by the many applications of probability forecasts, including medical diagnosis (\citet{wilson1998prediction, pepe2003statistical}), political and socio-economic foresight (\citet{tetlock2005expert}), and meteorology (\citet{sanders1963subjective, vislocky1995improved, baars2005performance}), researchers have proposed many approaches to combining probability forecasts 
-(see, e.g., \citet{Ranjan08, satopaa, batchelder2010cultural} for some recent studies, and \citet{Genest, Wallsten97evaluatingand, clemen2007aggregating, primo2009calibration} for a comprehensive overview). Recent developments suggest that shifting the average probability closer to its nearest extreme (0.0 or 1.0), known as \textit{extremizing}, yields even further improvements in forecasting performance. For instance, \citet{satopaa} uses a linear regression model in the logit-space to derive an extremizing aggregator that performs well on real-world data. \citet{Ranjan08} propose transforming the average probability with the CDF of a beta distribution. If both the shape and scale of this beta distribution are equal and constrained to be at least 1.0,  the aggregator extremizes and has some attractive theoretical properties (\cite{Wallsten2001}).  \citet{Baron} gives two reasons to justify extremizing. 
+Consulting experts are often asked to make estimates under incomplete information. If the experts form their estimates independently of each other, their estimates are likely to be different. To analyze the estimates with  statistical methodology, it is mathematically convenient and often necessary to assume that these differences  arise from a probability distribution. For instance, consider a group of experts who aim to eyeball the height of a building. Their estimates can be modeled as independent draws from a Gaussian distribution that is centered at the true height. This framework is called the \textit{generated signal framework}. Even though distributional assumptions clearly oversimplify the reality, they are typically useful enough to improve our understanding of the world. 
 
-To give an intuitive justification for extremization,  consider a binary event whose outcome is still uncertain.  For the sake of illustration, assume that 0.9 is the most informed probability forecast that could be given based on all the available information. Before having any knowledge of the event, a rational forecaster aiming to minimize a reasonable loss function, such as the Brier score, has no reason to give anything but 0.5 as his probability forecast. In the Bayesian terminology, this estimate can be viewed as his prior belief. As he acquires more information, he updates his prior belief accordingly.  This updated belief, which can be viewed as his posterior belief, is a compromise between his prior belief and the information acquired. Because he does not have all the available information, his estimate is conservative and necessarily too close to 0.5. If most forecasters fall somewhere on this spectrum between ignorance and full information, their average forecast tends to fall strictly between 0.5 and 0.9. It this difference between the ``true probability" and the average forecast that extremization aims to close. 
+Unfortunately, this is unlikely to be the case with subjective response data. \cite{hong2009interpreted} explain how standard distributional assumptions can be dramatically misaligned  with the process that generates subjective responses. As an alternative to the generated signal framwork, they introduce the  \textit{interpreted signal framework}. An estimate is said to be interpreted if the expert first filters reality into set of categories and then makes an estimate by applying active cognitive effort to these categories. For instance, consider an Olympic judge who is evaluating a figure skating performance. The judge first interprets the performance with the aid of categories, and then scrutinizes that experience into a final score. Therefore any differences between estimates is assumed to arise from cognitive diversity instead of an underlying probability distribution.
 
-The current extremizing aggregators have several shortcomings. First, often the underlying assumptions are overly simplistic or too detached from the psychology literature to provide the researcher any insight beyond the aggregate probability. For instance, it is still not well-understood when and how much should the average probability be extremized. Therefore it is necessary to learn the amount of extremizing from a separate training dataset. Second, the aggregators often arise from regression analysis that assumes the measurements to deviate from the truth by a random amount. Given that this random deviation is typically assumed to have a mean of zero, the true parameter values are estimated by a form of averaging. It is unlikely that this framework, under which estimation is performed via simple averaging, is appropriate for probability aggregation because extremizing the average probability forecast is known to improve its forecasting performance.
+%The observation that people use categories to interpret the world is well-established in the psychology literature (see, e.g, \citet{fryer2008categorical, page2008difference}).  
 
-The first contribution of this paper is to introduce an information theoretic framework that offers an alternative interpretation for the source of randomness in scientific measurements. This framework can be especially useful for analyzing subjective response data. The second contribution of this paper is to illustrate our framework by deriving an information theoretic model for probability aggregation. The aggregator is based on the distribution of information among experts who are forecasting the outcome of a binary event.  Under this model the average forecast is always extremized, and the amount of extremization is available in a closed-form. Given that this form depends on three parameters,  the number of experts, the amount of information known by an expert, and the amount of information shared by two experts, it allows us to investigate when and how much extremization should be performed. 
+The interpreted signal framework is clearly a more realistic modeling choice for subjective response data. Given that this kind of data is very common in real-world applications, such as product reviews, online auctions, and voting, this framework shows great potential in improving our understanding of many experimental results. Unfortunately, the interpreted signal framework is more of an abstract concept than a concrete model for subjective response data. Therefore it is not clear how this framework can be applied in complex real world situations. 
+%The framework does, however, offer  some novel and useful directions.
 
-This paper is structured as follows. The first section introduces our information theoretic framework and  compares it with the classical data generative process from regression analysis. The framework is then illustrated on probability aggregation. The aggregator provides an general closed-form expression for the amount of extremization. This form is analyzed in full generality and under a compound symmetric information structure. This simplified structure allows us to discuss and understand extremization in terms of a few intuitive parameters. The paper concludes with a discussion of  model limitations and future directions. 
+
+The first contribution of this paper is to introduce a concrete model that generates heterogeneity from cognitive diversity and can be used in a real-world situations. 
+%This model shares several key characteristics with the interpreted signal framework and therefore ends up supporting many of the observations made in \cite{hong2009interpreted}. 
+Our model is considered \textit{information theoretic} as it is based on the distribution of information among the experts. This distribution is completely characterized by the amount of information known by each expert and the amount information shared between any two experts. For instance, experts $A$ and $B$ may know 10\% and 5\%  of the full information, respectively. If they share 2.5\% of the full information, then their information sets overlap and their estimates are assumed to be positively correlated. The experts are assumed to give optimal estimates conditional on their private information sets. This means that a larger information set typically leads to a more accurate estimate, and two identical information sets lead to the same estimate. In reality experts, however, do not typically make optimal use of their information. Therefore the information theoretic framework is a simplification of the real world. It is, however, a compromise that strikes a good balance between psychological realism and analytical convenience. Therefore it offers a platform that is particularly convenient for development of future methodology.
+
+The second contribution of this paper is to apply the information theoretic framework  on probability aggregation. Combining multiple probability forecasts is an important problem with many applications including medical diagnosis (\citet{wilson1998prediction, pepe2003statistical}), political and socio-economic foresight (\citet{tetlock2005expert}), and meteorology (\citet{sanders1963subjective, vislocky1995improved, baars2005performance}). There is strong empirical evidence that bringing together the strengths of different experts by combining their probability forecasts into a single consensus, known as the \textit{crowd belief},  improves predictive performance. For instance, consider the aforementioned experts $A$ and $B$. The union of their information sets covers 12.5\% of the full information. Therefore it seems plausible that some combination of their probability forecasts is more informed than either one of the individual probabilities. The naive approach is to simply average the individual forecasts. To see why this approach can be problematic, recall that $A$'s forecast is based on a larger information set and hence typically more accurate than $B$'s forecast. Therefore $A$'s forecast is on average closer to the actual outcome of the event ($0$ if it does not happen and $1$ if it does happen) and should be given a higher weight in the final aggregate.  The average forecast, however, gives each forecast equal weight and hence ends up being necessarily too close to 0.5. Recent developments suggest that shifting the average probability closer to its nearest extreme (0.0 or 1.0), known as \textit{extremizing}, yields improved forecasting performance. For instance, \citet{satopaa} use a linear regression model in the logit-space to derive an extremizing aggregator that performs well on real-world data. \citet{Ranjan08} propose transforming the average probability with the cumulative distribution function (CDF) of a beta distribution. If both the shape and scale of this beta distribution are equal and constrained to be at least 1.0,  the aggregator extremizes and has some attractive theoretical properties (\cite{Wallsten2001}).  \citet{Baron} provide yet another extremizing aggregator in addition to two intuitive justifications for extremizing.
+
+%To give an intuitive justification for extremization,  consider a binary event whose outcome is still uncertain.  For the sake of illustration, assume that 0.9 is the most informed probability forecast that could be given based on all the available information. Before having any knowledge of the event, a rational forecaster aiming to minimize a reasonable loss function, such as the Brier score, has no reason to give anything but 0.5 as his probability forecast. In the Bayesian terminology, this estimate can be viewed as his prior belief. As he acquires more information, he updates his prior belief accordingly.  This updated belief, which can be viewed as his posterior belief, is a compromise between his prior belief and the information acquired. Because he does not have all the available information, his estimate is conservative and necessarily too close to 0.5. If most forecasters fall somewhere on this spectrum between ignorance and full information, their average forecast tends to fall strictly between 0.5 and 0.9. It this difference between the ``true probability" and the average forecast that extremization aims to close. 
+
+These aggregators, however, are based on ad hoc techniques that learn the amount of extremization by optimizing a scoring rule over a separate training set (\citet{Gneiting04strictlyproper}). It is concerning that extremization does not arise naturally from the underlying model. These aggregators are also too detached from the psychology literature to provide any insight beyond the aggregate probability. Therefore it is still not well-understood when and how much the average probability should be extremized. 
+%Therefore it is necessary to learn the amount of extremizing from a separate training dataset. Furthermore, many of these aggregators assume that the individual probability forecasts arise from the generative framework. Under this assumption the optimal aggregation is accessible by weighted averaging (\cite{parunak2013characterizing}). However, given that extremizing is known to improve the performance of the aggregate, it is unlikely that the generative framework is appropriate for probability aggregation. 
+This paper remedies these shortcomings by developing an aggregator that is based on the information theoretic framework. Under this model the average forecast is always extremized. The amount of extremization is given in a closed-form expression that can be applied to any number of experts with any given information structure. By assuming a simplified information structure, the amount of extremization can be made to depend only on three intuitive parameters. This allows us to visualize extremization and make concrete statements on when and how much extremization should be performed. 
+
+This paper is structured as follows. The first section introduces our information theoretic framework and  compares it with the generated and interpreted signal frameworks. The second section applies the framework to probability forecasts. The third section derives a closed-form expression for the amount of extremization and analyzes this expression under unstructured and compound symmetric information structures. The paper concludes with a discussion of  model limitations and future directions. 
 
 
 
 \section{Information Theoretic Framework}
-This section illustrates some of the similarities and differences between our information theoretic framework and the classical data generative process from regression analysis. This comparison is by no means comprehensive as regression analysis encompasses a very vast literature in statistics. The main difference is in the way the two frameworks incorporate randomness.
+This section discusses the information theoretic framework in comparison to the generated and interpreted signal frameworks. This comparison is by no means comprehensive as signal generation is a large part of the statistical literature. The first subsection builds  intuition via a simple example. The second subsection provides a technical comparison. 
 
-\begin{figure}[htbp]
-   \centering
-   \includegraphics[width = 0.6\textwidth]{regression} % requires the graphicx package
-   \caption{Comparison of the physical and information theoretic frameworks.}
-   \label{framework}
-\end{figure}
+\subsection{Simple Example}
+Consider two experts $1$ and $2$ who are observing a hockey tournament. The tournament consists of three games played between teams RED and BLUE. After seeing the outcome of the first game, the experts are asked to report the probability of RED winning the tournament. Assume that RED wins if $G_1 + G_2 + G_3 \geq 0$, where $G_k \in \{-1,1\}$ indicates whether RED won the $k$th game. Suppose that all 8 possible combinations are equally likely. 
+%Therefore the true probability of team RED winning the tournament is 1/2.
+
+\begin{enumerate}
+\item[] \textit{Generated Estimate:} Based on the first game, the $i$th expert believes that RED has an independent chance of $q_i$ winning any of the two remaining games. The probability $q_i$ is assumed to arise from a probability distribution defined on the unit interval. Therefore any individual differences in the way the experts process the first game and turn the acquired information into probabilities $q_1$ and $q_2$ are assumed to stem from a probability distribution. The exports report
+\begin{align}
+p_i &= \begin{cases}
+q_i(2-q_i) & \text{ if } G_1 = 1\\
+q_i^2 & \text{ if } G_1 = -1
+\end{cases}
+\label{basisP}
+\end{align}
+
+\item[] \textit{Interpreted Estimate:} Interpretations are different ways of seeing the first game. Assume that RED's performance can be attributed entirely to its \textit{defense} $D$ and \textit{offense} $O$ that are equally likely to be either good $1$ or bad $-1$. Expert 1 follows only the defense and expert 2 looks only at the offensive play. Based on these attributes the experts construct their final predictive models. Under the generated signal framework the details of these predictive models are abstracted into a probability distribution. Under the interpreted signal framework, however, the details are fixed and known. For instance, the experts may report (\ref{basisP}) but with
+%If RED wins a game when $D + 2O \geq 2$, the experts report (\ref{basisP}) but with
+\begin{align*}
+q_1 = \begin{cases}
+2/3 & \text{ if } D = 1\\
+1/3 &  \text{ if } D = -1
+\end{cases}
+&& q_2 &= \begin{cases}
+3/5 & \text{ if } O = 1\\
+2/5 & \text{ if } O = -1
+\end{cases}
+\end{align*}
+Each expert interprets the available information independently and subjectively.  Therefore even if the experts observed the same attributes of the game, their probability forecasts do not need to be the same. 
 
 
-To guide our comparison, Figure \ref{framework} illustrates both setups with the regression framework on the left and the information theoretic framework on the right. The two large circles represent the set of relevant factors, or simply the universe. This is the same under both frameworks. Consider first the regression framework on the left side. From the experimenter's point of view, the universe is divided into controlled (C) and uncontrolled factors (U) that affect his measurement (Y). The uncontrolled factors are assumed to have a random effect, typically with mean of zero, on the measurement. Therefore any repeated measurement under the same set of controlled factors leads to a slightly different answer.  
+\item[] \textit{Information Theoretic Estimate:} The experts know that RED has a 1/2 chance of winning any given game. Suppose that expert 1 knows the number of wins in the first two games, i.e. the value of $G_1 + G_2$, but not necessarily the separate outcomes of the two games. Assume that expert 2 only knows the outcome of the first game $G_1$. Then,
+\begin{align*}
+p_1 = \begin{cases}
+0 & \text{ if } G_1 + G_2 = -2\\
+1/2 & \text{ if } G_1 + G_2 = 0\\
+1 & \text{ if } G_1 + G_2 = 2\\
+\end{cases}
+&& p_2 = \begin{cases}
+1/4 & \text{ if } G_1 = -1\\
+3/4 & \text{ if } G_1 = 1\\
+\end{cases}
+\end{align*}
+Experts 1 and 2 know 2/3 and 1/3 of the full information, respectively. Their predictive models are completely determined by the size of their private information sets. As their information sets overlap by 1/3 of the full information, their probability forecasts are positively correlated. In this example, the correlation coefficient for their forecasts is $\sqrt{2}/2$.  
 
 
-The right side of Figure \ref{framework} depicts our information theoretic framework. Under this framework the data are generated by first picking a random subset of factors from the universe. This subset is then assumed to form its own sub-universe, where all factors are controlled. Repeating the measurement in this sub-universe always leads to the same answer (Z). Therefore, while in the regression framework any differences between two measurements is assumed to arise from the uncontrolled factors, these differences in the information theoretic framework arise due to different sets of sub-universes. In both cases the differences are random. 
-
-The need for our information theoretic framework is becomes clear by considering subjective responses. For instance, the response variable in the study may be the subject's personal belief about the closing price of a particular capital stock. The person in this case forms the sub-universe depicted by the small circle in Figure \ref{framework}. He holds some subset of  the information that make up the universe. He uses his information efficiently to produce an answer that is his \textit{personal truth}. There is no noise in his answer. Therefore, if he is asked the same question immediately after, he gives the same response. If, on the other hand, he is asked the same question a day later, he may give a different answer because his information set may have changed by then. 
-
-It is unclear how subjective responses can arise from the regression framework because under this setup exact measurements are not possible. Furthermore, repeated measurements cannot be identical. Instead they differ by a random amount that is often assumed to have a mean of zero. Therefore averaging can help to smooth the data and reveal a better picture of the underlying truth. But as has been shown in previous literature, mere averaging does not lead to optimal probability aggregation. The average must be extremized. Therefore the regression context does not appear suitable for analyzing probability forecasts. The next section introduces a information theoretic model for analyzing probability forecasts. 
+\end{enumerate}
 
 
-%In regression analysis the observations are assumed to deviate from the truth due to randomness that arises from the combined influence of many unobservable conditions. Averaging can help to smooth the data and reveal a better picture of the underlying truth. As have been shown in previous literature, mere averaging does not lead to optimal probability aggregation. The average must be extremized. Therefore the regression context does not appear suitable for analyzing probability forecasts. 
-%
-%Our framework does not assume unobservable conditions. Instead, each observation represents the truth under the given set of conditions. This means that if another measurement was to be performed under the same conditions, the resulting observation would be the same as before. Therefore any differences between observations are caused by variations in the underlying conditions. 
-%
-% the randomness arises from different information sets. 
-%
+\subsection{Technical Details}
+Let  $(\Omega, \mathcal{F}, \P)$ be a probability space, where the set $\Omega$ contains all possible states of the world, the $\sigma$-field $\mathcal{F}$ consists of all subsets of $\Omega$, and $\P$ is a probability measure. Let $A \in \mathcal{F}$ denote an event of interest. 
+%The set of possible outcomes is denoted with $S$. For the sake of illustration, assume that  $S = \{G, B\}$, where $G$ and $B$ denote good and bad outcomes, respectively. The outcome function $F: \Omega \to S$ is a random variable that maps the state of the world to the true outcome. 
+The experts aim to forecast the probability $p = \P(A)$. Even though this paper focuses on probability estimates, the following discussion can be easily generalized to different types of estimates. 
+
+Generated estimates can be considered as noisy or distorted versions of $p$. In other words, if $\xi: [0,1] \to [0,1]$ is a noise function that randomly distorts a probability, then a generated probability forecasts is realized by $p_i = \xi(p)$. Due to its mathematical convenience, this framework is typically applied to subjective response data. Unfortunately, it can be drastically misaligned with the psychology literature and hence lead to results that are not reflective of the actual process that generates the estimates.
+
+%Therefore any heterogeneity in the estimates stems from randomness that is typically assumed to be caused by uncontrolled or unmeasured factors. 
+%Even though this framework is mathematically convenient, it can be drastically misaligned with the psychology literature and hence lead to results that are not reflective of the actual environment that produces the estimates.
+%The interoperation framework aims to correct these shortcomings by proposing a model that is more cognitive based. See \cite{hong2009interpreted} for the original introduction. 
+Under the interpreted signal framework, the set of states $\Omega$ is assume to be finite. The expert partitions $\Omega$ into non-overlapping subsets. This partition, know as the \textit{interpretation}, is denoted with $\Pi^i = \{\pi_1^i, \pi_2^i, \dots, \pi_{n_i}^i\}$, where $\bigcup_{j=1}^{n_i} \pi_j^i = \Omega$ and  $\pi_j^i \cap \pi_k^i = \emptyset$ for $j \neq k$. The expert can only associate a state $\omega \in \Omega$ with a set in his partition. Therefore his information is incomplete as long as not all the sets of his partition are singletons. To make probability forecasts, the expert specifies a map $\phi_i: \Omega \to [0, 1]$ that is measurable with respect to $\Pi^i$. 
+%Therefore any differences in estimates stem from cognitive diversity of the experts. 
+Unfortunately, \cite{hong2009interpreted} do not specify how the expert constructs the map $\phi_i$. It is also not clear how to the set of states $\Omega$ should be specified in real-world applications.  
 
 
-%
-%
-%
-%Consider the model
-%\begin{align}
-%X_S &= \sum_{i=1}^\infty \beta_i X_i, \label{regression}
-%\end{align}
-%where the full process $X_s$ is a weighted sum of countably many ``facts" denoted with $X_i$. Assume now that the expert holds only some subset of these ``facts." Call this set $\textit{I}_{1}$ and let $\mathcal{I}_0 = \mathbb{N} / \mathcal{I}_1$ be the set unknown to the expert. Equation (\ref{regression}) then breaks down to known and unknown terms
-%\begin{align*}
-%X_S &= \sum_{i \in \mathcal{I}_1} \beta_i X_i + \sum_{i \in \mathcal{I}_0} \beta_i X_i,
-%\end{align*}
-% Denoting the experts probit forecast with $Y$, the unknown component with $\epsilon$, and reordering some of them terms we have that 
-%\begin{align*}
-%Y &= X_S + \epsilon
-%\end{align*}
-%The term $\epsilon$ is considered noise and typically assumed to have a mean of zero. Under this model averaging multiple probit forecasts $\{ Y_j \}_{j=1}^N$, gives an unbiased estimator of $X_S$. As have been shown in literature, mere averaging does not lead to optimal probability aggregation. The average must be extremized. Therefore the regression context does not appear suitable for analyzing probability forecasts. 
-%
-%In the next section we show that our framework leads to very intuitive extremization. The average probit forecast is always extremized. Another difference is in the way the noise term is treated. In our model any deviation from $X_S$ is caused by a constant -- not random -- $\epsilon$. Therefore in our framework any two experts holding the same set of ``facts" would give identical forecasts. This means that the decision-making is solely based on the information set that the expert has. In the regression context, on other hand, the two experts would give slightly different probit forecasts because the realization of the random $\epsilon$ is different for them. 
-%
-%WHERE DOES RANDOMNESS ARISE IN EACH CASE. 
+
+The information theoretic framework removes these intractable components and provides a model that can be applied in practice. It does not assume detailed knowledge of the expert interpretations nor pose any structure or cardinality restrictions on $\Omega$.  Each expert simply forecasts $p_i = \P\left(A | \mathcal{F}_i\right)$ based on a private information set $\mathcal{F}_i \subseteq \mathcal{F}$. 
+%If the set $\Omega$ is finite, the information set $\mathcal{F}_i$ can be considered equivalent to the $\sigma$-field generated by the interpretation $\Pi^i$. 
+If two experts $i$ and $j$ share information such that $\mathcal{F}_i \cap \mathcal{F}_j \neq \emptyset$, then the correlation of their forecasts $p_i$ and $p_j$ is positive and proportional to the overlap in their information sets. This means that, similarly to the interpreted signal framework, any heterogeneity in the estimates stems from cognitive diversity. As the details of the information set $\mathcal{F}_i$ cannot be known in practice, the information known by the $i$th expert is quantified as a fraction of the full information. 
+%For instance, expert $i$ may know 15\% of the full information while expert $j$ knows only 8\% of the full information. If in addition we specify that their shared information is, say, 3\% of the full information, we have established an information structure for these  experts. 
+%This leads to a compromise that is mathematically convenient and psychologically reasonable. 
+
+%This is shown in following sections where the information theoretic framework is applied to probability forecasts and their aggregation. 
+
 
 \section{Model for Probability Forecasts}
 \label{Model}
-Consider a probability space $(\Omega, \mathcal{F}, \P)$ and an event $A \in \mathcal{F}$ to be forecasted. Expert $j$ knows information $\mathcal{F}_j \subseteq \mathcal{F}$ and forecasts $p_j = \P(A | \mathcal{F}_j)$. The best in-principle forecast given the knowledge of the $N$ forecasters is $P(A | \mathcal{F}')$, where $\mathcal{F}' = \mathcal{F}_1 \cup \mathcal{F}_2 \cup .. \cup \mathcal{F}_N$. As in this work we do not allow the experts to exchange information with each other, the best aggregate probability is given by $\P(A | p_1, p_2, \dots, p_N)$.
-
-For illustrative purposes, we first assume only two experts and then generalize the model to $N$ experts. Under our model the event $A$ is determined by a pool of white noise. Experts 1 and 2 see respective $\delta_1$ and $\delta_2$ portions of the noise. These portions form their information sets. The overlap in their information sets is a fixed share $\rho$ of what is seen by either expert. This can be made more precise by letting  $(\Omega, \mathcal{F}, \P)$ be a probability space on which we define a white noise process indexed by the unit interval $S$. A white noise process is a Gaussian process $\{ X_B \}$ indexed by Borel measurable subsets $B$. We endow the unit interval with the uniform measure, $\mu$. This gives the white noise process a covariance structure of $Cov(X_B, X_{B'}) = \mu(B \cap B') = |B \cap B'|$, i.e. the length of the intersection. The target event is defined as $A = \{ X_{S} > 0\}$. Let $I_1, I_2 \subseteq S$ be the information sets observed by experts 1 and 2, respectively. Thus,
+Consider two experts 1 and 2 who forecast the probability of the event $A$ happening. Assume that the event $A$ is determined by a pool of white noise, and that the experts 1 and 2 see respective $\delta_1$ and $\delta_2$ portions of this noise. These portions form their information sets. The overlap in these information sets is a fixed share $\rho$ of what is seen by either expert. To make this more precise, let $(\Omega, \mathcal{F}, \P)$ be a probability space. On this space, define a white noise process that is indexed by the unit interval $S = [0,1]$. A white noise process is a Gaussian process $\{ X_B \}$ indexed by Borel measurable subsets $B$. The unit interval is endowed with the uniform measure $\mu$. This gives the white noise process a covariance structure $\text{cov}(X_B, X_{B'}) = \mu(B \cap B') = |B \cap B'|$, i.e. the length of the intersection. The target event is defined as $A = \{ X_{S} > 0\}$. Let $I_1, I_2 \subseteq S$ be the information sets observed by experts 1 and 2, respectively. Then,
 \begin{align*}
 \mu(I_1) = |I_1| &= \delta_1\\
 \mu(I_2) = |I_2| &= \delta_2\\
@@ -177,23 +216,29 @@ Call $X_{I_j}$ the probit forecast of the $j$th expert.  If $\Phi$ denotes the s
 \begin{align*}
 p_j &= \P(A | \mathcal{F}_{I_j}) = \Phi(X_{I_j})
 \end{align*}
-for $j = 1, 2$, and the aggregator is given by $\P(X_{S} > 0 | p_1, p_2)$.
+for $j = 1, 2$. 
 
 \begin{figure}[htbp]
 %   \hspace{-2em}
    \includegraphics[width = \textwidth]{N=2} % requires the graphicx package
-   \caption{Illustration of the model with two experts.}
+   \caption{Illustration of the information theoretic model with two experts.}
    \label{diagram2}
 \end{figure}
 
 Figure \ref{diagram2} illustrates the model with $N=2$. The Gaussian process has been partitioned into four parts based on the information sets $I_1$ and $I_2$:
 \begin{align*}
- U &= X_{I_1 / I_2}\\
-M &= X_{I_1 \cap I_2}\\
-V &= X_{I_2 / I_1}\\
-W &= X_{(I_1 \cup I_2)^c}
+ U &= X_{I_1 / I_2}
+& M &= X_{I_1 \cap I_2}\\
+ V &= X_{I_2 / I_1}
+& W &= X_{(I_1 \cup I_2)^c}
 \end{align*}
-Then $X_{I_1} = U + M$, $X_{I_2} = M + V$, and $X_S = U+M+V+W$, where $U, V, M, W$ are independent Gaussians with respective variances $\delta_1-\rho$, $\delta_2-\rho$, $\rho$, $1+\rho-\delta_2 - \delta_3$. This gives $(X_{S}, X_{I_1}, X_{I_2})$ a multivariate normal distribution. More specifically, we have 
+Then,
+\begin{align*}
+X_{I_1} &= U + M\\
+X_{I_2} &= M + V\\
+X_S &= U+M+V+W,
+\end{align*}
+where $U, V, M, W$ are independent Gaussians with respective variances $\delta_1-\rho$, $\delta_2-\rho$, $\rho$, $1+\rho-\delta_1 - \delta_2$. This gives $(X_{S}, X_{I_1}, X_{I_2})$ the following multivariate normal distribution. 
 \begin{align}
 \left(\begin{matrix} X_S \\ X_{I_1}\\ X_{I_2} \end{matrix}\right) &\sim \mathcal{N}\left(
  \boldsymbol{0},  \left(\begin{matrix} 
@@ -205,13 +250,13 @@ Then $X_{I_1} = U + M$, $X_{I_2} = M + V$, and $X_S = U+M+V+W$, where $U, V, M, 
 
 \begin{figure}[htbp]
    \includegraphics[width = \textwidth]{N=N} % requires the graphicx package
-   \caption{Illustration of the model with $N$ experts.}
+   \caption{Illustration of the information theoretic  model with $N$ experts.}
    \label{diagramN}
 \end{figure}
 
 
 
-Consider now $N$ experts. Let $|I_j| = \delta_j$ be the amount of information known by the $j$th expert, and $|I_i \cap I_j| = \rho_{ij}$ be the information overlap between the $i$th and $j$th experts. Then expression (\ref{twoExperts}) generalizes to the vector $(X_{S}, X_{I_1}, X_{I_2}, \dots, X_{I_N})$. This gives us
+Consider now $N$ experts. Let $|I_j| = \delta_j$ be the amount of information known by the $j$th expert, and $|I_i \cap I_j| = \rho_{ij}$ be the information overlap between the $i$th and $j$th experts. Expression (\ref{twoExperts}) generalizes to the vector $(X_{S}, X_{I_1}, X_{I_2}, \dots, X_{I_N})$ as follows.
 \begin{align*}
 \left(\begin{matrix} X_S \\ X_{I_1}\\ \vdots \\ X_{I_N} \end{matrix}\right) &\sim \mathcal{N}\left( \left(\begin{matrix} 
 \mu_1 \\ \boldsymbol{\mu}_2
@@ -229,8 +274,15 @@ Consider now $N$ experts. Let $|I_j| = \delta_j$ be the amount of information kn
 \delta_N & \rho_{N,1} & \rho_{N,2} & \dots & \delta_N\\ 
  \end{array}\right)\right)
 \end{align*}
-This is illustrated in Figure \ref{diagramN}. It is important to notice that the $I_j$ does not have to be contiguous segment of the unit interval. The sub-matrix $\Sigma_{22}$ fully describes the information structure among the experts.  This matrix has some technical conditions such as symmetry and non-singularity. In addition, $\Sigma_{22}$ must describe a coherent information structure. The matrix $\Sigma_{22}$ is coherent if and only if its information can be transformed into a diagram such as the one depicted by Figure \ref{diagramN}.
-
+This extension is illustrated in Figure \ref{diagramN}. It is important to notice that the $I_j$ does not have to be a contiguous segment of the unit interval. The sub-matrix $\Sigma_{22}$ fully describes the information structure among the experts.  This matrix has some technical conditions such as symmetry and non-singularity. In addition, $\Sigma_{22}$ must describe a coherent information structure. The matrix $\Sigma_{22}$ is coherent if and only if its information can be transformed into a diagram such as the one depicted by Figure \ref{diagramN}. It is easy to show that all covariance matrices of size $N \times N$ are not coherent information structures. For instance, the matrix
+\begin{align*}
+\Sigma_{22} =  \left(\begin{array}{c c c}
+0.33 & 0.28 & 0.11\\
+0.28 & 0.33 & 0.25\\
+0.11 & 0.25 & 0.33\\
+ \end{array}\right)
+\end{align*}
+is a valid covariance matrix but not a coherent information structure. The overlap $0.28$ between experts 1 and 2 is too large to allow for such a wide difference in their overlaps, $0.11$ and $0.25$ respectively, with the third expert's information set. 
 
 
 %Thus $\bar{X}$ is extremized when
@@ -246,7 +298,11 @@ This is illustrated in Figure \ref{diagramN}. It is important to notice that the
 
 
 \section{Extremization}
-Let $\boldsymbol{X}$ be a column vector of length $N$ such that $X_j = X_{I_j}$. If $\Sigma_{22}$ is a coherent overlap structure such that $\Sigma_{22}^{-1}$ exists, then $X_{S} | \boldsymbol{X} \sim \mathcal{N}(\bar{\mu}, \bar{\Sigma})$, where
+\label{extremization}
+
+The best in-principle forecast given the knowledge of $N$ experts is $P(X_{S} > 0 |  \mathcal{F}')$, where $\mathcal{F}' = \mathcal{F}_1 \cup \dots \cup \mathcal{F}_N$. This aggregate, however, assumes knowledge of the union of the information sets. Understanding the union $\mathcal{F}'$ is very difficult in practice, especially when the number of experts in the group is large. Therefore the best aggregate probability that can be realistically hoped for is  $\P(X_{S} > 0 | p_1, p_2)$.
+
+To derive this aggregator under the information theoretic model, let $\boldsymbol{X}$ be a column vector of length $N$ such that $X_j = X_{I_j}$ for $j = 1, \dots, N$. If $\Sigma_{22}$ is a coherent overlap structure and $\Sigma_{22}^{-1}$ exists, then $X_{S} | \boldsymbol{X} \sim \mathcal{N}(\bar{\mu}, \bar{\Sigma})$, where
 \begin{align}
 \bar{\mu} &= \mu_1 + \Sigma_{12} \Sigma_{22}^{-1} (\boldsymbol{X} - \boldsymbol{\mu}_2) =  \Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X} \label{condMu}
 \end{align}
@@ -254,51 +310,51 @@ and
 \begin{align}
  \bar{\Sigma}&= \Sigma_{11} - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21} =1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}  \label{condSigma}
 \end{align}
-See Result 5.2.10 on p. 156 in \cite{ravishanker2001first} for the formulas of a conditional multivariate normal distribution. The aggregator then becomes 
+See Result 5.2.10 on p. 156 in \cite{ravishanker2001first} for the formulas of the conditional multivariate normal distribution. This gives us the following aggregator. 
 \begin{align*}
-\P\left(A  \bigg| \boldsymbol{X}\right)  = \P\left(X_{S} > 0 \bigg| \boldsymbol{X}\right) &= \Phi\left( \frac{\Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}}\right)
+\P\left(A  | \boldsymbol{X}\right)  = \P\left(X_{S} > 0 | \boldsymbol{X}\right) &= \Phi\left( \frac{\Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}}\right)
 %&= \Phi\left( \frac{\boldsymbol{1}_{N}'  \Sigma_{22}^{-1} \Phi^{-1}(\boldsymbol{p})}{\sqrt{1 - \boldsymbol{1}_{N}' \Sigma_{22}^{-1} \boldsymbol{1}_{N}}}\right)
 \end{align*}
-Let $\alpha$ represents the amount of extremization that is performed for the average probit forecast. If $\bar{X}$ denotes the sample average, then
+Let $\alpha$ represent the amount of extremization that is performed for the average probit forecast. If $\bar{X} = \left( \sum_{j=1}^N X_{I_j} \right)/N$, then
 \begin{align}
 \alpha \bar{X}&=  \frac{\Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}}  &\Leftrightarrow&& \alpha  = \frac{N \Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\left(\boldsymbol{1}_N' \boldsymbol{X} \right) \sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}} \label{alpha}
 \end{align}
-Even though this expression assumes no structure on $\Sigma_{22}$ and depends on $N +\frac{N(N-1)}{2}$ unknown parameters, it can be used to gain insight on the behavior of the extremizing constant, $\alpha$. One useful development is to determine the amount of information in $\boldsymbol{X}$. 
+Even though this expression assumes no structure on $\Sigma_{22}$ and depends on $N +N(N-1)/2$ unknown parameters, it can be used to gain insight on the behavior of the extremizing constant $\alpha$. One useful development is to determine the amount of information in $\boldsymbol{X}$. 
 
-\begin{lemma}
-\label{infoLemma}
-If $\delta_0$ denotes the information in $\boldsymbol{X}$, then 
+\begin{observation}
+\label{infoObservation}
+If $\delta_X$ denotes the information in $\boldsymbol{X}$, then 
 \begin{align*}
 %\frac{N \Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\left(\boldsymbol{1}_N' \boldsymbol{X} \right) \sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}} &= \alpha\\
 %\frac{\Sigma_{12} \Sigma_{22}^{-1} }{\sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}} &= \alpha\\
-%\frac{1 }{\sqrt{1 - \delta_0}} &= \alpha\\
-%\frac{1}{\sqrt{1-\delta_0}} &= \frac{\frac{N}{(N-1)\rho +1}}{\sqrt{1- \frac{N\delta}{(N-1)\rho +1} }} \\
-\alpha &= \frac{1}{\sqrt{1-\delta_0}} &\Leftrightarrow&& \delta_0 &=1-\alpha^{-2}
+%\frac{1 }{\sqrt{1 - \delta_X}} &= \alpha\\
+%\frac{1}{\sqrt{1-\delta_X}} &= \frac{\frac{N}{(N-1)\rho +1}}{\sqrt{1- \frac{N\delta}{(N-1)\rho +1} }} \\
+\alpha &= \frac{1}{\sqrt{1-\delta_X}} &\Leftrightarrow&& \delta_X &=1-\alpha^{-2}
 \end{align*}
-\end{lemma}
+\end{observation}
 \begin{proof}
-Let $\alpha_N$ denote the extremizing constant for $\boldsymbol{X}$. Consider a single expert whose probit forecast is $\bar{X}$. Denote the size of his information set by $\delta_0$. The extremizing constant for his forecast, as is given by (\ref{alpha}), simplifies to
+Let $\alpha_N$ denote the extremizing constant for $\boldsymbol{X}$. Consider a single expert whose probit forecast is $\bar{X}$. Denote the size of his information set by $\delta_X$. The extremizing constant for his forecast, as is given by (\ref{alpha}), simplifies to
 \begin{align*}
-\alpha_1  =  \frac{1}{\sqrt{1-\delta_0}}
+\alpha_1  =  \frac{1}{\sqrt{1-\delta_X}}
 \end{align*}
 Setting $\alpha_1 = \alpha_N$ gives us the final result.
 
 \end{proof}
 
-Based on Lemma \ref{infoLemma} there is a monotonic and positive relationship between $\alpha$ and $\delta_0$. This means that the more the sample average is extremized the more information its corresponding $\boldsymbol{X}$ contains, and \textit{vice versa}. Lemma \ref{infoLemma}  is interesting for two reasons: (a) it allows the researcher to use black-box models from existing literature to determine the extremizing constant and then use it to analyze the amount of information in $\boldsymbol{X}$, and (b) it allows us to easily show that $\alpha \geq 1$ under any information structure.
+Based on Observation \ref{infoObservation} there is a monotonic and positive relationship between $\alpha$ and $\delta_X$. Therefore the more the sample average is extremized the more information its corresponding $\boldsymbol{X}$ contains, and \textit{vice versa}. Observation \ref{infoObservation}  is interesting for two reasons: (a) it allows the researcher to use black-box models from existing literature to determine the extremizing constant and then use it to analyze the amount of information in $\boldsymbol{X}$, and (b) it allows us to easily show that $\alpha \geq 1$ under any information structure.
 
-\begin{theorem}
+\begin{observation}
 \label{positiveThm}
 Under the model described in Section \ref{Model}, the extremizing factor, $\alpha$, is always greater or equal to 1. This means that the average probit forecast is always extremized. 
-\end{theorem}
+\end{observation}
 \begin{proof} 
-By Lemma \ref{infoLemma} we have that 
+By Observation \ref{infoObservation} we have that 
 \begin{align*}
-\alpha &= \frac{1}{\sqrt{1-\delta_0}} 
+\alpha &= \frac{1}{\sqrt{1-\delta_X}} 
 \end{align*}
-Given that $\delta_0 \in [0,1]$, it follows that $\alpha \in [1, \infty)$. 
+Given that $\delta_X \in [0,1]$, it follows that $\alpha \in [1, \infty)$. 
 
-%By Lemma \ref{infoLemma}, the extremizing constant $\alpha$ is the smallest when the sample $\boldsymbol{X}$ has the least amount of information. This happens when all the experts know the same information, and the amount of this information is very small. Assume without loss of generality that $\delta_j = \delta$. Then $\rho_{i,j} = \delta$ and
+%By Observation \ref{infoObservation}, the extremizing constant $\alpha$ is the smallest when the sample $\boldsymbol{X}$ has the least amount of information. This happens when all the experts know the same information, and the amount of this information is very small. Assume without loss of generality that $\delta_j = \delta$. Then $\rho_{i,j} = \delta$ and
 %\begin{align*}
 % \alpha  &= \frac{N \Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\left(\boldsymbol{1}_N' \boldsymbol{X} \right) \sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}} = \frac{1}{\sqrt{1- \delta }} \downarrow 1
 %\end{align*}
@@ -309,15 +365,15 @@ Given that $\delta_0 \in [0,1]$, it follows that $\alpha \in [1, \infty)$.
 %\end{align*} 
 %As $\Sigma_{22}$ is positive semi-definite,  $\Sigma_{22}^{-1}$ is positive definite. Therefore $\Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21} > 0$ and $ \sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}} \in [0,1)$. 
 \end{proof}
-
+Therefore the information theoretic framework offers a natural source of  extremization. 
 To continue our analysis of extremization, it is necessary to reduce the number of degrees of freedom by assuming a simpler form for the overlap structure $\Sigma_{22}$. 
 
 \subsection{Compound Symmetric Information Structure}
 
-In this section we assume that any two experts know and share the same amount of information. This gives us the compound symmetric overlap structure.
+This section assumes that the experts' information sets have the same size and the amount of overlap between any two information sets is constant, i.e.  $|I_{1}| =  \dots = |I_{N}|$ and $|I_{i} \cap I_{j}| = |I_{h} \cap I_{k}|$ for all $i \neq j$ and $h \neq k$. This results in the following compound symmetric overlap structure. 
 % $\rho \in [\max \{(N-T)/(T(N-1)), 0\},1] = A_\rho$. 
 \begin{align*}
-\left(\begin{matrix} S \\ X_1\\ \vdots \\ X_N \end{matrix}\right) &\sim \mathcal{N}\left( \left(\begin{matrix} 
+\left(\begin{matrix} X_{S} \\ X_{I_1}\\ \vdots \\ X_{I_N} \end{matrix}\right) &\sim \mathcal{N}\left( \left(\begin{matrix} 
 \mu_1 \\ \boldsymbol{\mu}_2
  \end{matrix}\right) =
  \boldsymbol{0}, \left(\begin{matrix} 
@@ -333,14 +389,36 @@ In this section we assume that any two experts know and share the same amount of
 \delta & \rho\delta & \rho\delta & \dots & \delta\\ 
  \end{array}\right)\right),
 \end{align*}
-where $\delta \in [0,1]$ and $\rho \in \left[  \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right]$. The lower bound for $\rho$ becomes necessary when $\delta > 1/N$ because then overlap is unavoidable. This minimum can be computed by assuming $\delta > 1/N$ and letting the shared information be the same for all $N$ experts. That is, $|I_{i} \cap I_j| = |I| =  \rho \delta$ for all $i \neq j$. The minimum sharing occurs, when $\rho\delta + N(\delta - \delta\rho) = 1$, which gives us the lower bound. The quantity  $\rho\delta + N(\delta - \delta\rho)$ also describes the maximum coverage of the $N$ experts. That is, $\rho\delta + N(\delta - \delta\rho) = \max | I_1 \cup I_2 \cup \dots \cup I_N|$. 
+where $\delta \in [0,1]$ is the fraction known by each expert and $\rho \in \left[  \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right]$ is the shared proportion of the known knowledge. The positive lower bound for $\rho$ becomes active when $\delta > 1/N$ because then overlap in the information sets is unavoidable. This minimum overlap can be computed by assuming $\delta > 1/N$ and letting the shared information be the same for all $N$ experts. That is, $I_{i} \cap I_j = I$ and $|I| =  \rho \delta$ for all $i \neq j$. The minimum sharing occurs when $\rho\delta + N(\delta - \delta\rho) = 1$, which gives us the lower bound. The quantity  $\rho\delta + N(\delta - \delta\rho)$ also describes the maximum coverage of the $N$ experts, i.e. $\max | I_1 \cup I_2 \cup \dots \cup I_N| = \rho\delta + N(\delta - \delta\rho)$. 
 
-Note that this model constrains the marginal distribution of $p_j = \Phi(X_{I_j})$ to be uniform on $[0,1]$ when $\delta_j = 1$. To see this, recall that if $X_{I_j} \sim \mathcal{N}(0,1)$, then $\Phi(X_{I_j})$ is uniform on $[0,1]$. If this does not hold empirically, it is a sign that the model cannot be correct on the micro-level. If $X_{I_j}$ appears more (respectively less) concentrated about $0.5$, then the model can be adjusted by changing $\delta_{j}$ to a smaller fraction. 
+Given that $\Sigma_{22}$ can be written in the form  $\Sigma_{22} = I_N (\delta-\rho\delta) + J_{N \times N} \rho\delta$, its inverse is
+\begin{align}
+\Sigma_{22}^{-1} = I_N \left(\frac{1}{\delta-\rho\delta} \right) - J_{N \times N} \frac{\rho}{(1-\rho)\delta(1+(N-1) \rho)} \label{inverse}
+\end{align}
+See the supplementary material of \cite{dobbin2005sample} for the proof of this fact.  The determinant of $\Sigma_{22}$ is
+\begin{align}
+| \Sigma_{22}| = (\delta - \rho\delta)^N \left(1+\frac{N \delta \rho}{\delta - \delta\rho} \right),\label{determinant}
+\end{align}
+which follows from p. 32 in \cite{rao2009linear}. As the compound symmetric information structure depends only on two unknown parameters, the values of $\delta$ and $\rho$ can be estimated in practice via the maximum likelihood method. That is,
+\begin{align}
+(\hat{\delta}, \hat{\rho}) =& \argmax_{\rho, \delta} \log \left[ \frac{1}{\sqrt{(2\pi)^N |\Sigma_{22}|}} \exp\left( -\frac{1}{2} \boldsymbol{X}' \Sigma_{22}^{-1} \boldsymbol{X} \right) \right], \label{MLE}\\
+& \text{s.t. } \nonumber \delta \in [0,1] \text{ and } \rho \in \left[  \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right]
+\end{align}
+where $\Sigma_{22}^{-1}$ and $|\Sigma_{22}|$ are given by (\ref{inverse}) and (\ref{determinant}), respectively. Unfortunately, (\ref{MLE}) cannot be solved analytically. However, a simple grid-search can be used to find the estimates very efficiently. 
+
+%\begin{align*}
+%(\hat{\delta}, \hat{\rho}) &= \argmax_{\rho, \delta}  - \frac{N}{2} \log (\delta - \rho\delta) - \frac{1}{2} \log \left(1+\frac{N \delta \rho}{\delta - \delta\rho} \right) -\frac{1}{2} \boldsymbol{X}' \left( I_N \left(\frac{1}{\delta-\rho\delta} \right) - J_{N \times N} \frac{\rho}{(1-\rho)\delta(1+(N-1) \rho)}  \right) \boldsymbol{X}
+%\end{align*}
+
+
+
+
+%Recall that if $X_{I_j} \sim \mathcal{N}(0,1)$, then $\Phi(X_{I_j})$ is uniform on $[0,1]$. Therefore, if $\delta_j = 1$, the marginal distribution of $p_j = \Phi(X_{I_j})$ is uniform on $[0,1]$. If this does not hold empirically, it is a sign that the model cannot be correct on the micro-level. If $X_{I_j}$ appears more (respectively less) concentrated about $0.5$, then the model can be adjusted by changing $\delta_{j}$ to a smaller fraction. 
 
 
 %Assuming no further prior information on overlap structure, the expected amount of information held by the group is WHAT IS THIS?
 
-Notice that $\Sigma_{22}$ can be written as  $\Sigma_{22} = I_N (\delta-\rho\delta) + J_{N \times N} \rho\delta$. Therefore its inverse is $\Sigma_{22}^{-1} = I_N \left(\frac{1}{\delta-\rho\delta} \right) - J_{N \times N} \frac{\rho\delta}{(\delta-\rho\delta)((\delta-\rho\delta) + N \rho\delta)}$ (see the supplementary material for \cite{dobbin2005sample}). Applying this to equations (\ref{condMu}) and (\ref{condSigma}) gives us the conditional mean
+The aggregator can be derived by applying (\ref{inverse}) and (\ref{determinant}) to the general formulas (\ref{condMu}) and (\ref{condSigma}). The resulting conditional mean and variance are 
 %By the conditional multivariate normal results, we have that 
 %\begin{align*}
 %\bar{\mu} &= \mu_1 + \Sigma_{12} \Sigma_{22}^{-1} (\boldsymbol{X} - \boldsymbol{\mu}_2)\\
@@ -373,20 +451,17 @@ Notice that $\Sigma_{22}$ can be written as  $\Sigma_{22} = I_N (\delta-\rho\del
 %&= \frac{\delta(\rho\delta -\delta)}{(\rho\delta-\delta)((N-1)\rho\delta +\delta)}  \sum_{j=1}^N X_j \\
 %&= \frac{\delta}{(N-1)\rho\delta +\delta}  \sum_{j=1}^N X_j \\
 \begin{align*}
-\bar{\mu} &= \frac{1}{(N-1)\rho +1}  \sum_{j=1}^N X_j 
-\end{align*}
-and variance 
-\begin{align*}
+\bar{\mu} = \frac{1}{(N-1)\rho +1}  \sum_{j=1}^N X_j 
 % \bar{\Sigma} &= 1 -  \Sigma_{12} \Sigma_{22}^{-1}\Sigma_{21} \\
 % &= 1  - \frac{\delta^2}{(\rho\delta-\delta)((N-1)\rho\delta +\delta)} N(\rho\delta -\delta)\\
 % &= 1  - \frac{\delta^2N}{(N-1)\rho\delta +\delta} \\
- \bar{\Sigma} &= 1  - \frac{\delta N}{(N-1)\rho +1} 
+&&  \bar{\Sigma} = 1  - \frac{\delta N}{(N-1)\rho +1} 
 \end{align*}
-The aggregation rule then becomes 
+The resulting aggregator is
 \begin{align*}
-\P\left(X_S > 0 \bigg| \boldsymbol{X}\right) &=\Phi\left(\frac{\frac{1}{(N-1)\rho +1} \sum_{j=1}^N X_{I_j} }{\sqrt{1- \frac{N\delta}{(N-1)\rho +1} }}  \right)
+\P\left(X_S > 0 | \boldsymbol{X}\right) &=\Phi\left(\frac{\frac{1}{(N-1)\rho +1} \sum_{j=1}^N X_{I_j} }{\sqrt{1- \frac{N\delta}{(N-1)\rho +1} }}  \right)
 \end{align*}
-From this aggregator we obtain an expression for the amount of extremization under the compound symmetric information structure.
+It is crucial to notice that this aggregator can learn the amount of extremization without a separate training set. Therefore it can be applied to a wide range of applied problems. Equating the aggregate probit forecast with $\bar{X}$ results in the following extremization factor.
 \begin{align}
 %\alpha \bar{X}  &=  \frac{\frac{1}{(N-1)\rho +1} \sum_{j=1}^N X_j }{\sqrt{T- \frac{N}{(N-1)\rho +1} }}\\
 %\alpha &= \frac{\frac{1}{(N-1)\rho +1} \sum_{j=1}^N X_j }{\bar{X} \sqrt{T- \frac{N}{(N-1)\rho +1} }}\\
@@ -407,9 +482,9 @@ From this aggregator we obtain an expression for the amount of extremization und
 %% \frac{N \delta}{(N-1)\rho +1}  &\leq& 1\\
 % \frac{N\delta - 1}{N-1}  &\leq \rho,
 %\end{align*}
-Unlike (\ref{alpha}), the extremizing constant under the compound symmetric information structure does not depend on the forecasts, $\boldsymbol{X}$. As the term inside the square-root must be non-negative, we have another technical restriction on $\rho$. That is, in addition to $\rho \in \left[  \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right]$, we require
+Notice that, unlike (\ref{alpha}), the extremizing constant in (\ref{CompoundAlpha}) does not depend on the forecasts $\boldsymbol{X}$. As the term inside the square-root must be non-negative, another technical restriction must be placed on $\rho$. That is, in addition to $\rho \in \left[  \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right]$, it is required that
 \begin{align*}
-\rho \geq \frac{N\delta - 1}{N-1}
+1- \frac{N\delta}{(N-1)\rho +1}  &\geq 0 &\Leftrightarrow&& \rho \geq \frac{N\delta - 1}{N-1}
 \end{align*}
 Notice, however, that $N\delta - 1 > N - \delta^{-1}$ only when $\delta < 1/N$. But when $\delta < 1/N$, both $N\delta - 1$ and $N - \delta^{-1}$ are negative. Therefore this technical condition is redundant and can be ignored. 
 
@@ -423,7 +498,8 @@ Notice, however, that $N\delta - 1 > N - \delta^{-1}$ only when $\delta < 1/N$. 
 %\end{align*}
 
 %\begin{verbatim}
-%N = 10
+%library(lattice)
+%N = 2
 %#deltas = seq(0.001, 2/N, length = 500)
 %deltas = seq(0.001, 0.999, length = 500)
 %rhos = seq(0.001, 1, length = 500)
@@ -447,50 +523,83 @@ Notice, however, that $N\delta - 1 > N - \delta^{-1}$ only when $\delta < 1/N$. 
 %ats = seq(min(alphas), max(alphas), length = L)
 %
 %
-%setwd("/Users/ville/Desktop/Probability Aggregation")
-%jpeg(paste("ExtremeN", N, ".jpeg", sep= ""))
-%levelplot(alphas~grid[,2]+grid[,3], ylab = expression(rho), xlab = expression(delta), col.regions = col.l, pretty = TRUE, at = ats, contour = TRUE)
+%setwd("/Users/ville/extremization_paper/")
+%jpeg(paste("ExtremeN", N, ".jpeg", sep= ""), pointsize = 15)
+%
+%p.strip <- list(cex=1.5, lines=2, fontface='bold')
+%#ckey <- list(labels=list(cex=1.5, col='black'), height=1.5)
+%ckey <- list(labels=list(cex=1.5, col='black'))
+%x.scale <- list(cex=1.5, alternating=1, col='black')
+%y.scale <- list(cex=1.5, alternating=1, col='black')
+%levelplot(alphas~grid[,2]+grid[,3], ylab = list(label = expression(rho), cex = 1.5), xlab = list( label = expression(delta), cex = 1.5), col.regions = col.l, colorkey=ckey, pretty = TRUE, at = ats, contour = TRUE, par.strip.text=p.strip, scales=list(x=x.scale, y=y.scale))
+%
 %dev.off()
 %\end{verbatim}
 
+%
+%
+%\begin{figure}[hbt!]
+%\begin{minipage}[t]{0.33\textwidth}
+%\centering
+%\includegraphics[width=\textwidth, height = \textwidth]{ExtremeN2.jpeg}
+%\caption{N = 2}
+%\label{ExtremeN5}
+%\end{minipage}
+%\begin{minipage}[t]{0.33\textwidth}
+%\centering
+%\includegraphics[width=\textwidth, height = \textwidth]{ExtremeN5.jpeg}
+%\caption{N = 5}
+%\label{ExtremeN10}
+%\end{minipage}
+%\begin{minipage}[t]{0.33\textwidth}
+%\centering
+%\includegraphics[width=\textwidth, height = \textwidth]{ExtremeN10.jpeg}
+%\caption{N = 10}
+%\label{ExtremeN30}
+%\end{minipage}
+%\end{figure}
 
 
-\begin{figure}[hbt!]
-\begin{minipage}[t]{0.33\textwidth}
-\centering
-\includegraphics[width=\textwidth, height = \textwidth]{ExtremeN2.jpeg}
-\caption{N = 2}
+\begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.32\textwidth}
+                \includegraphics[width=\textwidth]{ExtremeN2.jpeg}
+\caption{N = 2}	
 \label{ExtremeN5}
-\end{minipage}
-\begin{minipage}[t]{0.33\textwidth}
-\centering
-\includegraphics[width=\textwidth, height = \textwidth]{ExtremeN5.jpeg}
+        \end{subfigure}%
+        ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+          %(or a blank line to force the subfigure onto a new line)
+        \begin{subfigure}[b]{0.32\textwidth}
+                \includegraphics[width=\textwidth]{ExtremeN5.jpeg}
 \caption{N = 5}
 \label{ExtremeN10}
-\end{minipage}
-\begin{minipage}[t]{0.33\textwidth}
-\centering
-\includegraphics[width=\textwidth, height = \textwidth]{ExtremeN10.jpeg}
+        \end{subfigure}
+        ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+          %(or a blank line to force the subfigure onto a new line)
+        \begin{subfigure}[b]{0.32\textwidth}
+                \includegraphics[width=\textwidth]{ExtremeN10.jpeg}
 \caption{N = 10}
 \label{ExtremeN30}
-\end{minipage}
+        \end{subfigure}
+        \caption{ The amount of log-extremization $\log(\alpha)$ under different combinations of $N$ (the number of experts), $\delta$ (the amount of information known by one expert), and $\rho$ (the amount of information shared by any two experts).}
 \end{figure}
 
-Expression (\ref{CompoundAlpha}) is particularly convenient because it only depends on three intuitive parameters. Therefore it can be examined graphically. Figures \ref{ExtremeN5} to \ref{ExtremeN30} describe the amount of log-extremization, $\log(\alpha)$, under different values of $\rho, \delta$, and $N$. By Theorem \ref{positiveThm} the amount of extremizing is always greater or equal to 1.0. Notice that most extremization occurs when $\delta = 1.0$ and $\rho = 1$, or when  $\delta = 1/N$ and $\rho = 0$. In the first case, all $N$ experts know whether the event $A$ materializes or not. In the second case, each expert holds an independent set of information such that the group knows all the information. Such a group of experts can re-construct $X_S$ by simply adding up their individual probit forecasts. This means that aggregation becomes voting: if the sum of the probit forecasts is above 0, the event $A$ materializes; else it does not. Therefore in the real-world voting can be expected to work well when the voters form a very knowledgable and diverse group of people. 
 
 
- As we move from these two extreme points towards the upper left corner, where $\delta = 0.0$ and $\rho = 1.0$, the amount of extremizing decreases monotonically to $1.0$. This trend can be deduced directly from Lemma \ref{infoLemma}. The decrease in the amount of information in $\boldsymbol{X}$  is caused by a combination of (i) decrease in the amount of information that each individual expert holds and (ii) increase in the amount of shared information. Therefore the more knowledgable and diverse the group of experts is, the more their average probit forecast should be extremized. 
+Expression (\ref{CompoundAlpha}) is particularly convenient because it only depends on three intuitive parameters. Therefore it can be analyzed graphically. Figures \ref{ExtremeN5} to \ref{ExtremeN30} describe the amount of log-extremization $\log(\alpha)$ under different values of $\rho, \delta$, and $N$. By Observation \ref{positiveThm} the amount of extremizing is always greater or equal to 1.0. Notice that most extremization occurs when $\delta = 1.0$ and $\rho = 1.0$, or when  $\delta = 1/N$ and $\rho = 0$. In the first case, all experts know whether the target event materializes or not. In the second case, the group's information sets form a partition of the full information. Therefore as a group the experts know all the information. Such a group can re-construct $X_S$ by simply adding up their individual probit forecasts. This means that aggregation becomes voting: if the sum of the probit forecasts is above 0, the event $A$ materializes; else it does not. A similar observation has been made under the interpreted signal framework (see the example on information aggregation in \cite{hong2009interpreted}). Therefore in the real-world voting can be expected to work well when the voters form a very knowledgable and diverse group of people. 
 
-Figures \ref{ExtremeN5} to \ref{ExtremeN30} also make it clear that the feasible set of $(\delta, \rho)$-values becomes smaller as $N$ increases. This limitation arises from assuming a compound symmetric overlap structure. Having many experts, each with a considerable amount of information, simply leads to unavoidable overlap in the information sets. 
 
+Moving away from these two extreme points towards the upper left corner, where $\delta = 0.0$ and $\rho = 1.0$, decreases the amount of extremizing monotonically to $1.0$. This trend follows directly from Observation \ref{infoObservation}. The decrease in the amount of information in $\boldsymbol{X}$  is caused by a combination of a) reduction in the amount of information that each individual expert holds and b) increase in the amount of shared information. Therefore the more knowledgable and diverse the group of experts is, the more their average probit forecast should be extremized. Contrast this with the generated signal framework where higher variance is typically considered negative. Under the information theoretic and interpreted signal frameworks, however, higher variance implies broader diversity among the experts and hence is considered helpful. 
+
+From Figures \ref{ExtremeN5} to \ref{ExtremeN30} it is clear that the feasible set of $(\delta, \rho)$-values becomes smaller as $N$ increases. This limitation arises from assuming a compound symmetric overlap structure. Having many experts, each with a considerable amount of information, simply leads to unavoidable overlap in the information sets. From the domain restriction on $\rho$, it is clear that $\rho \to 1$ as $N \to \infty$. Therefore in the limit the group of experts is equivalent to a single expert. This observation clearly does not reflect the real-world. When $N = 2$, on other hand, the compound symmetric overlap is completely general. Therefore assuming a compound symmetric information structure can be appropriate for small numbers of experts but becomes overly restrictive as more experts enter the group. 
 
 %\subsection{Information in the Sample Average}
-%It is possible to determine the amount of information in the sample average. This is done by first computing the aggregate probability for the sample average, and then finding the amount of information that a single expert should have in order for his aggregate probability to match with the aggregate probability of the sample average. That is, if $\delta_0$ denotes the information in the sample average, then 
+%It is possible to determine the amount of information in the sample average. This is done by first computing the aggregate probability for the sample average, and then finding the amount of information that a single expert should have in order for his aggregate probability to match with the aggregate probability of the sample average. That is, if $\delta_X$ denotes the information in the sample average, then 
 %\begin{align*}
-%%\frac{1}{\sqrt{1-\delta_0}} &= \frac{\frac{N}{(N-1)\rho +1}}{\sqrt{1- \frac{N\delta}{(N-1)\rho +1} }} \\
-%\alpha &= \frac{1}{\sqrt{1-\delta_0}} &\Leftrightarrow&& \delta_0 &=1-\alpha^{-2}
+%%\frac{1}{\sqrt{1-\delta_X}} &= \frac{\frac{N}{(N-1)\rho +1}}{\sqrt{1- \frac{N\delta}{(N-1)\rho +1} }} \\
+%\alpha &= \frac{1}{\sqrt{1-\delta_X}} &\Leftrightarrow&& \delta_X &=1-\alpha^{-2}
 %\end{align*}
-%Based on these equation we notice that there is a monotonic and positive relationship between $\alpha$ and $\delta_0$. This means that the more the sample average is extremized the more information it contains, and \textit{vice versa}. This result is interesting because it allows the researcher to first use black-box models from earlier literature to determine the amount of extremization and then use this quantity to analyze the portion of information that is present in the sample average. 
+%Based on these equation we notice that there is a monotonic and positive relationship between $\alpha$ and $\delta_X$. This means that the more the sample average is extremized the more information it contains, and \textit{vice versa}. This result is interesting because it allows the researcher to first use black-box models from earlier literature to determine the amount of extremization and then use this quantity to analyze the portion of information that is present in the sample average. 
 
 %
 %
@@ -593,6 +702,14 @@ Figures \ref{ExtremeN5} to \ref{ExtremeN30} also make it clear that the feasible
 
 
 \section{Conclusion}
+This paper introduced a novel framework for analyzing subjective response data. Under this framework any response heterogeneity is assumed to arise from cognitive diversity. The mathematical tractability and real-world applicability of this model were illustrated by deriving an information theoretic aggregation rule for multiple probability forecasts. The aggregator resulted in closed-form expression for the amount of extremization that should be performed for the average probit forecast. By assuming a simplified information structure, the amount of extremization was studied graphically. This led to many insights on extremization. Given that these insights tend to align with common sense, the framework appears to be appropriate for probability aggregation.
+
+Part of our future work is to continue developing the aggregator under the information theoretic framework. It is possible to place flexible priors on the unknown parameters and marginalize them with respect to their posterior distributions. This would lead to a principled aggregator that does not require any training. Instead, it could be applied directly to the data and would replace suboptimal methods such as the mean or median. As was discussed in Section \ref{extremization}, assuming a compound symmetric information structure is hardly a realistic choice. Therefore it will be necessary to develop a class of information structures that reflect the reality more closely. As it is unlikely that such a structure will lead to an aggregator with a closed-form solution, the aggregator will be provided in the form of an efficient algorithm.
+
+Another future direction is to derive an information theoretic aggregator for subjective distributions. This is an important problem in Bayesian statistics where the analysis heavily depends on the choice of the prior distribution. Often the prior distribution is picked subjectively by the scientist who has previous experience on the problem at hand. If, however, the experiment is conducted by a group of scientists, their prior distributions must aggregated before the statistical analyses can be carried out. 
+ 
+The information theoretic framework is clearly a simplification of the reality. For instance, assuming that each expert produces an optimal probability forecast given his information set may not be a realistic assumption. The experts may believe in false information, hide their true beliefs, or be biased for many other reasons. This could be incorporated in the model by introducing an error term, possibly with a mean of zero, that is applied to the experts' probit forecasts. The resulting model, which is a hybrid of the generated signal and information theoretic frameworks, could lead to more realistic results. This improvement, however, may require a sacrifice in mathematical convenience. 
+
 
 %\bibliographystyle{plain}
 \bibliographystyle{plainnat}
