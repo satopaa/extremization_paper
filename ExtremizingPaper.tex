@@ -116,14 +116,47 @@ average forecasts.
 
 
 \section{Introduction}
-Consulting experts are often asked to make estimates under incomplete information. If the experts form their estimates independently of each other, their estimates are likely to be different. To analyze the estimates with  statistical methodology, it is mathematically convenient and often necessary to assume that these differences  arise from a probability distribution. For instance, consider a group of experts who aim to eyeball the height of a building. Their estimates can be modeled as independent draws from a Gaussian distribution that is centered at the true height. This framework is called the \textit{generated signal framework}. Even though distributional assumptions clearly oversimplify the reality, they are typically useful enough to improve our understanding of the world. 
 
-Unfortunately, this is unlikely to be the case with subjective probability forecasts. \cite{hong2009interpreted} explain how standard distributional assumptions can be dramatically misaligned  with the process that generates subjective responses. As an alternative to the generated signal framwork, they introduce the  \textit{interpreted signal framework}. An estimate is said to be interpreted if the expert first filters reality into set of categories and then makes an estimate by applying active cognitive effort to these categories. For instance, consider an Olympic judge who is evaluating a figure skating performance. The judge first interprets the performance with the aid of categories, and then scrutinizes that experience into a final score. Therefore any differences between estimates is assumed to arise from cognitive diversity instead of an underlying probability distribution.
+Consulting experts are often asked to make estimates under incomplete
+information. If the experts form their estimates independently of each
+other, their estimates are likely to be different. To analyze the
+estimates with statistical methodology, it is mathematically
+convenient and often necessary to assume that these differences arise
+from a probability distribution. For instance, consider a group of
+experts who aim to eyeball the height of a building. Their estimates
+can be modeled as independent draws from a Gaussian distribution that
+is centered at the true height. This framework, which generally views data as consisting of signal plus noise,
+has been called the \textit{generated signal framework}  \cite{hong2009interpreted}. Even though distributional
+assumptions clearly oversimplify the reality, they are typically
+useful enough to improve our understanding of the world.
+
+
+Unfortunately, this is unlikely to be the case with subjective
+probability forecasts. \cite{hong2009interpreted} explain how standard
+distributional assumptions can be dramatically misaligned with the
+process that generates subjective responses. As an alternative to the
+generated signal framwork, they introduce the \textit{interpreted
+signal framework}. An estimate is said to be 'interpreted' if the expert
+first filters reality into set of categories and then makes an
+estimate by applying active cognitive effort to these categories. For
+instance, consider an Olympic judge who is evaluating a figure skating
+performance. The judge first interprets the performance with the aid
+of categories, and then scrutinizes that experience into a final
+score. Therefore any differences between estimates is assumed to arise
+from cognitive diversity instead of an underlying probability
+distribution.
+
+%LHU: we are focussing more on information diversity rather than cognitive diversity; I think this could be better brought out.
 
 %The observation that people use categories to interpret the world is well-established in the psychology literature (see, e.g, \citet{fryer2008categorical, page2008difference}).  
 
-The interpreted signal framework is clearly a more realistic modeling choice for subjective probability forecasts. Given that this kind of data is very common in real-world applications, such as product reviews, online auctions, and voting, this framework shows great potential in improving our understanding of many experimental results. Unfortunately, the interpreted signal framework is more of an abstract concept than a concrete model for subjective probability forecasts. Therefore it is not clear how this framework can be applied in complex real world situations. 
-%The framework does, however, offer  some novel and useful directions.
+The interpreted signal framework is potentially  a more realistic modeling choice
+for subjective probability forecasts. Given that such data is
+common in real-world applications, such as product reviews,
+online auctions, and voting, this framework shows great potential in
+improving our understanding of many experimental
+results. Unfortunately, previous work  on using the interpreted signal framework has only produced
+abstract concept, and lacks formal models with quantitative predictions.
 
 
 The first contribution of this paper is to introduce a concrete model that generates heterogeneity from cognitive diversity and can be used in a real-world situations. 
