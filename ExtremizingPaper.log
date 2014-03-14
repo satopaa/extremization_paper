@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  10 MAR 2014 22:00
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  13 MAR 2014 14:43
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -415,61 +415,90 @@ File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 98.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 118.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 119.
  [1
 
 {/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 148.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 149.
  [3] [4] [5]
-<N=2.png, id=30, 595.826pt x 248.127pt>
+<Marginals.jpeg, id=30, 481.8pt x 481.8pt>
+File: Marginals.jpeg Graphic file (type jpg)
+ <use Marginals.jpeg>
+Package pdftex.def Info: Marginals.jpeg used on input line 239.
+(pdftex.def)             Requested size: 218.99994pt x 218.99878pt.
+
+<N=2.png, id=31, 595.826pt x 248.127pt>
 File: N=2.png Graphic file (type png)
  <use N=2.png>
-Package pdftex.def Info: N=2.png used on input line 237.
+Package pdftex.def Info: N=2.png used on input line 246.
 (pdftex.def)             Requested size: 433.62pt x 180.57841pt.
- [6 <./N=2.png>]
-<N=N.png, id=39, 595.826pt x 293.898pt>
+ [6] [7 <./Marginals.jpeg> <./N=2.png>] <N=N.png, id=44, 595.826pt x 293.898pt>
 File: N=N.png Graphic file (type png)
  <use N=N.png>
-Package pdftex.def Info: N=N.png used on input line 266.
+Package pdftex.def Info: N=N.png used on input line 275.
 (pdftex.def)             Requested size: 433.62pt x 213.88899pt.
- [7 <./N=N.png>] [8]
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 339.
+ [8 <./N=N.png>] <Multinomial.jpeg, id=51, 481.8pt x 481.8pt>
+File: Multinomial.jpeg Graphic file (type jpg)
+ <use Multinomial.jpeg>
+Package pdftex.def Info: Multinomial.jpeg used on input line 334.
+(pdftex.def)             Requested size: 218.99994pt x 218.99878pt.
 
-[9] [10] <ExtremeN2.jpeg, id=56, 481.8pt x 481.8pt>
+[9 <./Multinomial.jpeg>]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 416.
+
+Underfull \hbox (badness 10000) in paragraph at lines 363--417
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 422--432
+
+ []
+
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 437--442
+
+ []
+
+[11] [12] <ExtremeN2.jpeg, id=64, 481.8pt x 481.8pt>
 File: ExtremeN2.jpeg Graphic file (type jpg)
  <use ExtremeN2.jpeg>
-Package pdftex.def Info: ExtremeN2.jpeg used on input line 582.
+Package pdftex.def Info: ExtremeN2.jpeg used on input line 660.
 (pdftex.def)             Requested size: 138.76157pt x 138.75534pt.
 
-<ExtremeN5.jpeg, id=57, 481.8pt x 481.8pt>
+<ExtremeN5.jpeg, id=65, 481.8pt x 481.8pt>
 File: ExtremeN5.jpeg Graphic file (type jpg)
  <use ExtremeN5.jpeg>
-Package pdftex.def Info: ExtremeN5.jpeg used on input line 589.
+Package pdftex.def Info: ExtremeN5.jpeg used on input line 667.
 (pdftex.def)             Requested size: 138.76157pt x 138.75534pt.
 
-<ExtremeN10.jpeg, id=58, 481.8pt x 481.8pt>
+<ExtremeN10.jpeg, id=66, 481.8pt x 481.8pt>
 File: ExtremeN10.jpeg Graphic file (type jpg)
  <use ExtremeN10.jpeg>
-Package pdftex.def Info: ExtremeN10.jpeg used on input line 596.
+Package pdftex.def Info: ExtremeN10.jpeg used on input line 674.
 (pdftex.def)             Requested size: 138.76157pt x 138.75534pt.
- [11 <./ExtremeN2.jpeg> <./ExtremeN5.jpeg> <./ExtremeN10.jpeg>] [12] (./Extremi
-zingPaper.bbl
-[13]
+
+
+LaTeX Warning: Reference `infoObservation' on page 13 undefined on input line 6
+86.
+
+[13 <./ExtremeN2.jpeg> <./ExtremeN5.jpeg> <./ExtremeN10.jpeg>] [14]
+(./ExtremizingPaper.bbl [15]
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
-) [14] (./ExtremizingPaper.aux)
+) [16] (./ExtremizingPaper.aux)
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 5480 strings out of 493633
- 81268 string characters out of 3143378
- 152480 words of memory out of 3000000
- 8649 multiletter control sequences out of 15000+200000
+ 5497 strings out of 493633
+ 81528 string characters out of 3143378
+ 150519 words of memory out of 3000000
+ 8662 multiletter control sequences out of 15000+200000
  31973 words of font info for 72 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
  38i,19n,43p,2336b,426s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -491,10 +520,10 @@ f-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2011/texmf-dist/fon
 ts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/u
 rw/times/utmr8a.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/times/u
 tmri8a.pfb>
-Output written on ExtremizingPaper.pdf (14 pages, 322927 bytes).
+Output written on ExtremizingPaper.pdf (16 pages, 378839 bytes).
 PDF statistics:
- 127 PDF objects out of 1000 (max. 8388607)
- 86 compressed objects within 1 object stream
+ 135 PDF objects out of 1000 (max. 8388607)
+ 90 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
 
