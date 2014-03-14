@@ -2,3 +2,5 @@
 *.gz
 *.log
 *.pdf
+*~
+.Rapp.history
