@@ -81,7 +81,7 @@
 
 \begin{document}
 
-\title{Information Theoretic Model for Subjective Response Data with an Application to Probability Extremization}
+\title{Partial Information Model with an Application to Probability Extremization}
 %\title{A Novel Framework for Analyzing Subjective Response Data}
 \author{
 Ville A. Satop\"a\"a, Robin Pemantle, and Lyle H. Ungar\\
@@ -92,7 +92,7 @@ Ville A. Satop\"a\"a, Robin Pemantle, and Lyle H. Ungar\\
 \maketitle
 
 \pagestyle{myheadings}
-\markboth{Information Theoretic Model for Subjective Reponse Data}{Satop\"a\"a et al.}
+\markboth{Partial Information Model}{Satop\"a\"a et al.}
 \thispagestyle{empty}
 
 \begin{abstract}
@@ -100,7 +100,7 @@ Randomness in scientific estimation is generally assumed to arise from
 unmeasured or uncontrolled factors. However, when combining subjective probability forecasts, heterogeneity
 stemming from people's cognitive or information diversity is often
 more important than measurement noise.  This paper presents an
-information theoretic framework that models the heterogeneity arising
+partial information framework that models the heterogeneity arising
 from cognitively diverse experts, and applies the model to the task of
 aggregating probabilities given by a group of experts who forecast
 whether an event will occur or not. Our model describes the
@@ -118,143 +118,173 @@ average forecasts.
 
 \section{Introduction}
 
-Consulting experts are often asked to make estimates under incomplete
-information. If the experts form their estimates independently of each
+Consulting experts are often asked to give quantity estimates on real-world problems. If the experts form their estimates independently of each
 other, their estimates are likely to be different. To analyze the
 estimates with statistical methodology, it is mathematically
-convenient and often necessary to assume that these differences arise
-from a probability distribution. For instance, consider a group of
-experts who aim to eyeball the height of a building. Their estimates
-can be modeled as independent draws from a Gaussian distribution that
-is centered at the true height. This framework, which generally views data as consisting of signal plus noise,
-has been called the \textit{generated signal framework}  \cite{hong2009interpreted}. Even though distributional
-assumptions clearly oversimplify the reality, they are typically
-useful enough to improve our understanding of the world.
+convenient to assume that any such heterogeneity arises
+from a probability distribution. Under the most widely-used model, known as the \textit{classical measurement error model}, each estimate is assumed to be equal to the true value (a.k.a. signal) plus some random error (a.k.a. noise). As the distribution of this error term typically has mean zero, averaging the experts' estimates is expected to cancel out a part of the noise and hence lead to an accurate estimate of the true value. For instance, consider a group of park rangers whose task is to measure the length of a mountain trail. Each of the rangers walks through the trail, assesses the length, and reports a personal estimate of the total length. Inevitably some of the estimates will be higher while some will be lower than the true length of the trail. The classical measurement error model assumes that these discrepancies follow a common distribution with mean zero. Therefore the average estimate can be expected to capture the true trail length very accurately. Given that the signal remains constant among the estimates, each expert is assumed to have the same information about the target estimation problem. Even though this seems appropriate for passive recording of measurements made by imprecise instruments, assuming constant signal and information among consulting experts is hardly reasonable. 
 
 
-Unfortunately, this is unlikely to be the case with subjective
-probability forecasts. \cite{hong2009interpreted} explain how standard
-distributional assumptions can be dramatically misaligned with the
-process that generates subjective responses. As an alternative to the
-generated signal framwork, they introduce the \textit{interpreted
-signal framework}. An estimate is said to be 'interpreted' if the expert
-first filters reality into set of categories and then makes an
+In many real-world problems and particularly in the social sciences the target quantity is not directly observable. Therefore data collection typically relies on polling of people. As each person has a different set of knowledge, the polled estimates cannot be assumed to have been generated under the same amount of information. If the signal varies among the estimates, any procedure that is used to aggregate them must take this heterogeneity into account. For instance, assume that each park ranger observes a different segment of the trail and reports the length of this segment as the estimated length of the full trail. Assuming  that each ranger has the same amount of information and averaging their estimates dramatically underestimates the length of the full trail. Summing the estimates (a.k.a. \textit{voting}), on other hand, gives an unbiased estimator of the true length of the full trail. If, however, some of the segments are not completely disjoint but overlap partially, the aggregation procedure must down-weight the overlapping segments to avoid potential double counting. As this procedure falls somewhere between averaging and summing, varying the distribution of information establishes a spectrum of aggregators. Only the extremes, namely averaging and summing, have been examined closely in previous literature. Most problems in the real world, however, involve partially overlapping information sets. Therefore studying the entire spectrum is of outmost importance. 
+
+
+
+The first contribution of this paper is to introduce a \textit{partial information model} that serves as an alternative to the classical measurement error model. The partial information model is based on the distribution of information among the experts. This makes it particularly appropriate for analyzing human response data such as polling results or expert beliefs. The distribution of information is characterized by the amount of information known by each expert and the amount information shared among the experts. For instance, experts $A$ and $B$ may observe 10\% and 5\%  of the full information, respectively. If their information sets overlap by 2.5\% of the full information, then their estimates are assumed to be positively correlated. The experts are assumed to give optimal estimates conditional on their private information sets. Therefore any estimate heterogeneity arises solely from differences in the experts' information sets. 
+
+This is very different from the \textit{interpreted signal framework} introduced by  \cite{hong2009interpreted}. Under their framework estimate heterogeneity stems from cognitive diversity instead of information diversity. An estimate is said to be 'interpreted' if the expert
+first filters reality into a personal set of categories and then makes an
 estimate by applying active cognitive effort to these categories. For
 instance, consider an Olympic judge who is evaluating a figure skating
 performance. The judge first interprets the performance with the aid
 of categories, and then scrutinizes that experience into a final
-score. Therefore any differences between estimates is assumed to arise
-from cognitive diversity instead of an underlying probability
-distribution.
+score. It is therefore left for the expert's judgment to decide how the world should be interpreted. Even though the interpreted signal framework offers a highly realistic platform for modeling of human response data, any previous work based on this framework has only produced abstract concepts and still lacks a formal model with quantitative predictions. The main problem is that it is not clear how 'cognitive diversity' can be measured in practice. Amount of information known by an expert, on other hand, is at least theoretically measurable. 
+
+
+%The experts are assumed to give optimal estimates conditional on their private information sets. This means that a larger information set typically leads to a more accurate estimate, and two identical information sets lead to the same estimate. In reality experts, however, do not typically make optimal use of their information. Therefore the partial information framework is a simplification of the real world. It is, however, a compromise that strikes a good balance between psychological realism and analytical convenience. 
+
+%
+%For instance, consider a group of
+%experts who aim to eyeball the height of a building. Their estimates
+%can be modeled as independent draws from a Gaussian distribution that
+%is centered at the true height. This framework, which generally views data as consisting of signal plus noise,
+%has been called the \textit{generated signal framework}  \cite{hong2009interpreted}. Even though distributional
+%assumptions clearly oversimplify the reality, they are typically
+%useful enough to improve our understanding of the world.
+%
+%
+%Unfortunately, this is unlikely to be the case with subjective
+%probability forecasts. \cite{hong2009interpreted} explain how standard
+%distributional assumptions can be dramatically misaligned with the
+%process that generates subjective responses. As an alternative to the
+%generated signal framwork, they introduce the \textit{interpreted
+%signal framework}. An estimate is said to be 'interpreted' if the expert
+%first filters reality into set of categories and then makes an
+%estimate by applying active cognitive effort to these categories. For
+%instance, consider an Olympic judge who is evaluating a figure skating
+%performance. The judge first interprets the performance with the aid
+%of categories, and then scrutinizes that experience into a final
+%score. Therefore any differences between estimates is assumed to arise
+%from cognitive diversity instead of an underlying probability
+%distribution. The interpreted signal framework is potentially  a more realistic modeling choice
+%for subjective probability forecasts. Given that such data is
+%common in real-world applications, such as product reviews,
+%online auctions, and voting, this framework shows great potential in
+%improving our understanding of many experimental
+%results. Unfortunately, previous work  on using the interpreted signal framework has only produced
+%abstract concept, and lacks formal models with quantitative predictions.
 
 %LHU: we are focussing more on information diversity rather than cognitive diversity; I think this could be better brought out.
 
-%The observation that people use categories to interpret the world is well-established in the psychology literature (see, e.g, \citet{fryer2008categorical, page2008difference}).  
-
-The interpreted signal framework is potentially  a more realistic modeling choice
-for subjective probability forecasts. Given that such data is
-common in real-world applications, such as product reviews,
-online auctions, and voting, this framework shows great potential in
-improving our understanding of many experimental
-results. Unfortunately, previous work  on using the interpreted signal framework has only produced
-abstract concept, and lacks formal models with quantitative predictions.
 
 
-The first contribution of this paper is to introduce a concrete model that generates heterogeneity from cognitive diversity and can be used in a real-world situations. 
-%This model shares several key characteristics with the interpreted signal framework and therefore ends up supporting many of the observations made in \cite{hong2009interpreted}. 
-Our model is considered \textit{information theoretic} as it is based on the distribution of information among the experts. This distribution is completely characterized by the amount of information known by each expert and the amount information shared between any two experts. For instance, experts $A$ and $B$ may know 10\% and 5\%  of the full information, respectively. If they share 2.5\% of the full information, then their information sets overlap and their estimates are assumed to be positively correlated. The experts are assumed to give optimal estimates conditional on their private information sets. This means that a larger information set typically leads to a more accurate estimate, and two identical information sets lead to the same estimate. In reality experts, however, do not typically make optimal use of their information. Therefore the information theoretic framework is a simplification of the real world. It is, however, a compromise that strikes a good balance between psychological realism and analytical convenience. Therefore it offers a platform that is particularly convenient for development of future methodology.
+The second contribution of this paper is to apply the partial information model to probability aggregation. Combining multiple probability forecasts is an important problem with many applications including medical diagnosis (\citet{wilson1998prediction, pepe2003statistical}), political and socio-economic foresight (\citet{tetlock2005expert}), and meteorology (\citet{sanders1963subjective, vislocky1995improved, baars2005performance}). There is strong empirical evidence that bringing together the strengths of different experts by combining their probability forecasts into a single consensus, known as the \textit{crowd belief},  improves predictive performance. For instance, consider the aforementioned experts $A$ and $B$. The union of their information sets covers 12.5\% of the full information. Therefore it seems plausible that some combination of their probability forecasts is more informed than either one of the individual probabilities. The naive approach is to simply average the individual forecasts. To see why this approach can be problematic, recall that $A$'s forecast is based on a larger information set and hence typically more accurate than $B$'s forecast. Therefore $A$'s forecast is on average closer to the actual outcome of the event ($0$ if it does not happen and $1$ if it does happen) and should be given a higher weight in the final aggregate.  The average forecast, however, gives each forecast equal weight and hence ends up being necessarily too close to 0.5. Recent developments suggest that shifting the average probability closer to its nearest extreme (0.0 or 1.0), known as \textit{extremizing}, yields improved forecasting performance. For instance, \citet{satopaa} use a linear regression model in the logit-space to derive an extremizing aggregator that performs well on real-world data. \citet{Ranjan08} propose transforming the average probability with the cumulative distribution function (CDF) of a beta distribution. If both the shape and scale of this beta distribution are equal and constrained to be at least 1.0,  the aggregator extremizes and has some attractive theoretical properties (\cite{Wallsten2001}).  \citet{Baron} provide yet another extremizing aggregator in addition to two intuitive justifications for extremizing.
 
-The second contribution of this paper is to apply the information theoretic framework  on probability aggregation. Combining multiple probability forecasts is an important problem with many applications including medical diagnosis (\citet{wilson1998prediction, pepe2003statistical}), political and socio-economic foresight (\citet{tetlock2005expert}), and meteorology (\citet{sanders1963subjective, vislocky1995improved, baars2005performance}). There is strong empirical evidence that bringing together the strengths of different experts by combining their probability forecasts into a single consensus, known as the \textit{crowd belief},  improves predictive performance. For instance, consider the aforementioned experts $A$ and $B$. The union of their information sets covers 12.5\% of the full information. Therefore it seems plausible that some combination of their probability forecasts is more informed than either one of the individual probabilities. The naive approach is to simply average the individual forecasts. To see why this approach can be problematic, recall that $A$'s forecast is based on a larger information set and hence typically more accurate than $B$'s forecast. Therefore $A$'s forecast is on average closer to the actual outcome of the event ($0$ if it does not happen and $1$ if it does happen) and should be given a higher weight in the final aggregate.  The average forecast, however, gives each forecast equal weight and hence ends up being necessarily too close to 0.5. Recent developments suggest that shifting the average probability closer to its nearest extreme (0.0 or 1.0), known as \textit{extremizing}, yields improved forecasting performance. For instance, \citet{satopaa} use a linear regression model in the logit-space to derive an extremizing aggregator that performs well on real-world data. \citet{Ranjan08} propose transforming the average probability with the cumulative distribution function (CDF) of a beta distribution. If both the shape and scale of this beta distribution are equal and constrained to be at least 1.0,  the aggregator extremizes and has some attractive theoretical properties (\cite{Wallsten2001}).  \citet{Baron} provide yet another extremizing aggregator in addition to two intuitive justifications for extremizing.
 
 %To give an intuitive justification for extremization,  consider a binary event whose outcome is still uncertain.  For the sake of illustration, assume that 0.9 is the most informed probability forecast that could be given based on all the available information. Before having any knowledge of the event, a rational forecaster aiming to minimize a reasonable loss function, such as the Brier score, has no reason to give anything but 0.5 as his probability forecast. In the Bayesian terminology, this estimate can be viewed as his prior belief. As he acquires more information, he updates his prior belief accordingly.  This updated belief, which can be viewed as his posterior belief, is a compromise between his prior belief and the information acquired. Because he does not have all the available information, his estimate is conservative and necessarily too close to 0.5. If most forecasters fall somewhere on this spectrum between ignorance and full information, their average forecast tends to fall strictly between 0.5 and 0.9. It this difference between the ``true probability" and the average forecast that extremization aims to close. 
 
 These aggregators, however, are based on ad hoc techniques that learn the amount of extremization by optimizing a scoring rule over a separate training set (\citet{Gneiting04strictlyproper}). It is concerning that extremization does not arise naturally from the underlying model. These aggregators are also too detached from the psychology literature to provide any insight beyond the aggregate probability. Therefore it is still not well-understood when and how much the average probability should be extremized. 
 %Therefore it is necessary to learn the amount of extremizing from a separate training dataset. Furthermore, many of these aggregators assume that the individual probability forecasts arise from the generative framework. Under this assumption the optimal aggregation is accessible by weighted averaging (\cite{parunak2013characterizing}). However, given that extremizing is known to improve the performance of the aggregate, it is unlikely that the generative framework is appropriate for probability aggregation. 
-This paper remedies these shortcomings by developing an aggregator that is based on the information theoretic framework. Under this model the average forecast is always extremized. The amount of extremization is given in a closed-form expression that can be applied to any number of experts with any given information structure. By assuming a simplified information structure, the amount of extremization can be made to depend only on three intuitive parameters. This allows us to visualize extremization and make concrete statements on when and how much extremization should be performed. 
-
-This paper is structured as follows. The first section introduces our information theoretic framework and  compares it with the generated and interpreted signal frameworks. The second section applies the framework to probability forecasts. The third section derives a closed-form expression for the amount of extremization and analyzes this expression under unstructured and compound symmetric information structures. The paper concludes with a discussion of  model limitations and future directions. 
+This paper remedies these shortcomings by developing an aggregator that is based on the partial information framework. This aggregator supports the entire spectrum of aggregators. Each aggregator is uniquely determined by the distribution of information among the experts. Under this model the average forecast is always extremized. The amount of extremization is given in a closed-form expression that can be applied to any number of experts with any given information structure. By assuming a simplified information structure, the amount of extremization can be made to depend only on three intuitive parameters. This allows us to visualize extremization and make concrete statements on when and how much extremization should be performed. 
 
 
 
-\section{Information Theoretic Framework}
-This section discusses the information theoretic framework in comparison to the generated and interpreted signal frameworks. This comparison is by no means comprehensive as signal generation is a large part of the statistical literature. The first subsection builds  intuition via a simple example. The second subsection provides a technical comparison. 
 
-\subsection{Simple Example}
-Consider two experts $1$ and $2$ who are observing a hockey tournament. The tournament consists of three games played between teams RED and BLUE. After seeing the outcome of the first game, the experts are asked to report the probability of RED winning the tournament. Assume that RED wins if $G_1 + G_2 + G_3 \geq 0$, where $G_k \in \{-1,1\}$ indicates whether RED won the $k$th game. Suppose that all 8 possible combinations are equally likely. 
-%Therefore the true probability of team RED winning the tournament is 1/2.
-
-\begin{enumerate}
-\item[] \textit{Generated Estimate:} Based on the first game, the $i$th expert believes that RED has an independent chance of $q_i$ winning any of the two remaining games. The probability $q_i$ is assumed to arise from a probability distribution defined on the unit interval. Therefore any individual differences in the way the experts process the first game and turn the acquired information into probabilities $q_1$ and $q_2$ are assumed to stem from a probability distribution. The exports report
-\begin{align}
-p_i &= \begin{cases}
-q_i(2-q_i) & \text{ if } G_1 = 1\\
-q_i^2 & \text{ if } G_1 = -1
-\end{cases}
-\label{basisP}
-\end{align}
-
-\item[] \textit{Interpreted Estimate:} Interpretations are different ways of seeing the first game. Assume that RED's performance can be attributed entirely to its \textit{defense} $D$ and \textit{offense} $O$ that are equally likely to be either good $1$ or bad $-1$. Expert 1 follows only the defense and expert 2 looks only at the offensive play. Based on these attributes the experts construct their final predictive models. Under the generated signal framework the details of these predictive models are abstracted into a probability distribution. Under the interpreted signal framework, however, the details are fixed and known. For instance, the experts may report (\ref{basisP}) but with
-%If RED wins a game when $D + 2O \geq 2$, the experts report (\ref{basisP}) but with
-\begin{align*}
-q_1 = \begin{cases}
-2/3 & \text{ if } D = 1\\
-1/3 &  \text{ if } D = -1
-\end{cases}
-&& q_2 &= \begin{cases}
-3/5 & \text{ if } O = 1\\
-2/5 & \text{ if } O = -1
-\end{cases}
-\end{align*}
-Each expert interprets the available information independently and subjectively.  Therefore even if the experts observed the same attributes of the game, their probability forecasts do not need to be the same. 
+This paper is structured as follows. The first section introduces our partial information framework and  compares it with the generated and interpreted signal frameworks. The second section applies the framework to probability forecasts. The third section derives a closed-form expression for the amount of extremization and analyzes this expression under unstructured and compound symmetric information structures. The paper concludes with a discussion of  model limitations and future directions. 
 
 
-\item[] \textit{Information Theoretic Estimate:} The experts know that RED has a 1/2 chance of winning any given game. Suppose that expert 1 knows the number of wins in the first two games, i.e. the value of $G_1 + G_2$, but not necessarily the separate outcomes of the two games. Assume that expert 2 only knows the outcome of the first game $G_1$. Then,
-\begin{align*}
-p_1 = \begin{cases}
-0 & \text{ if } G_1 + G_2 = -2\\
-1/2 & \text{ if } G_1 + G_2 = 0\\
-1 & \text{ if } G_1 + G_2 = 2\\
-\end{cases}
-&& p_2 = \begin{cases}
-1/4 & \text{ if } G_1 = -1\\
-3/4 & \text{ if } G_1 = 1\\
-\end{cases}
-\end{align*}
-Experts 1 and 2 know 2/3 and 1/3 of the full information, respectively. Their predictive models are completely determined by the size of their private information sets. As their information sets overlap by 1/3 of the full information, their probability forecasts are positively correlated. In this example, the correlation coefficient for their forecasts is $\sqrt{2}/2$.  
+
+%\section{Information Theoretic Framework}
+%This section discusses the partial information framework in comparison to the generated and interpreted signal frameworks. This comparison is by no means comprehensive as signal generation is a large part of the statistical literature. The first subsection builds  intuition via a simple example. The second subsection provides a technical comparison. 
+%
+%\subsection{Simple Example}
+%Consider two experts $1$ and $2$ who are observing a hockey tournament. The tournament consists of three games played between teams RED and BLUE. After seeing the outcome of the first game, the experts are asked to report the probability of RED winning the tournament. Assume that RED wins if $G_1 + G_2 + G_3 \geq 0$, where $G_k \in \{-1,1\}$ indicates whether RED won the $k$th game. Suppose that all 8 possible combinations are equally likely. 
+%%Therefore the true probability of team RED winning the tournament is 1/2.
+%
+%\begin{enumerate}
+%\item[] \textit{Generated Estimate:} Based on the first game, the $i$th expert believes that RED has an independent chance of $q_i$ winning any of the two remaining games. The probability $q_i$ is assumed to arise from a probability distribution defined on the unit interval. Therefore any individual differences in the way the experts process the first game and turn the acquired information into probabilities $q_1$ and $q_2$ are assumed to stem from a probability distribution. The exports report
+%\begin{align}
+%p_i &= \begin{cases}
+%q_i(2-q_i) & \text{ if } G_1 = 1\\
+%q_i^2 & \text{ if } G_1 = -1
+%\end{cases}
+%\label{basisP}
+%\end{align}
+%
+%\item[] \textit{Interpreted Estimate:} Interpretations are different ways of seeing the first game. Assume that RED's performance can be attributed entirely to its \textit{defense} $D$ and \textit{offense} $O$ that are equally likely to be either good $1$ or bad $-1$. Expert 1 follows only the defense and expert 2 looks only at the offensive play. Based on these attributes the experts construct their final predictive models. Under the generated signal framework the details of these predictive models are abstracted into a probability distribution. Under the interpreted signal framework, however, the details are fixed and known. For instance, the experts may report (\ref{basisP}) but with
+%%If RED wins a game when $D + 2O \geq 2$, the experts report (\ref{basisP}) but with
+%\begin{align*}
+%q_1 = \begin{cases}
+%2/3 & \text{ if } D = 1\\
+%1/3 &  \text{ if } D = -1
+%\end{cases}
+%&& q_2 &= \begin{cases}
+%3/5 & \text{ if } O = 1\\
+%2/5 & \text{ if } O = -1
+%\end{cases}
+%\end{align*}
+%Each expert interprets the available information independently and subjectively.  Therefore even if the experts observed the same attributes of the game, their probability forecasts do not need to be the same. 
+%
+%
+%\item[] \textit{Information Theoretic Estimate:} The experts know that RED has a 1/2 chance of winning any given game. Suppose that expert 1 knows the number of wins in the first two games, i.e. the value of $G_1 + G_2$, but not necessarily the separate outcomes of the two games. Assume that expert 2 only knows the outcome of the first game $G_1$. Then,
+%\begin{align*}
+%p_1 = \begin{cases}
+%0 & \text{ if } G_1 + G_2 = -2\\
+%1/2 & \text{ if } G_1 + G_2 = 0\\
+%1 & \text{ if } G_1 + G_2 = 2\\
+%\end{cases}
+%&& p_2 = \begin{cases}
+%1/4 & \text{ if } G_1 = -1\\
+%3/4 & \text{ if } G_1 = 1\\
+%\end{cases}
+%\end{align*}
+%Experts 1 and 2 know 2/3 and 1/3 of the full information, respectively. Their predictive models are completely determined by the size of their private information sets. As their information sets overlap by 1/3 of the full information, their probability forecasts are positively correlated. In this example, the correlation coefficient for their forecasts is $\sqrt{2}/2$.  
+%
+%
+%\end{enumerate}
 
 
-\end{enumerate}
+%\section{Partial Information Framework}
+%\subsection{Technical Details}
+%Let  $(\Omega, \mathcal{F}, \P)$ be a probability space, where the set $\Omega$ contains all possible states of the world, the $\sigma$-field $\mathcal{F}$ consists of all subsets of $\Omega$, and $\P$ is a probability measure. Let $A \in \mathcal{F}$ denote an event of interest. 
+%%The set of possible outcomes is denoted with $S$. For the sake of illustration, assume that  $S = \{G, B\}$, where $G$ and $B$ denote good and bad outcomes, respectively. The outcome function $F: \Omega \to S$ is a random variable that maps the state of the world to the true outcome. 
+%The experts aim to forecast the probability $p = \P(A)$. Even though this paper focuses on probability estimates, the following discussion can be easily generalized to different types of estimates. 
+%
+%Generated estimates can be considered as noisy or distorted versions of $p$. In other words, if $\xi: [0,1] \to [0,1]$ is a noise function that randomly distorts a probability, then a generated probability forecasts is realized by $p_i = \xi(p)$. Due to its mathematical convenience, this framework is typically applied to subjective response data. Unfortunately, it can be drastically misaligned with the psychology literature and hence lead to results that are not reflective of the actual process that generates the estimates.
+%
+%%Therefore any heterogeneity in the estimates stems from randomness that is typically assumed to be caused by uncontrolled or unmeasured factors. 
+%%Even though this framework is mathematically convenient, it can be drastically misaligned with the psychology literature and hence lead to results that are not reflective of the actual environment that produces the estimates.
+%%The interoperation framework aims to correct these shortcomings by proposing a model that is more cognitive based. See \cite{hong2009interpreted} for the original introduction. 
+%Under the interpreted signal framework, the set of states $\Omega$ is assume to be finite. The expert partitions $\Omega$ into non-overlapping subsets. This partition, know as the \textit{interpretation}, is denoted with $\Pi^i = \{\pi_1^i, \pi_2^i, \dots, \pi_{n_i}^i\}$, where $\bigcup_{j=1}^{n_i} \pi_j^i = \Omega$ and  $\pi_j^i \cap \pi_k^i = \emptyset$ for $j \neq k$. The expert can only associate a state $\omega \in \Omega$ with a set in his partition. Therefore his information is incomplete as long as not all the sets of his partition are singletons. To make probability forecasts, the expert specifies a map $\phi_i: \Omega \to [0, 1]$ that is measurable with respect to $\Pi^i$. 
+%%Therefore any differences in estimates stem from cognitive diversity of the experts. 
+%Unfortunately, \cite{hong2009interpreted} do not specify how the expert constructs the map $\phi_i$. It is also not clear how to the set of states $\Omega$ should be specified in real-world applications.  
 
 
-\subsection{Technical Details}
+
+%The partial information framework removes these intractable components and provides a model that can be applied in practice. It does not assume detailed knowledge of the expert interpretations nor pose any structure or cardinality restrictions on $\Omega$.  Each expert simply forecasts $p_i = \P\left(A | \mathcal{F}_i\right)$ based on a private information set $\mathcal{F}_i \subseteq \mathcal{F}$. 
+%%If the set $\Omega$ is finite, the information set $\mathcal{F}_i$ can be considered equivalent to the $\sigma$-field generated by the interpretation $\Pi^i$. 
+%If two experts $i$ and $j$ share information such that $\mathcal{F}_i \cap \mathcal{F}_j \neq \emptyset$, then the correlation of their forecasts $p_i$ and $p_j$ is positive and proportional to the overlap in their information sets. This means that, similarly to the interpreted signal framework, any heterogeneity in the estimates stems from cognitive diversity. As the details of the information set $\mathcal{F}_i$ cannot be known in practice, the information known by the $i$th expert is quantified as a fraction of the full information. 
+%For instance, expert $i$ may know 15\% of the full information while expert $j$ knows only 8\% of the full information. If in addition we specify that their shared information is, say, 3\% of the full information, we have established an information structure for these  experts. 
+%This leads to a compromise that is mathematically convenient and psychologically reasonable. 
+
+%This is shown in following sections where the partial information framework is applied to probability forecasts and their aggregation. 
+
+%NOT OPTIMAL FORECASTS. THE EXPERTS DO NOT KNOW THE WHOLE PROCESS.
+
+\section{Partial Information Framework}
+
 Let  $(\Omega, \mathcal{F}, \P)$ be a probability space, where the set $\Omega$ contains all possible states of the world, the $\sigma$-field $\mathcal{F}$ consists of all subsets of $\Omega$, and $\P$ is a probability measure. Let $A \in \mathcal{F}$ denote an event of interest. 
 %The set of possible outcomes is denoted with $S$. For the sake of illustration, assume that  $S = \{G, B\}$, where $G$ and $B$ denote good and bad outcomes, respectively. The outcome function $F: \Omega \to S$ is a random variable that maps the state of the world to the true outcome. 
 The experts aim to forecast the probability $p = \P(A)$. Even though this paper focuses on probability estimates, the following discussion can be easily generalized to different types of estimates. 
 
-Generated estimates can be considered as noisy or distorted versions of $p$. In other words, if $\xi: [0,1] \to [0,1]$ is a noise function that randomly distorts a probability, then a generated probability forecasts is realized by $p_i = \xi(p)$. Due to its mathematical convenience, this framework is typically applied to subjective response data. Unfortunately, it can be drastically misaligned with the psychology literature and hence lead to results that are not reflective of the actual process that generates the estimates.
 
-%Therefore any heterogeneity in the estimates stems from randomness that is typically assumed to be caused by uncontrolled or unmeasured factors. 
-%Even though this framework is mathematically convenient, it can be drastically misaligned with the psychology literature and hence lead to results that are not reflective of the actual environment that produces the estimates.
-%The interoperation framework aims to correct these shortcomings by proposing a model that is more cognitive based. See \cite{hong2009interpreted} for the original introduction. 
-Under the interpreted signal framework, the set of states $\Omega$ is assume to be finite. The expert partitions $\Omega$ into non-overlapping subsets. This partition, know as the \textit{interpretation}, is denoted with $\Pi^i = \{\pi_1^i, \pi_2^i, \dots, \pi_{n_i}^i\}$, where $\bigcup_{j=1}^{n_i} \pi_j^i = \Omega$ and  $\pi_j^i \cap \pi_k^i = \emptyset$ for $j \neq k$. The expert can only associate a state $\omega \in \Omega$ with a set in his partition. Therefore his information is incomplete as long as not all the sets of his partition are singletons. To make probability forecasts, the expert specifies a map $\phi_i: \Omega \to [0, 1]$ that is measurable with respect to $\Pi^i$. 
-%Therefore any differences in estimates stem from cognitive diversity of the experts. 
-Unfortunately, \cite{hong2009interpreted} do not specify how the expert constructs the map $\phi_i$. It is also not clear how to the set of states $\Omega$ should be specified in real-world applications.  
-
-
-
-The information theoretic framework removes these intractable components and provides a model that can be applied in practice. It does not assume detailed knowledge of the expert interpretations nor pose any structure or cardinality restrictions on $\Omega$.  Each expert simply forecasts $p_i = \P\left(A | \mathcal{F}_i\right)$ based on a private information set $\mathcal{F}_i \subseteq \mathcal{F}$. 
+The partial information framework removes these intractable components and provides a model that can be applied in practice. It does not assume detailed knowledge of the expert interpretations nor pose any structure or cardinality restrictions on $\Omega$.  Each expert simply forecasts $p_i = \P\left(A | \mathcal{F}_i\right)$ based on a private information set $\mathcal{F}_i \subseteq \mathcal{F}$. 
 %If the set $\Omega$ is finite, the information set $\mathcal{F}_i$ can be considered equivalent to the $\sigma$-field generated by the interpretation $\Pi^i$. 
 If two experts $i$ and $j$ share information such that $\mathcal{F}_i \cap \mathcal{F}_j \neq \emptyset$, then the correlation of their forecasts $p_i$ and $p_j$ is positive and proportional to the overlap in their information sets. This means that, similarly to the interpreted signal framework, any heterogeneity in the estimates stems from cognitive diversity. As the details of the information set $\mathcal{F}_i$ cannot be known in practice, the information known by the $i$th expert is quantified as a fraction of the full information. 
-%For instance, expert $i$ may know 15\% of the full information while expert $j$ knows only 8\% of the full information. If in addition we specify that their shared information is, say, 3\% of the full information, we have established an information structure for these  experts. 
-%This leads to a compromise that is mathematically convenient and psychologically reasonable. 
 
-%This is shown in following sections where the information theoretic framework is applied to probability forecasts and their aggregation. 
-
-%NOT OPTIMAL FORECASTS. THE EXPERTS DO NOT KNOW THE WHOLE PROCESS.
-
-
-\section{Model for Probability Forecasts}
+\subsection{Model for Probability Forecasts}
 \label{Model}
+
+
 Consider two experts 1 and 2 who forecast the probability of the event $A$ happening. Assume that the event $A$ is determined by a pool of white noise, and that the experts 1 and 2 see respective $\delta_1$ and $\delta_2$ portions of this noise. These portions form their information sets. The overlap in these information sets is a fixed share $\rho$ of what is seen by either expert. To make this more precise, let $(\Omega, \mathcal{F}, \P)$ be a probability space. On this space, define a white noise process that is indexed by the unit interval $S = [0,1]$. A white noise process is a Gaussian process $\{ X_B \}$ indexed by Borel measurable subsets $B$. The unit interval is endowed with the uniform measure $\mu$. This gives the white noise process a covariance structure $\text{cov}(X_B, X_{B'}) = \mu(B \cap B') = |B \cap B'|$, i.e. the length of the intersection. The target event is defined as $A = \{ X_{S} > 0\}$. Let $I_1, I_2 \subseteq S$ be the information sets observed by experts 1 and 2, respectively. Then,
 \begin{align*}
 \mu(I_1) = |I_1| &= \delta_1\\
@@ -277,7 +307,7 @@ Recall that if $Z$ is standard normal random variable, then $\Phi(Z)$ is uniform
 \begin{figure}[htbp]
 %   \hspace{-2em}
    \includegraphics[width = \textwidth]{N=2} % requires the graphicx package
-   \caption{Illustration of the information theoretic model with two experts.}
+   \caption{Illustration of the partial information model with two experts.}
    \label{diagram2}
 \end{figure}
 
@@ -377,7 +407,7 @@ Expert $j$ observes a fixed share $\delta_j$ of the process. If the information 
 
 The best in-principle forecast given the knowledge of $N$ experts is $P(X_{S} > 0 |  \mathcal{F}')$, where $\mathcal{F}' = \mathcal{F}_1 \cup \dots \cup \mathcal{F}_N$. This aggregate, however, assumes knowledge of the union of the information sets. Understanding the union $\mathcal{F}'$ is very difficult in practice, especially when the number of experts in the group is large. Therefore the best aggregate probability that can be realistically hoped for is  $\P(X_{S} > 0 | p_1, \dots, p_N)$.
 
-To derive this aggregator under the information theoretic model, let $\boldsymbol{X}$ be a column vector of length $N$ such that $X_j = X_{I_j}$ for $j = 1, \dots, N$. If $\Sigma_{22}$ is a coherent overlap structure and $\Sigma_{22}^{-1}$ exists, then $X_{S} | \boldsymbol{X} \sim \mathcal{N}(\bar{\mu}, \bar{\Sigma})$, where
+To derive this aggregator under the partial information model, let $\boldsymbol{X}$ be a column vector of length $N$ such that $X_j = X_{I_j}$ for $j = 1, \dots, N$. If $\Sigma_{22}$ is a coherent overlap structure and $\Sigma_{22}^{-1}$ exists, then $X_{S} | \boldsymbol{X} \sim \mathcal{N}(\bar{\mu}, \bar{\Sigma})$, where
 \begin{align}
 \bar{\mu} &= \mu_1 + \Sigma_{12} \Sigma_{22}^{-1} (\boldsymbol{X} - \boldsymbol{\mu}_2) =  \Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X} \label{condMu}
 \end{align}
@@ -441,7 +471,7 @@ Let $\alpha$ represent the amount of extremization that is performed for the ave
 %%\end{align*} 
 %%As $\Sigma_{22}$ is positive semi-definite,  $\Sigma_{22}^{-1}$ is positive definite. Therefore $\Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21} > 0$ and $ \sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}} \in [0,1)$. 
 %\end{proof}
-%Therefore the information theoretic framework offers a natural source of  extremization. 
+%Therefore the partial information framework offers a natural source of  extremization. 
 %To continue our analysis of extremization, it is necessary to reduce the number of degrees of freedom by assuming a simpler form for the overlap structure $\Sigma_{22}$. 
 This extremizing constant $\alpha$ is not necessarily greater or equal to 1. Therefore the information theoretic aggregator (\ref{GeneralAggregator}) is not guaranteed to give an extremized probability. The following examples illustrate two typical scenarios when the aggregator shifts the average probability closer to the furthest extreme instead. For the sake of illustration, both examples involve only two experts. 
 \\
@@ -461,6 +491,18 @@ If $X_{I_1} = -0.85$ and $X_{I_2} = 0.16$, the information theoretic aggregate p
 respectively. Given that these probabilities are less than 0.5 while the information theoretic aggregate is greater than 0.5, the extremizing constant is negative in both cases. To understand this result, notice that expert 2 knows almost everything that expert 1 knows. Therefore his forecast should be weighted much more heavily in the final aggregate. Given that only the information theoretic aggregator is able to take this into account, its aggregate can differ radically from the average probability and probit forecasts. 
 \\
 \\
+
+
+%\begin{observation}
+%\label{positiveThm}
+%Under the model described in Section \ref{Model}, the extremizing factor, $\alpha$, is always greater or equal to 1. This means that the average probit forecast is always extremized. 
+%\end{observation}
+%\begin{proof} 
+%\end{proof}
+
+\subsection{Voting}
+
+
 \textbf{Example 2: Voting.} Consider the following information structure. 
 \begin{align*}
 \Sigma_{22} =  \left(\begin{array}{c c}
@@ -472,15 +514,6 @@ respectively. Given that these probabilities are less than 0.5 while the informa
 \\
 \\
 It is possible to find similar examples where the information theoretic aggregate is on the same side but closer to 0.5 than the average probability and probit forecast. In most cases, however, the aggregator extremizes. The next section studies a class of information structures under which extremization is  always guaranteed.
-
-%\begin{observation}
-%\label{positiveThm}
-%Under the model described in Section \ref{Model}, the extremizing factor, $\alpha$, is always greater or equal to 1. This means that the average probit forecast is always extremized. 
-%\end{observation}
-%\begin{proof} 
-%\end{proof}
-
-
 
 \subsection{Compound Symmetric Information Structure}
 
@@ -831,11 +864,11 @@ From Figures \ref{ExtremeN5} to \ref{ExtremeN30} it is clear that the feasible s
 \section{Conclusion}
 This paper introduced a novel framework for analyzing subjective response data. Under this framework any response heterogeneity is assumed to arise from cognitive diversity. The mathematical tractability and real-world applicability of this model were illustrated by deriving an information theoretic aggregation rule for multiple probability forecasts. The aggregator resulted in closed-form expression for the amount of extremization that should be performed for the average probit forecast. By assuming a simplified information structure, the amount of extremization was studied graphically. This led to many insights on extremization. Given that these insights tend to align with common sense, the framework appears to be appropriate for probability aggregation.
 
-Part of our future work is to continue developing the aggregator under the information theoretic framework. It is possible to place flexible priors on the unknown parameters and marginalize them with respect to their posterior distributions. This would lead to a principled aggregator that does not require any training. Instead, it could be applied directly to the data and would replace suboptimal methods such as the mean or median. As was discussed in Section \ref{extremization}, assuming a compound symmetric information structure is hardly a realistic choice. Therefore it will be necessary to develop a class of information structures that reflect the reality more closely. As it is unlikely that such a structure will lead to an aggregator with a closed-form solution, the aggregator will be provided in the form of an efficient algorithm.
+Part of our future work is to continue developing the aggregator under the partial information framework. It is possible to place flexible priors on the unknown parameters and marginalize them with respect to their posterior distributions. This would lead to a principled aggregator that does not require any training. Instead, it could be applied directly to the data and would replace suboptimal methods such as the mean or median. As was discussed in Section \ref{extremization}, assuming a compound symmetric information structure is hardly a realistic choice. Therefore it will be necessary to develop a class of information structures that reflect the reality more closely. As it is unlikely that such a structure will lead to an aggregator with a closed-form solution, the aggregator will be provided in the form of an efficient algorithm.
 
 Another future direction is to derive an information theoretic aggregator for subjective distributions. This is an important problem in Bayesian statistics where the analysis heavily depends on the choice of the prior distribution. Often the prior distribution is picked subjectively by the scientist who has previous experience on the problem at hand. If, however, the experiment is conducted by a group of scientists, their prior distributions must aggregated before the statistical analyses can be carried out. 
  
-The information theoretic framework is clearly a simplification of the reality. For instance, assuming that each expert produces an optimal probability forecast given his information set may not be a realistic assumption. The experts may believe in false information, hide their true beliefs, or be biased for many other reasons. This could be incorporated in the model by introducing an error term, possibly with a mean of zero, that is applied to the experts' probit forecasts. The resulting model, which is a hybrid of the generated signal and information theoretic frameworks, could lead to more realistic results. This improvement, however, may require a sacrifice in mathematical convenience. 
+The partial information framework is clearly a simplification of the reality. For instance, assuming that each expert produces an optimal probability forecast given his information set may not be a realistic assumption. The experts may believe in false information, hide their true beliefs, or be biased for many other reasons. This could be incorporated in the model by introducing an error term, possibly with a mean of zero, that is applied to the experts' probit forecasts. The resulting model, which is a hybrid of the generated signal and partial information frameworks, could lead to more realistic results. This improvement, however, may require a sacrifice in mathematical convenience. 
 
 
 %\bibliographystyle{plain}
