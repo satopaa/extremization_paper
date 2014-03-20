@@ -289,11 +289,6 @@ Consider two experts 1 and 2 who forecast the probability of the event $A$ happe
 \mu(I_2) = |I_2| &= \delta_2\\
 \mu(I_1 \cap I_2) =  |I_1 \cap I_2| &= \rho
 \end{align*}
-Call $P_{I_j} = X_{I_j}/\sqrt{1-\delta_j}$ the probit forecast of the $j$th expert.  If $\Phi$ denotes the standard normal CDF, then the calibrated forecast given by the $j$th expert is
-\begin{align*}
-p_j &= \P\left(A | \mathcal{F}_{I_j}\right) = \Phi\left( P_{I_j}\right)
-\end{align*}
-Recall that if $Z$ is standard normal random variable, then $\Phi(Z)$ is uniform on $[0,1]$. Therefore the marginal distribution of $p_j$ is uniform on $[0,1]$ when $\delta_j = 0.5$, i.e. when the expert knows half of the information. If the expert knows less than half of the information, i.e. $\delta_j < 0.5$, then the marginal distribution of $p_j$ is unimodal at $0.5$ with the variance decreasing to 0 as $\delta_j \to 0$. On other hand, if the expert knows more than half of the information, i.e. $\delta_j > 0.5$, then the marginal  distribution of $p_j$ is more heavily concentrated around extreme probabilities. In fact, when $\delta_j = 1$, the marginal distribution of $p_j$ is uniform over the set $\{0,1\}$. Figure \ref{marginals} illustrates these marginal distributions for $\delta_j$ equal to $0.3$, $0.5$, and $0.7$. 
 
 
 \begin{figure}[t]
@@ -302,16 +297,15 @@ Recall that if $Z$ is standard normal random variable, then $\Phi(Z)$ is uniform
 	\hspace{2em}\includegraphics{LegendMarginal} % requires the graphicx package
  \includegraphics[width= \textwidth]{Marginals}
    \caption{The marginal distribution of $p_j$ under different levels of $\delta_j$.}
-\label{Synthetic}
+\label{marginals}
 \end{minipage}
 \end{figure}
-%
-%\begin{figure}[htbp]
-%   \centering
-%   \includegraphics[width = 20em]{Marginals} % requires the graphicx package
-%   \caption{The marginal distribution of $p_j$ under different levels of $\delta_j$.}
-%   \label{marginals}
-%\end{figure}
+
+Call $P_{I_j} = X_{I_j}/\sqrt{1-\delta_j}$ the probit forecast of the $j$th expert.  If $\Phi$ denotes the standard normal CDF, then the calibrated forecast given by the $j$th expert is
+\begin{align*}
+p_j &= \P\left(A | \mathcal{F}_{I_j}\right) = \Phi\left( P_{I_j}\right)
+\end{align*}
+Recall that if $Z$ is standard normal random variable, then $\Phi(Z)$ is uniform on $[0,1]$. Therefore the marginal distribution of $p_j$ is uniform on $[0,1]$ when $\delta_j = 0.5$, i.e. when the expert knows half of the information. If the expert knows less than half of the information, i.e. $\delta_j < 0.5$, then the marginal distribution of $p_j$ is unimodal at $0.5$ with the variance decreasing to 0 as $\delta_j \to 0$. On other hand, if the expert knows more than half of the information, i.e. $\delta_j > 0.5$, then the marginal  distribution of $p_j$ is more heavily concentrated around extreme probabilities. In fact, when $\delta_j = 1$, the marginal distribution of $p_j$ is uniform over the set $\{0,1\}$. Figure \ref{marginals} illustrates these marginal distributions for $\delta_j$ equal to $0.3$, $0.5$, and $0.7$. 
 
 \begin{figure}[htbp]
 %   \hspace{-2em}
@@ -863,80 +857,78 @@ From Figures \ref{ExtremeN5} to \ref{ExtremeN30} it is clear that the feasible s
 If the target event can take upon $K > 2$ outcomes, the the white noise process must be extended to a $(K-1)$-dimensional process $\{ \boldsymbol{X}_B \}$ with each $\boldsymbol{X_B} = (X_{1,B}, X_{2,B},  \dots, X_{K-1,B})' \in \mathbb{R}^{K-1}$.  Expert $j$ observes a fixed share $\delta_j$ of the process. If the information sets of two experts $i$ and $j$ overlap, i.e. $| I_i \cap I_j| = \rho_{ij} > 0$, then the dependency between $\boldsymbol{X}_{I_i}$ and $\boldsymbol{X}_{I_j}$ is described by the cross-covariance $\text{cov}(\boldsymbol{X}_{I_i}, \boldsymbol{X}_{I_j}) = \rho_{ij} I_{K-1}$. Collect the coordinate-specific information sources into vectors $\boldsymbol{X}^{(k)} = \left(X_{k,I_1}, X_{k,I_2}, \dots, X_{k,I_N} \right)'$  for $k = 1, \dots, K-1$. This specifies the following multivariate normal distribution. 
 
 \begin{align*}
-\left(\begin{matrix} \boldsymbol{X}_S \\ \boldsymbol{X}^{(1)}\\ \vdots \\ \boldsymbol{X}^{(N)} \end{matrix}\right) &\sim \mathcal{N}\left( 
+\left(\begin{matrix} \boldsymbol{X}_S \\ \boldsymbol{X}^{(1)}\\ \vdots \\ \boldsymbol{X}^{(N)} \end{matrix}\right) &\sim \mathcal{N}_{}\left( 
  \boldsymbol{0}, \left(\begin{matrix} 
 \Lambda_{11} & \Lambda_{12}\\
 \Lambda_{21} & \Lambda_{22}\\
  \end{matrix}\right) 
  =
- \left(\begin{array}{c c c | c c c c c}
-  \multicolumn{3}{c|}{\multirow{3}{*}{$I_{K-1}$}} & \Sigma_{12}  & \boldsymbol{0} & & \multirow{2}{*}{$\boldsymbol{0}$}  \\ 
- &  & & \multirow{2}{*}{$\boldsymbol{0}$}&  \Sigma_{12} & \dots & \\ 
-  &  &  &  & \boldsymbol{0}  &&\Sigma_{12}  \\ \hline
-\Sigma_{21} & \multicolumn{2}{c|}{\boldsymbol{0}} & \Sigma_{22} & & \multicolumn{2}{c}{\multirow{2}{*}{$\boldsymbol{0}$}}   \\ 
-\boldsymbol{0}_{} & \Sigma_{21} & \boldsymbol{0} &  & \Sigma_{22} &&  \\ 
-\multicolumn{3}{c|}{\vdots} &\multicolumn{2}{c}{\multirow{2}{*}{$\boldsymbol{0}$}}  & \ddots &  \\ 
-\multicolumn{2}{c}{\boldsymbol{0}}  & \Sigma_{21} &  &  &&\Sigma_{22} \\ 
+ \left(\begin{array}{c c c c | c c c c c}
+  \multicolumn{4}{c|}{\multirow{4}{*}{$I_{K-1}$}} & \Sigma_{12}  & &  \multicolumn{2}{c}{\multirow{2}{*}{$\boldsymbol{0}$}}   \\ 
+ & &  & & &  \Sigma_{12} && & \\ 
+   &  &  &  &  \multicolumn{2}{c}{\multirow{2}{*}{$\boldsymbol{0}$}}  & \ddots&  \\ 
+   &  &  &  &&& &\Sigma_{12}  \\ \hline
+\Sigma_{21} & &\multicolumn{2}{c|}{\multirow{2}{*}{$\boldsymbol{0}$}}& \Sigma_{22} & & \multicolumn{2}{c}{\multirow{2}{*}{$\boldsymbol{0}$}}   \\ 
+ & \Sigma_{21} & & &  & \Sigma_{22} &&  \\ 
+\multicolumn{2}{c}{\multirow{2}{*}{$\boldsymbol{0}$}}& \ddots &&\multicolumn{2}{c}{\multirow{2}{*}{$\boldsymbol{0}$}}  & \ddots &  \\ 
+&&  & \Sigma_{21} &  &  &&\Sigma_{22} \\ 
  \end{array}\right)\right),
 \end{align*}
 where notation is borrowed from (\ref{NExperts}). Let $\boldsymbol{X} = ((\boldsymbol{X}^{(2)})', \dots, (\boldsymbol{X}^{(K-1)})')'$.  If $\Lambda_{22}$ is a coherent overlap structure and $\Lambda_{22}^{-1}$ exists, then all $\boldsymbol{X}_{S} | \boldsymbol{X} \sim \mathcal{N}\left(\boldsymbol{\bar{\mu}}, \bar{\Lambda}\right)$, where
 \begin{align*}
-\boldsymbol{\bar{\mu}} &=  \Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X} &&  \bar{\Lambda}= (1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}) I_{K-1}
+\boldsymbol{\bar{\mu}} &=  \Lambda_{12} \Lambda_{22}^{-1} \boldsymbol{X} &&  \bar{\Lambda}= (1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}) I_{K-1}
 \end{align*}
 
 \begin{figure}
         \centering
         \begin{subfigure}[b]{0.4\textwidth}
                 \includegraphics[width=\textwidth]{conesA.png}
-\caption{N = 2}	
+\caption{Illustration of the cone partition. . The cones $C_1$, $C_2$, and $C_3$ are denoted with colors red, blue, and green, respectively. }	
 \label{coneA}
         \end{subfigure}%
         ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
           %(or a blank line to force the subfigure onto a new line)
         \begin{subfigure}[b]{0.4\textwidth}
-                \includegraphics[width=\textwidth]{conesA.png}
-\caption{N = 5}
+                \includegraphics[width=\textwidth]{conesB.png}
+\caption{Illustration of the rotation. In this example $C_1$ is rotated to the convex cone $C_e$ defined by the two standard basis vectors $\boldsymbol{e}_1$ and $\boldsymbol{e}_2$}
 \label{coneB}
         \end{subfigure}
-        \caption{ }
+        \caption{Illustration of the model when the event can take $K = 3$ different outcomes.}
 \end{figure}
 
 
 
-The $(K-1)$-dimensional space is partitioned into $K$ cones with apexes at the origin. The target event results in the outcome $k$ if $\boldsymbol{X}_S$ is in the $k$th cone. As the different outcomes do not have a particular ordering to them, each cone must have the same shape and neighbor every other cone. This can be achieved with a regular $K$-simplex that has been centered at the origin. Let $A = \frac{1- \sqrt{K}}{K-1}$ and $B = \frac{1+A}{K}$. Then the $K$ vertices of the simplex are given by 
+The $(K-1)$-dimensional space is partitioned into $K$ cones with apexes at the origin. The target event results in the outcome $k$ if $\boldsymbol{X}_S$ is in the $k$th cone. As the different outcomes do not have a particular ordering to them, each cone must have the same shape and neighbor every other cone. This can be achieved with a regular $K$-simplex that has been centered at the origin. More specifically, if $A = \frac{1- \sqrt{K}}{K-1}$ and $B = \frac{1+A}{K}$, then the $K$ vertices of the simplex are given by 
 \begin{align*}
-\boldsymbol{b}_1 &= (1-B, -B, -B, \dots, -B)\\
-\boldsymbol{b}_2 &= (-B, 1-B, -B, \dots, -B)\\
+\boldsymbol{b}_1 &= (1-B, -B, -B, \dots, -B)'\\
+\boldsymbol{b}_2 &= (-B, 1-B, -B, \dots, -B)'\\
 & \phantom{=}\vdots\\
-\boldsymbol{b}_{K-1} &= (-B, -B, -B, \dots, 1-B)\\
-\boldsymbol{b}_{K} &= \left(A-B, A-B, \dots, A-B \right)
+\boldsymbol{b}_{K-1} &= (-B, -B, -B, \dots, 1-B)'\\
+\boldsymbol{b}_{K} &= \left(A-B, A-B, \dots, A-B \right)'
 \end{align*}
 %http://mathoverflow.net/questions/38724/coordinates-of-vertices-of-regular-simplex
-
-
-The $k$th cone is then the convex cone defined by all vertex points except the $k$th point. More specifically, the $k$th cone is given by
+The $k$th cone $C_k$ is the convex cone defined by all vertices except the $k$th one. That is, 
 \begin{align*}
 C_k &= \{\boldsymbol{b}_1\theta_1 + \dots + \boldsymbol{b}_{k-1}\theta_{k-1} + \boldsymbol{b}_{k+1}\theta_{k+1} + \boldsymbol{b}_{K}\theta_{K} | \theta_1, \theta_2, \dots, \theta_K \geq 0\} 
 \end{align*}
-The aggregate probability for the $k$th outcome is computed by integrating over the $k$th cone with respect to the conditional distribution of $\boldsymbol{X}_S$. This integration is much easier after transforming the cone is into the convex cone defined by the first $K-1$ standard basis functions. Denote this standard cone with $C_e$ and let 
+Figure \ref{coneA} illustrates the construction of cones under $K = 3$ different outcomes. The cones $C_1$, $C_2$, and $C_3$ are denoted with colors red, blue, and green, respectively. The aggregate probability for the $k$th outcome is computed by integrating over $C_k$ with respect to the conditional distribution of $\boldsymbol{X}_S$. This integration is much easier if $C_k$ is first transformed into the convex cone defined by the first $K-1$ standard basis functions. Figure \ref{coneB} illustrates the transformation for $C_1$.  Denote the standard cone with $C_e$ and let 
 \begin{align*}
-R &= \left(\begin{matrix} 
-\boldsymbol{b}_1\\
-\vdots\\
-\boldsymbol{b}_{k-1}\\
- \boldsymbol{b}_{k+1}\\
-  \dots\\
-   \boldsymbol{b}_K
- \end{matrix}\right) ^{-1},
+T_k &= \left(\begin{matrix} 
+\boldsymbol{b}_1& \dots & \boldsymbol{b}_{k-1} & \boldsymbol{b}_{k+1} & \dots & \boldsymbol{b}_K
+ \end{matrix}\right) ^{-1}
 \end{align*}
-If $\boldsymbol{\tilde{X}} = R\boldsymbol{X}_S$, then $R\boldsymbol{X}_S | \boldsymbol{X}  \sim \mathcal{N}(R\boldsymbol{\bar{\mu}}, R' \bar{\Lambda}R)$
-
+represent the transformation matrix for $C_k$. Define the function $F(\boldsymbol{x}_0 | \boldsymbol{\mu}, \Sigma)$ of a random variable $\boldsymbol{x} \sim \mathcal{N}_N(\boldsymbol{\mu}, \Sigma)$ as the probability that all of the components of $\boldsymbol{x}$ are \textit{greater or equal} to the corresponding elements in $\boldsymbol{x}_0$. Then the aggregator is 
+\begin{align}
+\P(\boldsymbol{X}_S \in C_k | \boldsymbol{X}) &= \P(T_k \boldsymbol{X}_S \in C_e | \boldsymbol{X}) \nonumber\\
+&= F(\boldsymbol{0} | T_k\boldsymbol{\bar{\mu}}, T_k' \bar{\Lambda}T_k) \label{MultiAggre}
+\end{align}
+By construction the aggregate probabilities for the $K$ outcomes sum to one. The aggregator (\ref{MultiAggre}) provides the map from a probability forecast to the corresponding probit forecast made by an expert. More specifically, the probability forecasts for the $k$th outcome made by the $j$th expert is
 \begin{align*}
-\P(\boldsymbol{X}_S \in C_k | \boldsymbol{X}) &= \P(R \boldsymbol{X}_S \in C_e | \boldsymbol{X})\\
-&= \Phi_{K-1} \left(\left(1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}) I_{K-1}\right)^{-1/2}R\Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X} \right)
+p_{kj}&= F(\boldsymbol{0} | T_k\boldsymbol{X}_{I_j}, (1-\delta_j)T_k'T_k)
 \end{align*}
+Similarly to the binary case, the expert's probability forecasts are marginally uniform over the vertices of the $K$-simplex when $\delta_j = 1$. This marginal distribution converges to the center of the simplex, i.e. the point $(1/K, 1/K, \dots, 1/K)$ as $\delta_j \to 0$. 
 
-\section{Conclusion}
+\section{Discussion}
 This paper introduced a novel framework for analyzing subjective response data. Under this framework any response heterogeneity is assumed to arise from cognitive diversity. The mathematical tractability and real-world applicability of this model were illustrated by deriving an information theoretic aggregation rule for multiple probability forecasts. The aggregator resulted in closed-form expression for the amount of extremization that should be performed for the average probit forecast. By assuming a simplified information structure, the amount of extremization was studied graphically. This led to many insights on extremization. Given that these insights tend to align with common sense, the framework appears to be appropriate for probability aggregation.
 
 Part of our future work is to continue developing the aggregator under the partial information framework. It is possible to place flexible priors on the unknown parameters and marginalize them with respect to their posterior distributions. This would lead to a principled aggregator that does not require any training. Instead, it could be applied directly to the data and would replace suboptimal methods such as the mean or median. As was discussed in Section \ref{extremization}, assuming a compound symmetric information structure is hardly a realistic choice. Therefore it will be necessary to develop a class of information structures that reflect the reality more closely. As it is unlikely that such a structure will lead to an aggregator with a closed-form solution, the aggregator will be provided in the form of an efficient algorithm.
