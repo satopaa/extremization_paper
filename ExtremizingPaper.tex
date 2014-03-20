@@ -294,8 +294,8 @@ Consider two experts 1 and 2 who forecast the probability of the event $A$ happe
 \begin{figure}[t]
 \centering
 \begin{minipage}[t]{.5\textwidth}
-	\hspace{2em}\includegraphics{LegendMarginal} % requires the graphicx package
- \includegraphics[width= \textwidth]{Marginals}
+	\hspace{0em}\includegraphics{LegendMarginal} % requires the graphicx package
+ \includegraphics[width= 0.85\textwidth]{Marginals}
    \caption{The marginal distribution of $p_j$ under different levels of $\delta_j$.}
 \label{marginals}
 \end{minipage}
@@ -648,46 +648,6 @@ For a given $\delta$, the extremizing constant $\alpha$ is minimized when $(N-1)
 %\alpha &= \frac{\frac{N}{N\rho +1} }{\sqrt{T- \frac{N}{N\rho +1} }}
 %\end{align*}
 %
-%\begin{verbatim}
-%library(lattice)
-%N = 10
-%#deltas = seq(0.001, 2/N, length = 500)
-%deltas = seq(0.001, 0.999, length = 500)
-%rhos = seq(0.001, 1, length = 500)
-%grid = expand.grid(deltas, rhos)
-%#grid =  grid[grid[,2] < grid[,1], ]
-%thresh = (N-1/grid[,1])/(N-1)
-%grid = grid[thresh <= grid[,2] ,]
-%range(N*grid[,1]/((N-1)*grid[,2]+1))
-%
-%alphas = N*sqrt(1-grid[,1])/((N-1)*grid[,2] + 1) / sqrt(1-N*grid[,1]/((N-1)*grid[,2] + 1))
-%grid = cbind(alphas, grid)
-%
-%
-%#col.l = c(colorRampPalette(c('darkblue', 'skyblue'))(9), colorRampPalette(c('darksalmon', 'darkred'))(11))
-%
-%alphas = log(alphas)
-%L = 50
-%#col.l =  colorRampPalette(c('coral', 'coral4', 'darkred'))(L)
-%col.l = colorRampPalette(c("yellow","red", "darkred", "black"))(L) 
-%#ats = seq(1, max(alphas, na.rm = TRUE), length = L)
-%#ats = ats[-10]
-%ats = seq(min(alphas), max(alphas), length = L)
-%
-%
-%setwd("/Users/ville/extremization_paper/")
-%jpeg(paste("ExtremeN", N, ".jpeg", sep= ""), pointsize = 15)
-%
-%p.strip <- list(cex=1.5, lines=2, fontface='bold')
-%#ckey <- list(labels=list(cex=1.5, col='black'), height=1.5)
-%ckey <- list(labels=list(cex=1.5, col='black'))
-%x.scale <- list(cex=1.5, alternating=1, col='black')
-%y.scale <- list(cex=1.5, alternating=1, col='black')
-%levelplot(alphas~grid[,2]+grid[,3], ylab = list(label = expression(rho), cex = 1.5), xlab = list( label = expression(delta), cex = 1.5), col.regions = col.l, colorkey=ckey, pretty = TRUE, at = ats, contour = TRUE, par.strip.text=p.strip, scales=list(x=x.scale, y=y.scale))
-%
-%dev.off()
-%\end{verbatim}
-%
 %
 %
 %\begin{figure}[hbt!]
@@ -714,21 +674,21 @@ For a given $\delta$, the extremizing constant $\alpha$ is minimized when $(N-1)
 
 \begin{figure}
         \centering
-        \begin{subfigure}[b]{0.32\textwidth}
+        \begin{subfigure}[b]{0.45\textwidth}
                 \includegraphics[width=\textwidth]{ExtremeN2.jpeg}
 \caption{N = 2}	
 \label{ExtremeN5}
         \end{subfigure}%
         ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
           %(or a blank line to force the subfigure onto a new line)
-        \begin{subfigure}[b]{0.32\textwidth}
-                \includegraphics[width=\textwidth]{ExtremeN5.jpeg}
-\caption{N = 5}
-\label{ExtremeN10}
-        \end{subfigure}
+%        \begin{subfigure}[b]{0.32\textwidth}
+%                \includegraphics[width=\textwidth]{ExtremeN5.jpeg}
+%\caption{N = 5}
+%\label{ExtremeN10}
+%        \end{subfigure}
         ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
           %(or a blank line to force the subfigure onto a new line)
-        \begin{subfigure}[b]{0.32\textwidth}
+        \begin{subfigure}[b]{0.45\textwidth}
                 \includegraphics[width=\textwidth]{ExtremeN10.jpeg}
 \caption{N = 10}
 \label{ExtremeN30}
@@ -881,14 +841,14 @@ where notation is borrowed from (\ref{NExperts}). Let $\boldsymbol{X} = ((\bolds
 
 \begin{figure}
         \centering
-        \begin{subfigure}[b]{0.4\textwidth}
+        \begin{subfigure}[b]{0.45\textwidth}
                 \includegraphics[width=\textwidth]{conesA.png}
-\caption{Illustration of the cone partition. . The cones $C_1$, $C_2$, and $C_3$ are denoted with colors red, blue, and green, respectively. }	
+\caption{Illustration of the cone partition. The cones $C_1$, $C_2$, and $C_3$ are denoted with colors red, blue, and green, respectively. }	
 \label{coneA}
         \end{subfigure}%
         ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
           %(or a blank line to force the subfigure onto a new line)
-        \begin{subfigure}[b]{0.4\textwidth}
+        \begin{subfigure}[b]{0.45\textwidth}
                 \includegraphics[width=\textwidth]{conesB.png}
 \caption{Illustration of the rotation. In this example $C_1$ is rotated to the convex cone $C_e$ defined by the two standard basis vectors $\boldsymbol{e}_1$ and $\boldsymbol{e}_2$}
 \label{coneB}
