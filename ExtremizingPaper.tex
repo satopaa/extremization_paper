@@ -1,6 +1,6 @@
 \let\mymarginpar\marginpar
 
-\documentclass[11pt,twoside]{article}
+\documentclass[10pt,twoside]{article}
 
 %\long\def\authornote#1{%
 %        \leavevmode\unskip\raisebox{-3.5pt}{\rlap{$\scriptstyle\diamond$}}%
@@ -295,12 +295,23 @@ p_j &= \P\left(A | \mathcal{F}_{I_j}\right) = \Phi\left( P_{I_j}\right)
 \end{align*}
 Recall that if $Z$ is standard normal random variable, then $\Phi(Z)$ is uniform on $[0,1]$. Therefore the marginal distribution of $p_j$ is uniform on $[0,1]$ when $\delta_j = 0.5$, i.e. when the expert knows half of the information. If the expert knows less than half of the information, i.e. $\delta_j < 0.5$, then the marginal distribution of $p_j$ is unimodal at $0.5$ with the variance decreasing to 0 as $\delta_j \to 0$. On other hand, if the expert knows more than half of the information, i.e. $\delta_j > 0.5$, then the marginal  distribution of $p_j$ is more heavily concentrated around extreme probabilities. In fact, when $\delta_j = 1$, the marginal distribution of $p_j$ is uniform over the set $\{0,1\}$. Figure \ref{marginals} illustrates these marginal distributions for $\delta_j$ equal to $0.3$, $0.5$, and $0.7$. 
 
-\begin{figure}[htbp]
-   \centering
-   \includegraphics[width = 20em]{Marginals} % requires the graphicx package
+
+\begin{figure}[t]
+\centering
+\begin{minipage}[t]{.5\textwidth}
+	\hspace{2em}\includegraphics{LegendMarginal} % requires the graphicx package
+ \includegraphics[width= \textwidth]{Marginals}
    \caption{The marginal distribution of $p_j$ under different levels of $\delta_j$.}
-   \label{marginals}
+\label{Synthetic}
+\end{minipage}
 \end{figure}
+%
+%\begin{figure}[htbp]
+%   \centering
+%   \includegraphics[width = 20em]{Marginals} % requires the graphicx package
+%   \caption{The marginal distribution of $p_j$ under different levels of $\delta_j$.}
+%   \label{marginals}
+%\end{figure}
 
 \begin{figure}[htbp]
 %   \hspace{-2em}
@@ -385,20 +396,6 @@ This extension is illustrated in Figure \ref{diagramN}. It is important to notic
 % \frac{( \boldsymbol{1}_{N}' \Sigma_{22}^{-1} \boldsymbol{X} )( \boldsymbol{X}'  \Sigma_{22}^{-1}\boldsymbol{1}_{N} )}{(\boldsymbol{1}_{N}'  \boldsymbol{X} )(  \boldsymbol{X}'  \boldsymbol{1}_{N})}   &>& \frac{1}{N} - \frac{\boldsymbol{1}_{N}' \Sigma_{22}^{-1} \boldsymbol{1}_{N}}{N^2}\\
 %\end{align*}
 
-\subsection{Multinomial Outcomes}
-If the target event can take upon $K > 2$ outcomes, the the white noise process must be extended to a $K-1$-dimensional process $\{ \boldsymbol{X}_B \}$, where $\boldsymbol{X_B} = (X_{1,B}, X_{2,B},  \dots, X_{K-1,B})' \in \mathbb{R}^{K-1}$.  The $K-1$-dimensional space is partitioned into $K$ equal-sized cones with apexes at the origin. 
-%The partitioning of the space into $K$ cones is not unique. Given that the analysis does not depend on the choice of the partitioning, it is not necessary at this point to specify a particular partition.  
-The target event results in the outcome $k$ if $\boldsymbol{X}_S$ is in the $k$th cone. Figure \ref{multinomial} illustrates this for an event that can take upon values $A$, $B$, and $C$. In this case, the process $\{ \boldsymbol{X}_B \}$ is $2$-dimensional, starts at the origin $(0,0)$, and moves around the $2$-dimensional Cartesian plane. Let the top, bottom-right, and bottom-left cones represents $A$, $B$, and $C$, respectively. Given that $X_S$ is in the bottom-right cone, the final outcome of the target event is $B$. 
-
-%\begin{figure}[htbp]
-%   \centering
-%   \includegraphics[width = 20em]{Multinomial} % requires the graphicx package
-%   \caption{Illustration of the model for a target event with $3$ outcomes.}
-%   \label{multinomial}
-%\end{figure}
-
-Expert $j$ observes a fixed share $\delta_j$ of the process. If the information sets of two experts $i$ and $j$ overlap, i.e. $| I_i \cap I_j| = \rho_{ij} > 0$, then the dependency between $X_{I_i}$ and $X_{I_j}$ is described by the cross-covariance $\text{cov}(X_{I_i}, X_{I_j}) = \rho_{ij} I_{K-1}$. This specifies a multivariate normal distribution for the vector $(X_S, X_{I_1}, X_{I_2}, \dots, X_{I_N})'$. (EXPLAIN HOW THE MULTINOMIAL PROBIT PARTITIONS THE SPACE; WHAT IS THE CONNECTION BETWEEN X AND P). The remainder of this paper focuses on the binary case as this is the most common case in practice. 
-
 
 \section{Extremization}
 \label{extremization}
@@ -418,9 +415,9 @@ See Result 5.2.10 on p. 156 in \cite{ravishanker2001first} for the formulas of t
 \P\left(A  | \boldsymbol{X}\right)  = \P\left(X_{S} > 0 | \boldsymbol{X}\right) &= \Phi\left( \frac{\Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}}\right) \label{GeneralAggregator}
 %&= \Phi\left( \frac{\boldsymbol{1}_{N}'  \Sigma_{22}^{-1} \Phi^{-1}(\boldsymbol{p})}{\sqrt{1 - \boldsymbol{1}_{N}' \Sigma_{22}^{-1} \boldsymbol{1}_{N}}}\right)
 \end{align}
-Let $\alpha$ represent the amount of extremization that is performed for the average probit forecast. If $\bar{X} = \left( \sum_{j=1}^N \tilde{X}_{I_j} \right)/N$, then
+Let $\alpha$ represent the amount of extremization that is performed for the average probit forecast. If $\bar{P} = \left( \sum_{j=1}^N P_{I_j} \right)/N$, then
 \begin{align}
-\alpha \bar{X}&=  \frac{\Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}}  &\Leftrightarrow&& \alpha  = \frac{N \Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\left(\boldsymbol{1}_N' \boldsymbol{\tilde{X}} \right) \sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}} \label{alpha}
+\alpha \bar{P}&=  \frac{\Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}}  &\Leftrightarrow&& \alpha  = \frac{N \Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\left(\boldsymbol{1}_N' \boldsymbol{P} \right) \sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}} \label{alpha}
 \end{align}
 
 This extremizing constant $\alpha$ is not necessarily greater or equal to 1. Therefore the information theoretic aggregator (\ref{GeneralAggregator}) does not always give an extremized probability. This offers a great opportunity to understand when extremization should not be performed. The following examples illustrate a typical scenario when the aggregator shifts the average probability closer to the furthest extreme instead. For the sake of illustration, the examples involve only two experts. 
@@ -444,7 +441,7 @@ The partial information aggregate is $0.65$.  Given that this is more than 0.5 w
 
 It is possible to find similar examples where the information theoretic aggregate is on the same side but closer to 0.5 than the average probability and probit forecast. In most cases, however, the aggregator extremizes. Before discussing the second example, it is necessary to analyze a particular subclass of information structures. 
 
-\subsection{Voting}
+\subsection{Voting Experts}
 This section assumes that the experts' information sets do not overlap, i.e.   $|I_{i} \cap I_{j}| = \emptyset$ for all $i \neq j$. The resulting information structure is diagonal.  That is,
 % $\rho \in [\max \{(N-T)/(T(N-1)), 0\},1] = A_\rho$. 
 \begin{align*}
@@ -462,7 +459,7 @@ This section assumes that the experts' information sets do not overlap, i.e.   $
 \delta_2 & 0 & \delta_2 & \dots & 0  \\ 
 \vdots & \vdots & \vdots & \ddots & \vdots  \\ 
 \delta_N & 0 & 0 & \dots & \delta_N\\ 
- \end{array}\right)\right),
+ \end{array}\right)\right)
 \end{align*}
 The information structure $\Sigma_{22}$ is consistent if and only if $\sum_{j=1}^N \delta_j \leq 1$. The aggregator (\ref{GeneralAggregator}) is given by
 \begin{align}
@@ -524,7 +521,7 @@ This section assumes that the experts' information sets have the same size and t
 \delta & \rho\delta & \rho\delta & \dots & \delta\\ 
  \end{array}\right)\right),
 \end{align*}
-where $\delta \in [0,1]$ is the fraction known by each expert and $\rho \in \left[  \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right]$ is the shared proportion of the known knowledge. The positive lower bound for $\rho$ becomes active when $\delta > 1/N$ because then overlap in the information sets is unavoidable. This minimum overlap can be computed by assuming $\delta > 1/N$ and letting the shared information be the same for all $N$ experts. That is, $I_{i} \cap I_j = I$ and $|I| =  \rho \delta$ for all $i \neq j$. The minimum sharing occurs when $\rho\delta + N(\delta - \delta\rho) = 1$, which gives us the lower bound. The quantity  $\rho\delta + N(\delta - \delta\rho)$ also describes the maximum coverage of the $N$ experts, i.e. $\max | I_1 \cup I_2 \cup \dots \cup I_N| = \rho\delta + N(\delta - \delta\rho)$. 
+where $\delta \in [0,1]$ is the fraction known by each expert and $\rho \in \left[  \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right]$ is the shared proportion of the known information. The positive lower bound for $\rho$ becomes active when $\delta > 1/N$ because then overlap in the information sets is unavoidable. This minimum overlap can be computed by assuming $\delta > 1/N$ and letting the shared information be the same for all $N$ experts. That is, $I_{i} \cap I_j = I$ and $|I| =  \rho \delta$ for all $i \neq j$. The minimum sharing occurs when $\rho\delta + N(\delta - \delta\rho) = 1$, which gives us the lower bound. The quantity  $\rho\delta + N(\delta - \delta\rho)$ also describes the maximum coverage of the $N$ experts, i.e. $\max | I_1 \cup I_2 \cup \dots \cup I_N| = \rho\delta + N(\delta - \delta\rho)$. 
 
 Given that $\Sigma_{22}$ can be written in the form  $\Sigma_{22} = I_N (\delta-\rho\delta) + J_{N \times N} \rho\delta$, its inverse is
 \begin{align}
@@ -532,14 +529,27 @@ Given that $\Sigma_{22}$ can be written in the form  $\Sigma_{22} = I_N (\delta-
 \end{align}
 See the supplementary material of \cite{dobbin2005sample} for the proof of this fact.  The determinant of $\Sigma_{22}$ is
 \begin{align}
-| \Sigma_{22}| = (\delta - \rho\delta)^N \left(1+\frac{N \delta \rho}{\delta - \delta\rho} \right),\label{determinant}
+%| \Sigma_{22}| = (\delta - \rho\delta)^N \left(1+\frac{N \delta \rho}{\delta - \delta\rho} \right),
+| \Sigma_{22}| = (\delta(1- \rho))^N \left(1+\frac{N \rho}{1 - \rho} \right),\label{determinant}
 \end{align}
-which follows from p. 32 in \cite{rao2009linear}. As the compound symmetric information structure depends only on two unknown parameters, the values of $\delta$ and $\rho$ can be estimated in practice via the maximum likelihood method. That is,
+which follows from p. 32 in \cite{rao2009linear}. As the compound symmetric information structure depends only on two unknown parameters, the values of $\delta$ and $\rho$ can be estimated in practice via the maximum likelihood method. This requires a closed form expression for the density of $\boldsymbol{p}$. First, note that $\boldsymbol{P} \sim \mathcal{N}_N(\boldsymbol{0}, \Sigma_{22} (1-\delta)^{-1})$ and that the Jacobian for the map $\boldsymbol{P} \to \Phi\left(\boldsymbol{P}\right)$ is
+\begin{eqnarray*}
+J(\boldsymbol{X}) &=& (2\pi)^{-N/2} \exp \left( - \frac{\boldsymbol{P}' \boldsymbol{P}}{2}   \right) 
+\end{eqnarray*}
+If $h(\boldsymbol{P})$ denotes the multivariate normal density of $\boldsymbol{P}$, then 
+%by the Inverse Function Theorem 
+the density for $\boldsymbol{p}$ is 
+\begin{eqnarray*}
+ f\left(p_1, \dots, p_N | \delta, \rho \right) &=& h(\boldsymbol{P}) J(\boldsymbol{P})^{-1} \bigg|_{\boldsymbol{P} = \Phi^{-1}(\boldsymbol{p})}\\
+%&=& \frac{(1-\delta)^{N/2}}{\sqrt{ |\Sigma_{22}|}} \exp\left( -\frac{1}{2} \boldsymbol{P}' (1-\delta)\Sigma_{22}^{-1} \boldsymbol{P} + \frac{\boldsymbol{P}' \boldsymbol{P}}{2}   \right)\\
+&=& \frac{(1-\delta)^{N/2}}{\sqrt{ |\Sigma_{22}|}} \exp\left( -\frac{1}{2} \Phi^{-1}(\boldsymbol{p})' \left( (1-\delta)\Sigma_{22}^{-1} - I_N \right) \Phi^{-1}(\boldsymbol{p})  \right) 
+\end{eqnarray*}
+where $\Sigma_{22}^{-1}$ and $|\Sigma_{22}|$ are given by (\ref{inverse}) and (\ref{determinant}), respectively. The maximum likelihood estimates of $\delta$ and $\rho$ are then obtained from
 \begin{align}
-(\hat{\delta}, \hat{\rho}) =& \argmax_{\rho, \delta} \log \left[ \frac{1}{\sqrt{(2\pi)^N |\Sigma_{22}|}} \exp\left( -\frac{1}{2} \boldsymbol{X}' \Sigma_{22}^{-1} \boldsymbol{X} \right) \right], \label{MLE}\\
+(\hat{\delta}, \hat{\rho}) =& \argmax_{\rho, \delta} \log  f\left(p_1, \dots, p_N | \delta, \rho \right), \label{MLE}\\
 & \text{s.t. } \nonumber \delta \in [0,1] \text{ and } \rho \in \left[  \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right]
 \end{align}
-where $\Sigma_{22}^{-1}$ and $|\Sigma_{22}|$ are given by (\ref{inverse}) and (\ref{determinant}), respectively. Unfortunately, (\ref{MLE}) cannot be solved analytically. However, a simple grid-search can be used to find the estimates very efficiently. 
+Unfortunately, (\ref{MLE}) cannot be solved analytically. However, a simple grid-search can be used to find the estimates very efficiently. 
 
 %\begin{align*}
 %(\hat{\delta}, \hat{\rho}) &= \argmax_{\rho, \delta}  - \frac{N}{2} \log (\delta - \rho\delta) - \frac{1}{2} \log \left(1+\frac{N \delta \rho}{\delta - \delta\rho} \right) -\frac{1}{2} \boldsymbol{X}' \left( I_N \left(\frac{1}{\delta-\rho\delta} \right) - J_{N \times N} \frac{\rho}{(1-\rho)\delta(1+(N-1) \rho)}  \right) \boldsymbol{X}
@@ -553,7 +563,7 @@ where $\Sigma_{22}^{-1}$ and $|\Sigma_{22}|$ are given by (\ref{inverse}) and (\
 
 %Assuming no further prior information on overlap structure, the expected amount of information held by the group is WHAT IS THIS?
 
-The aggregator can be derived by applying (\ref{inverse}) and (\ref{determinant}) to the general formulas (\ref{condMu}) and (\ref{condSigma}). The resulting conditional mean and variance are 
+The aggregator under the compound symmetric information structure can be derived by applying (\ref{inverse}) and (\ref{determinant}) to the general formulas (\ref{condMu}) and (\ref{condSigma}). The resulting conditional mean and variance are 
 %By the conditional multivariate normal results, we have that 
 %\begin{align*}
 %\bar{\mu} &= \mu_1 + \Sigma_{12} \Sigma_{22}^{-1} (\boldsymbol{X} - \boldsymbol{\mu}_2)\\
@@ -592,11 +602,12 @@ The aggregator can be derived by applying (\ref{inverse}) and (\ref{determinant}
 % &= 1  - \frac{\delta^2N}{(N-1)\rho\delta +\delta} \\
 &&  \bar{\Sigma} = 1  - \frac{\delta N}{(N-1)\rho +1} 
 \end{align*}
-The resulting aggregator is
+Therefore the  aggregator is
 \begin{align*}
 \P\left(X_S > 0 | \boldsymbol{X}\right) &=\Phi\left(\frac{\frac{1}{(N-1)\rho +1} \sum_{j=1}^N X_{I_j} }{\sqrt{1- \frac{N\delta}{(N-1)\rho +1} }}  \right)
 \end{align*}
-It is crucial to notice that this aggregator can learn the amount of extremization without a separate training set. Therefore it can be applied to a wide range of applied problems. Equating the aggregate probit forecast with $\bar{X}$ results in the following extremization factor.
+%It is crucial to notice that this aggregator can learn the amount of extremization without a separate training set. Therefore it can be applied to a wide range of applied problems. 
+Equating this with $\bar{P}$ results in the following extremization factor.
 \begin{align}
 %\alpha \bar{X}  &=  \frac{\frac{1}{(N-1)\rho +1} \sum_{j=1}^N X_j }{\sqrt{T- \frac{N}{(N-1)\rho +1} }}\\
 %\alpha &= \frac{\frac{1}{(N-1)\rho +1} \sum_{j=1}^N X_j }{\bar{X} \sqrt{T- \frac{N}{(N-1)\rho +1} }}\\
@@ -617,12 +628,11 @@ It is crucial to notice that this aggregator can learn the amount of extremizati
 %% \frac{N \delta}{(N-1)\rho +1}  &\leq& 1\\
 % \frac{N\delta - 1}{N-1}  &\leq \rho,
 %\end{align*}
-Notice that, unlike (\ref{alpha}), the extremizing constant in (\ref{CompoundAlpha}) does not depend on the forecasts $\boldsymbol{X}$. As the term inside the square-root must be non-negative, another technical restriction must be placed on $\rho$. That is, in addition to $\rho \in \left[  \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right]$, it is required that
+Notice that, unlike (\ref{alpha}), the extremizing constant (\ref{CompoundAlpha}) does not depend on the forecasts $\boldsymbol{X}$. As the term inside the square-root must be non-negative, another technical restriction must be placed on $\rho$. That is, in addition to $\rho \in \left[  \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right]$, it is required that
 \begin{align*}
 1- \frac{N\delta}{(N-1)\rho +1}  &\geq 0 &\Leftrightarrow&& \rho \geq \frac{N\delta - 1}{N-1}
 \end{align*}
-Notice, however, that $N\delta - 1 > N - \delta^{-1}$ only when $\delta < 1/N$. But when $\delta < 1/N$, both $N\delta - 1$ and $N - \delta^{-1}$ are negative. Therefore this technical condition is redundant and can be ignored. 
-
+Notice, however, that $N\delta - 1 > N - \delta^{-1}$ only when $\delta < 1/N$. But when $\delta < 1/N$, both $N\delta - 1$ and $N - \delta^{-1}$ are negative. Therefore this technical condition is redundant and can be ignored. The next observation shows that the extremizing constant  (\ref{CompoundAlpha}) is always greater or equal to 1.  
 
 \begin{observation}
 \label{positiveThm}
@@ -734,12 +744,12 @@ For a given $\delta$, the extremizing constant $\alpha$ is minimized when $(N-1)
 
 
 
-Expression (\ref{CompoundAlpha}) is particularly convenient because it only depends on three intuitive parameters. Therefore it can be analyzed graphically. Figures \ref{ExtremeN5} to \ref{ExtremeN30} describe the amount of log-extremization $\log(\alpha)$ under different values of $\rho, \delta$, and $N$. By Observation \ref{positiveThm} the amount of extremizing is always greater or equal to 1.0. Notice that most extremization occurs when $\delta = 1.0$ and $\rho = 1.0$, or when  $\delta = 1/N$ and $\rho = 0$. In the first case, all experts know whether the target event materializes or not. In the second case, the group's information sets form a partition of the full information. Therefore as a group the experts know all the information. Such a group can re-construct $X_S$ by simply adding up their individual probit forecasts. This means that aggregation becomes voting: if the sum of the probit forecasts is above 0, the event $A$ materializes; else it does not. A similar observation has been made under the interpreted signal framework (see the example on information aggregation in \cite{hong2009interpreted}). Therefore in the real-world voting can be expected to work well when the voters form a very knowledgable and diverse group of people. 
+Expression (\ref{CompoundAlpha}) is particularly convenient because it only depends on three intuitive parameters. Therefore it can be analyzed graphically. Figures \ref{ExtremeN5} to \ref{ExtremeN30} describe the amount of log-extremization $\log(\alpha)$ under different values of $\rho, \delta$, and $N$. By Observation \ref{positiveThm} the amount of extremizing is always greater or equal to 1.0. Notice that most extremization occurs when $\delta = 1/N$ and $\rho = 0$. In this case the group's information sets form a partition of the full information. Therefore as a group the experts know all the information. Such a group can re-construct $X_S$ by simply adding up their individual probit forecasts. This means that aggregation becomes voting: if the sum of the probit forecasts is above 0, the event $A$ materializes; else it does not. A similar observation has been made under the interpreted signal framework (see the example on information aggregation in \cite{hong2009interpreted}). Therefore in the real-world voting can be expected to work well when the voters form a very knowledgable and diverse group of people. 
 
 
-Moving away from these two extreme points towards the upper left corner, where $\delta = 0.0$ and $\rho = 1.0$, decreases the amount of extremizing monotonically to $1.0$. This trend follows directly from Observation \ref{infoObservation}. The decrease in the amount of information in $\boldsymbol{X}$  is caused by a combination of a) reduction in the amount of information that each individual expert holds and b) increase in the amount of shared information. Therefore the more knowledgable and diverse the group of experts is, the more their average probit forecast should be extremized. Contrast this with the generated signal framework where higher variance is typically considered negative. Under the information theoretic and interpreted signal frameworks, however, higher variance implies broader diversity among the experts and hence is considered helpful. 
+Moving away from these two extreme points towards the upper left corner, where $\delta = 0.0$ and $\rho = 1.0$, decreases the amount of extremizing monotonically to $1.0$. This decrease is caused by a) reduction in the amount of information that each individual expert holds and b) increase in the amount of shared information. Therefore the more knowledgable and diverse the group of experts is, the more their average probit forecast should be extremized. Contrast this with the classical measurement error model where higher variance is typically considered negative. Under the partial information model and the interpreted signal frameworks, however, higher variance implies broader diversity among the experts and hence is considered helpful. 
 
-From Figures \ref{ExtremeN5} to \ref{ExtremeN30} it is clear that the feasible set of $(\delta, \rho)$-values becomes smaller as $N$ increases. This limitation arises from assuming a compound symmetric overlap structure. Having many experts, each with a considerable amount of information, simply leads to unavoidable overlap in the information sets. From the domain restriction on $\rho$, it is clear that $\rho \to 1$ as $N \to \infty$. Therefore in the limit the group of experts is equivalent to a single expert. This observation clearly does not reflect the real-world. When $N = 2$, on other hand, the compound symmetric overlap is completely general IT IS NOT BECAUSE DELTA IS STILL THE SAME. Therefore assuming a compound symmetric information structure can be appropriate for small numbers of experts but becomes overly restrictive as more experts enter the group. 
+From Figures \ref{ExtremeN5} to \ref{ExtremeN30} it is clear that the feasible set of $(\delta, \rho)$-values becomes smaller as $N$ increases. This limitation arises from assuming a compound symmetric overlap structure. Having many experts, each with a considerable amount of information, simply leads to unavoidable overlap in the information sets. From the domain restriction on $\rho$, it is clear that $\rho \to 1$ as $N \to \infty$. Therefore in the limit the group of experts is equivalent to a single expert. This observation clearly does not reflect the real-world. When $N = 2$, on other hand, the compound symmetric overlap is almost fully general. Therefore assuming a compound symmetric information structure can be appropriate for small numbers of experts but becomes overly restrictive as more experts enter the group. 
 
 %\subsection{Information in the Sample Average}
 %It is possible to determine the amount of information in the sample average. This is done by first computing the aggregate probability for the sample average, and then finding the amount of information that a single expert should have in order for his aggregate probability to match with the aggregate probability of the sample average. That is, if $\delta_X$ denotes the information in the sample average, then 
@@ -848,6 +858,83 @@ From Figures \ref{ExtremeN5} to \ref{ExtremeN30} it is clear that the feasible s
 %
 %\section{Inverse Problem}
 
+
+\section{Multinomial Outcomes}
+If the target event can take upon $K > 2$ outcomes, the the white noise process must be extended to a $(K-1)$-dimensional process $\{ \boldsymbol{X}_B \}$ with each $\boldsymbol{X_B} = (X_{1,B}, X_{2,B},  \dots, X_{K-1,B})' \in \mathbb{R}^{K-1}$.  Expert $j$ observes a fixed share $\delta_j$ of the process. If the information sets of two experts $i$ and $j$ overlap, i.e. $| I_i \cap I_j| = \rho_{ij} > 0$, then the dependency between $\boldsymbol{X}_{I_i}$ and $\boldsymbol{X}_{I_j}$ is described by the cross-covariance $\text{cov}(\boldsymbol{X}_{I_i}, \boldsymbol{X}_{I_j}) = \rho_{ij} I_{K-1}$. Collect the coordinate-specific information sources into vectors $\boldsymbol{X}^{(k)} = \left(X_{k,I_1}, X_{k,I_2}, \dots, X_{k,I_N} \right)'$  for $k = 1, \dots, K-1$. This specifies the following multivariate normal distribution. 
+
+\begin{align*}
+\left(\begin{matrix} \boldsymbol{X}_S \\ \boldsymbol{X}^{(1)}\\ \vdots \\ \boldsymbol{X}^{(N)} \end{matrix}\right) &\sim \mathcal{N}\left( 
+ \boldsymbol{0}, \left(\begin{matrix} 
+\Lambda_{11} & \Lambda_{12}\\
+\Lambda_{21} & \Lambda_{22}\\
+ \end{matrix}\right) 
+ =
+ \left(\begin{array}{c c c | c c c c c}
+  \multicolumn{3}{c|}{\multirow{3}{*}{$I_{K-1}$}} & \Sigma_{12}  & \boldsymbol{0} & & \multirow{2}{*}{$\boldsymbol{0}$}  \\ 
+ &  & & \multirow{2}{*}{$\boldsymbol{0}$}&  \Sigma_{12} & \dots & \\ 
+  &  &  &  & \boldsymbol{0}  &&\Sigma_{12}  \\ \hline
+\Sigma_{21} & \multicolumn{2}{c|}{\boldsymbol{0}} & \Sigma_{22} & & \multicolumn{2}{c}{\multirow{2}{*}{$\boldsymbol{0}$}}   \\ 
+\boldsymbol{0}_{} & \Sigma_{21} & \boldsymbol{0} &  & \Sigma_{22} &&  \\ 
+\multicolumn{3}{c|}{\vdots} &\multicolumn{2}{c}{\multirow{2}{*}{$\boldsymbol{0}$}}  & \ddots &  \\ 
+\multicolumn{2}{c}{\boldsymbol{0}}  & \Sigma_{21} &  &  &&\Sigma_{22} \\ 
+ \end{array}\right)\right),
+\end{align*}
+where notation is borrowed from (\ref{NExperts}). Let $\boldsymbol{X} = ((\boldsymbol{X}^{(2)})', \dots, (\boldsymbol{X}^{(K-1)})')'$.  If $\Lambda_{22}$ is a coherent overlap structure and $\Lambda_{22}^{-1}$ exists, then all $\boldsymbol{X}_{S} | \boldsymbol{X} \sim \mathcal{N}\left(\boldsymbol{\bar{\mu}}, \bar{\Lambda}\right)$, where
+\begin{align*}
+\boldsymbol{\bar{\mu}} &=  \Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X} &&  \bar{\Lambda}= (1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}) I_{K-1}
+\end{align*}
+
+\begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.4\textwidth}
+                \includegraphics[width=\textwidth]{conesA.png}
+\caption{N = 2}	
+\label{coneA}
+        \end{subfigure}%
+        ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+          %(or a blank line to force the subfigure onto a new line)
+        \begin{subfigure}[b]{0.4\textwidth}
+                \includegraphics[width=\textwidth]{conesA.png}
+\caption{N = 5}
+\label{coneB}
+        \end{subfigure}
+        \caption{ }
+\end{figure}
+
+
+
+The $(K-1)$-dimensional space is partitioned into $K$ cones with apexes at the origin. The target event results in the outcome $k$ if $\boldsymbol{X}_S$ is in the $k$th cone. As the different outcomes do not have a particular ordering to them, each cone must have the same shape and neighbor every other cone. This can be achieved with a regular $K$-simplex that has been centered at the origin. Let $A = \frac{1- \sqrt{K}}{K-1}$ and $B = \frac{1+A}{K}$. Then the $K$ vertices of the simplex are given by 
+\begin{align*}
+\boldsymbol{b}_1 &= (1-B, -B, -B, \dots, -B)\\
+\boldsymbol{b}_2 &= (-B, 1-B, -B, \dots, -B)\\
+& \phantom{=}\vdots\\
+\boldsymbol{b}_{K-1} &= (-B, -B, -B, \dots, 1-B)\\
+\boldsymbol{b}_{K} &= \left(A-B, A-B, \dots, A-B \right)
+\end{align*}
+%http://mathoverflow.net/questions/38724/coordinates-of-vertices-of-regular-simplex
+
+
+The $k$th cone is then the convex cone defined by all vertex points except the $k$th point. More specifically, the $k$th cone is given by
+\begin{align*}
+C_k &= \{\boldsymbol{b}_1\theta_1 + \dots + \boldsymbol{b}_{k-1}\theta_{k-1} + \boldsymbol{b}_{k+1}\theta_{k+1} + \boldsymbol{b}_{K}\theta_{K} | \theta_1, \theta_2, \dots, \theta_K \geq 0\} 
+\end{align*}
+The aggregate probability for the $k$th outcome is computed by integrating over the $k$th cone with respect to the conditional distribution of $\boldsymbol{X}_S$. This integration is much easier after transforming the cone is into the convex cone defined by the first $K-1$ standard basis functions. Denote this standard cone with $C_e$ and let 
+\begin{align*}
+R &= \left(\begin{matrix} 
+\boldsymbol{b}_1\\
+\vdots\\
+\boldsymbol{b}_{k-1}\\
+ \boldsymbol{b}_{k+1}\\
+  \dots\\
+   \boldsymbol{b}_K
+ \end{matrix}\right) ^{-1},
+\end{align*}
+If $\boldsymbol{\tilde{X}} = R\boldsymbol{X}_S$, then $R\boldsymbol{X}_S | \boldsymbol{X}  \sim \mathcal{N}(R\boldsymbol{\bar{\mu}}, R' \bar{\Lambda}R)$
+
+\begin{align*}
+\P(\boldsymbol{X}_S \in C_k | \boldsymbol{X}) &= \P(R \boldsymbol{X}_S \in C_e | \boldsymbol{X})\\
+&= \Phi_{K-1} \left(\left(1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}) I_{K-1}\right)^{-1/2}R\Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X} \right)
+\end{align*}
 
 \section{Conclusion}
 This paper introduced a novel framework for analyzing subjective response data. Under this framework any response heterogeneity is assumed to arise from cognitive diversity. The mathematical tractability and real-world applicability of this model were illustrated by deriving an information theoretic aggregation rule for multiple probability forecasts. The aggregator resulted in closed-form expression for the amount of extremization that should be performed for the average probit forecast. By assuming a simplified information structure, the amount of extremization was studied graphically. This led to many insights on extremization. Given that these insights tend to align with common sense, the framework appears to be appropriate for probability aggregation.
