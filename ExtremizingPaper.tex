@@ -831,7 +831,7 @@ If the target event can take upon $K > 2$ outcomes, the white noise process must
 &&  & \Sigma_{21} &  &  &&\Sigma_{22} \\ 
  \end{array}\right)\right),
 \end{align*}
-where notation is borrowed from (\ref{NExperts}). Let $\boldsymbol{X} = ((\boldsymbol{X}^{(2)})', \dots, (\boldsymbol{X}^{(K-1)})')'$.  If $\Lambda_{22}$ is a coherent overlap structure and $\Lambda_{22}^{-1}$ exists, then all $\boldsymbol{X}_{S} | \boldsymbol{X} \sim \mathcal{N}\left(\boldsymbol{\bar{\mu}}, \bar{\Lambda}\right)$, where
+where notation is borrowed from (\ref{NExperts}). Concatenate all $\boldsymbol{X}^{(k)}$ for $k = 1, \dots, K$ into a single vector  $\boldsymbol{X}$.  If $\Lambda_{22}$ is a coherent overlap structure and $\Lambda_{22}^{-1}$ exists, then $\boldsymbol{X}_{S} | \boldsymbol{X} \sim \mathcal{N}\left(\boldsymbol{\bar{\mu}}, \bar{\Lambda}\right)$, where
 \begin{align*}
 \boldsymbol{\bar{\mu}} &=  \Lambda_{12} \Lambda_{22}^{-1} \boldsymbol{X} &&  \bar{\Lambda}= (1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}) I_{K-1}
 \end{align*}
@@ -855,7 +855,7 @@ where notation is borrowed from (\ref{NExperts}). Let $\boldsymbol{X} = ((\bolds
 
 
 
-The $(K-1)$-dimensional space is partitioned into $K$ cones with apexes at the origin. The target event results in the outcome $k$ if $\boldsymbol{X}_S$ is in the $k$th cone. As the different outcomes do not have a particular ordering to them, each cone must have the same shape and neighbor every other cone. This can be achieved with a regular $K$-simplex that has been centered at the origin. More specifically, if $A = \frac{1- \sqrt{K}}{K-1}$ and $B = \frac{1+A}{K}$, then the $K$ vertices of the simplex are given by 
+The $(K-1)$-dimensional space is partitioned into $K$ cones with apexes at the origin. Denote these cones with $C_k$ for $k = 1, \dots, K$. The target event results in the $k$th outcome if $\boldsymbol{X}_S \in C_k$. As the outcomes do not have a particular ordering to them, each cone must have the same shape and neighbor every other cone. This can be achieved with a regular $K$-simplex that has been centered at the origin. More specifically, if $A = \frac{1- \sqrt{K}}{K-1}$ and $B = \frac{1+A}{K}$, then the $K$ vertices of the simplex are given by 
 \begin{align*}
 \boldsymbol{b}_1 &= (1-B, -B, -B, \dots, -B)'\\
 \boldsymbol{b}_2 &= (-B, 1-B, -B, \dots, -B)'\\
@@ -864,11 +864,11 @@ The $(K-1)$-dimensional space is partitioned into $K$ cones with apexes at the o
 \boldsymbol{b}_{K} &= \left(A-B, A-B, \dots, A-B \right)'
 \end{align*}
 %http://mathoverflow.net/questions/38724/coordinates-of-vertices-of-regular-simplex
-The $k$th cone $C_k$ is the convex cone defined by all vertices except the $k$th one. That is, 
+Then $C_k$ is the convex cone defined by all vertices except the $k$th one. That is, 
 \begin{align*}
 C_k &= \{\boldsymbol{b}_1\theta_1 + \dots + \boldsymbol{b}_{k-1}\theta_{k-1} + \boldsymbol{b}_{k+1}\theta_{k+1} + \boldsymbol{b}_{K}\theta_{K} | \theta_1, \theta_2, \dots, \theta_K \geq 0\} 
 \end{align*}
-Figure \ref{coneA} illustrates the construction of cones under $K = 3$ different outcomes. The cones $C_1$, $C_2$, and $C_3$ are denoted with colors red, blue, and green, respectively. The aggregate probability for the $k$th outcome is computed by integrating over $C_k$ with respect to the conditional distribution of $\boldsymbol{X}_S$. This integration is much easier if $C_k$ is first transformed into the convex cone defined by the first $K-1$ standard basis functions. Figure \ref{coneB} illustrates the transformation for $C_1$.  Denote the standard cone with $C_e$ and let 
+Figure \ref{coneA} illustrates the construction of the cones under $K = 3$ different outcomes. The cones $C_1$, $C_2$, and $C_3$ are denoted with colors red, blue, and green, respectively. The aggregate probability for the $k$th outcome is computed by integrating over $C_k$ with respect to the conditional distribution of $\boldsymbol{X}_S$. This integration is much easier if $C_k$ is first transformed into the convex cone defined by the first $K-1$ standard basis functions. Figure \ref{coneB} illustrates the transformation for $C_1$.  Denote the standard cone with $C_e$ and let 
 \begin{align*}
 T_k &= \left(\begin{matrix} 
 \boldsymbol{b}_1& \dots & \boldsymbol{b}_{k-1} & \boldsymbol{b}_{k+1} & \dots & \boldsymbol{b}_K
