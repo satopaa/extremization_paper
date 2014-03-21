@@ -48,7 +48,7 @@
 
 
 
-\allowdisplaybreaks
+%\allowdisplaybreaks
 
 % Math Macros.  It would be better to use the AMS LaTeX package,
 % including the Bbb fonts, but I'm showing how to get by with the most
@@ -119,16 +119,14 @@ average forecasts.
 
 \section{Introduction}
 
-Consulting experts are often asked to report their beliefs on various estimation problems. If the experts form their estimates independently of each
+Consulting experts are often asked to report their beliefs on various estimation problems. If the experts form their beliefs independently of each
 other, their estimates are likely to be different. To analyze these
 estimates with statistical methodology, it is mathematically
 convenient to assume that any estimate heterogeneity arises
-from a probability distribution. Under the most widely-used model, known as the \textit{classical measurement error model}, each estimate is assumed to be equal to the true value (a.k.a. signal) plus some random error (a.k.a. noise). As the distribution of the error term is typically assumed to have mean zero, averaging the experts' estimates is expected to cancel out a part of the noise and hence lead to an accurate estimate of the true value. To illustrate this framework, consider a group of park rangers whose task is to measure the length of a mountain trail. Each of the rangers walks through the trail, assesses the length, and reports a personal estimate of the total length. Some of their estimates will be higher while some will be lower than the true length of the trail. Under the classical measurement error model these discrepancies follow a common distribution with mean zero and the average estimate gives an unbiased estimate of the trail length. It is important to notice that the classical measurement error model considers each estimate to have the same amount of signal. Therefore each expert is assumed to have the same information about the target estimation problem. Even though this seems appropriate for passive recording of measurements made by imprecise instruments, assuming constant signal and information among consulting experts is hardly reasonable. 
+from a probability distribution. Under the most widely-used model, known as the \textit{classical measurement error model}, each estimate is assumed to be equal to the true value, i.e. signal plus some random error, i.e. noise. As the distribution of the error term is typically assumed to have mean zero, averaging the experts' estimates is expected to cancel out a part of the noise and hence lead to an accurate estimate of the true value. To illustrate this framework, consider a group of park rangers whose task is to measure the length of a mountain trail. Each of the rangers walks through the trail, assesses the length, and reports a personal estimate of the total length. Some of their estimates will be higher while some will be lower than the true length of the trail. Under the classical measurement error model these discrepancies follow a common distribution with mean zero and the average estimate gives an unbiased estimate of the trail length. It is important to notice that the classical measurement error model considers each estimate to have the same amount of signal. Therefore each expert is assumed to have the same information about the target estimation problem. Even though this seems appropriate for passive recording of measurements made by imprecise instruments, assuming constant signal and information among consulting experts is hardly reasonable. 
 
 
-In many real-world problems and particularly in the social sciences the target quantity is not directly observable. Therefore data collection typically relies on polling of people. As each person has a different set of knowledge, the polled estimates cannot be assumed to have been generated under the same amount of information. If the signal varies among the estimates, any procedure that is used to aggregate them must take this heterogeneity into account. For instance, assume that each park ranger observes a different segment of the trail. Their information sets are therefore completely disjoint. Suppose that each ranger reports the length of the observed segment as the estimated length of the full trail. Modeling the estimates with the classical measurement error and hence averaging their estimates would dramatically underestimate the length of the full trail. Summing the estimates (a.k.a. \textit{voting}), on other hand, gives an unbiased estimator of the trail length. If, however, some of the segments are not completely disjoint but overlap partially, the aggregation procedure must down-weight the overlapping segments to avoid potential double counting. As this procedure falls somewhere between averaging and voting, varying the distribution of information establishes a spectrum of aggregators. Only the extremes, namely averaging and voting, have been examined closely in previous literature. Most problems in the real world, however, involve partially overlapping information sets. Therefore studying the entire spectrum is of outmost importance. 
-
-
+In many real-world problems and particularly in the social sciences the target quantity is not directly observable. Therefore data collection typically relies on polling of people. As each person has a different set of knowledge, the polled estimates cannot be assumed to have been generated under the same amount of information. If the signal varies among the estimates, any procedure that is used to aggregate them must take this heterogeneity into account. For instance, assume that each park ranger observes a different segment of the trail. Their information sets are therefore completely disjoint. Suppose that each ranger reports the length of the observed segment as the estimated length of the full trail. Modeling the estimates with the classical measurement error and hence averaging their estimates would dramatically underestimate the length of the trail. Summing the estimates, on other hand, gives an unbiased estimator of the trail length. If, however, some of the segments are not completely disjoint but overlap partially, the aggregation procedure must down-weight the overlapping segments to avoid potential double counting.  In this case the aggregator is a compromise between averaging and voting. Even though this example is clearly very simplistic, it illustrates that different information structures require different aggregators.  Only the extremes, namely averaging and summing (a.k.a. \textit{voting}), have been examined closely in previous literature. Most problems in the real world, however, involve partially overlapping information sets. Therefore studying the entire spectrum of aggregators is of outmost importance. 
 
 The first contribution of this paper is to introduce a \textit{partial information model} that serves as an alternative to the classical measurement error model. The partial information model is particularly appropriate for analyzing the aforementioned spectrum of aggregators because it is based on the distribution of information among the experts. This distribution is characterized by the amount of information known by each expert and the amount information shared among the experts. For instance, consider two experts $A$ and $B$ who observe 10\% and 5\%  of the full information, respectively. If their information sets overlap by 2.5\% of the full information, their estimates are assumed to be positively correlated. Under the partial information model experts are assumed to give optimal estimates conditional on their private information sets. Therefore estimate heterogeneity does not stem from a probability distribution but  from differences in the experts' information sets. 
 
@@ -270,19 +268,20 @@ The first section of this paper introduces our partial information model and ill
 
 \section{Partial Information Framework}
 
-Let  $(\Omega, \mathcal{F}, \P)$ be a probability space where the set $\Omega$ contains all possible states of the world, the $\sigma$-field $\mathcal{F}$ consists of all subsets of $\Omega$, and $\P$ is a probability measure. Denote the event of interest with $A \in \mathcal{F}$. 
+The main component of the partial information model is a process that determines the final outcome. This process must be defined such that the experts can observe only a part of the process without knowing the final outcome. The experts then make conditional predictions given their observations of the process. To make this more specific, let  $(\Omega, \mathcal{F}, \P)$ be a probability space where the set $\Omega$ contains all possible states of the world, the $\sigma$-field $\mathcal{F}$ consists of all subsets of $\Omega$, and $\P$ is a probability measure. Denote the event of interest with $A \in \mathcal{F}$. 
 %The set of possible outcomes is denoted with $S$. For the sake of illustration, assume that  $S = \{G, B\}$, where $G$ and $B$ denote good and bad outcomes, respectively. The outcome function $F: \Omega \to S$ is a random variable that maps the state of the world to the true outcome. 
 %Therefore the experts aim to forecast the probability $p = \P(A)$. 
 %The partial information framework removes these intractable components and provides a model that can be applied in practice. It does not assume detailed knowledge of the expert interpretations nor pose any structure or cardinality restrictions on $\Omega$. 
- Each expert forecasts $p_i = \P\left(A | \mathcal{F}_i\right)$ based on a private information set $\mathcal{F}_i \subseteq \mathcal{F}$. 
+ Each expert forecasts $p_j = \P\left(A | \mathcal{F}_j\right)$ based on a private information set $\mathcal{F}_j \subseteq \mathcal{F}$. 
 %If the set $\Omega$ is finite, the information set $\mathcal{F}_i$ can be considered equivalent to the $\sigma$-field generated by the interpretation $\Pi^i$. 
-If two experts $i$ and $j$ share information such that $\mathcal{F}_i \cap \mathcal{F}_j \neq \emptyset$, then the correlation of their forecasts $p_i$ and $p_j$ is positive and proportional to the overlap in their information sets. Therefore any heterogeneity in the estimates stems from information diversity. As the details of the information set $\mathcal{F}_i$ cannot be known in practice, the information known by the $i$th expert is quantified as a fraction of the full information. It is important to note that even though this paper focuses on probability estimates, the general framework of the partial information model can be  generalized to different types of estimates. 
+%If two experts $i$ and $j$ share information such that $\mathcal{F}_i \cap \mathcal{F}_j \neq \emptyset$, then the correlation of their forecasts $p_i$ and $p_j$ is positive and proportional to the overlap in their information sets. 
+Therefore any heterogeneity in the estimates stems from information diversity. As the details of the information set $\mathcal{F}_i$ cannot be known in practice, the information known by the $i$th expert is quantified as a fraction of the full information. It is important to note that even though this paper focuses on probability estimation, the general framework of the partial information model can be  generalized to different types of estimates. 
 
-\subsection{Model for Probability Forecasts}
+\subsection{Probability Forecasts}
 \label{Model}
 
 
-Consider two experts 1 and 2 who forecast the probability of the event $A$ happening. Assume that the event $A$ is determined by a pool of white noise, and that the experts 1 and 2 see respective $\delta_1$ and $\delta_2$ portions of this noise. These portions form their information sets. The overlap in these information sets is a fixed share $\rho$ of what is seen by either expert. To make this more precise, let $(\Omega, \mathcal{F}, \P)$ be a probability space. On this space, define a white noise process that is indexed by the unit interval $S = [0,1]$. A white noise process is a Gaussian process $\{ X_B \}$ indexed by Borel measurable subsets $B$. The unit interval is endowed with the uniform measure $\mu$. This gives the white noise process a covariance structure $\text{cov}(X_B, X_{B'}) = \mu(B \cap B') = |B \cap B'|$, i.e. the length of the intersection. The target event is defined as $A = \{ X_{S} > 0\}$. Let $I_1, I_2 \subseteq S$ be the information sets observed by experts 1 and 2, respectively. Then,
+Consider two experts 1 and 2 who forecast the probability of the event $A$ happening. Assume that the event $A$ is determined by a pool of white noise, and that the experts 1 and 2 see respective $\delta_1$ and $\delta_2$ portions of this noise. These portions form their information sets. The overlap in these information sets is a fixed share $\rho$ of what is seen by either expert. To make this more precise, consider the aforementioned probability space $(\Omega, \mathcal{F}, \P)$. On this space, define a white noise process that is indexed by the unit interval $S = [0,1]$. A white noise process is a Gaussian process $\{ X_B \}$ indexed by Borel measurable subsets $B$. The unit interval is endowed with the uniform measure $\mu$. This gives the white noise process a covariance structure $\text{cov}(X_B, X_{B'}) = \mu(B \cap B') = |B \cap B'|$, i.e. the length of the intersection. The target event is defined as $A = \{ X_{S} > 0\}$. Let $I_1, I_2 \subseteq S$ be the information sets observed by experts 1 and 2, respectively. Then,
 \begin{align*}
 \mu(I_1) = |I_1| &= \delta_1\\
 \mu(I_2) = |I_2| &= \delta_2\\
@@ -292,19 +291,18 @@ Consider two experts 1 and 2 who forecast the probability of the event $A$ happe
 
 \begin{figure}[t]
 \centering
-\begin{minipage}[t]{.5\textwidth}
-	\hspace{0em}\includegraphics{LegendMarginal} % requires the graphicx package
- \includegraphics[width= 0.85\textwidth]{Marginals}
-   \caption{The marginal distribution of $p_j$ under different levels of $\delta_j$.}
+	\hspace{0em}\includegraphics{LegendMarginal}
+
+ \includegraphics[width= 0.55\textwidth]{Marginals}
+   \caption{The marginal distribution of $p_j$ under different levels of $\delta_j$. The more the expert knows, i.e. the higher $\delta_j$ is, the more the probability forecasts are concentrated around the extreme points 0 and 1.}
 \label{marginals}
-\end{minipage}
 \end{figure}
 
-Call $P_{I_j} = X_{I_j}/\sqrt{1-\delta_j}$ the probit forecast of the $j$th expert.  If $\Phi$ denotes the standard normal CDF, then the calibrated forecast given by the $j$th expert is
+The part of the process $X_{I_j}$ can be interpreted as the synthesis of the information known by expert $j$. Call $P_{I_j} = X_{I_j}/\sqrt{1-\delta_j}$ the probit forecast of the $j$th expert.  If $\Phi$ denotes the standard normal CDF, then the calibrated forecast given by the $j$th expert is
 \begin{align*}
 p_j &= \P\left(A | \mathcal{F}_{I_j}\right) = \Phi\left( P_{I_j}\right)
 \end{align*}
-Recall that if $Z$ is standard normal random variable, then $\Phi(Z)$ is uniform on $[0,1]$. Therefore the marginal distribution of $p_j$ is uniform on $[0,1]$ when $\delta_j = 0.5$, i.e. when the expert knows half of the information. If the expert knows less than half of the information, i.e. $\delta_j < 0.5$, then the marginal distribution of $p_j$ is unimodal at $0.5$ with the variance decreasing to 0 as $\delta_j \to 0$. On other hand, if the expert knows more than half of the information, i.e. $\delta_j > 0.5$, then the marginal  distribution of $p_j$ is more heavily concentrated around extreme probabilities. In fact, when $\delta_j = 1$, the marginal distribution of $p_j$ is uniform over the set $\{0,1\}$. Figure \ref{marginals} illustrates these marginal distributions for $\delta_j$ equal to $0.3$, $0.5$, and $0.7$. 
+Recall that if $Z$ is a standard normal random variable, then $\Phi(Z)$ is uniform on $[0,1]$. Therefore the marginal distribution of $p_j$ is uniform on $[0,1]$ when $\delta_j = 0.5$, i.e. when the expert knows half of the information. If the expert knows less than half of the information, i.e. $\delta_j < 0.5$, the marginal distribution of $p_j$ is unimodal at $0.5$ with the variance decreasing to 0 as $\delta_j \to 0$. On other hand, if the expert knows more than half of the information, i.e. $\delta_j > 0.5$, the marginal  distribution of $p_j$ is more heavily concentrated around extreme probabilities. In fact, when $\delta_j = 1$, the marginal distribution of $p_j$ is uniform over the set $\{0,1\}$. Figure \ref{marginals} illustrates these marginal distributions for $\delta_j$ equal to $0.3$, $0.5$, and $0.7$. 
 
 \begin{figure}[htbp]
 %   \hspace{-2em}
@@ -313,7 +311,7 @@ Recall that if $Z$ is standard normal random variable, then $\Phi(Z)$ is uniform
    \label{diagram2}
 \end{figure}
 
-Figure \ref{diagram2} illustrates the model with $N=2$. The Gaussian process has been partitioned into four parts based on the information sets $I_1$ and $I_2$:
+It is helpful to begin the introduction of the model by first considering only two experts. Figure \ref{diagram2} illustrates this setup. The Gaussian process has been partitioned into four parts based on the experts' information sets $I_1$ and $I_2$:
 \begin{align*}
  U &= X_{I_1 / I_2}
 & M &= X_{I_1 \cap I_2}\\
@@ -336,6 +334,9 @@ where $U, V, M, W$ are independent Gaussians with respective variances $\delta_1
  \end{matrix}\right)\right) \label{twoExperts}
 \end{align}
 
+
+
+
 \begin{figure}[htbp]
    \includegraphics[width = \textwidth]{N=N} % requires the graphicx package
    \caption{Illustration of the information theoretic  model with $N$ experts.}
@@ -344,7 +345,7 @@ where $U, V, M, W$ are independent Gaussians with respective variances $\delta_1
 
 
 
-Consider now $N$ experts. Let $|I_j| = \delta_j$ be the amount of information known by the $j$th expert, and $|I_i \cap I_j| = \rho_{ij}$ be the information overlap between the $i$th and $j$th experts. Expression (\ref{twoExperts}) generalizes to the vector $(X_{S}, X_{I_1}, X_{I_2}, \dots, X_{I_N})$ as follows.
+Consider now $N$ experts. Let $|I_j| = \delta_j$ be the amount of information known by the $j$th expert, and $|I_i \cap I_j| = \rho_{ij}$ be the information overlap between experts $i$ and $j$. Expression (\ref{twoExperts}) generalizes to the vector $(X_{S}, X_{I_1}, X_{I_2}, \dots, X_{I_N})$ as follows.
 \begin{align}
 \left(\begin{matrix} X_S \\ X_{I_1}\\ \vdots \\ X_{I_N} \end{matrix}\right) &\sim \mathcal{N}\left( \left(\begin{matrix} 
 \mu_1 \\ \boldsymbol{\mu}_2
@@ -362,7 +363,7 @@ Consider now $N$ experts. Let $|I_j| = \delta_j$ be the amount of information kn
 \delta_N & \rho_{N,1} & \rho_{N,2} & \dots & \delta_N\\ 
  \end{array}\right)\right)  \label{NExperts}
 \end{align}
-This extension is illustrated in Figure \ref{diagramN}. It is important to notice that the $I_j$ does not have to be a contiguous segment of the unit interval. The sub-matrix $\Sigma_{22}$ fully describes the information structure among the experts.  This matrix has some technical conditions such as symmetry and non-singularity. In addition, $\Sigma_{22}$ must describe a coherent information structure. The matrix $\Sigma_{22}$ is coherent if and only if its information can be transformed into a diagram such as the one depicted by Figure \ref{diagramN}. 
+This case is illustrated in Figure \ref{diagramN}. It is important to notice that $I_j$ does not have to be a contiguous segment of the unit interval. Instead, each expert can know any Borel measurable subset of the full information. The amount of information known by each expert and any potential overlap in these information sets is described in the sub-matrix $\Sigma_{22}$. Therefore each element in $\Sigma_{22}$ must be in the unit interval, and no off-diagonal element can be larger than the corresponding diagonal element in the same row. This matrix also has some technical conditions such as symmetry, non-singularity, and coherence. The matrix $\Sigma_{22}$ is coherent if and only if its information can be transformed into a diagram such as the one depicted by Figure \ref{diagramN}. 
 
 %It is easy to show that all covariance matrices of size $N \times N$ are not coherent information structures. For instance, the off-diagonals of a covariance matrix  do not need to be upper bounded by its diagonal elements.  
 
