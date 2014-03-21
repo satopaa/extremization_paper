@@ -64,9 +64,12 @@
 \newtheorem{defi}{Definition}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Observation}
-\newtheorem{example}[theorem]{Example}
 \newtheorem{observation}[theorem]{Observation}
 \DeclareMathOperator*{\argmax}{arg\,max}
+
+\theoremstyle{definition}
+\newtheorem{example}[theorem]{Example}
+
 
 \newcommand{\myfunction}[3]
 {${#1} : {#2} \rightarrow {#3}$ }
@@ -339,7 +342,7 @@ where $U, V, M, W$ are independent Gaussians with respective variances $\delta_1
 
 \begin{figure}[htbp]
    \includegraphics[width = \textwidth]{N=N} % requires the graphicx package
-   \caption{Illustration of the information theoretic  model with $N$ experts.}
+   \caption{Illustration of the partial information model with $N$ experts.}
    \label{diagramN}
 \end{figure}
 
@@ -409,12 +412,13 @@ See Result 5.2.10 on p. 156 in \cite{ravishanker2001first} for the formulas of t
 \P\left(A  | \boldsymbol{X}\right)  = \P\left(X_{S} > 0 | \boldsymbol{X}\right) &= \Phi\left( \frac{\Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}}\right) \label{GeneralAggregator}
 %&= \Phi\left( \frac{\boldsymbol{1}_{N}'  \Sigma_{22}^{-1} \Phi^{-1}(\boldsymbol{p})}{\sqrt{1 - \boldsymbol{1}_{N}' \Sigma_{22}^{-1} \boldsymbol{1}_{N}}}\right)
 \end{align}
-Let $\alpha$ represent the amount of extremization that is performed for the average probit forecast. If $\bar{P} = \left( \sum_{j=1}^N P_{I_j} \right)/N$, then
+Denote the average probit forecast with $\bar{P} = \left( \sum_{j=1}^N P_{I_j} \right)/N$. Let $\alpha$ represent the amount of extremization that the partial information aggregator (\ref{GeneralAggregator}) performs for the average probit forecast. Then,
 \begin{align}
 \alpha \bar{P}&=  \frac{\Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}}  &\Leftrightarrow&& \alpha  = \frac{N \Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\left(\boldsymbol{1}_N' \boldsymbol{P} \right) \sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}} \label{alpha}
 \end{align}
+The extremizing constant $\alpha$ is not necessarily greater or equal to 1. Therefore the partial information aggregator (\ref{GeneralAggregator}) does not always yield an extremized probability. 
+The following examples illustrate typical scenarios when the aggregator shifts the average probability closer to the furthest extreme instead. For the sake of illustration, the examples involve only two experts. 
 
-This extremizing constant $\alpha$ is not necessarily greater or equal to 1. Therefore the information theoretic aggregator (\ref{GeneralAggregator}) does not always give an extremized probability. This offers a great opportunity to understand when extremization should not be performed. The following examples illustrate a typical scenario when the aggregator shifts the average probability closer to the furthest extreme instead. For the sake of illustration, the examples involve only two experts. 
 
 \begin{example}
 \textbf{Dominating Expert.} Consider the following setup.
@@ -432,19 +436,16 @@ X_{I_2} =& 0.30
 The probability forecasts in this example are $p_1 = 0.19$ and $p_2 = 0.65$. Therefore the average probability is $\bar{p} = 0.42$. The average probit forecast (transformed to probability space) is $\Phi(\bar{P}) = 0.40$. 
 The partial information aggregate is $0.65$.  Given that this is more than 0.5 while $\bar{p}$ and $\Phi(\bar{P})$ are less than 0.5, the extremizing constant is negative in both cases. To understand this result, notice that expert 2 knows everything that expert 1 knows. Therefore expert 1 does not provide any new information and can be ignored. The partial information aggregate is completely determined by the probability forecast made by expert 2. Given that only the partial information aggregator is able to take into account overlap information, its aggregate can differ radically from the average probability and probit forecasts. 
 \end{example}
-
-It is possible to find similar examples where the information theoretic aggregate is on the same side but closer to 0.5 than the average probability and probit forecast. In most cases, however, the aggregator extremizes. Before discussing the second example, it is necessary to analyze a particular subclass of information structures. 
+It is possible to find similar examples where the partial information aggregate is on the same side but closer to 0.5 than the average probability and probit forecast. Before discussing the second example, it is helpful to introduce the class of diagonal information structures. 
 
 \subsection{Voting Experts}
 This section assumes that the experts' information sets do not overlap, i.e.   $|I_{i} \cap I_{j}| = \emptyset$ for all $i \neq j$. The resulting information structure is diagonal.  That is,
 % $\rho \in [\max \{(N-T)/(T(N-1)), 0\},1] = A_\rho$. 
 \begin{align*}
-\left(\begin{matrix} X_{S} \\ X_{I_1}\\ \vdots \\ X_{I_N} \end{matrix}\right) &\sim \mathcal{N}\left( \left(\begin{matrix} 
-\mu_1 \\ \boldsymbol{\mu}_2
- \end{matrix}\right) =
+\left(\begin{matrix} X_{S} \\ X_{I_1}\\ \vdots \\ X_{I_N} \end{matrix}\right) &\sim \mathcal{N}\left( 
  \boldsymbol{0}, \left(\begin{matrix} 
-\Sigma_{11} & \Sigma_{12}\\
-\Sigma_{21} & \Sigma_{22}\\
+\Sigma_{11}^{(d)} & \Sigma_{12}^{(d)}\\
+\Sigma_{21}^{(d)} & \Sigma_{22}^{(d)}\\
  \end{matrix}\right) 
  =
  \left(\begin{array}{c|cccc}
@@ -453,13 +454,13 @@ This section assumes that the experts' information sets do not overlap, i.e.   $
 \delta_2 & 0 & \delta_2 & \dots & 0  \\ 
 \vdots & \vdots & \vdots & \ddots & \vdots  \\ 
 \delta_N & 0 & 0 & \dots & \delta_N\\ 
- \end{array}\right)\right)
+ \end{array}\right)\right),
 \end{align*}
-The information structure $\Sigma_{22}$ is consistent if and only if $\sum_{j=1}^N \delta_j \leq 1$. The aggregator (\ref{GeneralAggregator}) is given by
+where the super-script $(d)$ emphasizes that this information structure is disjoint and hence different from the fully general structure described in (\ref{NExperts}). The information structure $\Sigma_{22}^{(d)}$ is coherent if and only if $\sum_{j=1}^N \delta_j \leq 1$. The aggregator is given by
 \begin{align}
 \P\left(X_{S} > 0 | \boldsymbol{X}\right) &= \Phi\left( \frac{\sum_{j=1}^N X_{I_j}}{\sqrt{1 - \sum_{j=1}^N \delta_j}}\right), \label{VotingAggre}
 \end{align}
-which is equivalent to voting in the probit-space. The denominator on the right hand side takes into account  the amount of information within the group of experts. If they know all information, i.e. $\sum_{j=1}^N \delta_j = 1$, then their vote deterministically determines whether the event $A$ happens or not. The aggregator (\ref{VotingAggre}) is not guaranteed to always extremize. This leads us to our second example. 
+which is equivalent to voting in the probit-space. The denominator inside the CDF takes into account  the amount of information within the group of experts. If they know all information, i.e. $\sum_{j=1}^N \delta_j = 1$, then their vote deterministically determines whether the event $A$ happens or not. The aggregator (\ref{VotingAggre}) is not guaranteed to always extremize. This is illustrated in the next example.
 
 
 \begin{example}
@@ -476,10 +477,8 @@ X_{I_2} =& -0.25
  \end{array}
 \end{align*}
 The probability forecasts in this example are $p_1 = 0.70$ and $p_2 = 0.21$.  Therefore the average probability is $\bar{p} = 0.46$. The average probit forecast (transformed to probability space) is $\Phi(\bar{P}) = 0.44$.  As the partial information aggregate is $0.87$,  the extremizing constant is negative. To understand this result, notice that the information structure is diagonal. Therefore the partial information aggregate reduces to voting that gives each $X_{I_j}$ equal weight. Even though expert 1 knows much less than expert 2, his information is more extreme and hence more influential in determining the final outcome of the event. In other words, expert 1 holds some key information that expert 2 is lacking. Only the partial information aggregator can take this into account. The other two aggregators $\bar{p}$ and $\Phi(\bar{P})$ weight the second expert's information much more heavily because he knows more than expert 1.
-
 \end{example}
-
- The aggregator (\ref{VotingAggre}) always extremizes the probit forecast when each $X_{I_j}$ falls on the same side of zero. This stated more formally in the following observation.
+The aggregator (\ref{VotingAggre}) always extremizes the probit forecast when each $X_{I_j}$ falls on the same side of zero. This stated more formally in the following observation.
  
 \begin{observation}
 \label{positiveThmVote}
@@ -496,7 +495,7 @@ The next section discusses a different class of information structures. Under th
 
 \subsection{Compound Symmetric Information Structure}
 
-This section assumes that the experts' information sets have the same size and the amount of overlap between any two information sets is constant, i.e.  $|I_{1}| =  \dots = |I_{N}|$ and $|I_{i} \cap I_{j}| = |I_{h} \cap I_{k}|$ for all $i \neq j$ and $h \neq k$. This results in the following compound symmetric overlap structure. 
+This section assumes that the experts' information sets have the same size and the amount of overlap between any two information sets is constant, i.e.  $|I_{1}| =  \dots = |I_{N}|$ and $|I_{i} \cap I_{j}| = |I_{h} \cap I_{k}|$ for all $i \neq j$ and $h \neq k$. The resulting information structure is compound symmetric:
 % $\rho \in [\max \{(N-T)/(T(N-1)), 0\},1] = A_\rho$. 
 \begin{align*}
 \left(\begin{matrix} X_{S} \\ X_{I_1}\\ \vdots \\ X_{I_N} \end{matrix}\right) &\sim \mathcal{N}\left( \left(\begin{matrix} 
@@ -515,7 +514,7 @@ This section assumes that the experts' information sets have the same size and t
 \delta & \rho\delta & \rho\delta & \dots & \delta\\ 
  \end{array}\right)\right),
 \end{align*}
-where $\delta \in [0,1]$ is the fraction known by each expert and $\rho \in \left[  \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right]$ is the shared proportion of the known information. The positive lower bound for $\rho$ becomes active when $\delta > 1/N$ because then overlap in the information sets is unavoidable. This minimum overlap can be computed by assuming $\delta > 1/N$ and letting the shared information be the same for all $N$ experts. That is, $I_{i} \cap I_j = I$ and $|I| =  \rho \delta$ for all $i \neq j$. The minimum sharing occurs when $\rho\delta + N(\delta - \delta\rho) = 1$, which gives us the lower bound. The quantity  $\rho\delta + N(\delta - \delta\rho)$ also describes the maximum coverage of the $N$ experts, i.e. $\max | I_1 \cup I_2 \cup \dots \cup I_N| = \rho\delta + N(\delta - \delta\rho)$. 
+where $\delta \in [0,1]$ is the amount known by each expert and $\rho \in \left[  \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right]$ is the shared proportion of the known information. The positive lower bound for $\rho$ is necessary because overlap in the information sets is unavoidable when $\delta > 1/N$. This minimum overlap can be computed by assuming $\delta > 1/N$ and letting the shared information be the same for all $N$ experts. That is, $I_{i} \cap I_j = I$ and $|I| =  \rho \delta$ for all $i \neq j$. The minimum sharing occurs when $\rho\delta + N(\delta - \delta\rho) = 1$, which gives us the lower bound. The quantity  $\rho\delta + N(\delta - \delta\rho)$ also describes the maximum information coverage of the $N$ experts, i.e. $\max | I_1 \cup I_2 \cup \dots \cup I_N| = \rho\delta + N(\delta - \delta\rho)$. 
 
 Given that $\Sigma_{22}$ can be written in the form  $\Sigma_{22} = I_N (\delta-\rho\delta) + J_{N \times N} \rho\delta$, its inverse is
 \begin{align}
@@ -526,11 +525,11 @@ See the supplementary material of \cite{dobbin2005sample} for the proof of this 
 %| \Sigma_{22}| = (\delta - \rho\delta)^N \left(1+\frac{N \delta \rho}{\delta - \delta\rho} \right),
 | \Sigma_{22}| = (\delta(1- \rho))^N \left(1+\frac{N \rho}{1 - \rho} \right),\label{determinant}
 \end{align}
-which follows from p. 32 in \cite{rao2009linear}. As the compound symmetric information structure depends only on two unknown parameters, the values of $\delta$ and $\rho$ can be estimated in practice via the maximum likelihood method. This requires a closed form expression for the density of $\boldsymbol{p}$. First, note that $\boldsymbol{P} \sim \mathcal{N}_N(\boldsymbol{0}, \Sigma_{22} (1-\delta)^{-1})$ and that the Jacobian for the map $\boldsymbol{P} \to \Phi\left(\boldsymbol{P}\right)$ is
+which follows from p. 32 in \cite{rao2009linear}. As the compound symmetric information structure depends only on two unknown parameters, the values of $\delta$ and $\rho$ can be estimated in practice via the maximum likelihood method. This requires a closed form expression of the density of $\boldsymbol{p} = (p_1, p_2, \dots, p_N)$. Notice that $\boldsymbol{P} \sim \mathcal{N}_N(\boldsymbol{0}, \Sigma_{22} (1-\delta)^{-1})$ and that the Jacobian for the map $\boldsymbol{P} \to \Phi\left(\boldsymbol{P}\right)$ is
 \begin{eqnarray*}
 J(\boldsymbol{X}) &=& (2\pi)^{-N/2} \exp \left( - \frac{\boldsymbol{P}' \boldsymbol{P}}{2}   \right) 
 \end{eqnarray*}
-If $h(\boldsymbol{P})$ denotes the multivariate normal density of $\boldsymbol{P}$, then 
+If $h(\boldsymbol{P})$ denotes the multivariate normal density of $\boldsymbol{P}$,  
 %by the Inverse Function Theorem 
 the density for $\boldsymbol{p}$ is 
 \begin{eqnarray*}
@@ -538,7 +537,7 @@ the density for $\boldsymbol{p}$ is
 %&=& \frac{(1-\delta)^{N/2}}{\sqrt{ |\Sigma_{22}|}} \exp\left( -\frac{1}{2} \boldsymbol{P}' (1-\delta)\Sigma_{22}^{-1} \boldsymbol{P} + \frac{\boldsymbol{P}' \boldsymbol{P}}{2}   \right)\\
 &=& \frac{(1-\delta)^{N/2}}{\sqrt{ |\Sigma_{22}|}} \exp\left( -\frac{1}{2} \Phi^{-1}(\boldsymbol{p})' \left( (1-\delta)\Sigma_{22}^{-1} - I_N \right) \Phi^{-1}(\boldsymbol{p})  \right) 
 \end{eqnarray*}
-where $\Sigma_{22}^{-1}$ and $|\Sigma_{22}|$ are given by (\ref{inverse}) and (\ref{determinant}), respectively. The maximum likelihood estimates of $\delta$ and $\rho$ are then obtained from
+where $\Phi^{-1}(\boldsymbol{p}) =  (\Phi^{-1}(p_1), \Phi^{-1}(p_2), \dots, \Phi^{-1}(p_N))$. The expressions for $\Sigma_{22}^{-1}$ and $|\Sigma_{22}|$ are given by (\ref{inverse}) and (\ref{determinant}), respectively. The maximum likelihood estimates of $\delta$ and $\rho$ are then obtained from
 \begin{align}
 (\hat{\delta}, \hat{\rho}) =& \argmax_{\rho, \delta} \log  f\left(p_1, \dots, p_N | \delta, \rho \right), \label{MLE}\\
 & \text{s.t. } \nonumber \delta \in [0,1] \text{ and } \rho \in \left[  \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right]
@@ -601,7 +600,7 @@ Therefore the  aggregator is
 \P\left(X_S > 0 | \boldsymbol{X}\right) &=\Phi\left(\frac{\frac{1}{(N-1)\rho +1} \sum_{j=1}^N X_{I_j} }{\sqrt{1- \frac{N\delta}{(N-1)\rho +1} }}  \right)
 \end{align*}
 %It is crucial to notice that this aggregator can learn the amount of extremization without a separate training set. Therefore it can be applied to a wide range of applied problems. 
-Equating this with $\bar{P}$ results in the following extremization factor.
+Equating this with $\bar{P}$ results in the following extremizing factor.
 \begin{align}
 %\alpha \bar{X}  &=  \frac{\frac{1}{(N-1)\rho +1} \sum_{j=1}^N X_j }{\sqrt{T- \frac{N}{(N-1)\rho +1} }}\\
 %\alpha &= \frac{\frac{1}{(N-1)\rho +1} \sum_{j=1}^N X_j }{\bar{X} \sqrt{T- \frac{N}{(N-1)\rho +1} }}\\
@@ -622,7 +621,7 @@ Equating this with $\bar{P}$ results in the following extremization factor.
 %% \frac{N \delta}{(N-1)\rho +1}  &\leq& 1\\
 % \frac{N\delta - 1}{N-1}  &\leq \rho,
 %\end{align*}
-Notice that, unlike (\ref{alpha}), the extremizing constant (\ref{CompoundAlpha}) does not depend on the forecasts $\boldsymbol{X}$. As the term inside the square-root must be non-negative, another technical restriction must be placed on $\rho$. That is, in addition to $\rho \in \left[  \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right]$, it is required that
+Notice that, unlike (\ref{alpha}), the extremizing factor (\ref{CompoundAlpha}) does not depend on the forecasts $\boldsymbol{X}$. Therefore $\alpha$ is not influenced by the actual forecasts but is instead determined by the information structure. Given that the square-root is not defined for negative values, another technical restriction must be placed on $\rho$. In addition to $\rho \in \left[  \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right]$, it is required that
 \begin{align*}
 1- \frac{N\delta}{(N-1)\rho +1}  &\geq 0 &\Leftrightarrow&& \rho \geq \frac{N\delta - 1}{N-1}
 \end{align*}
@@ -630,7 +629,7 @@ Notice, however, that $N\delta - 1 > N - \delta^{-1}$ only when $\delta < 1/N$. 
 
 \begin{observation}
 \label{positiveThm}
-Under the compound symmetric information structure, the extremizing factor, $\alpha$, is always greater or equal to 1. This means that the average probit forecast is always extremized. 
+Under the compound symmetric information structure, the extremizing factor $\alpha$ is always greater or equal to 1. This means that the average probit forecast is always extremized. 
 \end{observation}
 \begin{proof} 
 For a given $\delta$, the extremizing constant $\alpha$ is minimized when $(N-1)\rho +1$ is maximized. This happens at $\rho = 1$. Plugging this into (\ref{CompoundAlpha}) gives
@@ -698,8 +697,8 @@ For a given $\delta$, the extremizing constant $\alpha$ is minimized when $(N-1)
 
 
 
-Expression (\ref{CompoundAlpha}) is particularly convenient because it only depends on three intuitive parameters. Therefore it can be analyzed graphically. Figures \ref{ExtremeN5} and \ref{ExtremeN30} describe the amount of log-extremization $\log(\alpha)$ under different values of $\rho, \delta$, and $N$. By Observation \ref{positiveThm} the amount of extremizing is always greater or equal to 1.0. Notice that most extremization occurs when $\delta = 1/N$ and $\rho = 0$. In this case the group's information sets form a partition of the full information. Therefore as a group the experts know all the information. Such a group can re-construct $X_S$ by simply adding up their individual probit forecasts. This means that aggregation becomes voting: if the sum of the probit forecasts is above 0, the event $A$ materializes; else it does not. A similar observation has been made under the interpreted signal framework (see the example on information aggregation in \cite{hong2009interpreted}). Therefore in the real-world voting can be expected to work well when the voters form a very knowledgable and diverse group of people. 
-
+Expression (\ref{CompoundAlpha}) is particularly convenient because it only depends on three intuitive parameters. Therefore it can be analyzed graphically. Figures \ref{ExtremeN5} and \ref{ExtremeN30} describe the amount of log-extremization $\log(\alpha)$ under different values of $\rho, \delta$, and $N$. By Observation \ref{positiveThm} the amount of extremizing is always greater or equal to 1.0. Notice that most extremization occurs when $\delta = 1/N$ and $\rho = 0$. In this case the group's information sets form a partition of the full information. Therefore as a group the experts know all the information. Such a group can re-construct $X_S$ by simply adding up their individual probit forecasts. This means that aggregation becomes voting: if the sum of the probit forecasts is above 0, the event $A$ materializes; else it does not. A similar observation has been made under the interpreted signal framework (see the example on information aggregation in \cite{hong2009interpreted}). Therefore voting can be expected to work well when the voters in the real world form a very knowledgable and diverse group of experts. 
+ 
 
 Moving away from these two extreme points towards the upper left corner, where $\delta = 0.0$ and $\rho = 1.0$, decreases the amount of extremizing monotonically to $1.0$. This decrease is caused by a) reduction in the amount of information that each individual expert holds and b) increase in the amount of shared information. Therefore the more knowledgable and diverse the group of experts is, the more their average probit forecast should be extremized. Contrast this with the classical measurement error model where higher variance is typically considered negative. Under the partial information model and the interpreted signal frameworks, however, higher variance implies broader diversity among the experts and hence is considered helpful. 
 
