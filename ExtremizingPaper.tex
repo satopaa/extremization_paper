@@ -498,12 +498,10 @@ The next section discusses a different class of information structures. Under th
 This section assumes that the experts' information sets have the same size and the amount of overlap between any two information sets is constant, i.e.  $|I_{1}| =  \dots = |I_{N}|$ and $|I_{i} \cap I_{j}| = |I_{h} \cap I_{k}|$ for all $i \neq j$ and $h \neq k$. The resulting information structure is compound symmetric:
 % $\rho \in [\max \{(N-T)/(T(N-1)), 0\},1] = A_\rho$. 
 \begin{align*}
-\left(\begin{matrix} X_{S} \\ X_{I_1}\\ \vdots \\ X_{I_N} \end{matrix}\right) &\sim \mathcal{N}\left( \left(\begin{matrix} 
-\mu_1 \\ \boldsymbol{\mu}_2
- \end{matrix}\right) =
+\left(\begin{matrix} X_{S} \\ X_{I_1}\\ \vdots \\ X_{I_N} \end{matrix}\right) &\sim \mathcal{N}\left( 
  \boldsymbol{0}, \left(\begin{matrix} 
-\Sigma_{11} & \Sigma_{12}\\
-\Sigma_{21} & \Sigma_{22}\\
+\Sigma_{11}^{(c)} & \Sigma_{12}^{(c)}\\
+\Sigma_{21}^{(c)} & \Sigma_{22}^{(c)}\\
  \end{matrix}\right) 
  =
  \left(\begin{array}{c|cccc}
@@ -514,18 +512,18 @@ This section assumes that the experts' information sets have the same size and t
 \delta & \rho\delta & \rho\delta & \dots & \delta\\ 
  \end{array}\right)\right),
 \end{align*}
-where $\delta \in [0,1]$ is the amount known by each expert and $\rho \in \left[  \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right]$ is the shared proportion of the known information. The positive lower bound for $\rho$ is necessary because overlap in the information sets is unavoidable when $\delta > 1/N$. This minimum overlap can be computed by assuming $\delta > 1/N$ and letting the shared information be the same for all $N$ experts. That is, $I_{i} \cap I_j = I$ and $|I| =  \rho \delta$ for all $i \neq j$. The minimum sharing occurs when $\rho\delta + N(\delta - \delta\rho) = 1$, which gives us the lower bound. The quantity  $\rho\delta + N(\delta - \delta\rho)$ also describes the maximum information coverage of the $N$ experts, i.e. $\max | I_1 \cup I_2 \cup \dots \cup I_N| = \rho\delta + N(\delta - \delta\rho)$. 
+where the super-script $(c)$ emphasizes that this information structure is compound symmetric and hence different from the fully general structure described in (\ref{NExperts}). The amount known by each expert is denoted with $\delta \in [0,1]$, and $\rho \in \left[  \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right]$ is the shared proportion of the known information. The positive lower bound for $\rho$ is necessary because overlap in the information sets is unavoidable when $\delta > 1/N$. This minimum overlap can be computed by assuming $\delta > 1/N$ and letting the shared information be the same for all $N$ experts. That is, $I_{i} \cap I_j = I$ and $|I| =  \rho \delta$ for all $i \neq j$. The minimum sharing occurs when $\rho\delta + N(\delta - \delta\rho) = 1$, which gives us the lower bound. The quantity  $\rho\delta + N(\delta - \delta\rho)$ also describes the maximum information coverage of the $N$ experts, i.e. $\max | I_1 \cup I_2 \cup \dots \cup I_N| = \rho\delta + N(\delta - \delta\rho)$. 
 
-Given that $\Sigma_{22}$ can be written in the form  $\Sigma_{22} = I_N (\delta-\rho\delta) + J_{N \times N} \rho\delta$, its inverse is
+Given that $\Sigma_{22}^{(c)}$ can be written in the form  $\Sigma_{22}^{(c)} = I_N (\delta-\rho\delta) + J_{N \times N} \rho\delta$, its inverse is
 \begin{align}
-\Sigma_{22}^{-1} = I_N \left(\frac{1}{\delta-\rho\delta} \right) - J_{N \times N} \frac{\rho}{(1-\rho)\delta(1+(N-1) \rho)} \label{inverse}
+\left(\Sigma_{22}^{(c)}\right)^{-1} = I_N \left(\frac{1}{\delta-\rho\delta} \right) - J_{N \times N} \frac{\rho}{(1-\rho)\delta(1+(N-1) \rho)} \label{inverse}
 \end{align}
-See the supplementary material of \cite{dobbin2005sample} for the proof of this fact.  The determinant of $\Sigma_{22}$ is
+See the supplementary material of \cite{dobbin2005sample} for the proof of this fact.  The determinant of $\Sigma_{22}^{(c)}$ is
 \begin{align}
 %| \Sigma_{22}| = (\delta - \rho\delta)^N \left(1+\frac{N \delta \rho}{\delta - \delta\rho} \right),
-| \Sigma_{22}| = (\delta(1- \rho))^N \left(1+\frac{N \rho}{1 - \rho} \right),\label{determinant}
+| \Sigma_{22}^{(c)}| = (\delta(1- \rho))^N \left(1+\frac{N \rho}{1 - \rho} \right),\label{determinant}
 \end{align}
-which follows from p. 32 in \cite{rao2009linear}. As the compound symmetric information structure depends only on two unknown parameters, the values of $\delta$ and $\rho$ can be estimated in practice via the maximum likelihood method. This requires a closed form expression of the density of $\boldsymbol{p} = (p_1, p_2, \dots, p_N)$. Notice that $\boldsymbol{P} \sim \mathcal{N}_N(\boldsymbol{0}, \Sigma_{22} (1-\delta)^{-1})$ and that the Jacobian for the map $\boldsymbol{P} \to \Phi\left(\boldsymbol{P}\right)$ is
+which follows from p. 32 in \cite{rao2009linear}. As the compound symmetric information structure depends only on two unknown parameters, the values of $\delta$ and $\rho$ can be estimated in practice via the maximum likelihood method. This requires a closed form expression of the density of $\boldsymbol{p} = (p_1, p_2, \dots, p_N)$. Notice that $\boldsymbol{P} \sim \mathcal{N}_N(\boldsymbol{0}, \Sigma_{22}^{(c)} (1-\delta)^{-1})$ and that the Jacobian for the map $\boldsymbol{P} \to \Phi\left(\boldsymbol{P}\right)$ is
 \begin{eqnarray*}
 J(\boldsymbol{X}) &=& (2\pi)^{-N/2} \exp \left( - \frac{\boldsymbol{P}' \boldsymbol{P}}{2}   \right) 
 \end{eqnarray*}
@@ -535,9 +533,9 @@ the density for $\boldsymbol{p}$ is
 \begin{eqnarray*}
  f\left(p_1, \dots, p_N | \delta, \rho \right) &=& h(\boldsymbol{P}) J(\boldsymbol{P})^{-1} \bigg|_{\boldsymbol{P} = \Phi^{-1}(\boldsymbol{p})}\\
 %&=& \frac{(1-\delta)^{N/2}}{\sqrt{ |\Sigma_{22}|}} \exp\left( -\frac{1}{2} \boldsymbol{P}' (1-\delta)\Sigma_{22}^{-1} \boldsymbol{P} + \frac{\boldsymbol{P}' \boldsymbol{P}}{2}   \right)\\
-&=& \frac{(1-\delta)^{N/2}}{\sqrt{ |\Sigma_{22}|}} \exp\left( -\frac{1}{2} \Phi^{-1}(\boldsymbol{p})' \left( (1-\delta)\Sigma_{22}^{-1} - I_N \right) \Phi^{-1}(\boldsymbol{p})  \right) 
+&=& \frac{(1-\delta)^{N/2}}{\sqrt{ |\Sigma_{22}^{(c)}|}} \exp\left( -\frac{1}{2} \Phi^{-1}(\boldsymbol{p})' \left( (1-\delta) \left(\Sigma_{22}^{(c)}\right)^{-1} - I_N \right) \Phi^{-1}(\boldsymbol{p})  \right) 
 \end{eqnarray*}
-where $\Phi^{-1}(\boldsymbol{p}) =  (\Phi^{-1}(p_1), \Phi^{-1}(p_2), \dots, \Phi^{-1}(p_N))$. The expressions for $\Sigma_{22}^{-1}$ and $|\Sigma_{22}|$ are given by (\ref{inverse}) and (\ref{determinant}), respectively. The maximum likelihood estimates of $\delta$ and $\rho$ are then obtained from
+where $\Phi^{-1}(\boldsymbol{p}) =  (\Phi^{-1}(p_1), \Phi^{-1}(p_2), \dots, \Phi^{-1}(p_N))$. The maximum likelihood estimates of $\delta$ and $\rho$ are then obtained from
 \begin{align}
 (\hat{\delta}, \hat{\rho}) =& \argmax_{\rho, \delta} \log  f\left(p_1, \dots, p_N | \delta, \rho \right), \label{MLE}\\
 & \text{s.t. } \nonumber \delta \in [0,1] \text{ and } \rho \in \left[  \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right]
@@ -813,7 +811,7 @@ From Figures \ref{ExtremeN5} and \ref{ExtremeN30} it is clear that the feasible 
 
 
 \section{Multinomial Outcomes}
-If the target event can take upon $K > 2$ outcomes, the the white noise process must be extended to a $(K-1)$-dimensional process $\{ \boldsymbol{X}_B \}$ with each $\boldsymbol{X_B} = (X_{1,B}, X_{2,B},  \dots, X_{K-1,B})' \in \mathbb{R}^{K-1}$.  Expert $j$ observes a fixed share $\delta_j$ of the process. If the information sets of two experts $i$ and $j$ overlap, i.e. $| I_i \cap I_j| = \rho_{ij} > 0$, then the dependency between $\boldsymbol{X}_{I_i}$ and $\boldsymbol{X}_{I_j}$ is described by the cross-covariance $\text{cov}(\boldsymbol{X}_{I_i}, \boldsymbol{X}_{I_j}) = \rho_{ij} I_{K-1}$. Collect the coordinate-specific information sources into vectors $\boldsymbol{X}^{(k)} = \left(X_{k,I_1}, X_{k,I_2}, \dots, X_{k,I_N} \right)'$  for $k = 1, \dots, K-1$. This specifies the following multivariate normal distribution. 
+If the target event can take upon $K > 2$ outcomes, the white noise process must be extended to a $(K-1)$-dimensional process $\{ \boldsymbol{X}_B \}$ with each $\boldsymbol{X}_B = (X_{1,B}, X_{2,B},  \dots, X_{K-1,B})' \in \mathbb{R}^{K-1}$.  Expert $j$ observes a fixed share $\delta_j$ of the process. If the information sets of two experts $i$ and $j$ overlap, i.e. $| I_i \cap I_j| = \rho_{ij} > 0$, then the dependency between $\boldsymbol{X}_{I_i}$ and $\boldsymbol{X}_{I_j}$ is described by the cross-covariance $\text{cov}(\boldsymbol{X}_{I_i}, \boldsymbol{X}_{I_j}) = \rho_{ij} I_{K-1}$. Collect the coordinate-specific information sources into vectors $\boldsymbol{X}^{(k)} = \left(X_{k,I_1}, X_{k,I_2}, \dots, X_{k,I_N} \right)'$  for $k = 1, \dots, K-1$. This specifies the following multivariate normal distribution. 
 
 \begin{align*}
 \left(\begin{matrix} \boldsymbol{X}_S \\ \boldsymbol{X}^{(1)}\\ \vdots \\ \boldsymbol{X}^{(N)} \end{matrix}\right) &\sim \mathcal{N}_{}\left( 
