@@ -197,7 +197,7 @@ These aggregators, however, are based on \textit{ad hoc} techniques that learn t
 
 The first section of this paper introduces our partial information model and illustrates  it on probability forecasts made by a group of expert on events with two potential outcomes. The second section derives a closed-form expression for the amount of extremization and analyzes it under unstructured, disjoint, and compound symmetric information structures. The third section extends the model to events with more than two potential outcomes. After this, the paper concludes with a discussion of  model limitations and future directions. 
 
-
+\textcolor{red}{List out subjective data sources}
 
 %\section{Information Theoretic Framework}
 %This section discusses the partial information framework in comparison to the generated and interpreted signal frameworks. This comparison is by no means comprehensive as signal generation is a large part of the statistical literature. The first subsection builds  intuition via a simple example. The second subsection provides a technical comparison. 
@@ -278,7 +278,7 @@ The first section of this paper introduces our partial information model and ill
 
 \section{Partial Information Framework}
 
-The main component of the partial information model is a pool of information that decides the final outcome. This pool must be defined such that the experts can observe only a part of the information without knowing the final outcome. The experts then make conditional predictions given their private information sets. To make this more specific, let  $(\Omega, \mathcal{F}, \P)$ be a probability space where the set $\Omega$ contains all possible states of the world, the $\sigma$-field $\mathcal{F}$ consists of all subsets of $\Omega$, and $\P$ is a probability measure. Denote the event of interest with $A \in \mathcal{F}$. 
+The main component of the partial information model is a pool of information that decides the final outcome. This pool must be defined such that the experts can observe only a part of the information without knowing the final outcome. The experts then make conditional predictions given their private information sets. An expert who observes all of the information deterministically outputs the correct answer. On the other hand, an expert who observes no information outputs a non-informative prediction. To make this more specific, let  $(\Omega, \mathcal{F}, \P)$ be a probability space where the set $\Omega$ contains all possible states of the world, the $\sigma$-field $\mathcal{F}$ consists of all subsets of $\Omega$, and $\P$ is a probability measure. Denote the event of interest with $A \in \mathcal{F}$. 
 %The set of possible outcomes is denoted with $S$. For the sake of illustration, assume that  $S = \{G, B\}$, where $G$ and $B$ denote good and bad outcomes, respectively. The outcome function $F: \Omega \to S$ is a random variable that maps the state of the world to the true outcome. 
 %Therefore the experts aim to forecast the probability $p = \P(A)$. 
 %The partial information framework removes these intractable components and provides a model that can be applied in practice. It does not assume detailed knowledge of the expert interpretations nor pose any structure or cardinality restrictions on $\Omega$. 
@@ -406,6 +406,8 @@ This case is illustrated in Figure \ref{diagramN}. It is important to notice tha
 
 \section{Extremization}
 \label{extremization}
+
+\textcolor{red}{Write about extremization wrt average probability}
 The best in-principle forecast given the knowledge of $N$ experts is $P(X_{S} > 0 |  \mathcal{F}')$, where $\mathcal{F}' = \mathcal{F}_1 \cup \dots \cup \mathcal{F}_N$. This aggregate, however, assumes knowledge of the union of the information sets. Understanding the union $\mathcal{F}'$ is very difficult in practice, especially when the number of experts in the group is large. Therefore the best aggregate probability that can be realistically hoped for is  $\P(X_{S} > 0 | p_1, \dots, p_N)$. This section derives this aggregator and then uses it to analyze extremization.  An aggregate probability $p$ for a binary event is considered extremized by $p'$ if $p'$ is closer to $0$ when $p \leq 0.5$ and closer to $1$ when $p \geq 1$.  The following definition describes extremization in full generality. 
 \begin{definition}
 Consider a target event that can take upon $K$ outcomes. Therefore all possible probability forecasts are described with a $K$-simplex. Let $\boldsymbol{d}$ represent the vertex of this simplex that is the closest to the vector of probabilities $\boldsymbol{p} \in \mathbb{R}^{K-1}$. This vector is \textit{extremized} by $\boldsymbol{p}' \in \mathbb{R}^{K-1}$ if $\boldsymbol{d}$ is closer to $\boldsymbol{p}'$ than $\boldsymbol{p}$ in terms of Euclidian distance. If, on other hand, $\boldsymbol{d}$ is closer to $\boldsymbol{p}$ than $\boldsymbol{p}'$, the forecast $\boldsymbol{p}$ is \textit{reverse-extremized} by $\boldsymbol{p}'$.
