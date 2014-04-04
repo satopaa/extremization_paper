@@ -197,7 +197,17 @@ These aggregators, however, are based on \textit{ad hoc} techniques that learn t
 
 The first section of this paper introduces our partial information model and illustrates  it on probability forecasts made by a group of expert on events with two potential outcomes. The second section derives a closed-form expression for the amount of extremization and analyzes it under unstructured, disjoint, and compound symmetric information structures. The third section extends the model to events with more than two potential outcomes. After this, the paper concludes with a discussion of  model limitations and future directions. 
 
-\textcolor{red}{List out subjective data sources}
+
+%List out subjective/qualitative data sources
+% 1. Economic forecasts
+%.2. Online ratings
+% 3. Sports or performance scores
+% 4. Property valuation
+% 5. Patient diagnosis
+% 6. 
+
+%An easy way to remember this distinction is to think of objective measurements and quantitative research as describing physical objects with numerical quantities and to think of subjective data and qualitative research as phenomenological experience partially dependent on the subject observing and in need of his or her qualifications to be made full sense of.
+%http://adamschwartz.hubpages.com/hub/The-Difference-Between-Objective-and-Subjective-Data
 
 %\section{Information Theoretic Framework}
 %This section discusses the partial information framework in comparison to the generated and interpreted signal frameworks. This comparison is by no means comprehensive as signal generation is a large part of the statistical literature. The first subsection builds  intuition via a simple example. The second subsection provides a technical comparison. 
@@ -406,8 +416,7 @@ This case is illustrated in Figure \ref{diagramN}. It is important to notice tha
 
 \section{Extremization}
 \label{extremization}
-
-\textcolor{red}{Write about extremization wrt average probability}
+%\textcolor{red}{Write about extremization wrt average probability}
 The best in-principle forecast given the knowledge of $N$ experts is $P(X_{S} > 0 |  \mathcal{F}')$, where $\mathcal{F}' = \mathcal{F}_1 \cup \dots \cup \mathcal{F}_N$. This aggregate, however, assumes knowledge of the union of the information sets. Understanding the union $\mathcal{F}'$ is very difficult in practice, especially when the number of experts in the group is large. Therefore the best aggregate probability that can be realistically hoped for is  $\P(X_{S} > 0 | p_1, \dots, p_N)$. This section derives this aggregator and then uses it to analyze extremization.  An aggregate probability $p$ for a binary event is considered extremized by $p'$ if $p'$ is closer to $0$ when $p \leq 0.5$ and closer to $1$ when $p \geq 1$.  The following definition describes extremization in full generality. 
 \begin{definition}
 Consider a target event that can take upon $K$ outcomes. Therefore all possible probability forecasts are described with a $K$-simplex. Let $\boldsymbol{d}$ represent the vertex of this simplex that is the closest to the vector of probabilities $\boldsymbol{p} \in \mathbb{R}^{K-1}$. This vector is \textit{extremized} by $\boldsymbol{p}' \in \mathbb{R}^{K-1}$ if $\boldsymbol{d}$ is closer to $\boldsymbol{p}'$ than $\boldsymbol{p}$ in terms of Euclidian distance. If, on other hand, $\boldsymbol{d}$ is closer to $\boldsymbol{p}$ than $\boldsymbol{p}'$, the forecast $\boldsymbol{p}$ is \textit{reverse-extremized} by $\boldsymbol{p}'$.
@@ -430,6 +439,9 @@ Denote the average probit forecast with $\bar{P} = \left( \sum_{j=1}^N P_{I_j} \
 \begin{align}
 \alpha \bar{P}&=  \frac{\Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}}  &\Leftrightarrow&& \alpha  = \frac{N \Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\left(\boldsymbol{1}_N' \boldsymbol{P} \right) \sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}} \label{alpha}
 \end{align}
+Even though this paper focuses on extremization with respect to the average probit forecast, the discussion can be easily applied to the average logit forecast by recalling that $\text{logit}(p_i) \approx \Phi^{-1}(p_i)/\sqrt{\frac{\pi}{8}}$. Therefore the amount of extremization that the partial information aggregator (\ref{GeneralAggregator}) performs for the average logit forecast is $\sqrt{\frac{\pi}{8}} \approx 0.627$ times $\alpha$.  
+
+
 The extremizing constant $\alpha$ is not necessarily greater or equal to 1. Therefore the partial information aggregator (\ref{GeneralAggregator}) does not always yield an extremized probability. A case-by-case analysis, however, reveals that the aggregator extremizes most of the time. The following examples illustrate typical scenarios when the aggregator shifts the average probability closer to the furthest extreme instead. For the sake of illustration, the examples involve only two experts. 
 
 %\textcolor{red}{EXPLAIN THAT THE AGGREGATE IS OFTEN MORE EXTREME THAN THE GROUP OR AT LEAST CAN BE OUTSIDE. CITE PAGES SECOND PAPER.}
