@@ -302,39 +302,24 @@ Therefore any heterogeneity in the experts' statements stems from information di
 
 \subsection{Probability Forecasts}
 \label{Model}
-Consider two experts 1 and 2 who forecast the probability of the event $A$ happening. Assume that the event $A$ is determined by a pool of white noise, and that the experts 1 and 2 see respective $\delta_1$ and $\delta_2$ portions of this noise. These portions form their information sets. The overlap in these information sets is a fixed share $\rho$ of what is seen by either expert. To make this more precise, consider the probability space $(\Omega, \mathcal{F}, \P)$. On this space, define a white noise process that is indexed by the unit interval $S = [0,1]$. A white noise process is a Gaussian process $\{ X_B \}$ indexed by Borel measurable subsets $B$. The unit interval is endowed with the uniform measure $\mu$. This gives the white noise process a covariance structure $\text{cov}(X_B, X_{B'}) = \mu(B \cap B') = |B \cap B'|$, i.e. the length of the intersection. The target event is defined as $A = \{ X_{S} > 0\}$. Let $I_1, I_2 \subseteq S$ be the information sets observed by experts 1 and 2, respectively. Then,
+%Consider two experts 1 and 2 who forecast the probability of the event $A$ happening. Assume that the event $A$ is determined by a pool of white noise, and that the experts 1 and 2 see respective $\delta_1$ and $\delta_2$ portions of this noise. These portions form their information sets. The overlap in these information sets is a fixed share $\rho$ of what is seen by either expert. To make this more precise, consider the probability space $(\Omega, \mathcal{F}, \P)$. 
+Let $S = [0,1]$ denote the unit interval and, on the probability space $(\Omega, \mathcal{F}, \P)$, define a Gaussian process $\{ X_B \}$ that is indexed by Borel measurable subsets $B \in S$. Endow the unit interval $S$ with the uniform measure $\mu$ such that the Gaussian process has a covariance structure $\text{cov}(X_B, X_{B'}) = \mu(B \cap B') = |B \cap B'|$, i.e. the length of the intersection. This process provides the pool of information that is central to the partial information model. The target event is defined as $A = \{ X_{S} > 0\}$. Even though the pool of information is indexed by the unit interval, it is important to emphasize that there is no sense of time or ranking of information. Instead the pool is a collection of information, where each piece of information has \textit{a priori} an equal chance to contribute to the final outcome of the event. It is not necessary to assume anything about the source or form of the information. For instance, the information may stem from photographs, survey research, books, or even interviews. All these details have been abstracted away. Instead any single piece of information is completely characterized by its effect on the target event. These effects are described by the Gaussian process.
+
+
+
+It is helpful to begin the introduction of the model by considering only two experts. Assume that the experts 1 and 2 see respective $\delta_1$ and $\delta_2$ portions of the Gaussian process. These portions form their information sets. The overlap in their information sets is a fixed share $\rho$ of what is seen by either expert. Therefore if $I_1, I_2 \subseteq S$ denote the information sets observed by experts 1 and 2, respectively, then
 \begin{align*}
 \mu(I_1) = |I_1| &= \delta_1\\
 \mu(I_2) = |I_2| &= \delta_2\\
 \mu(I_1 \cap I_2) =  |I_1 \cap I_2| &= \rho
 \end{align*}
-
-
-\begin{figure}[t]
-\centering
-	\hspace{0em}\includegraphics{LegendMarginal}
-
- \includegraphics[width= 0.55\textwidth]{Marginals}
-   \caption{The marginal distribution of $p_j$ under different levels of $\delta_j$. The more the expert knows, i.e. the higher $\delta_j$ is, the more the probability forecasts are concentrated around the extreme points 0 and 1.}
-\label{marginals}
-\end{figure}
-
-The part of the process $X_{I_j}$ can be interpreted as the synthesis of the information known by expert $j$. Call $P_{I_j} = X_{I_j}/\sqrt{1-\delta_j}$ the probit forecast of the $j$th expert.  If $\Phi$ denotes the standard normal CDF, then the forecast given by the $j$th expert is
-\begin{align}
-p_j &= \P\left(A | \mathcal{F}_{I_j}\right) = \Phi\left( P_{I_j}\right) \label{Indiv}
-\end{align}
-Given that this forecast is calibrated, the frequency of event occurrence agrees with the expert's assigned probabilities. For instance, consider all events that an expert believes to occur with a 60\% probability. If the expert is calibrated, 60\% of these events will actually end up occurring. As several experiments have shown that experts are often poorly calibrated (see, e.g., \citet{cooke1991experts, shlyakhter1994quantifying}), assuming calibrated forecasts is hardly realistic. This could be remedied by including an additive error term in (\ref{Indiv}) such that each expert is on average calibrated. Such an extension, however, is considered beyond the scope of this paper and hence deferred to future work. 
-
-Recall that if $Z$ is a standard normal random variable, then $\Phi(Z)$ is uniform on $[0,1]$. Therefore the marginal distribution of $p_j$ is uniform on $[0,1]$ when $\delta_j = 0.5$, i.e. when the expert knows half of the information. If the expert knows less than half of the information, i.e. $\delta_j < 0.5$, the marginal distribution of $p_j$ is unimodal at $0.5$ with the variance decreasing to 0 as $\delta_j \to 0$. Therefore an expert with no information on the target event reports a forecast of 0.5. On other hand, if the expert knows more than half of the information, i.e. $\delta_j > 0.5$, the marginal  distribution of $p_j$ is more heavily concentrated around extreme probabilities. In fact, when $\delta_j = 1$, the marginal distribution of $p_j$ is uniform over the set $\{0,1\}$. Figure \ref{marginals} illustrates these marginal distributions for $\delta_j$ equal to $0.3$, $0.5$, and $0.7$. 
-
 \begin{figure}[htbp]
 %   \hspace{-2em}
    \includegraphics[width = \textwidth]{N=2} % requires the graphicx package
    \caption{Illustration of the partial information model with two experts.}
    \label{diagram2}
 \end{figure}
-
-It is helpful to begin the introduction of the model by first considering only two experts. Figure \ref{diagram2} illustrates this setup. The Gaussian process has been partitioned into four parts based on the experts' information sets $I_1$ and $I_2$:
+Figure \ref{diagram2} illustrates this setup. In this diagram the Gaussian process has been partitioned into four parts based on the experts' information sets $I_1$ and $I_2$:
 \begin{align*}
  U &= X_{I_1 / I_2}
 & M &= X_{I_1 \cap I_2}\\
@@ -347,7 +332,7 @@ X_{I_1} &= U + M\\
 X_{I_2} &= M + V\\
 X_S &= U+M+V+W,
 \end{align*}
-where $U, V, M, W$ are independent Gaussians with respective variances $\delta_1-\rho$, $\delta_2-\rho$, $\rho$, $1+\rho-\delta_1 - \delta_2$. This gives $(X_{S}, X_{I_1}, X_{I_2})$ the following multivariate normal distribution. 
+where $U, V, M, W$ are independent Gaussians with respective variances $\delta_1-\rho$, $\delta_2-\rho$, $\rho$, $1+\rho-\delta_1 - \delta_2$. The random variable $X_{I_j}$ can be interpreted as the information known by expert $j$. The joint distribution of $X_{S}$, $X_{I_1}$, and $X_{I_2}$ is a multivariate normal distribution. 
 \begin{align}
 \left(\begin{matrix} X_S \\ X_{I_1}\\ X_{I_2} \end{matrix}\right) &\sim \mathcal{N}\left(
  \boldsymbol{0},  \left(\begin{matrix} 
@@ -356,12 +341,7 @@ where $U, V, M, W$ are independent Gaussians with respective variances $\delta_1
 \delta_2 & \rho & \delta_2
  \end{matrix}\right)\right) \label{twoExperts}
 \end{align}
-Given that $X_S$ has mean zero, $\P(X_S > 0) = \P(A) = 0.5$. This can be viewed as the decision maker's prior probability of $A$ and can be adjusted by changing the mean vector in (\ref{twoExperts}). As this paper is not concerned with any particular problem, the prior belief is taken non-informative.
-
-
-Even though the pool of information is indexed by the unit interval, it is important to emphasize that there is no sense of time or ranking of information. Instead the pool is a collection of information, where each piece of information has \textit{a priori} an equal chance to contribute to the final outcome of the event. It is not necessary to assume anything about the source or form of the information. For instance, the information may stem from photographs, survey research, books, or even interviews. All these details have been abstracted away. Instead any single piece of information is completely characterized by its effect on the target event. These effects are described by the white noise process.
-
-
+Given that $X_S$ has mean zero, $\P(X_S > 0) = \P(A) = 0.5$. This can be viewed as the decision maker's prior probability of $A$ and is easily adjusted by changing the mean vector in (\ref{twoExperts}). As this paper is not concerned with any particular problem, the prior belief is taken non-informative.
 
 \begin{figure}[htbp]
    \includegraphics[width = \textwidth]{N=N} % requires the graphicx package
@@ -389,7 +369,29 @@ Consider now $N$ experts. Let $|I_j| = \delta_j$ be the amount of information kn
 \delta_N & \rho_{N,1} & \rho_{N,2} & \dots & \delta_N\\ 
  \end{array}\right)\right)  \label{NExperts}
 \end{align}
-This case is illustrated in Figure \ref{diagramN}. It is important to notice that $I_j$ does not have to be a contiguous segment of the unit interval. Instead, each expert can know any Borel measurable subset of the full information. The amount of information known by each expert and any potential overlap in these information sets is described in the sub-matrix $\Sigma_{22}$. Therefore each element in $\Sigma_{22}$ must be in the unit interval, and no off-diagonal element can be larger than the corresponding diagonal element in the same row. This matrix also has some technical conditions such as symmetry, non-singularity, and coherence. The matrix $\Sigma_{22}$ is coherent if and only if its information can be transformed into a diagram such as the one depicted by Figure \ref{diagramN}. 
+This case is illustrated in Figure \ref{diagramN}. It is important to notice that $I_j$ does not have to be a contiguous segment of the unit interval. Instead, each expert can know any Borel measurable subset of the full information. The amount of information known by each expert and any potential overlap in these information sets is described in the sub-matrix $\Sigma_{22}$. Therefore each element in $\Sigma_{22}$ must be in the unit interval, and no off-diagonal element can be larger than the corresponding diagonal element in the same row. This matrix also has some technical conditions such as symmetry, non-singularity, and coherence. The matrix $\Sigma_{22}$ is coherent if and only if its information structure can be described by a diagram such as the one given in Figure \ref{diagramN}. 
+
+
+To link this model with the probability forecasts made by the experts, denote the probit forecast of the $j$th expert with $P_{I_j} = X_{I_j}/\sqrt{1-\delta_j}$.  If $\Phi$ represents the standard normal CDF, then the forecast given by the $j$th expert is
+\begin{align}
+p_j &= \P\left(A | \mathcal{F}_{I_j}\right) = \Phi\left( P_{I_j}\right) \label{Indiv}
+\end{align}
+This forecast is calibrated. This means that the frequency of event occurrence agrees with the expert's assigned probabilities. For instance, consider all events that an expert believes to occur with a 60\% probability. If the expert is calibrated, 60\% of these events will actually end up occurring. As several experiments have shown that experts are often poorly calibrated (see, e.g., \citet{cooke1991experts, shlyakhter1994quantifying}), assuming calibrated forecasts is hardly realistic. This could be remedied by including an additive error term in (\ref{Indiv}) such that each expert is on average calibrated. Such an extension, however, is considered beyond the scope of this paper and hence deferred to future work. 
+
+Recall that if $Z$ is a standard normal random variable, then $\Phi(Z)$ is uniform on $[0,1]$. Therefore the marginal distribution of $p_j$ is uniform on $[0,1]$ when $\delta_j = 0.5$, i.e. when the expert knows half of the information. If the expert knows less than half of the information, i.e. $\delta_j < 0.5$, the marginal distribution of $p_j$ is unimodal at $0.5$ with the variance decreasing to 0 as $\delta_j \to 0$. Therefore an expert with no information on the target event reports a forecast of 0.5. On other hand, if the expert knows more than half of the information, i.e. $\delta_j > 0.5$, the marginal  distribution of $p_j$ is more heavily concentrated around extreme probabilities. In fact, when $\delta_j = 1$, the marginal distribution of $p_j$ is uniform over the set $\{0,1\}$. Figure \ref{marginals} illustrates these marginal distributions for $\delta_j$ equal to $0.3$, $0.5$, and $0.7$. 
+
+\begin{figure}[t]
+\centering
+	\hspace{0em}\includegraphics{LegendMarginal}
+
+ \includegraphics[width= 0.55\textwidth]{Marginals}
+   \caption{The marginal distribution of $p_j$ under different levels of $\delta_j$. The more the expert knows, i.e. the higher $\delta_j$ is, the more the probability forecasts are concentrated around the extreme points 0 and 1.}
+\label{marginals}
+\end{figure}
+
+
+
+
 
 
 
