@@ -449,10 +449,10 @@ Collect all probit forecasts into a vector $\boldsymbol{P} = (P_{I_1} P_{I_2} \d
 \begin{align}
 \alpha \bar{P}&=  \frac{\Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}}  &\Leftrightarrow&& \alpha  = \frac{N \Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\left(\boldsymbol{1}_N' \boldsymbol{P} \right) \sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}} \label{alpha}
 \end{align}
-The partial information aggregate extremizes $\bar{P}$ when $\alpha$ is greater than $1$. In the contrary, when $\alpha$ is less than 1, the partial information aggregate reverse-extremizes $\bar{P}$. Even though this paper focuses on extremization of the average probit forecast, the discussion can be easily applied to the average logit forecast by recalling that $\text{logit}(p_i) \approx \Phi^{-1}(p_i)/\sqrt{\frac{\pi}{8}}$. Therefore the amount of extremization that the partial information aggregator (\ref{GeneralAggregator}) performs for the average logit forecast is $\sqrt{\frac{\pi}{8}} \approx 0.627$ times $\alpha$.  
+The partial information aggregate extremizes $\bar{P}$ when $\alpha$ is greater than $1$. In the contrary, when $\alpha$ is less than 1, the partial information aggregate reverse-extremizes $\bar{P}$. Even though this paper focuses on extremization of the average probit forecast, the discussion can be easily applied to the average logit forecast by recalling that $\text{logit}(p_i) \approx \Phi^{-1}(p_i)/\sqrt{\frac{\pi}{8}}$. Therefore the amount of extremization that the partial information aggregator performs for the average logit forecast is $\sqrt{\frac{\pi}{8}} \approx 0.627$ times $\alpha$.  
 
 
-The extremizing constant $\alpha$ is not necessarily greater or equal to 1. Therefore the partial information aggregator (\ref{GeneralAggregator}) does not always yield an extremized probability. A case-by-case analysis reveals that the aggregator extremizes most of the time. The following examples illustrate typical scenarios of reverse-extremization. For the sake of illustration, the examples involve only two experts. 
+The extremizing factor $\alpha$ is not necessarily greater or equal to 1. Therefore the partial information aggregator (\ref{GeneralAggregator}) does not always yield an extremized probability. A case-by-case analysis reveals that the aggregator extremizes most of the time. The following examples illustrate typical scenarios of reverse-extremization. For the sake of illustration, the examples involve only two experts. 
 
 %\textcolor{red}{EXPLAIN THAT THE AGGREGATE IS OFTEN MORE EXTREME THAN THE GROUP OR AT LEAST CAN BE OUTSIDE. CITE PAGES SECOND PAPER.}
 
@@ -474,7 +474,7 @@ X_{I_2} =& 0.30
 The probability forecasts in this example are $p_1 = 0.19$ and $p_2 = 0.65$, the average probability is $\bar{p} = 0.42$, and the average probit forecast (transformed to probability space) is $\Phi(\bar{P}) = 0.40$. 
 The partial information aggregate is $0.65$.  Given that this is more than 0.5 while $\bar{p}$ and $\Phi(\bar{P})$ are less than 0.5, the extremizing constant is negative in both cases. To understand this result, notice that expert 2 knows everything that expert 1 knows. Therefore expert 1 does not provide any new information and can be ignored. The partial information aggregate is completely determined by the probability forecast made by expert 2. Given that only the partial information aggregator is able to take into account overlap information, its aggregate can differ radically from the average probability and probit forecasts. 
 \end{example}
-It is possible to modify Example \ref{Example1} such that the partial information aggregate is on the same side but closer to 0.5 than the average probability and probit forecast. This can be achieved by making $X_{I_2}$ slightly negative. Before discussing the next example, it is helpful to introduce the class of diagonal information structures. 
+It is possible to modify Example \ref{Example1} such that the partial information aggregate is on the same side but closer to 0.5 than the average probability and probit forecast. This can be achieved by making $X_{I_2}$ slightly negative. Given that it is possible to make the partial information aggregate equal to any value in the unit interval by simply changing the information structure, inferring the underlying information among the experts is extremely important in probability aggregation.  Before discussing the next example, it is helpful to introduce the class of diagonal information structures. 
 
 \subsection{Non-overlapping Information Structure}
 This section assumes that the experts' information sets do not overlap, i.e.   $|I_{i} \cap I_{j}| = \emptyset$ for all $i \neq j$. The resulting information structure is diagonal.  That is,
@@ -535,7 +535,7 @@ The next section discusses a different class of information structures. Under th
 
 \subsection{Compound Symmetric Information Structure}
 
-This section assumes that the experts' information sets have the same size and the amount of overlap between any two information sets is constant, i.e.  $|I_{1}| =  \dots = |I_{N}|$ and $|I_{i} \cap I_{j}| = |I_{h} \cap I_{k}|$ for all $i \neq j$ and $h \neq k$. In other words, each expert knows and shares the same amount with every other expert. The resulting information structure is compound symmetric. That is,
+This section assumes that the experts' information sets have the same size and that the amount of overlap between any two information sets is constant, i.e.  $|I_{1}| =  \dots = |I_{N}|$ and $|I_{i} \cap I_{j}| = |I_{h} \cap I_{k}|$ for all $i \neq j$ and $h \neq k$. In other words, each expert knows and shares the same amount with every other expert. The resulting information structure is compound symmetric. That is,
 % $\rho \in [\max \{(N-T)/(T(N-1)), 0\},1] = A_\rho$. 
 \begin{align*}
 \left(\begin{matrix} X_{S} \\ X_{I_1}\\ \vdots \\ X_{I_N} \end{matrix}\right) &\sim \mathcal{N}\left( 
