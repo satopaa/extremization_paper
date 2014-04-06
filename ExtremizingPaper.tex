@@ -372,7 +372,7 @@ Consider now $N$ experts. Let $|I_j| = \delta_j$ be the amount of information kn
 \delta_N & \rho_{N,1} & \rho_{N,2} & \dots & \delta_N\\ 
  \end{array}\right)\right)  \label{NExperts}
 \end{align}
-This case is illustrated in Figure \ref{diagramN}. It is important to notice that $I_j$ does not have to be a contiguous segment of the unit interval. Instead, each expert can know any Borel measurable subset of the full information. The amount of information known by each expert and any potential overlap in these information sets is described in the sub-matrix $\Sigma_{22}$. Therefore each element in $\Sigma_{22}$ must be in the unit interval, and no off-diagonal element can be larger than the corresponding diagonal element in the same row. This matrix also has some technical conditions such as symmetry, non-singularity, and coherence. The matrix $\Sigma_{22}$ is coherent if and only if its information structure can be described by a diagram such as the one given in Figure \ref{diagramN}. 
+This case is illustrated in Figure \ref{diagramN}. It is important to notice that $I_j$ does not have to be a contiguous segment of the unit interval. Instead, each expert can know any Borel measurable subset of the full information. Given that the information structure is described by the sub-matrix $\Sigma_{22}$, learning about the information among the $N$ experts is equivalent to estimating a covariance matrix under several restrictions. First, each element in $\Sigma_{22}$ must be in the unit interval, and no off-diagonal element can be larger than the corresponding diagonal element in the same row. Second, $\Sigma_{22}$ must be symmetric, non-singular, and coherent. The matrix $\Sigma_{22}$ is coherent if and only if its information structure can be described by a diagram such as the one given in Figure \ref{diagramN}. 
 
 
 To link this model with the probability forecasts made by the experts, denote the probit forecast of the $j$th expert with $P_{I_j} = X_{I_j}/\sqrt{1-\delta_j}$.  If $\Phi$ represents the standard normal CDF, then the forecast given by the $j$th expert is
@@ -427,14 +427,12 @@ Recall that if $Z$ is a standard normal random variable, then $\Phi(Z)$ is unifo
 \section{Extremization}
 \label{extremization}
 %\textcolor{red}{Write about extremization wrt average probability}
-The best in-principle forecast given the knowledge of $N$ experts is $P(X_{S} > 0 |  \mathcal{F}')$, where $\mathcal{F}' = \mathcal{F}_1 \cup \dots \cup \mathcal{F}_N$. This aggregate, however, assumes knowledge of the union of the information sets. Given that this union is almost always unattainable due to company confidentiality or the experts' inability to specify the knowledge that ultimately leads to their opinions (\cite{dawid1995coherent}), the best aggregate probability that can be realistically hoped for is  $\P(X_{S} > 0 | p_1, \dots, p_N)$. 
-
-This section derives this aggregator under the partial information model and then uses it to analyze extremization.  In this paper extremization is considered to refer to an increase in the strength of the belief indicated by the probability forecast. For instance, a probability $p$ for a binary event is extremized by $p'$ if $p'$ is closer to $0$ when $p \leq 0.5$ and closer to $1$ when $p \geq 1$.  This is generalized in the the following definition.
+The best in-principle forecast given the knowledge of $N$ experts is $P(X_{S} > 0 |  \mathcal{F}')$, where $\mathcal{F}' = \mathcal{F}_1 \cup \dots \cup \mathcal{F}_N$. This aggregate, however, assumes knowledge of the union of the information sets. Given that this union is almost always unattainable due to company confidentiality or the experts' inability to specify the knowledge that ultimately leads to their opinions (\cite{dawid1995coherent}), the best aggregate probability that can be realistically hoped for is  $\P(X_{S} > 0 | p_1, \dots, p_N)$. This section derives this aggregator under the partial information model and then uses it to analyze extremization.  In this paper extremization is understood as an increase in the strength of the belief indicated by the probability forecast. For instance, a probability $p$ for a binary event is extremized by $p'$ if $p'$ is closer to $0$ when $p \leq 0.5$ and closer to $1$ when $p \geq 1$.  This is generalized in the the following definition.
 \begin{definition}
-Consider a target event that can take upon $K$ outcomes. Therefore all possible probability forecasts are described with a $K$-simplex. Let $\boldsymbol{d}$ represent the vertex of this simplex that is the closest to a $K$-dimensional probability forecast $\boldsymbol{p}$ in the simplex. This point is \textit{extremized} by another point $\boldsymbol{p}'$ in the simplex if $\boldsymbol{d}$ is closer to $\boldsymbol{p}'$ than $\boldsymbol{p}$. If, on other hand, $\boldsymbol{d}$ is closer to $\boldsymbol{p}$ than $\boldsymbol{p}'$, the forecast $\boldsymbol{p}$ is \textit{reverse-extremized} by $\boldsymbol{p}'$.
+Consider a target event that can take upon $K$ outcomes. Therefore all possible probability forecasts are described with a $K$-simplex in $\mathbb{R}^{K-1}$. Let $\boldsymbol{d}$ represent the vertex of this simplex that is the closest to a $(K-1)$-dimensional probability forecast $\boldsymbol{p}$ in the simplex. This point is \textit{extremized} by another point $\boldsymbol{p}'$ in the simplex if $\boldsymbol{d}$ is closer to $\boldsymbol{p}'$ than $\boldsymbol{p}$. If, on other hand, $\boldsymbol{d}$ is closer to $\boldsymbol{p}$ than $\boldsymbol{p}'$, the forecast $\boldsymbol{p}$ is \textit{reverse-extremized} by $\boldsymbol{p}'$.
 \end{definition}
 
-To derive the partial information aggregator let $\boldsymbol{X}$ be a column vector of length $N$ such that $X_j = X_{I_j}$ for $j = 1, \dots, N$. If $\Sigma_{22}$ is a coherent overlap structure and $\Sigma_{22}^{-1}$ exists, then $X_{S} | \boldsymbol{X} \sim \mathcal{N}(\bar{\mu}, \bar{\Sigma})$, where
+To derive the partial information aggregator, let $\boldsymbol{X}$ be a column vector of length $N$ such that $X_j = X_{I_j}$ for $j = 1, \dots, N$. If $\Sigma_{22}$ is a coherent overlap structure and $\Sigma_{22}^{-1}$ exists, then $X_{S} | \boldsymbol{X} \sim \mathcal{N}(\bar{\mu}, \bar{\Sigma})$, where
 \begin{align}
 \bar{\mu} &= \mu_1 + \Sigma_{12} \Sigma_{22}^{-1} (\boldsymbol{X} - \boldsymbol{\mu}_2) =  \Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X} \label{condMu}
 \end{align}
@@ -442,24 +440,25 @@ and
 \begin{align}
  \bar{\Sigma}&= \Sigma_{11} - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21} =1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}  \label{condSigma}
 \end{align}
-See  Result 5.2.10 on p. 156 in \cite{ravishanker2001first} for the formulas of the conditional multivariate normal distribution. This gives us the following aggregator. 
+These follow directly from the formulas of the conditional multivariate normal distribution (see, e.g., Result 5.2.10 on p. 156 in \cite{ravishanker2001first}). This gives us the following aggregator. 
 \begin{align}
 \P\left(A  | \boldsymbol{X}\right)  = \P\left(X_{S} > 0 | \boldsymbol{X}\right) &= \Phi\left( \frac{\Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}}\right) \label{GeneralAggregator}
 %&= \Phi\left( \frac{\boldsymbol{1}_{N}'  \Sigma_{22}^{-1} \Phi^{-1}(\boldsymbol{p})}{\sqrt{1 - \boldsymbol{1}_{N}' \Sigma_{22}^{-1} \boldsymbol{1}_{N}}}\right)
 \end{align}
-Denote the average probit forecast with $\bar{P} = \left( \sum_{j=1}^N P_{I_j} \right)/N$. Let $\alpha$ represent the amount of extremization that the partial information aggregator (\ref{GeneralAggregator}) performs for the average probit forecast. Then,
+Collect all probit forecasts into a vector $\boldsymbol{P} = (P_{I_1} P_{I_2} \dots P_{I_N})'$. Denote the average probit forecast with $\bar{P} = \left( \sum_{j=1}^N P_{I_j} \right)/N$, and let $\alpha$ represent the amount of extremization that the partial information aggregator (\ref{GeneralAggregator}) performs for the average probit forecast. Then,
 \begin{align}
 \alpha \bar{P}&=  \frac{\Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}}  &\Leftrightarrow&& \alpha  = \frac{N \Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}{\left(\boldsymbol{1}_N' \boldsymbol{P} \right) \sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}} \label{alpha}
 \end{align}
-Even though this paper focuses on extremization with respect to the average probit forecast, the discussion can be easily applied to the average logit forecast by recalling that $\text{logit}(p_i) \approx \Phi^{-1}(p_i)/\sqrt{\frac{\pi}{8}}$. Therefore the amount of extremization that the partial information aggregator (\ref{GeneralAggregator}) performs for the average logit forecast is $\sqrt{\frac{\pi}{8}} \approx 0.627$ times $\alpha$.  
+The partial information aggregate extremizes $\bar{P}$ when $\alpha$ is greater than $1$. In the contrary, when $\alpha$ is less than 1, the partial information aggregate reverse-extremizes $\bar{P}$. Even though this paper focuses on extremization of the average probit forecast, the discussion can be easily applied to the average logit forecast by recalling that $\text{logit}(p_i) \approx \Phi^{-1}(p_i)/\sqrt{\frac{\pi}{8}}$. Therefore the amount of extremization that the partial information aggregator (\ref{GeneralAggregator}) performs for the average logit forecast is $\sqrt{\frac{\pi}{8}} \approx 0.627$ times $\alpha$.  
 
 
-The extremizing constant $\alpha$ is not necessarily greater or equal to 1. Therefore the partial information aggregator (\ref{GeneralAggregator}) does not always yield an extremized probability. A case-by-case analysis, however, reveals that the aggregator extremizes most of the time. The following examples illustrate typical scenarios when the aggregator shifts the average probability closer to the furthest extreme instead. For the sake of illustration, the examples involve only two experts. 
+The extremizing constant $\alpha$ is not necessarily greater or equal to 1. Therefore the partial information aggregator (\ref{GeneralAggregator}) does not always yield an extremized probability. A case-by-case analysis reveals that the aggregator extremizes most of the time. The following examples illustrate typical scenarios of reverse-extremization. For the sake of illustration, the examples involve only two experts. 
 
 %\textcolor{red}{EXPLAIN THAT THE AGGREGATE IS OFTEN MORE EXTREME THAN THE GROUP OR AT LEAST CAN BE OUTSIDE. CITE PAGES SECOND PAPER.}
 
 
 \begin{example}
+\label{Example1}
 \textbf{Dominating Expert.} Consider the following setup.
 \begin{align*}
 \Sigma_{22} =  \left(\begin{array}{c c}
@@ -472,10 +471,10 @@ X_{I_1} =& -0.80\\
 X_{I_2} =& 0.30
  \end{array}
 \end{align*}
-The probability forecasts in this example are $p_1 = 0.19$ and $p_2 = 0.65$. Therefore the average probability is $\bar{p} = 0.42$. The average probit forecast (transformed to probability space) is $\Phi(\bar{P}) = 0.40$. 
+The probability forecasts in this example are $p_1 = 0.19$ and $p_2 = 0.65$, the average probability is $\bar{p} = 0.42$, and the average probit forecast (transformed to probability space) is $\Phi(\bar{P}) = 0.40$. 
 The partial information aggregate is $0.65$.  Given that this is more than 0.5 while $\bar{p}$ and $\Phi(\bar{P})$ are less than 0.5, the extremizing constant is negative in both cases. To understand this result, notice that expert 2 knows everything that expert 1 knows. Therefore expert 1 does not provide any new information and can be ignored. The partial information aggregate is completely determined by the probability forecast made by expert 2. Given that only the partial information aggregator is able to take into account overlap information, its aggregate can differ radically from the average probability and probit forecasts. 
 \end{example}
-It is possible to find similar examples where the partial information aggregate is on the same side but closer to 0.5 than the average probability and probit forecast. Before discussing the second example, it is helpful to introduce the class of diagonal information structures. 
+It is possible to modify Example \ref{Example1} such that the partial information aggregate is on the same side but closer to 0.5 than the average probability and probit forecast. This can be achieved by making $X_{I_2}$ slightly negative. Before discussing the next example, it is helpful to introduce the class of diagonal information structures. 
 
 \subsection{Voting Experts}
 This section assumes that the experts' information sets do not overlap, i.e.   $|I_{i} \cap I_{j}| = \emptyset$ for all $i \neq j$. The resulting information structure is diagonal.  That is,
