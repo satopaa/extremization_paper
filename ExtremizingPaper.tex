@@ -855,7 +855,7 @@ From Figures \ref{ExtremeN5} and \ref{ExtremeN30} it is clear that the feasible 
 
 
 \section{Multinomial Outcomes}
-If the target event can take upon $K > 2$ outcomes, the white noise process must be extended to a $(K-1)$-dimensional process $\{ \boldsymbol{X}_B \}$ with each $\boldsymbol{X}_B = (X_{1,B}, X_{2,B},  \dots, X_{K-1,B})' \in \mathbb{R}^{K-1}$.  Expert $j$ observes a fixed share $\delta_j$ of the process. If the information sets of two experts $i$ and $j$ overlap, i.e. $| I_i \cap I_j| = \rho_{ij} > 0$, then the dependency between $\boldsymbol{X}_{I_i}$ and $\boldsymbol{X}_{I_j}$ is described by the cross-covariance $\text{cov}(\boldsymbol{X}_{I_i}, \boldsymbol{X}_{I_j}) = \rho_{ij} I_{K-1}$. Collect the coordinate-specific information sources into vectors $\boldsymbol{X}^{(k)} = \left(X_{k,I_1}, X_{k,I_2}, \dots, X_{k,I_N} \right)'$  for $k = 1, \dots, K-1$. This specifies the following multivariate normal distribution. 
+If the target event can take upon $K > 2$ outcomes, the white noise process must be extended to a $(K-1)$-dimensional process $\{ \boldsymbol{X}_B \}$ with each $\boldsymbol{X}_B = (X_{1,B}, X_{2,B},  \dots, X_{K-1,B})' \in \mathbb{R}^{K-1}$.  Expert $j$ observes a fixed share $\delta_j$ of the process. If the information sets of two experts $i$ and $j$ overlap, i.e. $| I_i \cap I_j| = \rho_{ij} > 0$, then the dependency between $\boldsymbol{X}_{I_i}$ and $\boldsymbol{X}_{I_j}$ is described by the cross-covariance $\text{cov}(\boldsymbol{X}_{I_i}, \boldsymbol{X}_{I_j}) = \rho_{ij} I_{K-1}$. Collect the coordinate-specific information sources into vectors $\boldsymbol{X}^{(k)} = \left(X_{k,I_1}, X_{k,I_2}, \dots, X_{k,I_N} \right)'$  for $k = 1, \dots, K-1$. This specifies a multivariate normal distribution,
 
 \begin{align*}
 \left(\begin{matrix} \boldsymbol{X}_S \\ \boldsymbol{X}^{(1)}\\ \vdots \\ \boldsymbol{X}^{(N)} \end{matrix}\right) &\sim \mathcal{N}_{}\left( 
@@ -875,7 +875,11 @@ If the target event can take upon $K > 2$ outcomes, the white noise process must
 &&  & \Sigma_{21} &  &  &&\Sigma_{22} \\ 
  \end{array}\right)\right),
 \end{align*}
-where notation is borrowed from (\ref{NExperts}). Concatenate all $\boldsymbol{X}^{(k)}$ for $k = 1, \dots, K$ into a single vector  $\boldsymbol{X}$.  If $\Lambda_{22}$ is a coherent overlap structure and $\Lambda_{22}^{-1}$ exists, then $\boldsymbol{X}_{S} | \boldsymbol{X} \sim \mathcal{N}\left(\boldsymbol{\bar{\mu}}, \bar{\Lambda}\right)$, where
+where notation is borrowed from (\ref{NExperts}). Concatenate all $\boldsymbol{X}^{(k)}$ for $k = 1, \dots, K$ into a single vector  $\boldsymbol{X}$.  If $\Lambda_{22}$ is a coherent overlap structure and $\Lambda_{22}^{-1}$ exists, then 
+\begin{align}
+\boldsymbol{X}_{S} | \boldsymbol{X} \sim \mathcal{N}\left(\boldsymbol{\bar{\mu}}, \bar{\Lambda}\right), \label{CondMult}
+\end{align}
+where
 \begin{align*}
 \boldsymbol{\bar{\mu}} &=  \Lambda_{12} \Lambda_{22}^{-1} \boldsymbol{X} &&  \bar{\Lambda}= (1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}) I_{K-1}
 \end{align*}
@@ -899,12 +903,12 @@ where notation is borrowed from (\ref{NExperts}). Concatenate all $\boldsymbol{X
 
 
 
-The $(K-1)$-dimensional space is partitioned into $K$ cones with apexes at the origin. Denote these cones with $C_k$ for $k = 1, \dots, K$. The target event results in the $k$th outcome if $\boldsymbol{X}_S \in C_k$. As the outcomes do not have a particular ordering to them, each cone must have the same shape and neighbor every other cone. This can be achieved with a regular $K$-simplex that has been centered at the origin. More specifically, if $A = \frac{1- \sqrt{K}}{K-1}$ and $B = \frac{1+A}{K}$, then the $K$ vertices of the simplex are given by 
+To link this process to the target event, the $(K-1)$-dimensional space is partitioned into $K$ cones with apexes at the origin. Denote these cones with $C_k$ for $k = 1, \dots, K$. The target event results in the $k$th outcome if $\boldsymbol{X}_S \in C_k$. As the outcomes do not have a particular ordering to them, each cone must have the same shape and neighbor every other cone. This can be achieved with a regular $K$-simplex that has been centered at the origin. More specifically, if $A = \frac{1- \sqrt{K}}{K-1}$ and $B = \frac{1+A}{K}$, then the $K$ vertices of the simplex are given by 
 \begin{align*}
-&\boldsymbol{b}_1 = (1-B, -B, -B, \dots, -B)'\\
-&\boldsymbol{b}_2 = (-B, 1-B, -B, \dots, -B)'\\
+&\boldsymbol{b}_1 = (1-B, -B, \dots, -B)'\\
+&\boldsymbol{b}_2 = (-B, 1-B, \dots, -B)'\\
 & \phantom{=}\vdots\\
-&\boldsymbol{b}_{K-1} = (-B, -B, -B, \dots, 1-B)'\\
+&\boldsymbol{b}_{K-1} = (-B, -B, \dots, 1-B)'\\
 &\boldsymbol{b}_{K} = \left(A-B, A-B, \dots, A-B \right)'
 \end{align*}
 %http://mathoverflow.net/questions/38724/coordinates-of-vertices-of-regular-simplex
@@ -912,7 +916,7 @@ Then $C_k$ is the convex cone defined by all vertices except the $k$th one. That
 \begin{align*}
 C_k &= \{\boldsymbol{b}_1\theta_1 + \dots + \boldsymbol{b}_{k-1}\theta_{k-1} + \boldsymbol{b}_{k+1}\theta_{k+1} + \boldsymbol{b}_{K}\theta_{K} | \theta_1, \theta_2, \dots, \theta_K \geq 0\} 
 \end{align*}
-Figure \ref{coneA} illustrates the construction of the cones under $K = 3$ different outcomes. The cones $C_1$, $C_2$, and $C_3$ are denoted with colors red, blue, and green, respectively. The aggregate probability for the $k$th outcome is computed by integrating over $C_k$ with respect to the conditional distribution of $\boldsymbol{X}_S$. This integration is much easier if $C_k$ is first transformed into the convex cone defined by the first $K-1$ standard basis functions. Figure \ref{coneB} illustrates the transformation for $C_1$.  Denote the standard cone with $C_e$ and let 
+Figure \ref{coneA} illustrates the construction of the cones under $K = 3$ different outcomes. The cones $C_1$, $C_2$, and $C_3$ are denoted with colors red, blue, and green, respectively. The aggregate probability for the $k$th outcome is computed by integrating over $C_k$ with respect to (\ref{CondMult}). This integration becomes easier if $C_k$ is first transformed into the convex cone defined by the first $K-1$ standard basis functions. Figure \ref{coneB} illustrates the transformation for $C_1$.  Denote the standard cone with $C_e$ and let 
 \begin{align*}
 T_k &= \left(\begin{matrix} 
 \boldsymbol{b}_1& \dots & \boldsymbol{b}_{k-1} & \boldsymbol{b}_{k+1} & \dots & \boldsymbol{b}_K
@@ -927,7 +931,7 @@ By construction the aggregate probabilities for the $K$ outcomes sum to one. The
 \begin{align*}
 p_{kj}&= F(\boldsymbol{0} | T_k\boldsymbol{X}_{I_j}, (1-\delta_j)T_k'T_k)
 \end{align*}
-This map establishes $K$ equations with $K$ unknown values of $\boldsymbol{X}_{I_j}$. Therefore $\boldsymbol{X}_{I_j}$ can be determined based on the probability forecasts. Similarly to the binary case, the expert's probability forecasts are marginally uniform over the vertices of the $K$-simplex when $\delta_j = 1$. This marginal distribution converges to the center of the simplex, i.e. the point $(1/K, 1/K, \dots, 1/K)$ as $\delta_j \to 0$. 
+This map establishes $K$ equations with $K$ unknown values of $\boldsymbol{X}_{I_j}$. Therefore $\boldsymbol{X}_{I_j}$ can be determined based on the probability forecasts. Similarly to the binary case, the expert's probability forecasts are marginally uniform over the vertices of the $K$-simplex when $\delta_j = 1$. This marginal distribution converges to the center of the simplex, i.e. the point $(1/K, 1/K, \dots, 1/K)$ as $\delta_j \to 0$. This kind of behavior has been acknowledged in the previous literature (see, e.g., \cite{fox2003partition, see2006between, satopaa}).
 
 
 
