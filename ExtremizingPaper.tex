@@ -391,12 +391,32 @@ Recall that if $Z$ is a standard normal random variable, then $\Phi(Z)$ is unifo
    \caption{The marginal distribution of $p_j$ under different levels of $\delta_j$. The more the expert knows, i.e. the higher $\delta_j$ is, the more the probability forecasts are concentrated around the extreme points 0 and 1.}
 \label{marginals}
 \end{figure}
-
-
-
-
-
-
+%
+%\subsection{Multinomial Outcomes}
+%This section generalizes the partial information model to events with $K \geq 2$ outcomes. Denote these outcomes with $O_1, O_2, \dots, O_K$. Choose one of the outcomes, say $O_K$, as the base-case and define the following conditional probabilities
+%\begin{align*}
+%r_{jk} &= \P(O_k | O_k \cup O_K) = \frac{p_{jk}}{p_{jk}+p_{jK}},
+%\end{align*}
+%where $p_{jk}$ is the probability assigned to $O_k$ by the $j$th expert. Under the partial information model, these conditional probabilities are modeled similarly to the binary-case described in Section \ref{Model}. That is,
+%\begin{align*}
+%r_{jk} &= \Phi \left(X_{k, I_j} / \sqrt{1-\delta_{j}} \right),
+%\end{align*}
+%where $\{X_{k,B}\}$ is a Gaussian process defined for $O_k$. Therefore a total of $K-1$ Gaussian processes are required for an event with $K$ possible outcomes. These conditional probabilities can be mapped back to the probabilities of the individual outcomes by
+%\begin{align*}
+%p_{jk} &= \begin{cases}
+% \frac{\frac{r_{jk}}{1-r_{jk}}}{1+\sum_{h=1}^{K-1} \frac{r_{jh}}{1-r_{jh}}} & \text{ if } k \neq K\\
+% \frac{1}{1+\sum_{h=1}^{K-1} \frac{r_{jh}}{1-r_{jh}}} & \text{ if } k = K
+%\end{cases}
+%\end{align*}
+%
+%
+%
+%The vector of probabilities given by the $j$th expert with $\boldsymbol{p}_{j} = (p_{j1}\ p_{j2}\ \dots\ p_{j2})'$. 
+%
+%If the event can take upon $K \geq 2$ outcomes, one of the outcomes, say the $K$th one, is chosen as the base-case and a total of $K-1$ Gaussian processes must be constructed. The $k$th process represents the  event that the $k$th outcome occurs given that either the $k$th or the $K$th outcome occur. 
+%
+%This kind of behavior has been acknowledged in the previous literature (see, e.g., \cite{fox2003partition, see2006between, satopaa}).
+%
 
 %It is easy to show that all covariance matrices of size $N \times N$ are not coherent information structures. For instance, the off-diagonals of a covariance matrix  do not need to be upper bounded by its diagonal elements.  
 
@@ -853,9 +873,12 @@ From Figures \ref{ExtremeN5} and \ref{ExtremeN30} it is clear that the feasible 
 %
 %\section{Inverse Problem}
 
+%
+
+%The natural approach to extending the model to events with $K \geq 2$ possible outcomes is to choose one of the outcomes, say the $K$th one, as the base-case and then use the results from Section \ref{Model} to model each of the remaining $(K-1)$ events separately relative to this base-case. An expert who knows all information, i.e. $\delta_j = 1$, can therefore deterministically report on each of the $(K-1)$ outcomes but only relative to the base-case. As it is not clear how the expert can use this knowledge to always learn the true outcome of the event, a different approach to modeling multinomial outcomes has been taken in this section. It is hoped that this section further illustrates the 
 
 \section{Multinomial Outcomes}
-If the target event can take upon $K > 2$ outcomes, the white noise process must be extended to a $(K-1)$-dimensional process $\{ \boldsymbol{X}_B \}$ with each $\boldsymbol{X}_B = (X_{1,B}, X_{2,B},  \dots, X_{K-1,B})' \in \mathbb{R}^{K-1}$.  Expert $j$ observes a fixed share $\delta_j$ of the process. If the information sets of two experts $i$ and $j$ overlap, i.e. $| I_i \cap I_j| = \rho_{ij} > 0$, then the dependency between $\boldsymbol{X}_{I_i}$ and $\boldsymbol{X}_{I_j}$ is described by the cross-covariance $\text{cov}(\boldsymbol{X}_{I_i}, \boldsymbol{X}_{I_j}) = \rho_{ij} I_{K-1}$. Collect the coordinate-specific information sources into vectors $\boldsymbol{X}^{(k)} = \left(X_{k,I_1}, X_{k,I_2}, \dots, X_{k,I_N} \right)'$  for $k = 1, \dots, K-1$. This specifies a multivariate normal distribution,
+This section derives a partial information model for probability forecasts of an event that can take upon $K \geq 2$ outcomes. These outcomes are assumed to have no particular ordering to them. The first step is to extend the Gaussian process to $(K-1)$ dimensions $\boldsymbol{X}_B = (X_{1,B}, X_{2,B},  \dots, X_{K-1,B})' \in \mathbb{R}^{K-1}$.  Expert $j$ observes a fixed share $\delta_j$ of the process. If the information sets of two experts $i$ and $j$ overlap, i.e. $| I_i \cap I_j| = \rho_{ij} > 0$, then the dependency between $\boldsymbol{X}_{I_i}$ and $\boldsymbol{X}_{I_j}$ is described by the cross-covariance $\text{cov}(\boldsymbol{X}_{I_i}, \boldsymbol{X}_{I_j}) = \rho_{ij} I_{K-1}$. Collect the coordinate-specific information sources into vectors $\boldsymbol{X}^{(k)} = \left(X_{k,I_1}, X_{k,I_2}, \dots, X_{k,I_N} \right)'$  for $k = 1, \dots, K-1$. This specifies a multivariate normal distribution,
 
 \begin{align*}
 \left(\begin{matrix} \boldsymbol{X}_S \\ \boldsymbol{X}^{(1)}\\ \vdots \\ \boldsymbol{X}^{(N)} \end{matrix}\right) &\sim \mathcal{N}_{}\left( 
@@ -902,15 +925,16 @@ where
 \end{figure}
 
 
-
-To link this process to the target event, the $(K-1)$-dimensional space is partitioned into $K$ cones with apexes at the origin. Denote these cones with $C_k$ for $k = 1, \dots, K$. The target event results in the $k$th outcome if $\boldsymbol{X}_S \in C_k$. As the outcomes do not have a particular ordering to them, each cone must have the same shape and neighbor every other cone. This can be achieved with a regular $K$-simplex that has been centered at the origin. More specifically, if $A = \frac{1- \sqrt{K}}{K-1}$ and $B = \frac{1+A}{K}$, then the $K$ vertices of the simplex are given by 
-\begin{align*}
-&\boldsymbol{b}_1 = (1-B, -B, \dots, -B)'\\
-&\boldsymbol{b}_2 = (-B, 1-B, \dots, -B)'\\
-& \phantom{=}\vdots\\
-&\boldsymbol{b}_{K-1} = (-B, -B, \dots, 1-B)'\\
-&\boldsymbol{b}_{K} = \left(A-B, A-B, \dots, A-B \right)'
-\end{align*}
+This process is linked to the target event by partitioning the $(K-1)$-dimensional space into $K$ cones with apexes at the origin. Denote these cones with $C_k$ for $k = 1, \dots, K$. The target event results in the $k$th outcome if $\boldsymbol{X}_S \in C_k$. Given that the outcomes do not have a particular ordering to them, each cone must have the same shape and neighbor every other cone. This can be achieved with a regular $K$-simplex that has been centered at the origin. More specifically, if $A = \frac{1- \sqrt{K}}{K-1}$ and $B = \frac{1+A}{K}$, the $K$ vertices of the simplex are
+\begin{equation*}
+\begin{array}{lllccr}
+\boldsymbol{b}_1& = &(1-B& -B& \dots& -B)'\\
+\boldsymbol{b}_2& = &(-B& 1-B& \dots& -B)'\\
+&\phantom{.}\vdots&\\
+\boldsymbol{b}_{K-1}& = &(-B& -B& \dots& 1-B)'\\
+\boldsymbol{b}_{K}& = &(A-B& A-B& \dots& A-B )'
+\end{array}
+\end{equation*}
 %http://mathoverflow.net/questions/38724/coordinates-of-vertices-of-regular-simplex
 Then $C_k$ is the convex cone defined by all vertices except the $k$th one. That is, 
 \begin{align*}
@@ -931,7 +955,7 @@ By construction the aggregate probabilities for the $K$ outcomes sum to one. The
 \begin{align*}
 p_{kj}&= F(\boldsymbol{0} | T_k\boldsymbol{X}_{I_j}, (1-\delta_j)T_k'T_k)
 \end{align*}
-This map establishes $K$ equations with $K$ unknown values of $\boldsymbol{X}_{I_j}$. Therefore $\boldsymbol{X}_{I_j}$ can be determined based on the probability forecasts. Similarly to the binary case, the expert's probability forecasts are marginally uniform over the vertices of the $K$-simplex when $\delta_j = 1$. This marginal distribution converges to the center of the simplex, i.e. the point $(1/K, 1/K, \dots, 1/K)$ as $\delta_j \to 0$. This kind of behavior has been acknowledged in the previous literature (see, e.g., \cite{fox2003partition, see2006between, satopaa}).
+This map establishes $K$ equations with $K$ unknown values. Therefore $\boldsymbol{X}_{I_j}$ can be determined based on the probability forecasts. Similarly to the binary case, the expert's probability forecasts are marginally uniform over the vertices of the $K$-simplex when $\delta_j = 1$. This marginal distribution converges to the center of the simplex, i.e. the point $(1/K, 1/K, \dots, 1/K)$ as $\delta_j \to 0$. This ``point of ignorance" has been acknowledged previously in the literature (see, e.g., \cite{fox2003partition, see2006between, satopaa}). 
 
 
 
