@@ -89,7 +89,7 @@
 
 \begin{document}
 
-\title{Partial Information Model with an Application to Probability Extremization}
+\title{Partial Information Framework with an Application to Probability Extremization}
 %\title{A Novel Framework for Analyzing Subjective Response Data}
 \author{
 Ville A. Satop\"a\"a, Robin Pemantle, and Lyle H. Ungar\\
@@ -492,7 +492,7 @@ X_{I_2} =& 0.30
  \end{array}
 \end{align*}
 The probability forecasts in this example are $p_1 = 0.19$ and $p_2 = 0.65$, the average probability is $\bar{p} = 0.42$, and the average probit forecast (transformed to probability space) is $\Phi(\bar{P}) = 0.40$. 
-The partial information aggregate is $0.65$.  Given that this is more than 0.5 while $\bar{p}$ and $\Phi(\bar{P})$ are less than 0.5, the extremizing constant is negative in both cases. To understand this result, notice that expert 2 knows everything that expert 1 knows. Therefore expert 1 does not provide any new information and can be ignored. The partial information aggregate is completely determined by the probability forecast made by expert 2. Given that only the partial information aggregator is able to take into account overlap information, its aggregate can differ radically from the average probability and probit forecasts. 
+The partial information aggregate is $0.65$.  Given that this is more than 0.5 while $\bar{p}$ and $\Phi(\bar{P})$ are less than 0.5, the extremizing constant is negative in both cases. To understand this result, notice that expert $E_2$ knows everything that expert $E_1$ knows. Therefore $E_1$ does not provide any new information and can be ignored. The partial information aggregate is completely determined by the probability forecast made by $E_2$. Given that only the partial information aggregator is able to take into account overlap information, its aggregate can differ radically from the average probability and probit forecasts. 
 \end{example}
 It is possible to modify Example \ref{Example1} such that the partial information aggregate is on the same side but closer to 0.5 than the average probability and probit forecast. This can be achieved by making $X_{I_2}$ slightly negative. Given that it is possible to make the partial information aggregate equal to any value in the unit interval by simply changing the information structure, inferring the underlying information among the experts is extremely important in probability aggregation.  Before discussing the next example, it is helpful to introduce the class of diagonal information structures. 
 
@@ -535,7 +535,7 @@ X_{I_1} =& 0.50\\
 X_{I_2} =& -0.25
  \end{array}
 \end{align*}
-The probability forecasts in this example are $p_1 = 0.70$ and $p_2 = 0.21$, the average probability is $\bar{p} = 0.46$, and the average probit forecast (transformed to probability space) is $\Phi(\bar{P}) = 0.44$.  The partial information aggregate is $0.87$. Therefore the extremizing constant is negative. To understand this result, notice that the information structure is diagonal. This means that the partial information aggregate reduces to voting that gives each $X_{I_j}$ equal weight. Even though the first expert knows much less than the second expert, the first expert's information is more extreme and hence more influential in determining the final outcome of the event. In other words, expert 1 holds some key information that expert 2 is lacking. Only the partial information aggregator can take this into account. The other two aggregators $\bar{p}$ and $\Phi(\bar{P})$ weight the second expert's information much more heavily because expert 2 knows more than expert 1.
+The probability forecasts in this example are $p_1 = 0.70$ and $p_2 = 0.21$, the average probability is $\bar{p} = 0.46$, and the average probit forecast (transformed to probability space) is $\Phi(\bar{P}) = 0.44$.  The partial information aggregate is $0.87$. Therefore the extremizing constant is negative. To understand this result, notice that the information structure is diagonal. This means that the partial information aggregate reduces to voting that gives each $X_{I_j}$ equal weight. Even though expert $E_1$ knows much less than expert $E_2$,  $E_1$'s information is more extreme and hence more influential in determining the final outcome of the event. In other words, $E_1$ holds some key information that $E_2$ is lacking. Only the partial information aggregator can take this into account. The other two aggregators  weight $E_2$'s information much more heavily because $E_2$ knows more than $E_1$.
 \end{example}
 
 Example (\ref{KeyInfo}) illustrates that the partial information aggregate can be outside the convex hull of the experts' probability forecasts. Given that interpreted estimates require aggregation precedures that can leave the convex hull of the forecasts (\cite{parunak2013characterizing}), the partial information aggregator appears particularly suitable for interpreted estimates. It is possible to show that the aggregator (\ref{VotingAggre}) always extremizes the probit forecast when each $X_{I_j}$ falls on the same side of zero. This is stated more formally in the following observation.
@@ -875,10 +875,17 @@ From Figures \ref{ExtremeN5} and \ref{ExtremeN30} it is clear that the feasible 
 
 %
 
-%The natural approach to extending the model to events with $K \geq 2$ possible outcomes is to choose one of the outcomes, say the $K$th one, as the base-case and then use the results from Section \ref{Model} to model each of the remaining $(K-1)$ events separately relative to this base-case. An expert who knows all information, i.e. $\delta_j = 1$, can therefore deterministically report on each of the $(K-1)$ outcomes but only relative to the base-case. As it is not clear how the expert can use this knowledge to always learn the true outcome of the event, a different approach to modeling multinomial outcomes has been taken in this section. It is hoped that this section further illustrates the 
+
 
 \section{Multinomial Outcomes}
-This section derives a partial information model for probability forecasts of an event that can take upon $K \geq 2$ outcomes. These outcomes are assumed to have no particular ordering to them. The first step is to extend the Gaussian process to $(K-1)$ dimensions $\boldsymbol{X}_B = (X_{1,B}, X_{2,B},  \dots, X_{K-1,B})' \in \mathbb{R}^{K-1}$.  Expert $j$ observes a fixed share $\delta_j$ of the process. If the information sets of two experts $i$ and $j$ overlap, i.e. $| I_i \cap I_j| = \rho_{ij} > 0$, then the dependency between $\boldsymbol{X}_{I_i}$ and $\boldsymbol{X}_{I_j}$ is described by the cross-covariance $\text{cov}(\boldsymbol{X}_{I_i}, \boldsymbol{X}_{I_j}) = \rho_{ij} I_{K-1}$. Collect the coordinate-specific information sources into vectors $\boldsymbol{X}^{(k)} = \left(X_{k,I_1}, X_{k,I_2}, \dots, X_{k,I_N} \right)'$  for $k = 1, \dots, K-1$. This specifies a multivariate normal distribution,
+Typically a binary model is extended to events with $K \geq 2$  outcomes by first choosing one of the outcomes, say the $K$th one, as the base-case and then using the binary results to model each of the remaining $(K-1)$ events relative to this base-case. Applying this idea to the binary model introduced in Section \ref{Model} would lead to several pools of information. These pools must depend on each other such that only one outcome can occur at a time. For instance, the events could form structure resembling a binary-tree. Such a structure, however, can require over $2K$ pools of information. Furthermore, it is not clear how to reinforce the correct marginal distributions (see Section \ref{Model}) of expert forecasts under multiple pools of information. Therefore a different approach is adopted in this section. This section illustrates that using a single pool of information typically leads to the cleanest specification of the model. 
+
+
+%An expert who knows all information, i.e. $\delta_j = 1$, can therefore deterministically report on each of the $(K-1)$ outcomes but only relative to the base-case. As it is not clear how the expert can use this knowledge to always learn the true outcome of the event, a different approach to modeling multinomial outcomes has been taken in this section. It is hoped that this section further illustrates the 
+
+%This section derives a partial information model for probability forecasts of an event that can take upon $K \geq 2$ outcomes. 
+
+Assume that the $K$ outcomes of the event have no particular ordering to them. The first step is to extend the Gaussian process to $(K-1)$ dimensions $\boldsymbol{X}_B = (X_{1,B}, X_{2,B},  \dots, X_{K-1,B})' \in \mathbb{R}^{K-1}$.  Expert $j$ observes a fixed share $\delta_j$ of the process. If the information sets of two experts $i$ and $j$ overlap, i.e. $| I_i \cap I_j| = \rho_{ij} > 0$, then the dependency between $\boldsymbol{X}_{I_i}$ and $\boldsymbol{X}_{I_j}$ is described by the cross-covariance $\text{cov}(\boldsymbol{X}_{I_i}, \boldsymbol{X}_{I_j}) = \rho_{ij} I_{K-1}$. Collect the coordinate-specific information sources into vectors $\boldsymbol{X}^{(k)} = \left(X_{k,I_1}, X_{k,I_2}, \dots, X_{k,I_N} \right)'$  for $k = 1, \dots, K-1$. This specifies a multivariate normal distribution,
 
 \begin{align*}
 \left(\begin{matrix} \boldsymbol{X}_S \\ \boldsymbol{X}^{(1)}\\ \vdots \\ \boldsymbol{X}^{(N)} \end{matrix}\right) &\sim \mathcal{N}_{}\left( 
@@ -955,7 +962,7 @@ By construction the aggregate probabilities for the $K$ outcomes sum to one. The
 \begin{align*}
 p_{kj}&= F(\boldsymbol{0} | T_k\boldsymbol{X}_{I_j}, (1-\delta_j)T_k'T_k)
 \end{align*}
-This map establishes $K$ equations with $K$ unknown values. Therefore $\boldsymbol{X}_{I_j}$ can be determined based on the probability forecasts. Similarly to the binary case, the expert's probability forecasts are marginally uniform over the vertices of the $K$-simplex when $\delta_j = 1$. This marginal distribution converges to the center of the simplex, i.e. the point $(1/K, 1/K, \dots, 1/K)$ as $\delta_j \to 0$. This ``point of ignorance" has been acknowledged previously in the literature (see, e.g., \cite{fox2003partition, see2006between, satopaa}). 
+This map establishes $K$ equations with $K$ unknown values. Therefore $\boldsymbol{X}_{I_j}$ can be determined based on the probability forecasts. Similarly to the binary case, the expert's probability forecasts are marginally uniform over the vertices of the $K$-simplex when $\delta_j = 1$. The marginal distribution converges to a point mass at the center of the simplex, i.e. the point $(1/K, 1/K, \dots, 1/K)$ as $\delta_j \to 0$. This ``point of ignorance" has been acknowledged previously in the literature (see, e.g., \cite{fox2003partition, see2006between, satopaa}). 
 
 
 
