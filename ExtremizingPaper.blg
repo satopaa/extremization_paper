@@ -1,28 +1,27 @@
-This is BibTeX, Version 0.99d (TeX Live 2011)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+This is BibTeX, Version 0.99c (Web2C 7.5.4)
 The top-level auxiliary file: ExtremizingPaper.aux
 The style file: plainnat.bst
 Database file #1: biblio.bib
 You've used 15 entries,
-            2773 wiz_defined-function locations,
-            692 strings with 7413 characters,
-and the built_in function-call counts, 6545 in all, are:
+            2774 wiz_defined-function locations,
+            695 strings with 7434 characters,
+and the built_in function-call counts, 6425 in all, are:
 = -- 576
 > -- 361
 < -- 13
 + -- 123
 - -- 108
-* -- 519
+* -- 489
 := -- 1026
 add.period$ -- 45
 call.type$ -- 15
-change.case$ -- 77
+change.case$ -- 62
 chr.to.int$ -- 15
 cite$ -- 30
-duplicate$ -- 296
-empty$ -- 549
+duplicate$ -- 281
+empty$ -- 534
 format.name$ -- 139
-if$ -- 1356
+if$ -- 1341
 int.to.chr$ -- 1
 int.to.str$ -- 1
 missing$ -- 18
@@ -30,9 +29,9 @@ newline$ -- 83
 num.names$ -- 60
 pop$ -- 152
 preamble$ -- 1
-purify$ -- 66
+purify$ -- 51
 quote$ -- 0
-skip$ -- 228
+skip$ -- 213
 stack$ -- 0
 substring$ -- 267
 swap$ -- 15
