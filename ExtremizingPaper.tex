@@ -35,6 +35,7 @@
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Observation}
 \newtheorem{observation}[theorem]{Observation}
+\newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{claim}[theorem]{Claim}
 \DeclareMathOperator*{\argmax}{arg\,max}
 
@@ -153,7 +154,7 @@ Our first contribution is a concrete model for probability forecasts made by a g
 %For instance, expert $E_1$ may actively follow both American and Russian news on the Crimean crisis while $E_2$ hardly reads any news at all. 
 %The result is a group of experts with varying amounts of information about the future event to be predicted. These experts then 
 %Formally, this is realized as experts making forecasts based on different subsets of all information that ultimately decides the final outcome of the future event to be predicted. 
-Therefore, as different information is considered to lead to different beliefs, forecast heterogeneity stems from \textit{information diversity}. This maintains a close link with interpreted forecasts while permitting models that can be potentially estimated in practice. For instance, our model for probability forecasts describes the distribution of information among the experts with a covariance matrix that can be constrained and estimated in different ways to suit the available resources.  Unlike the classical measurement error framework, the partial information framework does not assume a ``true'' probability. Instead, the target event either happens or does not, and each probability forecast is a reflection of the expert's personal amount of information. This guides the discussion away from the meaning of a ``true'' probability and therefore avoids potential philosophical debate.
+Therefore, as different information is considered to lead to different beliefs, forecast heterogeneity stems from \textit{information diversity}. This maintains a close link with interpreted forecasts while permitting models that can be potentially estimated in practice. For instance, our model for probability forecasts describes the distribution of information among the experts with a covariance matrix that can be constrained and estimated in different ways to suit the available resources.  Unlike the classical measurement error framework, the partial information framework does not assume a ``true'' probability. Instead, the target event either happens or does not, and each probability forecast is a reflection of the expert's personal amount of information. This guides the discussion away from the meaning of a ``true'' probability and avoids potential philosophical debate.
 
 %\textcolor{red}{explain that this forms our gold-standard which allows us to study extremizing}
 %\textcolor{red}{remove all reference to training set}
@@ -198,7 +199,7 @@ The rest of the paper is organized as follows. Section 2 briefly reviews several
 
 
 \section{Classical Aggregation Procedures}
-This section describes three commonly used aggregators that are based on the classical measurement error framework. This framework assumes a ``true'' probability $\theta$ for a binary event $A$. Each of the $N$  experts is then able to measure $\theta$ but with some error. This can be formalized by regarding the $j$th expert's probability forecast $p_j$ as a draw from a probability density function (PDF) $f(\cdot | \theta)$. The PDF $f(\cdot | \theta)$ is supported on the unit interval and depends on $\theta$. Implicit in the assumption of $f(\cdot | \theta)$ is that the forecasts are conditionally independent given $\theta$. In other words, each forecast is a fresh draw from the corresponding probability distribution. 
+The classical measurement error framework assumes a ``true'' probability $\theta$ for a binary event $A$. Each of the $N$  experts is then able to measure $\theta$ but with some error. This can be formalized by regarding the $j$th expert's probability forecast $p_j$ as a draw from a probability density function (PDF) $f(\cdot | \theta)$. The PDF $f(\cdot | \theta)$ is supported on the unit interval and depends on $\theta$. Implicit in the assumption of $f(\cdot | \theta)$ is that the forecasts are conditionally independent given $\theta$. In other words, each forecast is a fresh draw from the corresponding probability distribution. 
 
 To introduce the first classical aggregator, consider a noise-added model in which the experts share an identical PDF $f(\cdot | \theta)$ and all forecasts are conditionally independent given $\theta$. If $f(\cdot | \theta)$ has mean $\theta$, the average of the forecasts $\{ p_j \}_{j=1}^N$ converges to $\theta$ as $N \to \infty$. Therefore the \textit{simple average} (a.k.a. the (equally weighted) \textit{linear opinion pool})
 \begin{align*}
@@ -258,7 +259,7 @@ It is helpful to begin the introduction by considering only two experts. Assume 
 \begin{figure}[htbp]
 %   \hspace{-2em}
    \includegraphics[width = \textwidth]{N=2} % requires the graphicx package
-   \caption{Illustration of the partial information model with two experts.}
+   \caption{Illustration of the partial information model with $2$ experts.}
    \label{diagram2}
 \end{figure}
 Figure \ref{diagram2} illustrates this setup. In this diagram the Gaussian process has been partitioned into four parts based on the experts' information sets:
@@ -293,7 +294,7 @@ Given that $X_S$ has mean zero, the prior probability for the event is $\P(X_S >
 
 
 
-Consider now $N$ experts. Let $|I_j| = \delta_j$ be the amount of information known by expert $E_j$, and $|I_i \cap I_j| = \rho_{ij}$ be the information overlap between experts $E_i$ and $E_j$. Expression (\ref{twoExperts}) generalizes to the vector $(X_{S}, X_{I_1}, X_{I_2}, \dots, X_{I_N})$ as follows.
+Consider now $N$ experts. Let $|I_j| = \delta_j$ be the amount of information known by expert $E_j$ for $j = 1, \dots, N$, and $|I_i \cap I_j| = \rho_{ij}$ be the information overlap between experts $E_i$ and $E_j$ with $i \neq j$. Expression (\ref{twoExperts}) generalizes to the vector $(X_{S}, X_{I_1}, X_{I_2}, \dots, X_{I_N})$ as follows.
 \begin{align}
 \left(\begin{matrix} X_S \\ X_{I_1}\\ \vdots \\ X_{I_N} \end{matrix}\right) &\sim \mathcal{N}\left( \left(\begin{matrix} 
 \mu_1 \\ \boldsymbol{\mu}_2
@@ -393,15 +394,15 @@ where
 \begin{align*}
 x_0 = \kappa \frac{\sigma_1}{\sigma_2} && \gamma &= \frac{\sigma_1}{\sigma_2} \sqrt{1-\kappa^2}
 \end{align*}
-The parameter $x_0$ represents the location (the median and mode) and $\gamma$ specifies the scale (half the interquartile range) of the Cauchy distribution. This leads to the following theorem whose proof is deferred to Appendix A.
+The parameter $x_0$ represents the location (the median and mode) and $\gamma$ specifies the scale (half the interquartile range) of the Cauchy distribution. This leads to the following proposition whose proof is deferred to Appendix A.
 
-\begin{theorem}
+\begin{proposition}
 \label{positiveProbThm}
 %Under the partial information model, the probability $\P(\alpha \geq 1 | \Sigma_{22}) \in (0.5,1]$.
 The amount of extremizing $\alpha \sim \text{Cauchy}(x_0, \gamma)$, where the location parameter $x_0 \geq 1$. The equality $x_0 = 1$ occurs only when $\delta_j = \delta'$ for all $j = 1, \dots, N$. Consequently, if $\delta_j \neq \delta'$ for some $j = 1, \dots, N$, then the probability that the probit opinion pool requires extremizing is $\P(\alpha > 1 | \Sigma_{22}, \delta') \in (0.5,1]$, where the bounds are sharp.
-\end{theorem}
+\end{proposition}
 \noindent
-This theorem shows that, on any non-trivial problem, extremizing is more likely to be improve the probit opinion pool than to degrade it. This can partially explain why extremizing aggregators perform well on large sets of real-world prediction problems.  To understand how the probability $\P(\alpha > 1 | \Sigma_{22}, \delta')$  changes across different information structures,  
+This proposition shows that, on any non-trivial problem, extremizing is more likely to be improve the probit opinion pool than to degrade it. This can partially explain why extremizing aggregators perform well on large sets of real-world prediction problems.  To understand how the probability $\P(\alpha > 1 | \Sigma_{22}, \delta')$  changes across different information structures,  
 %Given that (\ref{Cauchy}) depends on $2+N(N+1)/2$ parameters,
  it is helpful, if not necessary, to make simplifying assumptions. A natural choice is to consider all experts exchangeable and develop intuition at a higher level. This is done in the next subsection that analyzes extremizing under compound symmetric information. 
 
@@ -568,7 +569,7 @@ According to Figure \ref{LevelplotsOracle} extremizing is required more often wh
 This relationship can be understood in broader terms as follows. Recall that the experts form their individual forecasts independently based on their own information. Given that this personal information cannot be larger than the group's total information, the expert's forecast is often less confident, i.e. closer to $0.5$, than the crowd belief. Unfortunately, any average of the individual forecasts cannot be more confident than the most confident expert in the group. Therefore it cannot extend beyond convex hull of the individual forecasts even when this is suggested by the group's total information. The crowd belief, on the other hand, is based on more information than any of the individual forecasts, and as a result, is likely to be more confident than any of them. The gap between the average aggregate and the crowd belief widens as the group's total information increases (the crowd belief becomes more confident) and the average amount information of a single expert decreases (the convex hull becomes more concentrated around $0.5$ and the average aggregate becomes less confident). These two changes can happen simultaneously only if the information diversity among the experts increases. 
 
 
-In Figure \ref{LevelplotsOracle} the location parameter $x_0 \geq 1$ and, consequently, $\P(\alpha > 1 | \Sigma_{22}, \delta') \in (0.5, 1.0]$. This follows from Theorem \ref{positiveProbThm}. When $\lambda = 1.0$, the location $x_0 = 1.0$ and scale $\gamma = 0.0$, which represents a point mass at $\alpha = 1.0$.  In this case, all information is public, and the group of experts is as good as a single expert. Therefore, given that the forecast of a group with only one expert coincides with the crowd belief, $\lambda = 1.0$ always implies $\alpha = 1.0$ regardless of the value of $\delta$. From the top of Figure \ref{xOracle} the location $x_0$ increases indefinitely towards the boarder line defined by $\delta' = \delta(2- \lambda) = 1$. At this point the oracle knows everything and the crowd belief is always equal to the true outcome of the target event. Based on Figure \ref{probOracle}, the probit opinion pool is more likely to agree with the crowd belief at points closer to the end points of the boarder line, namely, when $(\delta, \lambda) = (0.5, 0.0)$ or  $(\delta, \lambda) = (1.0, 1.0)$. At the former point, experts' information sets form a partition of the full information. Therefore the experts know all the information. Such a group of experts can re-construct $X_S$ by simply adding up their information, and aggregation becomes deterministic voting: if the sum of the probit forecasts is above $0.0$, the event $A$ materializes; else it does not. A similar observation has been made under the interpreted forecasts (\citet{hong2009interpreted}). At the latter point, the outcome of the target event is public information and the experts can deterministically report the correct outcome. In between these two points, however, there is a chance that the probit opinion pool disagrees with the crowd belief on the more likely outcome of the target event. The correction requires a large but negative value of $\alpha$. Consequently, the scale $\gamma$ increases and $\P(\alpha > 1 | \Sigma_{22}, \delta')$ decreases slightly. 
+In Figure \ref{LevelplotsOracle} the location parameter $x_0 \geq 1$ and, consequently, $\P(\alpha > 1 | \Sigma_{22}, \delta') \in (0.5, 1.0]$. This follows from Proposition \ref{positiveProbThm}. When $\lambda = 1.0$, the location $x_0 = 1.0$ and scale $\gamma = 0.0$, which represents a point mass at $\alpha = 1.0$.  In this case, all information is public, and the group of experts is as good as a single expert. Therefore, given that the forecast of a group with only one expert coincides with the crowd belief, $\lambda = 1.0$ always implies $\alpha = 1.0$ regardless of the value of $\delta$. From the top of Figure \ref{xOracle} the location $x_0$ increases indefinitely towards the boarder line defined by $\delta' = \delta(2- \lambda) = 1$. At this point the oracle knows everything and the crowd belief is always equal to the true outcome of the target event. Based on Figure \ref{probOracle}, the probit opinion pool is more likely to agree with the crowd belief at points closer to the end points of the boarder line, namely, when $(\delta, \lambda) = (0.5, 0.0)$ or  $(\delta, \lambda) = (1.0, 1.0)$. At the former point, experts' information sets form a partition of the full information. Therefore the experts know all the information. Such a group of experts can re-construct $X_S$ by simply adding up their information, and aggregation becomes deterministic voting: if the sum of the probit forecasts is above $0.0$, the event $A$ materializes; else it does not. A similar observation has been made under the interpreted forecasts (\citet{hong2009interpreted}). At the latter point, the outcome of the target event is public information and the experts can deterministically report the correct outcome. In between these two points, however, there is a chance that the probit opinion pool disagrees with the crowd belief on the more likely outcome of the target event. The correction requires a large but negative value of $\alpha$. Consequently, the scale $\gamma$ increases and $\P(\alpha > 1 | \Sigma_{22}, \delta')$ decreases slightly. 
 
 
 
@@ -618,7 +619,7 @@ The amount of extremizing is positive only if the probit opinion pool and the cr
 
 
 \section{Probability Aggregation}
-This section uses the partial information model from Section \ref{Model} to derive a probability aggregator that can be applied in practice. Recall that assuming knowledge of the union of the experts' information sets is hardly reasonable in practice. Therefore the best aggregate probability that can be realistically hoped for is  $\P(X_{S} > 0 | p_1, \dots, p_N)$.  This can be constructed under the partial information model by first deriving the conditional distribution of $X_S$ given $\boldsymbol{X}$. That is, if $\boldsymbol{X} = (X_{I_1}, X_{I_2},  \dots, X_{I_N})'$ is a column vector of length $N$ and $\Sigma_{22}$ is a coherent overlap structure such that $\Sigma_{22}^{-1}$ exists, then 
+This section uses the partial information model from Section \ref{Model} to derive a probability aggregator that can be applied in practice. Recall that assuming knowledge of the union of the experts' information sets is hardly reasonable in practice. Therefore the best aggregate probability that can be realistically hoped for is  $\P(X_{S} > 0 | p_1, \dots, p_N)$.  This can be constructed under the partial information model by first deriving the conditional distribution of $X_S$ given $\boldsymbol{X}$. Referring back to (\ref{NExperts}), if $\boldsymbol{X} = (X_{I_1}, X_{I_2},  \dots, X_{I_N})'$ is a column vector of length $N$ and $\Sigma_{22}$ is a coherent overlap structure such that $\Sigma_{22}^{-1}$ exists, then 
 \begin{align*}
 X_{S} | \boldsymbol{X} \sim \mathcal{N}\left(\bar{\mu}, \bar{\Sigma}\right), 
 \end{align*}
@@ -653,12 +654,12 @@ The partial information aggregator (\ref{GeneralAggregator}) under the compound 
 \end{align}
 where  the values of $\delta$ and $\lambda$ can be estimated in practice via the maximum likelihood method. Technical details for estimation  are provided in Appendix A.
 %It is crucial to notice that this aggregator can learn the amount of extremizing without a separate training set. Therefore it can be applied to a wide range of applied problems. 
-The domain restriction (\ref{rhoDomain}) ensures that the term under the square-root in (\ref{CompoundAggre}) is always non-negative. Similarly to the aforementioned classical aggregators,  the partial information aggregator (\ref{CompoundAggre}) considers the experts exchangeable. However, it is based on widely different modeling assumptions. This makes it more appropriate for combining interpreted forecasts. This is stated more formally in the following theorem whose proof is deferred to Appendix A. 
+The domain restriction (\ref{rhoDomain}) ensures that the term under the square-root in (\ref{CompoundAggre}) is always non-negative. Similarly to the aforementioned classical aggregators,  the partial information aggregator (\ref{CompoundAggre}) considers the experts exchangeable. However, it is based on widely different modeling assumptions. This makes it more appropriate for combining interpreted forecasts. This is stated more formally in the following proposition whose proof is deferred to Appendix A. 
 
-\begin{theorem}
+\begin{proposition}
 \label{positiveThm}
 Under the compound symmetric information structure, (a) the partial information aggregator extremizes the probit opinion pool as long as $p_j \neq p_i$ for some $j \neq i$, and (b) the aggregator can leave the convex hull of the individual probability forecasts. 
-\end{theorem}
+\end{proposition}
 
 \begin{figure}[t]
 \centering
@@ -777,7 +778,7 @@ The partial information model offers many future research directions. For instan
 % \\
 %\noindent
 
-\textit{Proof of Theorem \ref{positiveProbThm}.}
+\textit{Proof of Proposition \ref{positiveProbThm}.}
 \begin{align*}
 x_0 &= \kappa \frac{\sigma_1}{\sigma_2} \\
  &= \frac{ \sum_{j=1}^N \frac{\delta_j}{\sqrt{1-\delta_j}}}{\sqrt{\delta'  \left\{ \sum_{j=1}^N \frac{\delta_j}{1-\delta_j} + 2 \sum_{i,j: i<j} \frac{\rho_{ij}}{\sqrt{(1-\delta_j)(1-\delta_i)}}\right\}}} \sqrt{\frac{\frac{\delta'}{1-\delta'}}{\frac{1}{N^2} \left\{ \sum_{j=1}^N \frac{\delta_j}{1-\delta_j} + 2 \sum_{i,j: i<j} \frac{\rho_{ij}}{\sqrt{(1-\delta_j)(1-\delta_i)}}\right\} }}\\
@@ -800,7 +801,7 @@ which gives that $x_0 \geq 1$. Given that the Cauchy distribution is symmetric a
 \\
 \\
 \noindent
-\textit{Proof of Theorem \ref{positiveThm}.} (a) For a given $\delta$, the amount of extremizing $\alpha$ is minimized when $(N-1)\lambda +1$ is maximized. This happens as $\lambda \uparrow 1$. Plugging this into (\ref{CompoundAlpha}) gives
+\textit{Proof of Proposition \ref{positiveThm}.} (a) For a given $\delta$, the amount of extremizing $\alpha$ is minimized when $(N-1)\lambda +1$ is maximized. This happens as $\lambda \uparrow 1$. Plugging this into (\ref{CompoundAlpha}) gives
 \begin{align*}
 \alpha &= \frac{\frac{N\sqrt{1-\delta}}{(N-1)\lambda +1}}{\sqrt{1- \frac{N\delta}{(N-1)\lambda +1} }}  \downarrow \frac{\sqrt{1-\delta}}{\sqrt{1-\delta }} = 1
 \end{align*}
