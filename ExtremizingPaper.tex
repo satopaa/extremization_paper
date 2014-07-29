@@ -129,20 +129,17 @@ political and socio-economic event forecasting~\citep{tetlock2005expert};
 for example, one might forecast the winner of the next Congolese election, 
 whether war will break out in Egypt this year, and so forth.  
 
-Forecast aggregation is the problem of combining two or more 
-expert forecasts into a single forecast with optimal properties.
-There is strong empirical evidence that bringing together the
-strengths of different experts by aggregating their probability 
-forecasts into a signle common forecast improves predictive
-performance~\citep{clemen1989combining, armstrong2001combining}.
+Such forecasting tasks typically involve several probability forecasts arising from diverse sources (e.g., statistical models, human experts, etc.). The decision maker then takes action based on this information. A typical first step, known as \textit{forecast aggregation}, is to combine the probabilities  into a single forecast with optimal properties. Bringing together the
+strengths of different forecasters in this manner has been shown to improve predictive
+performance under various contexts.~\citep{clemen1989combining, armstrong2001combining}.
 
 There are two approaches to forecast aggregation: empirical
 and theoretical.  The empirical approach is akin to machine
-learning.  Given several forecast streams, one experiments
+learning.  Given several forecast streams, the decision maker experiments
 with different aggregation procedures, evaluates the results
-of these on training data and selects parameters to optimize 
-the results.  The theoretical approach is to produce a probability
-model and to compute the optimal aggregation procedure under the 
+of these on training data, and finally selects parameters values that optimize 
+the results.  The theoretical approach, on the other hand, first produces a probability
+model and then computes the optimal aggregation procedure under the 
 assumptions of the model.  This may involve estimating parameters 
 of the model from the data.  
 
@@ -159,9 +156,9 @@ underpinnings, have been pursued in a manner that is largely empirical.}.
 The goal of this paper is to
 produce a plausible theoretical framework for forecast aggregation.
 This framework allows us to interpret existing aggregation 
-procedures and illuminates aspects that can be improved.
+procedures and illuminate aspects that can be improved.
 Secondly, at a general level, we use this framework to shed light on 
-the practice of {\em probability extremizing}.  Thirdly, we apply
+the practice of {\em probability extremizing} (shifting an average aggregate closer to its nearest extreme). Thirdly, we apply
 this framework to a specific toy model, where the optimal 
 aggregator may be computed and reflects qualitative properties 
 
@@ -170,29 +167,25 @@ aggregator may be computed and reflects qualitative properties
 A forecast is an estimator of an indicator function.  As is
 the case with any estimator, its deviation from the truth
 can be broken into two pieces: bias and noise.  A forecast
-stream is said to be {\em true}
-if, in the long run, the proportion of times the event occurs 
-when the forecast is $p$ is in fact $p$.  Another term for 
-this is {\em calibrated} (see, e.g., \citealt{degroot1983comparison}). 
+stream is said to be {\em calibrated}
+if, in the long run, events associated with a forecast $p$ have an empirical frequency of occurrence of $p$ (see, e.g., \citealt{degroot1983comparison}). 
 In the lingo of estimation, this is equivalent to being conditionally 
-unbiased.  A forecast stream that is not true
-can, in principle, be corrected by the application of a 
-function translating the forecast $p$ into the forecast $\pt$
+unbiased.  A forecast stream that is not calibrated
+can, in principle, be corrected by translating the forecast $p$ into the forecast $\pt$
 where $\pt$ is the (historical) proportion of times the 
 event occurs when $p$ is forecast.  One can then assume without
 loss of generality that the forecast stream is true, replacing
 $p$ if necessary by the historically corrected $\pt$.
 
-This assumption is of course valid only in principle: 
+This assumption is, of course, valid only in principle: 
 it relies on a relatively lengthy history and an assumption
 of stationarity of the properties of the forecast.  Nevertheless,
 on the theoretical level, it is important to separate the problems 
 of bias and noise because they are solved by different mechanisms.
-In this paper we consider the aggregation problem for true forecast
+In this paper we consider the aggregation problem for calibrated forecast
 streams, thus isolating the task to one of noise reduction.  
 
-Before delving into the problem of forecast aggregation, we take
-a brief look at the problem of assessing and improving a single
+Before delving into the problem of forecast aggregation, it is useful to briefly discuss the problem of assessing and improving a single
 forecast stream.  The most common methodology is to use a loss
 function.  Letting $\one_A$ denote the indicator function of the
 event $A$ being forecast, the loss function is a penalty 
@@ -200,32 +193,29 @@ $L(p , \one_A)$ where $p$ is the forecasted probability.
 A loss function is said to be {\em revealing} or {\em proper}
 if the Bayesian optimal strategy is to tell the truth.  In other words, 
 if the subjective probability estimate is $p$, then $t = p$ should
-minimize the expected loss $p L(t,1) + (1-p) L(t,0)$.  Many
-choices are possible.  The expected loss is a one dimensional
-assessment of an estimator and an estimator that outperforms 
+minimize the expected loss $p L(t,1) + (1-p) L(t,0)$.  This expected loss is a one dimensional
+assessment of an estimator. Many
+choices, however, are possible, and an estimator that outperforms 
 another under one loss function will not necessarily do so
-under a different loss function.  For example, the esitmator with 
-the least variance is best under the quadratic loss function
-$(p - \one_A)^2$, also known as the {\em Brier score}, 
-whereas the winner under entropy loss $\log (1 / |p - \one_{A^c}|)$ 
-is one that best avoids forecasting an incorrect event with near 
+under a different loss function.  For example, minimizing the quadratic loss function
+$(p - \one_A)^2$, also known as the {\em Brier score}, gives the estimator with the least variance. On the other hand, minimizing the entropy loss $\log (1 / |p - \one_{A^c}|)$ reveals the estimator that best avoids forecasting an incorrect event with near 
 certainty; see~\citet[Section~2]{HwPe1997} for a discussion of
 proper loss functions.
 
 The point of this brief review is two-fold.  First, when a group of
-sophisiticated forecasters operates under a revealing loss function,
-the assumption of true forecast streams is, to some degree, 
+sophisticated forecasters operates under a revealing loss function,
+the assumption of calibrated forecast streams is, to some degree, 
 self-fulfilling.  Forecasters can improve their long run 
-performance by trueing their forecasts, and forecasters with 
+performance by calibrating their forecasts. Forecasters with 
 competitive motivation, sophistication and historical data
 will probably do so.  Secondly, the assessment of the aggregated forecast
 is not uni-dimensional any more than is the assessment of an
 individual forecast.  In order to compare different aggregation 
 procedures, a scoring rule must be chosen.  In practice, the
-Brier score is most often chosen, perhaps because of its simplicity
+Brier score is the most common choice, perhaps because of its simplicity
 or because of the paramount status of variance in the statistical
 literature.  In this paper we will concentrate on minimizing the
-variance of aggregators, though much of what we say will hold under
+variance of aggregators, though much of the discussion will hold under
 general proper loss functions.
 
 \subsection{The Partial Information Model}
@@ -234,24 +224,24 @@ Any probability model for forecast aggregation must begin with a
 probability space $(\Omega, \F , \P)$ and a measurable event
 $A \in \F$ to be forecasted.  In any Bayesian setup, with a proper 
 loss function, it is more or less tautological that a forecaster
-forecasts $p = \E (\one_A \| \G)$ where $\G \subseteq \F$ is the
+reports $p = \E (\one_A \| \G)$ where $\G \subseteq \F$ is the
 information used by the forecaster.  Our most general model for
 forecast aggregation is little more than this.  Suppose there are
 $N$ forecasters, numbered $1, \ldots, N$.  We posit the existence
-of $\sigma$-fields $\F_i \subseteq \F$ such that Forecaster~$i$
-forecasts $\E (\one_A \| \F_i)$.  Anything further must come from
-assumptions on the structure of the collection $\{ \F_i \}$.
+of sub-$\sigma$-fields $\F_i \subseteq \F$ such that Forecaster~$i$
+forecasts $p_i = \E (\one_A \| \F_i)$.  Anything further must come from
+assumptions on the structure of the collection $\{ \F_i \}_{i=1}^N$.
 %%%In Section~?? we explore in detail a particular such structure.
 
 This setup is quite flexible.  Suppose, for example, that there are
 many events $A_1, A_2 , \ldots,$ to be forecasted.  For each event 
 $A_j$, the model assumes only that Forecaster~$i$ uses some 
 $\sigma$-field $\F_{ij}$.  Further aspects of the problem are
-reflected by the structure of the collection $\{ F_{ij} \}$.
+reflected by the structure of the collection $\{ \F_{ij} \}$.
 For example, if the events are sequenced in time, then probably
-$\{ F_{ij} : j = 1 , 2, 3, \ldots \}$ will be an increasing 
+$\{ \F_{ij} : j = 1 , 2, 3, \ldots \}$ will be an increasing 
 sequence.  If the forecasts are public, it may make sense to 
-asume that $F_{ij}$ contains all forecasts up to time $j-1$.
+asume that $\F_{ij}$ contains all forecasts up to time $j-1$.
 If the forecasts of each individual $A_j$ are sequenced rather 
 than synchronous, it may make sense for $\F_{ij}$ to include
 some forecasts at time $j$ as well.  
@@ -270,9 +260,9 @@ In this model, we distinguish two benchmarks for efficiency in
 aggregation.  The first is the {\em oracular} aggregator, which
 forecasts $p' := \E (\one_A \| \F')$ where $\F'$ is the $\sigma$-field
 generated by the union of the $\sigma$-fields $\{ \F_i : 1 \leq i 
-\leq N \}$.  Obviously we can do no better when forecasting the
+\leq N \}$.  Obviously, it is not possible do better when forecasting the
 probability of the event $A$ than to use all the information available 
-to any expert; note that if an expert chooses to throw away 
+to the forecasters; note that if a forecaster chooses to throw away 
 some of the available information then, for purposes of aggregation,
 the information may as well not exist.  The oracular aggregator
 is a reasonable model for an upper bound on estimation efficiency;
@@ -280,14 +270,14 @@ information not in $\F'$ represents randomness inherent in the outcome.
 
 In practice, the aggregator cannot necessary do as well as this.  
 Information comes to the aggregator only via the forecasts.  Hence the 
-aggregator can do no better than to estimate $p'' := \E (\one_A \| \F'')$
+aggregator cannot improve upon the estimate $p'' := \E (\one_A \| \F'')$
 where $\F''$ is the $\sigma$-field generated by the forecasts
 $\{ p_1 , \ldots , p_N \}$.  We call this the {\em revealed} aggregator 
 because it uses exactly the information revealed by the forecasters
 through their forecasts.  The {\em general partial information model} 
 is precisely the model described in the foregoing paragaphs.  
 Specific partial information models involve assumptions on
-the structure of $\{ F_i \}$.  In each case, the relevant estimator 
+the structure of $\{ \F_i \}$.  In each case, the relevant estimator 
 is the revealed aggregator. 
 
 \subsection{Organization of the Paper}
@@ -296,7 +286,7 @@ In the next section we review some prior work on aggregation and
 indicate the relation to the partial information framework.
 Section~\ref{sec:model} discusses some lliuminating toy examples 
 and motivates our subsequent choices of specific partial information 
-models.  Section~\ref{extremizing} is compares the oracular
+models.  Section~\ref{extremizing} compares the oracular
 aggregator $p'$ with the average probit $\probit$, thereby
 explaining the empirical practice of {\em probability extremizing}.
 Section~\ref{aggregation} analyzes the revealed aggregator for a
@@ -947,10 +937,11 @@ optimal aggregate under full information overlap.  The optimal
 aggregator, however, undergoes a smooth transformation from 
 averaging to summing of the probit forecasts as the information 
 overlap decreases towards the point of no overlap, i.e., as the 
-information structure becomes diagonal.  This is summarized in the following observation.
-
-\begin{observation}
-The information structures index a spectrum of aggregators. That is,
+information structure becomes diagonal.  
+%This is summarized in the following observation.
+%%\begin{observation}
+%The information structures index a spectrum of aggregators. 
+That is,
 \begin{center}
 \begin{tabular}{ccc}
 %\stackrel{\text{ \normalsize full information overlap}}{\stackrel{\text{\normalsize no extremization}}{averaging}} && \Leftrightarrow  && \stackrel{\text{ no information overlap}}{\text{full extremization}}
@@ -960,8 +951,7 @@ low extremization & {\Large $\Longleftrightarrow$} & high extremization \\
 averaging  & & voting\\
 \end{tabular}
 \end{center}
-\end{observation}
-
+%\end{observation}
 This observation gives qualitative
 guidance in real world settings where the general level of overlap 
 can said to be high or low.  For instance, forecasts from a group 
@@ -1113,10 +1103,10 @@ partition the total information, i.e. $\delta = \delta'/2$, and
 share nothing, i.e. $\lambda = 0.0$.  Given that moving down along 
 the curve increases both information diversity and the modal amount 
 of extremizing, information diversity is an important determinant 
-of extremizing together with the group's total information.  This provides the basis for our second observation.
-
-\begin{observation}
-The amount of extremization can be expected to increases in factors such as number of experts, subject-matter expertise, and human diversity, but to decrease in collaboration, sharing of resources, and problem difficulty.
+of extremizing together with the group's total information.  
+%This provides the basis for our second observation.
+%\begin{observation}
+Therefore the amount of extremization can be expected to increases in factors such as number of experts, subject-matter expertise, and human diversity, but to decrease in collaboration, sharing of resources, and problem difficulty.
 %\begin{center}
 %\begin{tabular}{l | l}
 %increase in & decrease in\\ \hline
@@ -1125,7 +1115,7 @@ The amount of extremization can be expected to increases in factors such as numb
 %Human Diversity & Problem Difficulty
 %\end{tabular}
 %\end{center}
-\end{observation}
+%\end{observation}
 
 %Therefore the amount of extremizing can be expected to increase 
 %in many factors such as human diversity, subject-matter expertise, 
@@ -1461,7 +1451,52 @@ which gives that $x_0 \geq 1$. Given that the Cauchy distribution is symmetric a
 (b) Assume without loss of generality that $\bar{P} > 0$. If $\max\{p_1, p_2, \dots, p_N \} < 1$, then  setting $\delta = 1/N$ and $\lambda = 0$ gives an aggregate probability $p'' = 1$ that is outside the convex hull of the individual probabilities.
 \qed
 
-\subsection*{A.2 Estimation of $\delta$ and $\lambda$}
+\subsection*{A.2 Parameter Estimation under $N=2$ Forecasters}
+The information among $N=2$ forecasters is completely characterized by $\delta_1$, $\delta_2$, and $\rho$. The values of these parameters can be estimated via the maximum likelihood method.  To make this more explicit, observe that the Jacobian for the map $\boldsymbol{P} \to \Phi\left(\boldsymbol{P}\right) = (\Phi(P_1), \Phi(P_2))'$ is
+\begin{eqnarray*}
+J(\boldsymbol{P}) &=& (2\pi)^{-1} \exp \left( - \frac{\boldsymbol{P}' \boldsymbol{P}}{2}   \right) 
+\end{eqnarray*}
+%
+%$\boldsymbol{P} \sim \mathcal{N}_N\left(\boldsymbol{0}, \Sigma_{22} (1-\delta)^{-1}\right)$ and that
+Let $\Sigma_{P} =  \Sigma_{22} (1-\delta)^{-1}$. If $h(\boldsymbol{P})$ denotes the multivariate Gaussian density of $\boldsymbol{P} \sim \mathcal{N}_2\left(\boldsymbol{0}, \Sigma_{P}\right)$,
+%by the Inverse Function Theorem 
+the density for  $\boldsymbol{p} = (p_1, p_2)'$ becomes
+\begin{eqnarray*}
+ f\left(\boldsymbol{p} | \delta_1, \delta_2, \rho \right) &=& h(\boldsymbol{P}) J(\boldsymbol{P})^{-1} \bigg|_{\boldsymbol{P} = \Phi^{-1}(\boldsymbol{p})}\\
+%&=& \frac{(1-\delta)^{N/2}}{\sqrt{ |\Sigma_{22}|}} \exp\left( -\frac{1}{2} \boldsymbol{P}' (1-\delta)\Sigma_{22}^{-1} \boldsymbol{P} + \frac{\boldsymbol{P}' \boldsymbol{P}}{2}   \right)\\
+&=& \frac{1}{\sqrt{ \left|\Sigma_{P}\right|}} \exp\left[ -\frac{1}{2} \Phi^{-1}(\boldsymbol{p})' \left\{\Sigma_{P}^{-1} - I_2 \right\} \Phi^{-1}(\boldsymbol{p})  \right]
+\end{eqnarray*}
+Assume that the forecasters participated in $K$ problems. If the forecasts given for the $k$th problem are denoted with $\boldsymbol{p}_k$, then the maximum likelihood estimates of $\delta$ and $\lambda$ are obtained from
+\begin{align*}
+\left(\hat{\delta}_1, \hat{\delta}_2, \hat{\rho}\right) =& \argmax_{\delta_1, \delta_2, \rho} \sum_{k=1}^K \log  f\left(\boldsymbol{p}_k| \delta_1, \delta_2, \rho \right),\\
+& \text{s.t. } \nonumber \delta_1, \delta_2 \in [0,1] \text{ and } \lambda \in \left[  \max \left\{\delta_1+\delta_2 - 1,  0\right\}, \min \left\{\delta_1, \delta_2 \right\} \right]
+\end{align*}
+This works well as long as the forecasters participate in the same set of problems. The forecasters, however, were allowed to choose their problems and therefore generally do not participate in the same set of problems. Disregarding any problems with partial participation would lead to a loss of information. Therefore it is necessary to handle the missing values in some manner. The first step is to assume that the forecasts are missing at random. The likelihood for a unpaired forecast, say $p_1$, then becomes 
+\begin{eqnarray*}
+ f\left(p_1 | \delta_1, \delta_2, \rho \right) &=& \int_0^1 f\left(\boldsymbol{p} | \delta_1, \delta_2, \rho \right) dp_2
+% &=& \int_{\mathbb{R}} \frac{(1-\delta)}{\sqrt{ \left|\Sigma_{22}\right|}} \exp\left[ -\frac{1}{2} \boldsymbol{P}' \left\{ (1-\delta) \Sigma_{22}^{-1} - I_2 \right\} \boldsymbol{P}  \right] dP_2\\
+% &=&  \frac{1}{\sqrt{ \left|\Sigma_{P}\right|}} \int_{0}^1 \exp\left[ -\frac{1}{2} \Phi^{-1}(\boldsymbol{p})' \left\{  \Sigma_{P}^{-1} - I_2 \right\} \Phi^{-1}(\boldsymbol{p})  \right] dp_2
+\end{eqnarray*}
+%Assume that $ \Sigma_{P}^{-1} - I_2$ is invertible and let $\Lambda = ( \Sigma_{P}^{-1} - I_2)^{-1}$. Then,
+%\begin{eqnarray*}
+% f\left(p_1 | \delta_1, \delta_2, \rho \right) &=&  2\pi \sqrt{ \frac{|\Lambda|}{|\Sigma_{P}|}} \int_{\mathbb{R}} \frac{1}{2\pi \sqrt{|\Lambda|}} \exp\left( -\frac{1}{2} \boldsymbol{P}' \Lambda^{-1} \boldsymbol{P}  \right) dP_2\\
+% &=&  2\pi  \sqrt{ \frac{|\Lambda|}{|\Sigma_{P}|}} \phi(p_1 | 0, \Lambda_{11}),
+%\end{eqnarray*}
+%where $\Lambda_{11}$ is the $(1,1)$th element of $\Lambda$ and $\phi(\cdot | \mu, \sigma^2)$ represents the probability density function of a normal distribution with mean $\mu$ and variance $\sigma^2$.
+ Let $\mathcal{K}_{12}$ denote the set of problems in which both forecasters participated. Similarly, let $\mathcal{K}_1$ and $\mathcal{K}_2$ denote the sets of problems in which only Forecaster $1$ and $2$ participated, respectively. The final optimization task then becomes
+\begin{align*}
+\left(\hat{\delta}_1, \hat{\delta}_2, \hat{\rho}\right) =& \argmax_{\delta_1, \delta_2, \rho} \left\{ \sum_{k \in \mathcal{K}_{12}} \log  f\left(\boldsymbol{p}_k| \delta_1, \delta_2, \rho \right) +  \sum_{r = 1}^2 \sum_{k \in \mathcal{K}_{r}} \log  f\left(p_r| \delta_r, \rho \right)  \right\},\\
+& \text{s.t. } \nonumber \delta_1, \delta_2 \in [0,1] \text{ and } \lambda \in \left[  \max \left\{\delta_1+\delta_2 - 1,  0\right\}, \min \left\{\delta_1, \delta_2 \right\} \right]
+\end{align*}
+%Given that this optimization problem cannot be solved analytically, numerical methods must be used. The feasible set of parameter values is a convex set defined by the intersection of four half-spaces. Therefore the constraints are equivalent to a set of linear inequalities
+%\begin{align*}
+%-\rho &\leq 0\\
+%\delta_1+\delta_2-\rho-1 &\leq 0\\
+%\rho - \delta_1 &\leq 0\\
+%\rho - \delta_2 &\leq 0
+%\end{align*}
+%and an adaptive barrier method can be used to solve the maximization problem. 
+\subsection*{A.3 Estimation of $\delta$ and $\lambda$}
 
 
 The values of $\delta$ and $\lambda$ can be estimated via the maximum likelihood method. To make this more explicit, observe that the Jacobian for the map $\boldsymbol{P} \to \Phi\left(\boldsymbol{P}\right) = (\Phi(P_1), \Phi(P_2), \dots, \Phi(P_N))'$ is
