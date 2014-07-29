@@ -316,7 +316,7 @@ two candidates both receive the same information, they interpret
 it differently, arriving at different forecasts for the probability
 that this candidate wins the election.  
 
-Under the interpreted signal framework, forecast heterogeneity 
+Therefore, under the interpreted signal framework, forecast heterogeneity 
 stems from cognitive diversity.  This is a realistic framework that
 has been analyzed and extended to many other settings.  For example,
 ~\citet{parunak2013characterizing} demonstrate that 
@@ -326,7 +326,7 @@ analyze inter-expert correlation
 under the assumption that the cues can be mapped to the experts'
 forecasts via different linear regression functions.
 
-Th interpreted signal framework, when formalized, more or less implies 
+The interpreted signal framework, when formalized, more or less implies 
 the partial information model.  Unfortunately, previous work on
 interpreted forecasts has produced only abstract concepts and 
 has not been taken to the level of a precise formal model with 
@@ -335,24 +335,23 @@ quantitative predictions.
 \subsection{The Measurement Error Framework}
 \label{ss:measurement}
 
-In practice it is often easier and more common to explain subjective
-forecasts with the classical {\em measurement error framework}
-instead.  This framework assumes a ``true'' probability (interpreted
+Given the lack of a quantitative model for the interpreted signal framework, in practice it is often easier and more common to explain subjective
+forecasts with the classical {\em measurement error framework}.  This framework assumes a ``true'' probability (interpreted
 as the probability forecast made by an ideal expert) for the future 
 event.  The experts are able to measure this probaiblity but with
 some mean-zero idiosyncratic error.  Each forecast is then modeled
 as a draw from a common probability distribution that is typically 
 centered at the true probability.  
 %
-The underlying probability model is just the classical statistical
-model for measurement with IID mean zero error.  The average, $\pb$,
+In other words, the underlying probability model is just the classical statistical
+model for measurement with IID mean zero error.  Consequently, the average probability, $\pb = \frac{1}{N}\sum_{i=1}^N p_i$,
 is an aggregator which will be unbiased and have the least variance.
 
 Variants on this model alter the quantity that is supposedly 
 measured without bias.  If instead of $p$, for example,
 the log odds $\log (p/(1-p))$ has been measured without bias, 
 the the average log odds will be an unbiased estimator for
-the true log odds.  Transforming the log odds estimate back into
+the true log odds.  Transforming the average log odds back into
 an estimate for $p$ yields the {\em logarithmic opinion pool}
 $$\plog := \frac{\exp \left [ \frac{1}{N} \sum_{i=1}^N
    \log (p_i / (1-p_i)) \right ]}
@@ -362,8 +361,8 @@ This aggregator has been analyzed and utilized by many investigators
 (see, e.g., \citet{dawid1995coherent, Genest, bacharach1975group}).
 In a similar vein, the {\em probit opinion pool} is defined as
 $$\probit := \Phi \left \{ \frac{1}{N} \sum_{i=1}^N \Phi^{-1}
-   (p_i) \right \} \, .$$
-The underlying probability model is that the forecasters are able
+   (p_i) \right \} \, ,$$
+ where $\Phi$ represents the CDF of a standard Gaussian distribution. In this case, the underlying probability model assumes that the forecasters are able
 to observe probit scores with IID mean zero error.
 %%%The probit transformation is favored in economics, while other disciplines
 %%%more commonly  use the log-odds transformation~(\citet{bryan2013regression}).
@@ -376,14 +375,12 @@ One advantage of such a model is its simplicity.  The formula
 for the aggregator is obtained in a straightforward manner: 
 transform, average, and transform back.  The underlying probability
 model is also simple and very familiar.  There are, however, a number
-of disadvantages.  One is that the introduction of a nonlinear 
+of disadvantages.  First, these aggregators are by nature difference convex combinations of the forecasts. \citet{Ranjan08} prove that any convex combination of calibrated forecasts will be under-confident, that is, too close to $1/2$. Second, the introduction of a nonlinear 
 transformation biases the estimator.  Thus, neither $\plog$ 
-nor $\probit$ produces a true forecast stream.  Just how
+nor $\probit$ produces a calibrated forecast stream.  Just how
 problematic this is depends on whether the bias is small enough
 to be swamped by the noise or other adjustments.  The direction of
-the bias can sometimes be determined.  \citet{Ranjan08}
-show that a convex combination of unbiased log-odds forecasts will
-always be under-confident, that is, too close to $1/2$.
+the bias can sometimes be determined. 
 
 A more serious disadvantage is the implausibility of the underlying 
 model.  It is difficult to convince one's self that the experts
@@ -399,9 +396,8 @@ of the procedures.
 A third disadvantage is that the aggregated forecasts produced by
 the measurement error model are often not very good.  For one thing,
 any transformed average is constrained to the convex hull of the
-individual forecasts.  As previously mentioned, this can be
-shown~\citep{parunak2013characterizing} to contradict the 
-interpreted signal model.  Empirically, one sees for many data 
+individual forecasts.  As previously mentioned, this contradicts the 
+interpreted signal model \citep{parunak2013characterizing}.  Empirically, one sees for many data 
 sets that an aggregator restricted to the convex hull will be far 
 from optimal.  
 
@@ -448,9 +444,7 @@ rule over a separate training set (see~\citealt{Gneiting04strictlyproper}
 for a discussion on scoring rules).
 Given that such a training set requires repeated realizations of
 a single event, it is not clear how these aggregators can be applied
-for a one-time event.  
-
-Overall, while {\em ad hoc} extremization works to some degree, such
+for a one-time event. Overall, while {\em ad hoc} extremization works to some degree, such
 techniques provide little insight beyond the amount of extremizing
 itself.  They do not point the way to continued improvement.
 
@@ -458,17 +452,17 @@ The main point of the present paper is to remedy this situation.
 The framework of partial information produces theoretically
 based estimators which explain extremization.  We produce a 
 simple instance of partial information in which the amount of 
-extremization that results can be quantified with a single number
+extremization can be quantified with a single number
 that follows a Cauchy distribution.  Given that this distribution
 depends on a structure of information among the experts, it establishes
 a link between the information structure and the amount of
 extremizing one must apply to an averaging aggregator.  This leads
-to two main results.  First, the modal amount of extremizing is 
-increasing in the level of information divsersity and the total amount 
+to three main results.  First, the modal amount of extremizing is 
+increasing in the level of information diversity and the total amount 
 of information among experts.  Second, no matter how information is 
 distributed among experts, extremizing the average probit forecast
 is more likely to be beneficial than harmful (except in the degenerate
-situation where all experts' forecasts are the same).
+situation where all experts' forecasts are the same). Third, the information structure among the experts establishes a spectrum of aggregators, ranging from average- (most information public) to voting-like (most information is private) techniques. 
 
 
 \section{The Gaussian Partial Information Model}
