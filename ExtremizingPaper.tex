@@ -793,11 +793,11 @@ points 0 and~1.}
 \label{extremizing}
 
 This section compares the probit opinion pool aggregator $\probit$ 
-to the oracular forecast $p'$. The probit opinion pool was chosen because it is argueably more reasonable than the empirical average, $\bar{p}$. It is very similar to the logarithmic opinion pool but leads to more convenient notation. We show that, under two specific Gaussian partial 
+to the oracular forecast $p'$. The probit opinion pool was chosen because a) it is more reasonable than the empirical average and b) it is very similar to the logarithmic opinion pool but results in cleaner analytic expressions.  We show that, under two specific Gaussian partial 
 information models, the oracle, on average,
 extremizes the probit aggregator.  Recall that the oracle is emulated
 by a forecaster whose information set is $I' := \bigcup_{i=1}^N I_i$.
-Appending to the multivariate Gaussian distribution~(\ref{Nforecasters}),
+Appending this to the multivariate Gaussian distribution~(\ref{Nforecasters}) gives
 \begin{align}
 \left(\begin{matrix} X_S \\ X_{I'} \\ X_{I_1}\\ \vdots \\ X_{I_N} 
  \end{matrix}\right) &\sim \mathcal{N}\left( 
@@ -831,7 +831,7 @@ this gives
 \alpha  = \frac{P_{I'}}{\frac{1}{N}\sum_{j=1}^N P_{I_j}}\label{alpha}
 \end{align}
 %
-This is a random quantity that spans the entire real line, that is, 
+This is a random quantity that spans the entire real line; that is, 
 it is possible to find a set of probability forecasts and a distribution 
 of information for any possible value of $\alpha \in \mathbb{R}$. 
 Evidently, extremizing is not guaranteed to always improve the 
@@ -876,7 +876,7 @@ x_0 = \kappa \frac{\sigma_1}{\sigma_2} \hspace{0.2in} \mbox{ and }
 The parameter $x_0$ represents the location (the median and mode) and 
 $\gamma$ specifies the scale (half the interquartile range) of the 
 Cauchy distribution. This leads to the following proposition. 
-The proof of this and other propositions are deferred to Appendix A.
+The proof of this is deferred to Appendix A.
 
 \begin{proposition}
 \label{positiveProbThm}
@@ -901,7 +901,7 @@ computations may be performed.
 
 \subsection{Fully- and Non-Overlapping Information}
 \label{disjoint}
-This section examines two scenarios, namely, when the forecasters share no information and when the forecasters share all their information. In the latter case, $I_{i} = I_j$ for all $i \neq j$, the oracular and revealed aggregators, $p'$ and $p''$ coincide and equal to all $p_j$ for $j = 1, \dots, N$. Consequently, $\alpha = 1$ and no extremization is needed. Given that the oracular forecast varies smoothly over the space of  information structures, averaging techniques such as the probit opinion pool can be expected to work well when the forecasters are forming their forecasts based on similar information sets.
+This section examines two scenarios, namely, when the forecasters share no information and when the forecasters share all their information. In the latter case, $I_{i} = I_j$ for all $i \neq j$. Consequently, the oracular and revealed aggregators, $p'$ and $p''$, coincide and equal to all $p_j$ for $j = 1, \dots, N$. Therefore no extremization is needed. Given that the oracular forecast varies smoothly over the space of  information structures, averaging techniques such as the probit opinion pool can be expected to work well when the forecasters are forming their forecasts based on similar information sets.
 % For instance, the forecasters may discuss the forecasting problem before making their separate predictions. 
 
 
@@ -914,8 +914,9 @@ In this situation the oracular and revealed aggregators $p'$ and $p''$
 coincide because $p_i$ determines $X_i$ and $X_{I'}$ is the sum of
 all the $X_i$.  The resulting information structure $\Sigma_{22}$ 
 is diagonal, and hence coherent if and only if $\sum_{j=1}^N \delta_j \leq 1$ 
-with all $\delta_j \in [0,1]$.  Given that under non-overlapping information 
-$\delta' = \sum_{j=1}^N \delta_j$ and $X_{I'} = \sum_{j=1}^N X_{I_j}$, 
+with all $\delta_j \in [0,1]$.  The oracular aggregate becomes
+%Given that under non-overlapping information 
+%$\delta' = \sum_{j=1}^N \delta_j$ and $X_{I'} = \sum_{j=1}^N X_{I_j}$, 
  \begin{align}
 p' &= \Phi\left( \frac{\sum_{j=1}^N X_{I_j}}
   {\sqrt{1- \sum_{j=1}^N \delta_j}} \right) \label{vote}
