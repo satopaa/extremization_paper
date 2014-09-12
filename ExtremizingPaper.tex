@@ -119,11 +119,9 @@ Averaging; Probability Forecasting; Stochastic Process; Wisdom of
 Crowds
 \end{abstract}
 
-
 \section{Introduction and Overview}
 
 \subsection{The Forecast Aggregation Problem}
-
 Event forecasting is the science of giving probability forecasts for
 future events.  The classical examples can be found in meteorology
 \citep{sanders1963subjective}, where the scientists are often
@@ -757,7 +755,7 @@ almost exclusively in this mode.
 
 \subsection{Preliminary Observations}
 \label{prelim}
- It is helpful to begin the introduction of the  the Gaussian partial information
+ It is helpful to begin the introduction of the  Gaussian partial information
 model by considering only two
 forecasters.  That is, consider Forecasters $1$ and $2$ who see
 respective $\delta_1$ and $\delta_2$ portions of the Gaussian process.  Let $\rho$ denote the
@@ -844,16 +842,21 @@ interval.  Instead, each forecaster can know any Borel measurable
 subset of the full information.  Given that the information structure
 is described by the sub-matrix $\Sigma_{22}$, learning about the
 information among the $N$ forecasters is equivalent to estimating a
-covariance matrix under several restrictions.  First, each element of
-$\Sigma_{22}$ must be in the unit interval, and no off-diagonal
-element can be larger than the corresponding diagonal element in the
-same row. Second, $\Sigma_{22}$ must be symmetric, non-singular, and
-coherent. The matrix $\Sigma_{22}$ is coherent if and only if its
+covariance matrix under several restrictions.  We accept the matrix $\Sigma_{22}$ and call it \textit{coherent} if and only if its
 information structure can be described by a diagram such as the one
-given in Figure \ref{diagramN}.
+given in Figure \ref{diagramN}. By quick inspection, we notice that coherence requires that each element of
+$\Sigma_{22}$ must be in the unit interval and that no off-diagonal
+element can be larger than the corresponding diagonal element in the
+same row. Furthermore, $\Sigma_{22}$ must be symmetric and non-singular. These conditions, however, are necessary but not sufficient.  The following proposition provides the remaining details by describing the space of coherent information structures. The
+proof of this and other propositions are deferred to the Appendix.
 
+\begin{proposition}
+\label{CorrelationPolytope}
+The overlap structure $\Sigma_{22}$ is coherent if and only if $$\Sigma_{22} \in  \mathcal{Q}_N := \text{conv}\{ \boldsymbol{x}\boldsymbol{x}' : \boldsymbol{x} \in \{0,1\}^N\},$$ where $\mathcal{Q}_N$ is known as the  boolean quadric polytope, or the correlation polytope. The set $\mathcal{Q}_N$ is described by $2^N$ vertices in dimension $\text{dim}(\mathcal{Q}_N) = \binom{N+1}{2}$.  
+\end{proposition}
+The correlation polytope is a known to have a very complex $\mathcal{H}$-representation, i.e. a description in terms of a finite number of half-spaces. In fact, because the unconstrained quadratic 0-1 problem is NP-hard, it is probability hopeless to find a complete list of linear inequalities that describe the correlation polytope (\citealt{deza1997geometry}). Approximating the correlation polytope and estimating the general information structure, however, are not in the scope of this paper and  are therefore left for future work. 
 
-The next step is to link this model with the probability forecasts.
+The next step in developing the Gaussian partial information model is to link it with the probability forecasts.
 If $P_{i} = X_{B_i}/\sqrt{1-\delta_i}$ represents the probit
 forecast made by Forecaster $i$, the corresponding probability
 forecast is given by
@@ -1008,8 +1011,7 @@ x_0 = \kappa \frac{\sigma_1}{\sigma_2} \hspace{0.2in} \mbox{ and }
 \end{align*}
 The parameter $x_0$ represents the location (the median and mode) and
 $\gamma$ specifies the scale (half the interquartile range) of the
-Cauchy distribution. This leads to the following proposition.  The
-proof of this and other propositions are deferred to the Appendix.
+Cauchy distribution. This leads to the following proposition.  
 
 \begin{proposition}
 \label{positiveProbThm}
@@ -1679,6 +1681,23 @@ this project.
 % \
 % \\
 %\noindent
+\subsubsection{Proof of Proposition \ref{CorrelationPolytope}.}
+Consider a coherent information structure $\Sigma_{22}$ that is defined by the Borel sets $\{ B_i : i = 1, \dots, N\}$.  Therefore its information can be represented in a diagram. Keeping the diagram representation in mind, the unit interval $S$ can be partitioned  into $2^N$ parts
+\begin{align*}
+C_v := \cup_{i \in v} B_i \setminus \cup_{i \notin v} B_i,
+\end{align*}
+where $v \subseteq \{1, \dots, N\}$ denotes a subset of the forecasters. Each $C_v$ represents information known only by forecasters $v$. Given that $\sum_{v} |C_v|  = 1$, it is possible to establish a bijective linear function $L$ from the simplex
+\begin{align*}
+\Delta_N &:= \text{conv}\{  \boldsymbol{e}_v : v \subseteq \{1, \dots, N\} \}\\
+&= \{ \boldsymbol{z} \in \mathbb{R}^{2^N} : \boldsymbol{z} \geq 0, \boldsymbol{1}'\boldsymbol{z} = 1\}
+\end{align*}
+to the space of all coherent information structures $\mathcal{Q}_N$. In particular, the linear function $L: \boldsymbol{z} \in \Delta_N \to \Sigma_{22} \in \mathcal{Q}_N$ is defined such that $\rho_{ij} = \sum_{\{i,j\} \subseteq v} z_v$ and $\delta_i =  \sum_{i \in v} z_v$. Given that $\Delta_N$ is a convex polytope, transforming it via the linear function yields a convex polytope spanned by the $2^N$ points $\{ L(\boldsymbol{e}_v) : v \subseteq \{1, \dots, N\}  \} = \{\boldsymbol{x}\boldsymbol{x}' : \boldsymbol{x}  \in \{0,1\}^N\}$. That is, $L(\Delta_N) = \mathcal{Q}_N$, which is known as the boolean quadratic polytope, a.k.a. correlation polytope. Each $\Sigma_{22} \in \mathcal{Q}_N$ has $\frac{N(N+1)}{2} = \binom{n+1}{2}$ unique values and therefore exists in $\binom{n+1}{2}$ dimensions. \qed
+%To show that none of these vertices are interior, assume that some point $X_v = \boldsymbol{x}_v\boldsymbol{x}_v'$, where $x_i = \one_{i \in v}$, is interior. Then $X_v$ has to be a convex combination of $\{X_w : w \neq v\}$. That is, for some constants $\phi_w$ such that $\phi_w \geq 0$ and $\sum_w \phi_w = 1$,  
+%\begin{align*}
+%X_v &= \sum_w \phi_w X_w
+%\end{align*}
+
+
 \subsubsection{Proof of Proposition \ref{positiveProbThm}.}
 \begin{align*}
 x_0 &= \kappa \frac{\sigma_1}{\sigma_2} \\
@@ -1799,7 +1818,8 @@ the density for  $\boldsymbol{p} = (p_1, p_2, \dots, p_N)'$ becomes
 \begin{eqnarray*}
  f\left(\boldsymbol{p} | \delta, \lambda \right) &=& h(\boldsymbol{P}) J(\boldsymbol{P})^{-1} \bigg|_{\boldsymbol{P} = \Phi^{-1}(\boldsymbol{p})}\\
 %&=& \frac{(1-\delta)^{N/2}}{\sqrt{ |\Sigma_{22}|}} \exp\left( -\frac{1}{2} \boldsymbol{P}' (1-\delta)\Sigma_{22}^{-1} \boldsymbol{P} + \frac{\boldsymbol{P}' \boldsymbol{P}}{2}   \right)\\
-&=& \frac{(1-\delta)^{N/2}}{\sqrt{ \left|\Sigma_{22}\right|}} \exp\left[ -\frac{1}{2} \Phi^{-1}(\boldsymbol{p})' \left\{ (1-\delta) \Sigma_{22}^{-1} - I_N \right\} \Phi^{-1}(\boldsymbol{p})  \right],
+&\propto&\frac{(1-\delta)^{N/2}}{\sqrt{ \left|\Sigma_{22}\right|}} \exp\left[ -\frac{1-\delta}{2} \Phi^{-1}(\boldsymbol{p})' \Sigma_{22}^{-1}  \Phi^{-1}(\boldsymbol{p})  \right],\\
+%&=& \frac{(1-\delta)^{N/2}}{\sqrt{ \left|\Sigma_{22}\right|}} \exp\left[ -\frac{1}{2} \Phi^{-1}(\boldsymbol{p})' \left\{ (1-\delta) \Sigma_{22}^{-1} - I_N \right\} \Phi^{-1}(\boldsymbol{p})  \right],
 \end{eqnarray*}
 %where $\Phi^{-1}(\boldsymbol{p}) =  (\Phi^{-1}(p_1), \Phi^{-1}(p_2), \dots, \Phi^{-1}(p_N))$. 
 %Given that $\Sigma_{22}$ can be written in the form  $\Sigma_{22} = B_N (\delta-\lambda\delta) + J_{N \times N} \lambda\delta$
