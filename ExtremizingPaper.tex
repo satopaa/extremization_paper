@@ -682,15 +682,16 @@ information was unknown to Forecaster~$i$ instead of known but not
 used in the forecast.
 
 
-\item {\bf Pool of Information.} The role of the unit interval is for
+\item {\bf Pool of Information.} First, the role of the unit interval is for
 convenient specification of the sets $B_i$. The pool of information
 potentially available to the forecasters is the white noise on
 $S = [0,1]$. The choice of unit interval is not relevant, and any other set
-could have been used. There is no sense of time or ranking of the
+could have been used. The unit interval, however, is a natural starting point that allows us to treat $\{ |B_j| : j = 1, \dots, N\}$ as probabilities for some $N$ events, $\{ |B_i \cap B_j| : i \neq j\}$ as their pairwise joint probabilities, $\{ |B_i \cap B_j \cap B_k| : i \neq j \neq k\}$ as their three-way joint probabilities, and so on.  This is particularly useful in analysis as it links the information structure to many known results. One such connection is established in Proposition \ref{CorrelationPolytope}. Second, there is no sense of time or ranking of the
 information within the pool. Instead, the pool is a collection of
 information, where each piece of information has an {\em a priori}
 equal chance to contribute to the final outcome.  Quantitatively, the
 information is parametrized by the length, a.k.a. the Lebesgue measure, on $S$.
+\label{item:pool}
 
 
 \item {\bf Invariant Transformations.}  From the empirical point of
@@ -842,19 +843,17 @@ interval.  Instead, each forecaster can know any Borel measurable
 subset of the full information.  Given that the information structure
 is described by the sub-matrix $\Sigma_{22}$, learning about the
 information among the $N$ forecasters is equivalent to estimating a
-covariance matrix under several restrictions.  We accept the matrix $\Sigma_{22}$ and call it \textit{coherent} if and only if its
-information structure can be described by a diagram such as the one
-given in Figure \ref{diagramN}. By quick inspection, we notice that coherence requires that each element of
-$\Sigma_{22}$ must be in the unit interval and that no off-diagonal
-element can be larger than the corresponding diagonal element in the
-same row. Furthermore, $\Sigma_{22}$ must be symmetric and non-singular. These conditions, however, are necessary but not sufficient.  The following proposition provides the remaining details by describing the space of coherent information structures. The
-proof of this and other propositions are deferred to the Appendix.
+covariance matrix under several restrictions.  In particular, the information in matrix $\Sigma_{22}$ must be descriable by a diagram such as the one
+given in Figure \ref{diagramN}. If this is the case, the matrix $\Sigma_{22}$ is called \textit{coherent}.  Coherence clearly requires each element of
+$\Sigma_{22}$ to be in the unit interval with no off-diagonal
+element being larger than the corresponding diagonal element in the
+same row or column.  These conditions, however, are not sufficient.  The following proposition provides the remaining details by describing the space of coherent information structures. The proof treats $\{\delta_j : j = 1, \dots, N\}$ as probabilities for some $N$ events (recall Remark (\ref{item:pool})) and therefore regards Figure \ref{diagramN} as a type of Venn diagram. The details of this and other proofs are deferred to the Appendix.
 
 \begin{proposition}
 \label{CorrelationPolytope}
-The overlap structure $\Sigma_{22}$ is coherent if and only if $$\Sigma_{22} \in  \mathcal{Q}_N := \text{conv}\{ \boldsymbol{x}\boldsymbol{x}' : \boldsymbol{x} \in \{0,1\}^N\},$$ where $\mathcal{Q}_N$ is known as the  boolean quadric polytope, or the correlation polytope. The set $\mathcal{Q}_N$ is described by $2^N$ vertices in dimension $\text{dim}(\mathcal{Q}_N) = \binom{N+1}{2}$.  
+The overlap structure $\Sigma_{22}$ is coherent if and only if $$\Sigma_{22} \in  \text{COR}(N) := \text{conv}\left\{ \boldsymbol{x}\boldsymbol{x}' : \boldsymbol{x} \in \{0,1\}^N\right\},$$ where $\text{COR}(N)$ is known as the correlation polytope or the boolean quadric polytope. It is described by $2^N$ vertices in dimension $\text{dim}(\text{COR}(N)) = \binom{N+1}{2}$.  
 \end{proposition}
-The correlation polytope is a known to have a very complex $\mathcal{H}$-representation, i.e. a description in terms of a finite number of half-spaces. In fact, because the unconstrained quadratic 0-1 problem is NP-hard, it is probability hopeless to find a complete list of linear inequalities that describe the correlation polytope (\citealt{deza1997geometry}). Approximating the correlation polytope and estimating the general information structure, however, are not in the scope of this paper and  are therefore left for future work. 
+The correlation polytope is a known to have a very complex $\mathcal{H}$-representation, i.e. a description in terms of a finite number of half-spaces. In fact, because the unconstrained quadratic 0-1 problem is NP-hard, it is probably hopeless to find a complete list of linear inequalities that describe the correlation polytope (\citealt{deza1997geometry}). Approximating the correlation polytope and estimating the general information structure, however, are not in the scope of this paper and  are therefore left for future work. 
 
 The next step in developing the Gaussian partial information model is to link it with the probability forecasts.
 If $P_{i} = X_{B_i}/\sqrt{1-\delta_i}$ represents the probit
@@ -913,7 +912,7 @@ This section first derives the oracular aggregator $p'$ under the
 Gaussian partial information model and then uses it to study
 extremizing of the probit opinion pool $\probit$. The probit opinion 
 pool was chosen instead of the other averaging aggregators discussed 
-in Section \ref{ss:measurement} because a) $\probit$ is more
+in Section \ref{ss:measurement} because a) $\probit$ is arguably more
 reasonable than the simple average $\bar{p}$; and b) $\probit$ is very
 similar to the logarithmic opinion pool $\plog$ but results in cleaner
 analytic expressions. 
@@ -928,7 +927,7 @@ forecasters. Under the Gaussian partial information model, this can be
 emulated by introducing an oracle forecaster whose information set is
 $B' := \bigcup_{i=1}^N B_i$.  Appending this to the multivariate
 Gaussian distribution~(\ref{Nforecasters}) gives
-\begin{align*}
+\begin{align}
 \left(\begin{matrix} X_S \\ X_{B'} \\ X_{B_1}\\ \vdots \\ X_{B_N} 
  \end{matrix}\right) &\sim \mathcal{N}\left( 
  \boldsymbol{0}, 
@@ -945,8 +944,8 @@ Gaussian distribution~(\ref{Nforecasters}) gives
 \delta_2 & \delta_2 &\rho_{2,1} & \delta_2 & \dots & \rho_{2,N}  \\ 
 \vdots &\vdots & \vdots & \vdots & \ddots & \vdots  \\ 
 \delta_N &\delta_N & \rho_{N,1} & \rho_{N,2} & \dots & \delta_N\\ 
- \end{array}\right)\right), 
-\end{align*}
+ \end{array}\right)\right), \label{oracleN}
+\end{align}
 where $X_{B'}$ is the information known to the oracle and $\delta' =
 |B'|$.  Therefore,
  \begin{align*}
@@ -967,7 +966,7 @@ extremizes $p$ when $\alpha(q,p) > 1$.  In the case where $p =
 \begin{align}
 \alpha(p', \probit)  = \frac{P_{B'}}{\frac{1}{N}\sum_{i=1}^N P_{B_i}}\label{alpha}
 \end{align}
-From now on, unless otherwise stated, we denote (\ref{alpha}) simply with
+From now on, unless otherwise stated, we refer to (\ref{alpha}) simply with
 $\alpha$. This is a random quantity that spans the entire real line;
 that is, it is possible to find a set of probability forecasts and a
 distribution of information for any possible value of $\alpha \in
@@ -1040,7 +1039,7 @@ real-world forecasting settings.
 This section examines two limiting scenarios: a) the forecasters share
 no information; and b) the forecasters share all their
 information. First, consider the latter case where all the information
-sets are the same, $B_{i} = B_j$ for all $i \neq j$. Consequently, all
+sets are the same, i.e. $B_{i} = B_j$ for all $i \neq j$. Consequently, all
 the probability forecasts $\{p_i : i = 1, \dots, N\}$ are the same,
 and the probit opinion pool, the oracular aggregator, and the revealed
 aggregator equal to this common probability forecast. Therefore no
@@ -1137,72 +1136,117 @@ sharing among the forecasters.
 %or every $p_i \leq 1/2$).
 %\end{proposition}
 
+
 \subsection{Partially Overlapping Information}
 \label{compound}
-The total amount of information among the forecasters $\delta'$ is
-uniquely determined by $\Sigma_{22}$ only when the group involves two
-forecasters. More specifically, $\delta' = \delta_1 + \delta_2 -
-\rho_{12}$ when $N=2$. By further assuming that $\delta = \delta_1 =
-\delta_2$, both $x_0$ and $\gamma$ depend only on two parameters and
-hence can be analyzed graphically. The results remain qualitatively
-similar even without assuming $\delta_1 = \delta_2$. This assumption,
-however, leads to fewer plots with essentially no loss of
-information. Let $\rho_{12} = \lambda\delta$, where the value of
-$\lambda$ is the proportion of the information known to one forecaster
-that is also known to the other forecaster. Under these assumptions
-the information structure $\Sigma_{22}$ is coherent if and only if
-\begin{align*}
-\delta \in [0,1] &&  \lambda &\in \left[  
-   \max \left\{ 2-\delta^{-1}, 0\right\}, 1 \right] 
-\end{align*}
-%  When $N=2$, the information structure is coherent if and only if 
-%\begin{align}
-% \delta_1, \delta_2 \in [0,1] && \rho_{12} \in \left[  \max \left\{\delta_1+\delta_2 - 1,  0\right\}, \min \left\{\delta_1, \delta_2 \right\} \right] \nonumber
-%\end{align}
-%The analysis is almost fully general because compound symmetry under $N = 2$ forecasters is equivalent to only assuming $\delta_1 = \delta_2$. 
 
+The amount of information known by the oracle $\delta'$ is uniquely determined by $\Sigma_{22}$ only when the group involves only two experts. More specifically, in this case the inclusion-exclusion principle gives that $\delta' = \delta_1 + \delta_2 - \rho_{ij}$. Fortunately, Proposition \ref{CorrelationPolytope} connects the information structure $\Sigma_{22}$ with the historical Boole Problem (\citealt{boole1854investigation}) and therefore provides many well-known bounds for $\delta'$ when $N \geq 2$. For instance, one choice is
+\begin{align*}
+\delta'_{min} := \frac{N \sum_{i=1}^N \delta_i - 2 \sum_{1 \leq i \leq j \leq N} \rho_{ij}}{\lfloor \frac{N+1}{2} \rfloor \lceil \frac{N+1}{2} \rceil }  \leq \delta' \leq \frac{N \sum_{i=1}^N \delta_i - 2 \sum_{1 \leq i \leq j \leq N} \rho_{ij}}{N} := \delta'_{max}
+\end{align*}
+%where
+%\begin{align*}
+%\delta'_{min} &= \frac{N \sum_{i=1}^N \delta_i - 2 \sum_{1 \leq i \leq j \leq N} \rho_{ij}}{\lfloor \frac{N+1}{2} \rfloor \lceil \frac{N+1}{2} \rceil }\\
+%\delta'_{max} &=  \leq \delta' \leq \frac{N \sum_{i=1}^N \delta_i - 2 \sum_{1 \leq i \leq j \leq N} \rho_{ij}}{N}
+%\end{align*}
+See \citealt{deza1997geometry} for the discussion of these and other bounds. Notice that both bounds are equal to $\delta_1 + \delta_2 - \rho_{ij}$ when $N=2$. The lower bound is particularly useful because it allows us to lower bound the amount of extremization under any number of forecasters. 
+
+First, however, the number of parameters in $\Sigma_{22}$ must be reduced. A natural approach is to assume that the
+forecasters' information sets have the same size and that the amount
+of overlap between any two information sets is constant, i.e.,
+$|B_{1}| = \dots = |B_{N}|$ and $|B_{i} \cap B_{j}| = |B_{h} \cap
+B_{k}|$ for all $i \neq j$ and $h \neq k$.  
+%Here, we compare $\probit$ to the %oracular aggregator; in Section~\ref{compound2} 
+%we compare the revealed aggregator to the probit opinion pool.  
+The information structure $\Sigma_{22}$ is called \textit{compound
+symmetric}.  This structure would hold, for example, if the
+forecasters sample information sources from a common distribution.
+Plugging this structure in the multivariate Gaussian distribution (\ref{oracleN}) gives
+% $\rho \in [\max \{(N-T)/(T(N-1)), 0\},1] = A_\rho$. 
+\begin{align*}
+\left(\begin{matrix} X_{S} \\ X_{I'}\\ X_{I_1}\\ \vdots \\ X_{I_N} \end{matrix}\right) &\sim \mathcal{N}\left( 
+ \boldsymbol{0}, 
+% \left(\begin{matrix} 
+%\Sigma_{11}' & \Sigma_{12}'\\
+%\Sigma_{21}' & \Sigma_{22}\\
+% \end{matrix}\right) 
+% =
+ \left(\begin{array}{cc|cccc}
+1 & \delta'& \delta & \delta & \dots & \delta  \\ 
+\delta' & \delta' & \delta & \delta & \dots & \delta  \\ \hline
+\delta & \delta &\delta & \lambda\delta & \dots & \lambda\delta   \\ 
+\delta& \delta & \lambda\delta & \delta & \dots & \lambda\delta  \\ 
+\vdots &\vdots & \vdots & \vdots & \ddots & \vdots  \\ 
+\delta &\delta & \lambda\delta & \lambda\delta & \dots & \delta\\ 
+ \end{array}\right)\right)
+\end{align*}
+where $\delta$ is the amount of information known by a forecaster and
+$\lambda$ is the proportion of information
+known to one forecaster that is also known to another single
+forecaster.  %This minor change of parametrization %was made for the sake of simplifying some of the following expressions.  
+To ensure that
+$\Sigma_{22}$ is coherent, a restriction must be placed on $\lambda$.
+First, given that under any combination of $\delta$ and $N$ all
+forecasters may know the exact same information, the value of
+$\lambda$ is bounded from above by $1$. Second, observe that
+information overlap is unavoidable when $\delta > 1/N$.  The minimum
+sharing occurs when all information is either known by everyone or
+private to a single forecaster.  In other words, if $\delta > 1/N$ and
+$B_{i} \cap B_j = B$ with $|B| = \lambda \delta$ for all $i \neq j$,
+the value of $\lambda$ is minimized when $\lambda\delta + N(\delta -
+\delta\lambda) = 1$.  Therefore the lower bound for $\lambda$ is $\max
+\left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}$, and $\Sigma_{22}$ is
+coherent if and only if
+\begin{align}
+\delta \in [0,1] &&  \lambda &\in \left[  
+   \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right), 
+   \label{rhoDomain}
+\end{align}
+where the strict upper bound on $\lambda$ ensures that
+$\Sigma_{22}$ is not singular.  
+
+Under these simplifications, the extremization ratio (\ref{alpha}) becomes
+\begin{align*}
+\alpha &= \frac{X_{I'}}{\frac{1}{N}\sum_{j=1}^N X_{I_j}} \sqrt{\frac{1-\delta}{1-\delta'}} \sim \text{Cauchy}(x_0, \gamma)
+\end{align*}
+ with
+\begin{align*}
+x_0 &= \frac{N}{1+(N-1)\lambda}  \sqrt{\frac{1-\delta}{1-\delta'}} &&& \text{ and } &&& \gamma &=  \sqrt{\frac{N(\delta' + \delta' \lambda (N-1) - \delta N)}{\delta (\lambda (N-1) + 1)^2}}\sqrt{\frac{1-\delta}{1-\delta'}}
+\end{align*}
+The location parameter $x_0$ can be lower bounded by replacing $\delta'$ with $\delta'_{min}$. Making this substitution and recalling Proposition \ref{positiveProbThm} gives us 
+\begin{align}
+\max\left\{ \frac{N}{1+(N-1)\lambda}  \sqrt{\frac{1-\delta}{1-\delta'_{min}}}, 1 \right\} \leq x_0 \label{bound}
+\end{align}
+Given that (\ref{bound}) depends only on $\delta$, $\lambda$, and $N$, it can be analyzed graphically. Figure \ref{LevelplotsOracle} considers $N=2$ and $N = 10$ forecasters and shows the lower bound on $x_0$ under all plausible combinations of $\delta$ and $\lambda$. High values have been censored to keep the scale manageable. 
 
 \begin{figure}[t]
 \hspace{-1.2em}
     \centering
-    \begin{subfigure}[b]{0.33\textwidth}
-        \includegraphics[width=1.07\textwidth, height = \textwidth]{ExtremeX0}
-\caption{$\log(x_0)$}	
-\label{xOracle}
+    \begin{subfigure}[b]{0.48\textwidth}
+        \includegraphics[width=\textwidth, height = \textwidth]{ExtremeX0N2}
+\caption{$N = 2$}	
+\label{xOracle2}
     \end{subfigure}%
-\hspace{0.6em}
-    \begin{subfigure}[b]{0.33\textwidth}
-        \includegraphics[width= 0.95\textwidth, height = \textwidth]{ExtremeGamma}
-\caption{$\gamma$}
-\label{gammaOracle}
-        \end{subfigure}
-\hspace{-1.3em}
-    \begin{subfigure}[b]{0.33\textwidth}
-        \includegraphics[width=1.07\textwidth, height = \textwidth]{Probs}
-\caption{$\P(\alpha > 1 | \Sigma_{22}, \delta')$}
-\label{probOracle}
-        \end{subfigure}
-
-    \caption{ The amount of extremizing follows a 
+    \begin{subfigure}[b]{0.48\textwidth}
+        \includegraphics[width=\textwidth, height = \textwidth]{ExtremeX0N10}
+\caption{$N = 10$}	
+\label{xOracle10}
+    \end{subfigure}%
+    \caption{ The extremization ratio follows a 
 Cauchy$(x_0, \gamma)$, where $x_0$ is a location parameter and $\gamma$ 
-is a scale parameter.  This figure considers only $N = 2$ forecasters.}
+is a scale parameter.  This figure plots the lower bound (\ref{bound}) for $x_0$ under $N = 2$, where the bound is exact, and $N = 10$ forecasters.}
         \label{LevelplotsOracle}
 \end{figure}
- 
-Figure \ref{LevelplotsOracle} shows $\log(x_0)$, $\gamma$, and
-$\P(\alpha > 1 | \Sigma_{22}, \delta')$ under all plausible
-combinations of $\delta$ and $\lambda$. High values have been censored
-to keep the scale manageable. Notice that extremizing is required more
-often when $\delta$ is high and $\lambda$ is low.  Given that
-$\delta'$ increases in $\delta$ but decreases in $\lambda$, the amount
+ Notice that extremizing is required more
+often when $\delta$ and $N$ are high but $\lambda$ is low.  Given that
+$\delta'$ increases in $\delta$ and $N$ but decreases in $\lambda$, the amount
 of extremizing can be expected to increase in the total amount of
 information among the forecasters $\delta'$.  This, however, does not
 provide a full explanation of extremizing.  Information diversity is
 also an important yet separate determinant of extremizing.  To see
-this, observe that fixing $\delta'$ to some constant defines a curve
-$\lambda = 2 - \delta'/\delta$ on the plots in
-Figure~\ref{LevelplotsOracle}.  For instance, letting $\delta' = 1$
-gives the boundary curve on the right side of each plot.  This curve
+this, consider Figure \ref{xOracle2} and observe that fixing $\delta'$ to some constant defines a curve
+$\lambda = 2 - \delta'/\delta$. For instance, letting $\delta' = 1$
+gives the boundary curve on the right side of the plot.  This curve
 then shifts inwards and rotates slightly counterclockwise as $\delta'$
 decreases.  At the top end of each curve all forecasters know and
 share the total information, i.e. $\delta = \delta'$ and $\lambda =
@@ -1214,25 +1258,110 @@ extremizing, information diversity is an important determinant of
 extremizing together with the group's total amount of information.
 %This provides the basis for our second observation.
 %\begin{observation}
-Therefore extremization can be expected to increase in factors such as
+This guides practitioners towards proper extremization because many aspects of the prediction context can be viewed closely related to these two factors. For instance,  extremization can be expected to increase in factors such as
 number of forecasters, subject-matter expertise, and human diversity,
 but to decrease in collaboration, sharing of resources, and problem
 difficulty.
-%\begin{center}
-%\begin{tabular}{l | l}
-%increase in & decrease in\\ \hline
-%Number of forecasters & Collaboration\\
-%Subject-Matter forecasterise & Sharing of Resources\\
-%Human Diversity & Problem Difficulty
-%\end{tabular}
-%\end{center}
-%\end{observation}
 
-%Therefore the amount of extremizing can be expected to increase 
-%in many factors such as human diversity, subject-matter forecasterise, 
-%and the extent to which forecasters can access information, but decrease 
-%through forecaster collaboration and sharing of resources. 
-
+ 
+ 
+%
+%\subsection{Partially Overlapping Information}
+%\label{compound}
+%The total amount of information among the forecasters $\delta'$ is
+%uniquely determined by $\Sigma_{22}$ only when the group involves two
+%forecasters. More specifically, $\delta' = \delta_1 + \delta_2 -
+%\rho_{12}$ when $N=2$. By further assuming that $\delta = \delta_1 =
+%\delta_2$, both $x_0$ and $\gamma$ depend only on two parameters and
+%hence can be analyzed graphically. The results remain qualitatively
+%similar even without assuming $\delta_1 = \delta_2$. This assumption,
+%however, leads to fewer plots with essentially no loss of
+%information. Let $\rho_{12} = \lambda\delta$, where the value of
+%$\lambda$ is the proportion of the information known to one forecaster
+%that is also known to the other forecaster. Under these assumptions
+%the information structure $\Sigma_{22}$ is coherent if and only if
+%\begin{align*}
+%\delta \in [0,1] &&  \lambda &\in \left[  
+%   \max \left\{ 2-\delta^{-1}, 0\right\}, 1 \right] 
+%\end{align*}
+%%  When $N=2$, the information structure is coherent if and only if 
+%%\begin{align}
+%% \delta_1, \delta_2 \in [0,1] && \rho_{12} \in \left[  \max \left\{\delta_1+\delta_2 - 1,  0\right\}, \min \left\{\delta_1, \delta_2 \right\} \right] \nonumber
+%%\end{align}
+%%The analysis is almost fully general because compound symmetry under $N = 2$ forecasters is equivalent to only assuming $\delta_1 = \delta_2$. 
+%
+%
+%\begin{figure}[t]
+%\hspace{-1.2em}
+%    \centering
+%    \begin{subfigure}[b]{0.33\textwidth}
+%        \includegraphics[width=1.07\textwidth, height = \textwidth]{ExtremeX0}
+%\caption{$\log(x_0)$}	
+%\label{xOracle}
+%    \end{subfigure}%
+%\hspace{0.6em}
+%    \begin{subfigure}[b]{0.33\textwidth}
+%        \includegraphics[width= 0.95\textwidth, height = \textwidth]{ExtremeGamma}
+%\caption{$\gamma$}
+%\label{gammaOracle}
+%        \end{subfigure}
+%\hspace{-1.3em}
+%    \begin{subfigure}[b]{0.33\textwidth}
+%        \includegraphics[width=1.07\textwidth, height = \textwidth]{Probs}
+%\caption{$\P(\alpha > 1 | \Sigma_{22}, \delta')$}
+%\label{probOracle}
+%        \end{subfigure}
+%
+%    \caption{ The amount of extremizing follows a 
+%Cauchy$(x_0, \gamma)$, where $x_0$ is a location parameter and $\gamma$ 
+%is a scale parameter.  This figure considers only $N = 2$ forecasters.}
+%        \label{LevelplotsOracle}
+%\end{figure}
+% 
+%Figure \ref{LevelplotsOracle} shows $\log(x_0)$, $\gamma$, and
+%$\P(\alpha > 1 | \Sigma_{22}, \delta')$ under all plausible
+%combinations of $\delta$ and $\lambda$. High values have been censored
+%to keep the scale manageable. Notice that extremizing is required more
+%often when $\delta$ is high and $\lambda$ is low.  Given that
+%$\delta'$ increases in $\delta$ but decreases in $\lambda$, the amount
+%of extremizing can be expected to increase in the total amount of
+%information among the forecasters $\delta'$.  This, however, does not
+%provide a full explanation of extremizing.  Information diversity is
+%also an important yet separate determinant of extremizing.  To see
+%this, observe that fixing $\delta'$ to some constant defines a curve
+%$\lambda = 2 - \delta'/\delta$ on the plots in
+%Figure~\ref{LevelplotsOracle}.  For instance, letting $\delta' = 1$
+%gives the boundary curve on the right side of each plot.  This curve
+%then shifts inwards and rotates slightly counterclockwise as $\delta'$
+%decreases.  At the top end of each curve all forecasters know and
+%share the total information, i.e. $\delta = \delta'$ and $\lambda =
+%1.0$.  At the bottom end, on the other hand, the forecasters partition
+%the total information, i.e. $\delta = \delta'/2$, and share nothing,
+%i.e. $\lambda = 0.0$.  Given that moving down along the curve
+%increases both information diversity and the modal amount of
+%extremizing, information diversity is an important determinant of
+%extremizing together with the group's total amount of information.
+%%This provides the basis for our second observation.
+%%\begin{observation}
+%Therefore extremization can be expected to increase in factors such as
+%number of forecasters, subject-matter expertise, and human diversity,
+%but to decrease in collaboration, sharing of resources, and problem
+%difficulty.
+%%\begin{center}
+%%\begin{tabular}{l | l}
+%%increase in & decrease in\\ \hline
+%%Number of forecasters & Collaboration\\
+%%Subject-Matter forecasterise & Sharing of Resources\\
+%%Human Diversity & Problem Difficulty
+%%\end{tabular}
+%%\end{center}
+%%\end{observation}
+%
+%%Therefore the amount of extremizing can be expected to increase 
+%%in many factors such as human diversity, subject-matter forecasterise, 
+%%and the extent to which forecasters can access information, but decrease 
+%%through forecaster collaboration and sharing of resources. 
+%
 
 
 
@@ -1301,7 +1430,7 @@ As  was discussed in Remark (\ref{item:specific}) in
 Section~\ref{ss:Gaussian}, this may be done in one of three ways: by
 assumption, by estimation, or in a Bayesian manner. If one is to
 assume a structure, the most natural and non-informative choice is the
-symmetric one. This is the topic in the following subsections.
+symmetric one. This is the topic in the next subsection.
 
 
 %\section{Version 1}
@@ -1318,59 +1447,59 @@ aggregators described in Section~\ref{sec:prior}, for instance, are
 symmetric. Therefore, to the extent that they reflect an underlying
 model, the model assumes exchangeability.
 
-Under the Gaussian partial information model, this implies that the
-forecasters' information sets have the same size and that the amount
-of overlap between any two information sets is constant, i.e.,
-$|B_{1}| = \dots = |B_{N}|$ and $|B_{i} \cap B_{j}| = |B_{h} \cap
-B_{k}|$ for all $i \neq j$ and $h \neq k$.  
-%Here, we compare $\probit$ to the %oracular aggregator; in Section~\ref{compound2} 
-%we compare the revealed aggregator to the probit opinion pool.  
-The information structure $\Sigma_{22}$ is called \textit{compound
-symmetric}.  This structure would hold, for example, if the
-forecasters sample information sources from a common distribution.
-Plugging this structure in the multivariate Gaussian distribution (\ref{Nforecasters}) gives
-\begin{align*}
-%\label{eq:symmetric}
-\left(\begin{matrix} X_{S} \\ X_{B_1}\\ \vdots \\ X_{B_N} 
-   \end{matrix}\right) 
-  &\sim \mathcal{N}\left( \boldsymbol{0}, \left(\begin{matrix} 
-\Sigma_{11} & \Sigma_{12}\\
-\Sigma_{21} & \Sigma_{22}\\
- \end{matrix}\right) 
- =
- \left(\begin{array}{c|cccc}
-1 & \delta & \delta & \dots & \delta  \\ \hline
-%\delta' & \delta' & \delta & \delta & \dots & \delta  \\ \hline
-\delta  &\delta & \lambda\delta & \dots & \lambda\delta   \\ 
-\delta & \lambda\delta & \delta & \dots & \lambda\delta  \\ 
-\vdots & \vdots & \vdots & \ddots & \vdots  \\ 
-\delta  & \lambda\delta & \lambda\delta & \dots & \delta\\ 
- \end{array}\right)\right),
-\end{align*}
-where $\delta$ is the amount of information known by a forecaster and
-$\lambda$ is the proportion of information
-known to one forecaster that is also known to another single
-forecaster.  %This minor change of parametrization %was made for the sake of simplifying some of the following expressions.  
-To ensure that
-$\Sigma_{22}$ is coherent, a restriction must be placed on $\lambda$.
-First, given that under any combination of $\delta$ and $N$ all
-forecasters may know the exact same information, the value of
-$\lambda$ is bounded from above by $1$. Second, observe that
-information overlap is unavoidable when $\delta > 1/N$.  The minimum
-sharing occurs when all information is either known by everyone or
-private to a single forecaster.  In other words, if $\delta > 1/N$ and
-$B_{i} \cap B_j = B$ with $|B| = \lambda \delta$ for all $i \neq j$,
-the value of $\lambda$ is minimized when $\lambda\delta + N(\delta -
-\delta\lambda) = 1$.  Therefore the lower bound for $\lambda$ is $\max
-\left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}$, and $\Sigma_{22}$ is
-coherent if and only if
-\begin{align}
-\delta \in [0,1] &&  \lambda &\in \left[  
-   \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right), 
-   \label{rhoDomain}
-\end{align}
-where the strict upper bound on $\lambda$ ensures that
-$\Sigma_{22}$ is not singular.  
+%Under the Gaussian partial information model, this implies that the
+%forecasters' information sets have the same size and that the amount
+%of overlap between any two information sets is constant, i.e.,
+%$|B_{1}| = \dots = |B_{N}|$ and $|B_{i} \cap B_{j}| = |B_{h} \cap
+%B_{k}|$ for all $i \neq j$ and $h \neq k$.  
+%%Here, we compare $\probit$ to the %oracular aggregator; in Section~\ref{compound2} 
+%%we compare the revealed aggregator to the probit opinion pool.  
+%The information structure $\Sigma_{22}$ is called \textit{compound
+%symmetric}.  This structure would hold, for example, if the
+%forecasters sample information sources from a common distribution.
+%Plugging this structure in the multivariate Gaussian distribution (\ref{Nforecasters}) gives
+%\begin{align*}
+%%\label{eq:symmetric}
+%\left(\begin{matrix} X_{S} \\ X_{B_1}\\ \vdots \\ X_{B_N} 
+%   \end{matrix}\right) 
+%  &\sim \mathcal{N}\left( \boldsymbol{0}, \left(\begin{matrix} 
+%\Sigma_{11} & \Sigma_{12}\\
+%\Sigma_{21} & \Sigma_{22}\\
+% \end{matrix}\right) 
+% =
+% \left(\begin{array}{c|cccc}
+%1 & \delta & \delta & \dots & \delta  \\ \hline
+%%\delta' & \delta' & \delta & \delta & \dots & \delta  \\ \hline
+%\delta  &\delta & \lambda\delta & \dots & \lambda\delta   \\ 
+%\delta & \lambda\delta & \delta & \dots & \lambda\delta  \\ 
+%\vdots & \vdots & \vdots & \ddots & \vdots  \\ 
+%\delta  & \lambda\delta & \lambda\delta & \dots & \delta\\ 
+% \end{array}\right)\right),
+%\end{align*}
+%where $\delta$ is the amount of information known by a forecaster and
+%$\lambda$ is the proportion of information
+%known to one forecaster that is also known to another single
+%forecaster.  %This minor change of parametrization %was made for the sake of simplifying some of the following expressions.  
+%To ensure that
+%$\Sigma_{22}$ is coherent, a restriction must be placed on $\lambda$.
+%First, given that under any combination of $\delta$ and $N$ all
+%forecasters may know the exact same information, the value of
+%$\lambda$ is bounded from above by $1$. Second, observe that
+%information overlap is unavoidable when $\delta > 1/N$.  The minimum
+%sharing occurs when all information is either known by everyone or
+%private to a single forecaster.  In other words, if $\delta > 1/N$ and
+%$B_{i} \cap B_j = B$ with $|B| = \lambda \delta$ for all $i \neq j$,
+%the value of $\lambda$ is minimized when $\lambda\delta + N(\delta -
+%\delta\lambda) = 1$.  Therefore the lower bound for $\lambda$ is $\max
+%\left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}$, and $\Sigma_{22}$ is
+%coherent if and only if
+%\begin{align}
+%\delta \in [0,1] &&  \lambda &\in \left[  
+%   \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right), 
+%   \label{rhoDomain}
+%\end{align}
+%where the strict upper bound on $\lambda$ ensures that
+%$\Sigma_{22}$ is not singular.  
 %In the following discussion, 
 %however, this technical restriction is ignored and the case 
 %$\lambda = 1$ is analyzed as a limiting case.
@@ -1385,8 +1514,10 @@ $\Sigma_{22}$ is not singular.
 %  \gamma &=  \sqrt{\frac{N(\delta' + \delta' \lambda (N-1) - \delta N)}
 %  {\delta (\lambda (N-1) + 1)^2}}\sqrt{\frac{1-\delta}{1-\delta'}}
 %\end{align*}
-Under these constraints, the general form of the revealed
-aggregator~(\ref{GeneralAggregator}) simplifies to
+
+
+Under the Gaussian partial information model, this implies a compound symmetric information structure (see Section \ref{compound}). The general form of the revealed
+aggregator~(\ref{GeneralAggregator}) then simplifies to
 \begin{align}
 p''
   &=\Phi\left(\frac{\frac{1}{(N-1)\lambda +1} 
@@ -1418,7 +1549,7 @@ Appendix.  Besides exchangeability, the revealed aggregator
 (\ref{CompoundAggre}) is based on very different modeling assumptions
 than the averaging aggregators described in
 Section~\ref{sec:prior}. The following proposition summarizes some of
-the properties of the revealed aggregator (\ref{CompoundAggre}).
+the key properties of the revealed aggregator (\ref{CompoundAggre}).
 
 \begin{proposition} \label{positiveThm}
 Under symmetric information, 
@@ -1691,7 +1822,7 @@ where $v \subseteq \{1, \dots, N\}$ denotes a subset of the forecasters. Each $C
 \Delta_N &:= \text{conv}\{  \boldsymbol{e}_v : v \subseteq \{1, \dots, N\} \}\\
 &= \{ \boldsymbol{z} \in \mathbb{R}^{2^N} : \boldsymbol{z} \geq 0, \boldsymbol{1}'\boldsymbol{z} = 1\}
 \end{align*}
-to the space of all coherent information structures $\mathcal{Q}_N$. In particular, the linear function $L: \boldsymbol{z} \in \Delta_N \to \Sigma_{22} \in \mathcal{Q}_N$ is defined such that $\rho_{ij} = \sum_{\{i,j\} \subseteq v} z_v$ and $\delta_i =  \sum_{i \in v} z_v$. Given that $\Delta_N$ is a convex polytope, transforming it via the linear function yields a convex polytope spanned by the $2^N$ points $\{ L(\boldsymbol{e}_v) : v \subseteq \{1, \dots, N\}  \} = \{\boldsymbol{x}\boldsymbol{x}' : \boldsymbol{x}  \in \{0,1\}^N\}$. That is, $L(\Delta_N) = \mathcal{Q}_N$, which is known as the boolean quadratic polytope, a.k.a. correlation polytope. Each $\Sigma_{22} \in \mathcal{Q}_N$ has $\frac{N(N+1)}{2} = \binom{n+1}{2}$ unique values and therefore exists in $\binom{n+1}{2}$ dimensions. \qed
+to the space of all coherent information structures $\text{COR}(N)$. In particular, the linear function $L: \boldsymbol{z} \in \Delta_N \to \Sigma_{22} \in \text{COR}(N)$ is defined such that $\rho_{ij} = \sum_{\{i,j\} \subseteq v} z_v$ and $\delta_i =  \sum_{i \in v} z_v$. Given that $\Delta_N$ is a convex polytope, transforming it via the linear function yields a convex polytope spanned by the $2^N$ points $\{ L(\boldsymbol{e}_v) : v \subseteq \{1, \dots, N\}  \} = \{\boldsymbol{x}\boldsymbol{x}' : \boldsymbol{x}  \in \{0,1\}^N\}$. That is, $L(\Delta_N) = \text{COR}(N)$, which is known as the boolean quadratic polytope, a.k.a. correlation polytope. Each $\Sigma_{22} \in \text{COR}(N)$ has $\frac{N(N+1)}{2} = \binom{n+1}{2}$ unique values and therefore exists in $\binom{n+1}{2}$ dimensions. \qed
 %To show that none of these vertices are interior, assume that some point $X_v = \boldsymbol{x}_v\boldsymbol{x}_v'$, where $x_i = \one_{i \in v}$, is interior. Then $X_v$ has to be a convex combination of $\{X_w : w \neq v\}$. That is, for some constants $\phi_w$ such that $\phi_w \geq 0$ and $\sum_w \phi_w = 1$,  
 %\begin{align*}
 %X_v &= \sum_w \phi_w X_w
