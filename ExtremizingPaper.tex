@@ -71,8 +71,7 @@
 %\author[2]{Robin Pemantle\thanks{pemantle@math.upenn.edu}}
 %\thanks{Research supported by NSF award \# DMS-1209117}
 %\author[3]{Lyle H. Ungar\thanks{ungar@cis.upenn.edu}}
-\author[2]{Robin Pemantle\thanks{Research supported in part by NSF grant
-   \# DMS-1209117}}
+\author[2]{Robin Pemantle}
 \author[3]{Lyle H. Ungar}
 \affil[1]{Department of Statistics,
 The Wharton School of the University of Pennsylvania\\
@@ -388,14 +387,17 @@ inter-forecaster correlation under the assumption that the cues can be
 mapped to the individual forecasts via different linear regression
 functions.
 
-The interpreted signal framework, when formalized, more or less
-implies the partial information framework.  Unfortunately, previous
-work on interpreted forecasts has produced only abstract concepts and
-has not been taken to the level of a precise formal model with
-quantitative predictions.  Given this lack of a quantitative model, in
-practice it is often easier and more common to explain subjective
-forecasts with the {\em measurement error framework}. This framework
-is described in the next subsection.
+The interpreted signal framework, as proposed, is relatively abstract; Our partial information model formalizes the intuition behind it, and allows quantitative predictions. In the absence of a quantitative interpreted signal model, people have typically explained subjective forecasts with standard statistical models. These have been called \textit{measurement error framework}; we describe it in the next subsection.
+
+%
+%The interpreted signal framework, when formalized, more or less
+%implies the partial information framework.  Unfortunately, previous
+%work on interpreted forecasts has produced only abstract concepts and
+%has not been taken to the level of a precise formal model with
+%quantitative predictions.  Given this lack of a quantitative model, in
+%practice it is often easier and more common to explain subjective
+%forecasts with the {\em measurement error framework}. This framework
+%is described in the next subsection.
 
 \subsection{The Measurement Error Framework}
 \label{ss:measurement}
@@ -1432,6 +1434,8 @@ assumption, by estimation, or in a Bayesian manner. If one is to
 assume a structure, the most natural and non-informative choice is the
 symmetric one. This is the topic in the next subsection.
 
+%\textcolor{red}{Discuss here Julia's first paper. Hypothesis: the aggregator does not drop out a person whose $B_1 \subset B_2$ unless $B_3$ is completely separate. In a sense, in such a case the first forecaster does not provide anything beyond the second forecaster. This is not surprising. }
+
 
 %\section{Version 1}
 \subsection{Aggregation under Symmetric Information}
@@ -1585,33 +1589,30 @@ underlying model.
 
 \subsection{Real-World Forecasting Data}
 \label{realData}
-The Good Judgment Project (GJP) (see, e.g.,
-\citealt{mellers2014psychological, ungar2012good}) is a research study
-that started in 2011 and has ever since recruited thousands of
+The Good Judgment Project (GJP) (
+\citealt{mellers2014psychological, ungar2012good}) is a research study that since 2011 has recruited thousands of
 forecasters from professional societies, research centers, and alumni
-associations.  These forecasters face questions about future
+associations.  These forecasters are given questions about future
 international political events, estimate the probability of each
 event, and update their predictions when they feel the probabilities
 have changed.  The forecasters know that their probability estimates
-are assessed for accuracy using Brier scores.  % This incentivizes
+are assessed for accuracy using Brier scores (a squared error loss function).  % This incentivizes
 %the forecasters to report their true beliefs instead of attempting
 %to game the system (\citealt{winkler1968good}). 
  In addition to
 receiving \$150 for meeting minimum participation requirements that do
 not depend on prediction accuracy, the forecasters receive status
 rewards for their performance via leader-boards displaying Brier
-scores for the top 20 forecasters.  Every year the top 2\% percent of
+scores for the top 20 forecasters.  Every year the top 1\% percent of
 the forecasters are selected to the elite group of
-``super-forecasters''.  
-%The %super-forecasters work in groups to make highly accurate predictions %on the same events as the rest of the forecasters.
+``super-forecasters''. The super-forecasters work in groups to make highly accurate predictions on the same events as the rest of the forecasters.
 
 This section illustrates the revealed aggregator (\ref{CompoundAggre})
 on forecasts made by the super-forecasters. These forecasters were
 chosen to the group of super-forecasters during the first year of the
 GJP. Our evaluation, however, only uses forecasts that were made
 during the second year. Therefore, the individual forecasts are
-likely, but not guaranteed, to be good. This group of
-super-forecasters consisted of 44 forecasters making predictions about
+likely, but not guaranteed, to be relatively good. This group consisted of 44 super-forecasters making predictions about
 123 geopolitical events with two possible outcomes. For instance, some
 of the questions were
 \begin{quote}\textit{
@@ -1741,7 +1742,7 @@ extremizing has been found to improve the average aggregates
 The average forecast of a team of super-forecasters, however, often
 requires very little or no extremizing.  This can explained by the
 partial information model as follows.  The super-forecasters are
-highly knowledgeable (i.e. they have a high $\delta$) and they who
+highly knowledgeable (i.e. they have a high $\delta$) and they also
 work in groups (i.e. they have a high $\rho$ and $\lambda$).  In
 Figure \ref{LevelplotsOracle} they are situated around the upper-right
 corners where almost no extremizing is required.  In other words,
@@ -1782,7 +1783,7 @@ performing aggregators.
 
 
 \section*{Acknowledgments} 
-This research was supported by a research contract to the University
+This research was supported in part by NSF grant \# DMS-1209117 and in part by a research contract to the University
 of Pennsylvania and the University of California from the Intelligence
 Advanced Research Projects Activity (IARPA) via the Department of
 Interior National Business Center contract number D11PC20061. The
@@ -1793,9 +1794,9 @@ those of the authors and should not be interpreted as necessarily
 representing the official policies or endorsements, either expressed
 or implied, of IARPA, DoI/NBC, or the U.S. Government.
 
-We deeply appreciate the project management skills and work of Terry
-Murray and David Wayrynen, which went far beyond the call-of-duty on
-this project.
+%We deeply appreciate the project management skills and work of Terry
+%Murray and David Wayrynen, which went far beyond the call-of-duty on
+%this project.
 
 \appendix 
 \section*{Appendix: Technical Details}
