@@ -182,7 +182,7 @@ specific model under which the optimal aggregator can be computed.
 
 \subsection{Bias, Noise and Forecast Assessment}
 \label{BiasNoise}
-It is convenient to represent the event to be forecasted with an
+For the sake of theoretical development, it is convenient to represent the event to be forecasted with an
 indicator function that equals one or zero depending whether the event
 happens or not, respectively. Each probability forecast is then an
 estimator of this indicator function.  Therefore, as is the case with
@@ -192,9 +192,10 @@ is said to be {\em calibrated} if, in the long run, events associated
 with a forecast $p \in [0,1]$ have an empirical frequency of
 occurrence of $p$ (see, e.g., \citealt{degroot1983comparison}). For
 instance, consider all events that the forecaster believes to occur
-with a 60\% probability. If the forecaster is well-calibrated, 60\% of
+with probability 0.6. If the forecaster is calibrated, 60\% of
 these events will actually end up occurring. The same, of course, has
-to be true across all probabilities -- not just 60\%.  In the lingo of
+to be true across all probabilities -- not just 0.6.  
+In the lingo of
 estimation, this is equivalent to being conditionally unbiased.
 
 Non-expert populations are typically not calibrated. There are,
@@ -208,7 +209,7 @@ calibrated forecasts on sports events (\citealt{dowie1976efficiency,
 yates1985conditional}). If the decision-maker is left with poorly
 calibrated forecasts, they can, in principle, be corrected by
 translating the forecast $p$ into the forecast $\pt$ where $\pt$ is
-the (historical) proportion of times the event occurs when $p$ is
+the historical proportion of times the event occurs when $p$ is
 forecast.  One can then assume without loss of generality that the
 forecaster is calibrated, replacing $p$ if necessary by the
 historically corrected $\pt$. This assumption is, of course, valid
@@ -217,9 +218,9 @@ assumption of stationarity of the properties of the forecasts.
 % For other calibration techniques, see, for instance, \citealt{foster1998asymptotic, Brier}.  
 Nevertheless, on the
 theoretical level, it is important to separate the problems of bias
-and noise because they are solved by different mechanisms.  In this
-paper we consider the aggregation problem for calibrated forecasts,
-thus isolating the task to one of noise reduction.
+and noise because they are solved by different mechanisms.  This
+paper considers the aggregation problem for calibrated forecasts,
+therefore isolating the task to one of noise reduction.
 
 Before delving into the problem of forecast aggregation, it is useful
 to briefly discuss the problem of assessing and improving a single
@@ -238,27 +239,24 @@ minimizing the quadratic loss function $(p - \one_A)^2$, also known as
 the {\em Brier score}, gives the estimator with the least variance. On
 the other hand, minimizing the entropy loss $\log (1 / |p -
 \one_{A^c}|)$ reveals the estimator that best avoids forecasting an
-incorrect event with near certainty; see~\citet[Section~2]{HwPe1997}
-for a discussion of proper loss functions.
+incorrect event with near certainty (see, e.g., \citealt[Section~2]{HwPe1997}
+for a discussion of proper loss functions).
 
 The point of this brief review is two-fold.  First, when a group of
-sophisticated forecasters operates under a revealing loss function,
+sophisticated forecasters operates under a proper loss function,
 the assumption of calibrated forecasts is, to some degree,
 self-fulfilling.  Forecasters can improve their long run performance
-by calibrating their forecasts. Forecasters with competitive
-motivation, sophistication and historical data will probably do so. In
-fact, calibration has been noticed to improve via training and active
-feedback (see \citealt{o2006uncertain} for an excellent overview of
-calibrating subjective probability forecasts). Secondly, the
+by calibrating their forecasts via training and active
+feedback (\citealt{o2006uncertain}). Forecasters with competitive
+motivation, sophistication, and historical data will probably do so. Secondly, the
 assessment of the aggregated forecast is not uni-dimensional any more
 than is the assessment of an individual forecast.  In order to compare
 different aggregation procedures, a scoring rule must be chosen.  In
 practice, the Brier score is the most common choice, perhaps because
 of its simplicity, its convenient decomposition into three
 interpretable parts (See Section \ref{realData}), or because of the
-paramount status of variance in the statistical literature.  In this
-paper we will concentrate on minimizing the variance of aggregators,
-though much of the discussion will hold under general proper loss
+paramount status of variance in the statistical literature. This paper concentrates on minimizing the variance of the aggregators, though
+ much of the discussion holds under general proper loss
 functions.
 
 \subsection{The Partial Information Framework}
