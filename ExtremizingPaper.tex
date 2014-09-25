@@ -545,67 +545,61 @@ is private) techniques.
 
 \subsection{Motivating Examples}
 
-Partial information models are sensitive to the structure of
+Partial information models are sensitive to the structure of the
 information overlap that is assumed to hold among the individual
-forecasters.  Model sensitivity is good when it reflects sensitivity
-to important inherent features of the problem, but bad when it adds
+forecasters. Model sensitivity is useful if it reacts
+to important inherent features of the problem, but harmful if it adds
 noise that is not reflected in the actual best response to the data.
 It therefore behooves us to begin with some simple examples to show
-that the best aggregate forecast is not well defined without
+that the optimal aggregate forecast is not well defined without
 assumptions on the information structure among the forecasters.
 
 \begin{example}
 \label{FirstExample}
-Suppose two forecasters both forecast a probability of $2/3$ for some
-event.  If they are seeing the same evidence, then the best aggregate
-forecast probability is $2/3$.  If they are seeing different evidence,
+Suppose two forecasters both report a probability of $2/3$ for some
+event.  If they are seeing the same evidence, then the optimal aggregate
+forecast is $2/3$.  If they are seeing different evidence,
 then clearly the combined evidence should give an aggregate forecast
-somewhat greater than $2/3$.  To make the situation more concrete,
-suppose that the event to be forecasted is that a coin, picked from a
-basket containing a fair coin and a two-headed coin, is in fact
-two-headed.  Each forecaster observes the result of a single flip of
-the coin that was picked.  If they see HEADS, then the correct
+somewhat greater than $2/3$.  To make the situation more concrete, consider a basket containing a fair coin and a two-headed coin. The forecasters are asked to predict whether a coin chosen at random is in fact
+two-headed. Before making their predictions, each forecaster observes the result of a single flip of
+the chosen coin.  If they see HEADS, then the correct
 Bayesian probability estimate is $2/3$.  If both forecasters see the
-result of the same coin flip, then the best aggregate probability
-estimate is again $2/3$.  If they observe different (presumably
-independent) coin flips, then the best aggregate probability estimate
+result of the same coin flip, then the optimal aggregate forecast
+ is again $2/3$. On the other hand, if they observe different (presumably
+independent) coin flips, then the optimal aggregate forecast 
 is $4/5$.
 \end{example}
-
-The point of this example is that, based on just these observations,
-there is no way to distinguish the two situations.  If we are able to
-observe these two forecasters for a longer time, we might be able to
-ascertain whether they tend to have the same information.  Had the two
-forecasts in the above example disagreed, we would be sure they were
-not seeing the same coin flip.  However, in the given situation, there
+In this example, it is not possible to distinguish between the two different information structures simply based on the given predictions. If the forecasters had participated in a long sequence of independent replications of the given task, it may have been possible to eventually ascertain whether they have the same information or not. Similarly, if their forecasts had disagreed, it would have been easy to conclude that they did not observe the same coin flip.  However, in the given situation, there
 was no way to know, and neither $2/3$ nor $4/5$ can be said to be a
-better choice than the other for an aggregate forecast.  We conclude
-that it is necessary to add an assumption as to the information
-overlap structure, and that this must be informed by the particular
-instance of the problem. The next example shows that even when we
-assume two forecasters to observe independent events, further details
-as to the structure of information can still greatly affect the
+better choice for the aggregate forecast.  Therefore, we conclude that it is necessary to incorporate an assumption as to the structure of the information
+overlap, and that the details must be informed by the particular
+instance of the problem. The next example shows that even if the forecasters observe independent events, further details
+in the structure of information can still greatly affect the
 optimal aggregate forecast.
 
 \begin{example}
 Let $\Omega = \{ A,B,C,D \} \times \{ 0,1 \}$ be a probability space
 with eight points.  Consider a measure $\mu$ that assigns
 probabilities $\mu (A,1) = a/4, \mu (A,0) = (1-a)/4$, $\mu (B,1) =
-b/4, \mu (B,0) = (1-b)/4$, and so forth. Let $S_1 = \{
-(A,0),(A,1),(B,0),(B,1) \}$ be the event that the first coordinate is
-$A$ or $B$ and, similarly, $S_2$ the event that the first coordinate
-is $A$ or $C$. Consider two Forecasters $1$ and $2$ who observe $S_1$
-and $S_2$, respectively. Therefore Forecaster $i$'s information set is
-given by the $\sigma$-field $\F_i$ that contains $S_i$ and its
-complement. In this case, the Forecasters' $\sigma$-fields are independent. Let
-$G$ be the target event that the second coordinate is~1.  Forecaster~1
-reports $p_1 = \P(G | \mathcal{F}_i) = (a+b)/2$ if $S_1$ occurs;
+b/4, \mu (B,0) = (1-b)/4$, and so forth. Define two events
+\begin{align*}
+ S_1 &= \{A,0),(A,1),(B,0),(B,1) \}\\
+ S_2 &= \{A,0),(A,1),(C,0),(C,1) \}
+\end{align*}
+In other words, $S_1$ is the event that the first coordinate is
+$A$ or $B$, and $S_2$ is the event that the first coordinate
+is $A$ or $C$. Suppose that Forecasters $1$ and $2$ observe $S_1$
+and $S_2$, respectively. Therefore the $i$th Forecaster's information set is
+given by the $\sigma$-field $\F_i$ containing $S_i$ and its
+complement. Given that $S_1$ and $S_2$ are independent, the $\sigma$-fields $\F_1$ and $\F_2$ are also independent. Now, let
+$G$ be the event that the second coordinate is~1.  Forecaster~1
+reports $p_1 = \P(G | \mathcal{F}_1) = (a+b)/2$ if $S_1$ occurs;
 otherwise, $p_1 = (c+d)/2$.  Forecaster~2, on the other hand, reports
 $p_2 = \P(G | \mathcal{F}_2) = (a+c)/2$ if $S_2$ occurs; otherwise,
-$p_2 = (b+d)/2$.  If $\ee$ is added to $a$ and $d$ and subtracted from
+$p_2 = (b+d)/2$.  If $\ee$ is added to $a$ and $d$ but subtracted from
 $b$ and $c$, the forecasts $p_1$ and $p_2$ do not change, nor does it
 change the fact that each of the four possible pairs of forecasts has
-probability $1/4$.  Therefore, all observables are invariant under
+probability $1/4$.  Therefore all observables are invariant under
 this perturbation.  If Forecasters $1$ and $2$ report $(a+b)/2$ and
 $(a+c)/2$, respectively, then the aggregator knows, by considering the
 intersection $S_1 \cap S_2$, that the first coordinate is $A$.
@@ -613,11 +607,11 @@ Consequently, the optimal aggregate forecast is $a$, which is most
 definitely affected by the perturbation.
 \end{example}
 
-The point of this example is that the aggregation problem is affected
-by the fine structure of shared information.  It is, however, unlikely
+The point of this example is to show that the aggregation problem is affected
+by the fine structure of information overlap.  It is, however, unlikely
 that the structure can ever be known with the precision postulated in
-this simple model.  Therefore we will need to make reasonable
-assumptions that yield plausible and generic information structures.
+this simple example.  Therefore it is necessary to make reasonable
+assumptions that yield plausible yet generic information structures.
 
 \subsection{Gaussian Partial Information Model}
 \label{ss:Gaussian}
