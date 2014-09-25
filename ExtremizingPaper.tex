@@ -122,8 +122,7 @@ Crowds
 \section{Introduction and Overview}
 
 \subsection{The Forecast Aggregation Problem}
-Event forecasting is the science of giving probability forecasts for
-future events.  The classical examples can be found in meteorology
+Event forecasting is the science of giving probability estimates for future events.  The classical examples can be found in meteorology
 \citep{sanders1963subjective}, where the scientists are often
 interested in accurate probability predictions of different weather
 phenomena such as rain in the next few days.  But the practice has now
@@ -138,28 +137,24 @@ for the decision-maker who wants to decide, for instance, what to pack
 for tomorrow's family outing or whether to advice against all travel
 to Egypt.
 
-The decision-maker, however, often has access to several different
-forecasts on the same event. For instance, one forecast might draw its
-information from television news in the United States while the other
-is based on local news in Egypt. In such cases, bringing together the
-strengths of different forecasters by combining their forecasts has
-been shown to improve predictive performance under various
-contexts~\citep{clemen1989combining,
-armstrong2001combining}. Unfortunately, the choice of the combination
+Often the decision-maker has access to several different
+forecasts on the same event. For instance, one forecast might depend on news broadcasting in the United States while the other
+is based on local news in Egypt. Many investigators have shown that combining the individual probabilities into a single consensus forecast typically improves predictive performance and hence improves decision making \citep{clemen1989combining,
+armstrong2001combining}. Unfortunately, there are many different ways to combine the forecasts, and the choice of the combination
 rule can have a large impact on the predictive quality of the final
 aggregate forecast.  
 %Analyzing and developing improved rules is the main motivation of 
 This motivates \textit{forecast aggregation} that
-is the problem of combining two or more forecasts into a single
+is the problem of combining multiple forecasts into a single
 forecast with optimal properties.
 
 There are two general approaches to forecast aggregation: empirical
 and theoretical.  The empirical approach is akin to machine
-learning. Given a training set with several forecasts on events with
-known outcomes, the decision-maker experiments with several
-aggregation techniques and chooses the technique (and potentially any
+learning. Given a training set with multiple forecasts on events with
+known outcomes, the decision-maker experiments with different
+aggregation techniques and chooses the one (and potentially any
 parameter values) that yield the best performance on the training set.
-The theoretical approach, on the other hand, first produces a
+The theoretical approach, on the other hand, first constructs a
 probability model and then computes the optimal aggregation procedure
 under the assumptions of the model.  This may involve estimating model
 parameters from the forecasts.
@@ -174,16 +169,16 @@ empirical\footnote{Not only the approaches in
 Section~\ref{ss:empirical} but also the approaches described in
 Section~\ref{ss:measurement}, to which we have provided theoretical
 underpinnings, have been pursued in a manner that is largely
-empirical.}.  The goal of this paper is to produce a plausible
+empirical.}.  The main contribution of this paper is to introduce a plausible
 theoretical framework for forecast aggregation.  This framework allows
 us to interpret existing aggregation procedures and illuminate aspects
-that can be improved.  Secondly, at a general level, we use this
-framework to shed light on the practice of {\em probability
-extremizing} (shifting an average aggregate closer to its nearest
-extreme). This is an empirical technique that has been widely used to
+that can be improved. For instance, the
+framework is used to shed light on the practice of {\em probability
+extremizing}, i.e. shifting an average aggregate closer to its nearest
+extreme. This is an empirical technique that has been widely used to
 improve the predictive performance of many simple aggregators such as
-the average probability. Thirdly, we apply this framework to a
-specific model, where the optimal aggregator may be computed.
+the average probability. Finally, the framework is applied to a
+specific model under which the optimal aggregator can be computed.
 
 \subsection{Bias, Noise and Forecast Assessment}
 \label{BiasNoise}
@@ -880,11 +875,7 @@ conditions, however, are not sufficient. The parameters are heavily linked to ea
 \begin{example}
 Consider $N = 3$ forecasters with $\delta_i =  0.5$, $i = 1, 2, 3$.  If $\rho_{12} = 0.25$, then Forecasters 1 and 2 cover $|B_1 \cup B_2| = 0.75$ of the full information. This is enough to restrict the remaining parameters $\rho_{13}$ and $\rho_{23}$ beyond simply $0 \leq \rho_{j3} \leq 0.5$, $j = 1, 2$. To see this, observe that the sum $\rho_{13} + \rho_{23}$ is maximized when Forecaster 3 knows the same information as, say, Forecaster 1. In this case, $\rho_{13} = 0.5$ and  $\rho_{23} = 0.25$. On the other hand, the sum is minimized if Forecaster 3 knows all the remaining information that is not known by Forecasters 1 and 2, but shares the rest of the information with, say, Forecaster 2; that is, $\rho_{13} = 0$ and $\rho_{23} = 0.25$. Therefore  $0.25 \leq \rho_{31} + \rho_{32} \leq 0.75$. 
 \end{example}
-In this example, simple triangle inequalities were enough to derive the necessary bounds for the parameters. However, as $N$ gets large, the parameters begin to form more complex dependence structures that cannot be described with triangle inequalities anymore. Instead, under any number of forecasters $N$, the space of coherent information structures can be expressed as a convex hull of $2^N$ points. This description is provided in the following proposition. The proof treats $\{\delta_j : j = 1, \dots,
-N\}$ as probabilities for some $N$ events (recall Remark
-(\ref{item:pool})) and regards Figure \ref{diagramN} as a type of Venn
-diagram. The details of this and other proofs are deferred to the
-Appendix.
+In this example, simple triangle inequalities were enough to derive the necessary bounds for the parameters. However, as $N$ gets large, the structures that cannot be described with triangle inequalities anymore. Instead, under any number of forecasters $N$, the space of coherent information structures can be expressed as a convex hull of $2^N$ points. This description is provided in the following proposition. The proof of this and any other propositions are deferred to the Appendix.
 
 \begin{proposition}
 \label{CorrelationPolytope}
@@ -1787,7 +1778,7 @@ of one-time events.
 
 It is interesting to relate our discussion to the many empirical
 studies conducted by the Good Judgment Project (see Section
-\ref{realData} for a brier introduction of the project).  Generally
+\ref{realData} for a brief introduction of the project).  Generally
 extremizing has been found to improve the average aggregates
 (\citealt{mellers2014psychological, satopaa, satopaa2014probability}).
 The average forecast of a team of super-forecasters, however, often
@@ -1869,18 +1860,18 @@ Denote the set of all coherent information structures $\Sigma_{22}$ with $\mathc
 \begin{align*}
 C_\v := \cup_{i \in \v} B_i \setminus \cup_{i \notin \v} B_i,
 \end{align*}
-where $\v \subseteq \{1, \dots, N\}$ denotes a subset of forecasters and the union is over $i = 1, \dots, N$. Therefore each $C_\v$ represents information known only to the forecasters indexed by $\v$. Given that $\sum_{\v} |C_\v|  = 1$, it is possible to establish a bijective linear function $L$ from the simplex
+where $\v \subseteq \{1, \dots, N\}$ denotes a subset of forecasters and the union is over $i = 1, \dots, N$. Therefore each $C_\v$ represents information known only to the forecasters indexed by $\v$. Given that $\sum_{\v} |C_\v|  = 1$, it is possible to establish a linear function $L$ from the simplex
 \begin{align*}
 \Delta_N &:= \text{conv}\{  \boldsymbol{e}_\v : \v \subseteq \{1, \dots, N\} \}\\
 &= \left\{ \boldsymbol{z} \in \mathbb{R}^{2^N} : \boldsymbol{z} \geq \boldsymbol{0}, \boldsymbol{1}'\boldsymbol{z} = 1 \right\}
 \end{align*}
-to the space of all coherent information structures $\mathcal{Q}_N$. In particular, the linear function $L: \boldsymbol{z} \in \Delta_N \to \Sigma_{22} \in \mathcal{Q}_N$ is defined such that $\rho_{ij} = \sum_{\{i,j\} \subseteq \v} z_\v$ and $\delta_i =  \sum_{i \in \v} z_\v$. Therefore $L(\Delta_N) = \mathcal{Q}_N$. Furthermore, given that $\Delta_N$ is a convex polytope, 
-\begin{align*}
-L(\Delta_N) &= \text{conv}\{  L(\boldsymbol{e}_\v) : \v \subseteq \{1, \dots, N\} \}\\
-&=  \text{conv} \left\{\boldsymbol{x}\boldsymbol{x}' : \boldsymbol{x}  \in \{0,1\}^N \right\}\\
-&= \text{COR}(N),
-\end{align*}
-which gives $\text{COR}(N) = \mathcal{Q}_N$. The first equality follows from the basic properties of convex polytopes (see, e.g., \citealt{mcmullen1971convex}).  Each $\Sigma_{22} \in \text{COR}(N)$ has $\frac{N(N+1)}{2} = \binom{n+1}{2}$ parameters and therefore exists in $\binom{n+1}{2}$ dimensions. \qed
+to the space of coherent information structures $\mathcal{Q}_N$. In particular, the linear function $L: \boldsymbol{z} \in \Delta_N \to \Sigma_{22} \in \mathcal{Q}_N$ is defined such that $\rho_{ij} = \sum_{\{i,j\} \subseteq \v} z_\v$ and $\delta_i =  \sum_{i \in \v} z_\v$. Therefore $L(\Delta_N) = \mathcal{Q}_N$. Furthermore, given that $\Delta_N$ is a convex polytope, 
+\begin{align}
+L(\Delta_N) &= \text{conv}\{  L(\boldsymbol{e}_\v) : \v \subseteq \{1, \dots, N\} \} \label{first_step}\\
+&=  \text{conv} \left\{\boldsymbol{x}\boldsymbol{x}' : \boldsymbol{x}  \in \{0,1\}^N \right\} \nonumber\\
+&= \text{COR}(N), \nonumber
+\end{align}
+which gives $\text{COR}(N) = \mathcal{Q}_N$. Equality (\ref{first_step}) follows from the basic properties of convex polytopes (see, e.g., \citealt{mcmullen1971convex}).  Each $\Sigma_{22} \in \text{COR}(N)$ has $\frac{N(N+1)}{2} = \binom{n+1}{2}$ parameters and therefore exists in $\binom{n+1}{2}$ dimensions. \qed
 %To show that none of these vertices are interior, assume that some point $X_v = \boldsymbol{x}_v\boldsymbol{x}_v'$, where $x_i = \one_{i \in v}$, is interior. Then $X_v$ has to be a convex combination of $\{X_w : w \neq v\}$. That is, for some constants $\phi_w$ such that $\phi_w \geq 0$ and $\sum_w \phi_w = 1$,  
 %\begin{align*}
 %X_v &= \sum_w \phi_w X_w
