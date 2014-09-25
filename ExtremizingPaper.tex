@@ -615,20 +615,19 @@ assumptions that yield plausible yet generic information structures.
 
 \subsection{Gaussian Partial Information Model}
 \label{ss:Gaussian}
-Intuitively, the general partial information model can be abstracted with a pool of information particles. Each particle (interpreted as the smallest unit of information) is either positive or negative. The positive particles provide evidence in favor of the event $A$. 
+A natural approach to abstracting the general partial information framework is to define a pool of information particles. Each particle, which can be interpreted as the smallest unit of information, is either positive or negative. The positive particles provide evidence in favor of the event $A$. 
 %For instance, a subset of positive particles may represent a news article with  evidence that $A$ is likely to happen. 
-In the contrary, the negative particles provide evidence against $A$. Therefore, if the overall sum (integral) of the positive particles is larger than the sum of the negative particles, the event $A$ happens; otherwise, it does not. Each forecaster, however, observes only the sum of some subset of the particles. Based on this sum, the forecaster then makes a probability forecasts for the event $A$. The following model represents the pool of information with the unit interval and generates the particles with a Gaussian process. 
+In the contrary, the negative particles provide evidence against $A$. Therefore, if the overall sum (integral) of the positive particles is larger than that of the negative particles', the event $A$ happens; otherwise, it does not. Each forecaster, however, observes only the sum of some subset of the particles. Based on this sum, the forecaster makes a probability forecasts for the event $A$. This is made concrete in the following model that  represents the pool of information with the unit interval and generates the particles from a Gaussian process. 
 
 \begin{quote}
-{\bf The Model.} Let $S = [0,1]$ denote the unit interval and let $\{
-X_B \}$ be a centered Gaussian process on some abstract space $(\Omega
-, \F , \P)$, indexed by the Borel subsets of $B \subseteq S$, with
+{\bf Model.} Denote the pool of information with the unit interval $S = [0,1]$. Consider a centered Gaussian process $\{X_B\}$ defined on a probability space $(\Omega
+, \F , \P)$ and indexed by the Borel subsets $B \subseteq S$ such that the
 covariances $\Cov (X_B , X_{B'}) = |B \cap B'|$.  In other words, the
-unit interval is endowed with Gaussian white noise and $X_B$ is the
+unit interval $S$ is endowed with Gaussian white noise, and $X_B$ is the
 total of the white noise in the Borel subset $B$.  Let $A$ denote the
 event that the sum of all the noise is positive: $A := \{ X_S > 0 \}$.
-For each $1 \leq i \leq N$, let $B_i$ be some Borel subset of $S$, and
-define the information set as $\F_i := \sigma (X_{B_i})$.  Let $p_i :=
+For each $i = 1, \dots, N$, let $B_i$ be some Borel subset of $S$, and
+define the corresponding information set as $\F_i := \sigma (X_{B_i})$. Forecaster $i$ predicts $p_i :=
 \E (\one_A \| \F_i)$.
 \end{quote}
 
