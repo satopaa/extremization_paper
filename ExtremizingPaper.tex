@@ -33,6 +33,7 @@
 \newcommand{\myR}{\hbox{R}}
 \renewcommand{\P}{\mathbb{P}}
 \newcommand{\E}{\mathbb{E}}
+\newcommand{\COR}{\text{COR}}
 \newtheorem{defi}{Definition}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Observation}
@@ -830,42 +831,65 @@ $\left(X_{S}, X_{B_1}, X_{B_2}, \dots, X_{B_N}\right)$ as follows.
 \end{align}
  Given that the information structure
 is described by the sub-matrix $\Sigma_{22}$, learning about the
-information among the $N$ forecasters is equivalent to estimating a
+information among the forecasters is equivalent to estimating a
 covariance matrix under several restrictions.  In particular, the
 information in matrix $\Sigma_{22}$ must be describable by a diagram
-such as the one given in Figure \ref{diagramN}. If this is the case,
+such as Figure \ref{diagramN}. If this is the case,
 the matrix $\Sigma_{22}$ is called \textit{coherent}.  Coherence
 clearly requires that $0 \leq \rho_{ij} \leq \delta_i \leq 1$ for all $i \neq j$.  These
-conditions, however, are not sufficient. The parameters are heavily linked to each other and form a highly constrained space. To develop some intuition of this complexity, it is helpful to illustrate the parameter interdependencies with a simple example. 
-\begin{example}
-Consider three forecasters with $\delta_i =  0.5$ for $i = 1, 2, 3$.  If $\rho_{12} = 0.25$, then Forecasters 1 and 2 observe $|B_1 \cup B_2| = 0.75$ of the full information. This is enough to restrict the remaining parameters $\rho_{13}$ and $\rho_{23}$ beyond $0 \leq \rho_{j3} \leq 0.5$ for $j = 1, 2$. To see this, observe that the sum $\rho_{13} + \rho_{23}$ is maximized when Forecaster 3 knows the same information as, say, Forecaster 1. In this case, $\rho_{13} = 0.5$ and  $\rho_{23} = 0.25$. On the other hand, the sum is minimized if Forecaster 3 knows all the remaining information that is not known by Forecasters 1 and 2, but shares the rest of the information with, say, Forecaster 2; that is, $\rho_{13} = 0$ and $\rho_{23} = 0.25$. Therefore  $0.25 \leq \rho_{31} + \rho_{32} \leq 0.75$. 
-\end{example}
-In this example, simple triangle inequalities were enough to derive the necessary bounds for the parameters. However, as $N$ gets large, the structures that cannot be described with triangle inequalities anymore. Instead, under any number of forecasters $N$, the space of coherent information structures can be expressed as a convex hull of $2^N$ points. This description is provided in the following proposition. The proof of this and any other propositions are deferred to the Appendix.
+conditions, however, are not sufficient. The parameters are heavily linked to each other and form a highly constrained space. 
+%For instance,  consider three forecasters with $\delta_i =  0.5$ for $i = 1, 2, 3$. If $\rho_{12} = 0.25$, then $0.25 \leq \rho_{31} + \rho_{32} \leq 0.75$. This can be verified easily with a diagram such as Figure \ref{diagramN}. But as $N$ grows large, visual inspections of 
+%
+%Unfortunately, for a general $N$, the constraints cannot be obtained via triangle inequalities anymore. Instead, under any number of forecasters $N$, the space of coherent information structures can be expressed as a convex hull of $2^N$ points. This description is provided in the following proposition. 
+%To develop some intuition of this complexity, it is helpful to illustrate the parameter interdependencies with a simple example. 
+%\begin{example}
+%Consider three forecasters with $\delta_i =  0.5$ for $i = 1, 2, 3$.  If $\rho_{12} = 0.25$, then Forecasters 1 and 2 observe $|B_1 \cup B_2| = 0.75$ of the full information. This is enough to restrict the remaining parameters $\rho_{13}$ and $\rho_{23}$ beyond $0 \leq \rho_{j3} \leq 0.5$ for $j = 1, 2$. To see this, observe that the sum $\rho_{13} + \rho_{23}$ is maximized when Forecaster 3 knows the same information as, say, Forecaster 1. In this case, $\rho_{13} = 0.5$ and  $\rho_{23} = 0.25$. On the other hand, the sum is minimized if Forecaster 3 knows all the remaining information that is not known by Forecasters 1 and 2, but shares the rest of the information with, say, Forecaster 2; that is, $\rho_{13} = 0$ and $\rho_{23} = 0.25$. Therefore  $0.25 \leq \rho_{31} + \rho_{32} \leq 0.75$. 
+%\end{example}
+%In this example, simple triangle inequalities were enough to derive the necessary bounds for the parameters. However, as $N$ gets large, the structures that cannot be described with triangle inequalities anymore. 
+%Instead, under any number of forecasters $N$, the space of coherent information structures can be expressed as a convex hull of $2^N$ points. This description is provided in the following proposition. 
+The following proposition describes the space of coherent information structures.
+ The proof of this and other propositions are deferred to the Appendix.
 
 \begin{proposition}
 \label{CorrelationPolytope}
 The overlap structure $\Sigma_{22}$ is coherent if and only
 if 
 \begin{align*}
-\Sigma_{22} \in \text{COR}(N) &:= \text{conv}\left\{
+\Sigma_{22} \in \COR(N) &:= \text{conv}\left\{
 \boldsymbol{x}\boldsymbol{x}' : \boldsymbol{x} \in
 \{0,1\}^N\right\},
 %&= \left\{ \sum_{i=1}^{2^N} \lambda_i  \right\}\\
 \end{align*}
-where $\text{conv}\{\cdot\}$ denotes the convex hull and $\text{COR}(N)$ is known as the correlation
+where $\text{conv}\{\cdot\}$ denotes the convex hull and $\COR(N)$ is known as the correlation
 polytope or the boolean quadric polytope. The correlation polytope is described by $2^N$
-vertices in dimension $\text{dim}(\text{COR}(N)) = \binom{N+1}{2}$.
+vertices in dimension $\text{dim}(\COR(N)) = \binom{N+1}{2}$.
 \end{proposition}
 The correlation polytope is known to have a very complex
 $\mathcal{H}$-representation, i.e. a description in terms of a finite
-number of half-spaces (\citealt{padberg1989boolean, ziegler2000lectures}). In fact, because the unconstrained quadratic
+number of half-spaces (\citealt{padberg1989boolean, ziegler2000lectures}). Complete descriptions of the facets of $\COR(N)$ are known for $N \leq 7$ and conjectured for  $\COR(8)$ and $\COR(9)$ (\citealt{ziegler2000lectures, christofsmapo, pitowsky1991correlation}). For instance, $\COR(2)$ is described with
+\begin{align*}
+\begin{cases}
+ 0 \leq \rho_{12} \leq \min(\delta_1, \delta_2)\\
+ \delta_1 + \delta_2 - \rho_{12} \leq 1
+\end{cases}
+\end{align*}
+and $\COR(3)$ with 
+\begin{align*}
+\begin{cases}
+ 0 \leq \rho_{ij} \leq \min(\delta_i, \delta_j)\\
+ \delta_i + \delta_j - \rho_{ij} \leq 1\\
+ \delta_i - \rho_{ij} - \rho_{ik} + \rho_{jk} \geq 0\\
+ \delta_1 + \delta_2 + \delta_3 - \rho_{12} - \rho_{13} - \rho_{23} \leq 1
+\end{cases}
+\end{align*}
+for $i,j,k \in \{1,2,3\}$ such that $i \neq j$, $i \neq k$, and $j \neq k$. After this the $\mathcal{H}$-representation of $\COR(N)$ becomes increasingly complex. For instance, $\COR(5)$ is known to have 56 facets while $\COR(9)$ has at least 12,246,651,158,320 facets. In fact, because the unconstrained quadratic
 0-1 problem is NP-hard, it is probably hopeless to find a complete
-list of linear inequalities that describe the correlation polytope
-(\citealt{deza1997geometry}). Fortunately, both linear and semidefinite relaxations have been introduced in previous literature (see, e.g., \citealt{laurent1997connections}). Such relaxations paired with modern optimization techniques allow the general information structure to be estimated efficiently from sufficient data. This, however, is not in the scope of this paper and is therefore left for future work. 
+list of linear inequalities to describe $\COR(N)$ under general $N$
+(\citealt{deza1997geometry}). Fortunately, previous literature has introduced both linear and semidefinite relaxations of $\COR(N)$ (see, e.g., \citealt{laurent1997connections}). Such relaxations together with modern optimization techniques and sufficient data allow the general information structure to be estimated efficiently. This, however, is not in the scope of this paper and is therefore left for subsequent work. 
 
 
 The next step is
-to link the pool of information with the probability forecasts. Conditional on the $i$th Forecaster's information, $X_S | X_{B_i} \sim \mathcal{N}\left(X_{B_i}, 1-\delta_j\right)$. Thus,
+to link the pool of information with the probability forecasts. Note that conditional on the $i$th Forecaster's information, $X_S | X_{B_i} \sim \mathcal{N}\left(X_{B_i}, 1-\delta_j\right)$. Thus,
 \begin{align*}
 p_i &= \P\left(A | \mathcal{F}_{i}\right)\\
  &= \P\left(X_S > 0 | X_{B_i}\right)\\
@@ -889,7 +913,7 @@ maximum at $p_i = 1/2$ when $\delta_i < 1/2$.  As $\delta_i \to 0$ (no
 information), $p_i$ converges to a point mass at $1/2$
 (non-informative forecast) and as $\delta_i \to 1$, $p_i$ converges to
 a correct forecast, whose distribution has atoms of weight $1/2$ at
-zero and one. Therefore a forecaster with no information withdraws from the problem by reporting $0.5$ while a forecaster with full information always predicts the correct outcome. Figure \ref{marginals} illustrates the marginal
+zero and one. Therefore a forecaster with no information ``withdraws'' from the problem by reporting $0.5$ while a forecaster with full information always predicts the correct outcome. Figure \ref{marginals} illustrates the marginal
 distribution when $\delta_i$ is equal to $0.3$, $0.5$, and $0.7$.
 
 \begin{figure}[t]
@@ -907,24 +931,21 @@ points 0 and~1.}
 \section{Probability Extremizing}
 \label{extremizing}
 This section first introduces the oracular aggregator $p'$ under the
-Gaussian partial information model and then uses it to study
+Gaussian model and then uses it to study
 extremizing of the probit opinion pool $\probit$. The probit opinion 
-pool was chosen instead of the other averaging aggregators discussed 
-in Section \ref{ss:measurement} because a) $\probit$ is arguably more
+pool was chosen for the analysis because a) $\probit$ is arguably more
 reasonable than the simple average $\bar{p}$; and b) $\probit$ is very
 similar to the logarithmic opinion pool $\plog$ but results in cleaner
 analytic expressions. Even though the results are mainly targeted at forecasting practitioners, the discussion serves as an illustration on how the oracular aggregator can be used to benchmark and understand other aggregation techniques. 
-
-\textcolor{red}{Extremizing corrects the bias introduced by taking the average.}
 
 \subsection{General Information Structure}
 %We show that, under two specific Gaussian partial 
 %information models, the oracle, on average,
 %extremizes the probit aggregator. 
-Recall from Section \ref{PIFintro} that the oracular aggregate is the
-conditional expectation of $\one_A$ given all the information of the
-forecasters. Under the Gaussian partial information model, this can be
-emulated by introducing an oracle forecaster whose information set is
+Recall from Section \ref{PIFintro} that the oracular aggregator is the
+conditional expectation of $\one_A$ given all the information known to the
+forecasters. Under the Gaussian model, this can be
+emulated with an oracle forecaster whose information set is
 $B' := \bigcup_{i=1}^N B_i$.  Appending this to the multivariate
 Gaussian distribution~(\ref{Nforecasters}) gives
 \begin{align}
@@ -947,27 +968,26 @@ Gaussian distribution~(\ref{Nforecasters}) gives
  \end{array}\right)\right), \label{oracleN}
 \end{align}
 where $X_{B'}$ is the information known to the oracle and $\delta' =
-|B'|$.  Therefore,
+|B'|$.  Therefore the oracular aggregator under the Gaussian model is
  \begin{align*}
 p' = \P(X_S > 0 |  \mathcal{F}') 
    &= \Phi\left( \frac{X_{B'}}{\sqrt{1-\delta'}} \right)
 \end{align*}
 
-Given that it is not
-possible to do better than $p'$, the oracular aggregator provides a
+Given that no aggregator can improve upon $p'$, it provides a
 benchmark for quantifying how much extremizing should be performed
-under any given circumstances. To make this more specific, recall that a
+under any given information structure. This can be made more specific by first recalling that a
 probability $p$ is extremized by another probability $q$ if and only
 if $q$ is closer to $0$ when $p \leq 0.5$ and closer to $1$ when $p
-\geq 0.5$. Equivalently, $q$ extremizes $p$ if and only if its probit score $\Phi^{-1}(q)$ is on the same side but further away from zero than $\Phi^{-1}(p)$. The amount of (multiplicative) extremization can then be quantified with the {\em probit extremization ratio} that is defined simply as the ratio
- $\alpha(q,p) := \Phi^{-1}(q) / \Phi^{-1} (p)$. Therefore $q$
-extremizes $p$ if and only if $\alpha(q,p) > 1$. The larger $\alpha(q,p)$ is, the more $q$ extremizes $p$. In the special case with $p =
-\probit$ and $q = p'$, the probit extremization ratio becomes
+\geq 0.5$. Equivalently, $q$ extremizes $p$ if and only if its probit score $\Phi^{-1}(q)$ is on the same side but further away from zero than $\Phi^{-1}(p)$. The amount of (multiplicative) extremization can then be quantified with the {\em probit extremization ratio} defined as the ratio
+ $\alpha(q,p) := \Phi^{-1}(q) / \Phi^{-1} (p)$. This section focuses on the special case
 \begin{align}
 \alpha(p', \probit)  = \frac{P'}{\frac{1}{N}\sum_{i=1}^N P_{i}}, \label{alpha}
 \end{align}
-where $P' = \Phi^{-1}(p')$. From now on, unless otherwise stated, we refer to (\ref{alpha}) simply with
-$\alpha$. This is a random quantity that spans the entire real line;
+where $P' = \Phi^{-1}(p')$. From now on, unless otherwise stated, expression (\ref{alpha}) is referred simply with
+$\alpha$. 
+Under this definition, $\probit$
+requires extremization if and only if $\alpha > 1$, and the larger $\alpha$ is, the more $\probit$ should be extremized. Note that $\alpha$ a random quantity that spans the entire real line;
 that is, it is possible to find a set of probability forecasts and a
 distribution of information for any possible value of $\alpha \in
 \mathbb{R}$.  Evidently, extremizing is not guaranteed to always
@@ -995,7 +1015,7 @@ coefficient for them is
 It follows that $\alpha$ has a Cauchy distribution as long as
 $\sigma_1 \neq 1$, $\sigma_2 \neq 1$, or $\kappa \pm 1$ (see, e.g.,
 \citealt{cedilnik2004distribution}).  These
-conditions are very mild under the Gaussian partial information model.
+conditions are very mild under the Gaussian model.
 For instance, if no forecaster knows as much as the oracle, the
 conditions are satisfied.  Consequently, the probability density
 function of $\alpha$ is
@@ -1032,7 +1052,7 @@ forecasting literature is still full of articles that perform
 probability averaging without extremizing.  The next two sections
 examine sub-cases in which more detailed computations of the oracular
 aggregator can be performed. This sheds light on extremization in many
-real-world forecasting settings.
+real-world forecasting setups.
 
 \subsection{Fully- and Non-Overlapping Information}
 \label{disjoint}
@@ -1061,9 +1081,7 @@ an information structure is likely to arise if a team of forecasters
 strategically decide to access and study disjoint sources of
 information. The resulting information structure $\Sigma_{22}$ is
 diagonal, and hence coherent if and only if $\sum_{i=1}^N \delta_i
-\leq 1$.  In this situation the oracular aggregator and the revealed
-aggregators coincide because $p_i$ determines $X_{B_i}$ and $X_{B'}$ is
-the sum of all the $X_{B_i}$. That is,
+\leq 1$. In this case, the additive nature of the Gaussian process gives $\delta' = \sum_{i=1}^N \delta_i$ and $X_{B'} = \sum_{i=1}^N X_{B_i}$. Consequently, the revealed aggregator coincides with the oracular aggregator. That is,
 %Given that under non-overlapping information 
 %$\delta' = \sum_{j=1}^N \delta_j$ and $X_{B'} = \sum_{j=1}^N X_{B_j}$, 
  \begin{align*}
@@ -1076,7 +1094,7 @@ of voting, or range voting to be more specific (see, e.g.,
 the importance of the forecasters' private information. This is
 performed by the summation in the numerator. If this sum falls below
 $0.0$ (or above $0.0$), the consensus believes that the event will not
-happen (or will happen). The second step is performed by the
+happen (or will happen). The second step is made by the
 denominator that extremizes the consensus according to the total
 amount of information in the group. For instance, if the forecasters
 know all the information, i.e. $\sum_{i=1}^N \delta_i = 1$, their vote
@@ -1105,15 +1123,14 @@ averaging  & & voting\\
 \end{tabular}
 \end{center}
 %\end{observation}
-This observation gives qualitative guidance in real world settings
+This observation gives qualitative guidance in real-world settings
 where the general level of overlap can be said to be high or low.  For
-instance, forecasts from a group of forecasters working together or in
-close collaboration can be averaged while forecasts from a diverse
+instance, predictions from a group of forecasters working together or in
+close collaboration can be averaged while predictions from a diverse
 group of forecasters working independently of each other should be
 aggregated via more extreme techniques such as voting (see
-\citealt{parunak2013characterizing} for a discussion on aggregation
-via voting). This spectrum is particularly visible in the next section
-that examines the intermediate scenarios with partial information
+\citealt{parunak2013characterizing} for a discussion on voting-like techniques). This spectrum is particularly visible in the next section
+that visualizes the intermediate scenarios with partial information
 sharing among the forecasters.
 
 %Because $p_i$ and $X_{B_i}$ are related by the one-to-one 
