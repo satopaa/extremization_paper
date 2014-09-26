@@ -615,23 +615,23 @@ assumptions that yield plausible yet generic information structures.
 
 \subsection{Gaussian Partial Information Model}
 \label{ss:Gaussian}
-A natural approach to abstracting the general partial information framework is to define a pool of information particles. Each particle, which can be interpreted as the smallest unit of information, is either positive or negative. The positive particles provide evidence in favor of the event $A$. 
+The general partial information framework can be abstracted by first constructing a pool of information particles. Each particle, which can be interpreted as the smallest unit of information, is either positive or negative. The positive particles provide evidence in favor of the event $A$. 
 %For instance, a subset of positive particles may represent a news article with  evidence that $A$ is likely to happen. 
-In the contrary, the negative particles provide evidence against $A$. Therefore, if the overall sum (integral) of the positive particles is larger than that of the negative particles', the event $A$ happens; otherwise, it does not. Each forecaster, however, observes only the sum of some subset of the particles. Based on this sum, the forecaster makes a probability forecasts for the event $A$. This is made concrete in the following model that  represents the pool of information with the unit interval and generates the particles from a Gaussian process. 
+In the contrary, the negative particles provide evidence against $A$. Therefore, if the overall sum (integral) of the positive particles is larger than that of the negative particles', the event $A$ happens; otherwise, it does not. Each forecaster, however, observes only the sum of some subset of the particles. Based on this sum, the forecaster makes a probability estimate for the event $A$. This is made concrete in the following model that  represents the pool of information with the unit interval and generates the information particles from a Gaussian process. 
 
 \begin{quote}
-{\bf Model.} Denote the pool of information with the unit interval $S = [0,1]$. Consider a centered Gaussian process $\{X_B\}$ defined on a probability space $(\Omega
+{\bf Model.} Denote the pool of information with the unit interval $S = [0,1]$. Consider a centered Gaussian process $\{X_B\}$ that is defined on a probability space $(\Omega
 , \F , \P)$ and indexed by the Borel subsets $B \subseteq S$ such that the
 covariances $\Cov (X_B , X_{B'}) = |B \cap B'|$.  In other words, the
 unit interval $S$ is endowed with Gaussian white noise, and $X_B$ is the
 total of the white noise in the Borel subset $B$.  Let $A$ denote the
 event that the sum of all the noise is positive: $A := \{ X_S > 0 \}$.
 For each $i = 1, \dots, N$, let $B_i$ be some Borel subset of $S$, and
-define the corresponding information set as $\F_i := \sigma (X_{B_i})$. Forecaster $i$ predicts $p_i :=
+define the corresponding $\sigma$-field as $\F_i := \sigma (X_{B_i})$. Forecaster $i$ then predicts $p_i :=
 \E (\one_A \| \F_i)$.
 \end{quote}
 
-This model can be interpreted and motivated by recalling from Section \ref{ss:inerpreted} the interpreted signal
+This model can be interpreted and motivated by recalling the interpreted signal
 model of~\citet{broomell2009experts}, in which the forecasters
 use different linear functions of the cues that influence the future event to be predicted.  In other words,
 Forecaster~$i$ forms an opinion based on $L_i (Z_1 , \ldots , Z_r)$,
@@ -641,8 +641,8 @@ interpretation seems quite natural and is in fact the only such
 postulate we know to have been suggested for interpreted signals.  If
 the observables (or any linear combination of them) are independent
 and have small tails, then as $r \to \infty$, the joint distribution
-of linear combinations $L_1 , \ldots , L_N$ will be asymptotically
-Gaussian.  Given that the number of such observables in a real-world setup is likely to be large, it makes sense
+of the linear combinations $L_1 , \ldots , L_N$ will be asymptotically
+Gaussian.  Given that the number of observables in a real-world setup is likely to be large, it makes sense
 to model the forecasters' observations as jointly Gaussian.  The
 following enumeration provides interpretation and clarify which
 aspects of the Gaussian model are essential and which have little or
@@ -657,7 +657,7 @@ been abstracted away.
 
 \item {\bf Information Sets.} The set $B_i$ holds the information used
 by Forecaster $i$, and the covariance $\Cov (X_{B_i} , X_{B_j}) = |B_{i} \cap B_{j}|$
-represents the information overlap between the Forecasters $i$ and
+represents the information overlap between Forecasters $i$ and
 $j$.
 %\item In the interpreted signal framework, the set $B_i$ represents 
 %the linear regressor used by Forecaster~$i$, and the covariance 
@@ -669,16 +669,15 @@ information was unknown to Forecaster~$i$ instead of known but not
 used in the forecast.
 
 
-\item {\bf Pool of Information.} First, the role of the unit interval
-is for convenient specification of the sets $B_i$. The pool of
+\item {\bf Pool of Information.} First, the pool of
 information potentially available to the forecasters is the white
-noise on $S = [0,1]$. The choice of unit interval is not relevant, and
+noise on $S = [0,1]$. The role of the unit interval
+is for the convenient specification of the sets $B_i$.
+The exact choice is not relevant, and
 any other set could have been used. The unit interval, however, is a
-natural starting point that allows us to treat $\{ |B_j| : j = 1,
-\dots, N\}$ as probabilities for some $N$ events, $\{ |B_i \cap B_j| :
-i \neq j\}$ as their pairwise joint probabilities, $\{ |B_i \cap B_j
-\cap B_k| : i \neq j \neq k\}$ as their three-way joint probabilities,
-and so on.  This is particularly useful in analysis as it links the
+natural starting point that provides an alternative interpretation of $|B_j|$ as marginal probabilities for some $N$ events, $|B_i \cap B_j|$ as their pairwise joint probabilities, $|B_i \cap B_j
+\cap B_k|$ as their three-way joint probabilities,
+and so forth.  This interpretation is particularly useful in analysis as it links the
 information structure to many known results in combinatorics and geometry. One such connection is
 established in Proposition \ref{CorrelationPolytope}. Second, there is
 no sense of time or ranking of the information within the
@@ -693,7 +692,7 @@ by the length, a.k.a. the Lebesgue measure, on $S$.
 view, the exact identities of the individual sets $B_i$ are
 irrelevant.  All that matters are the covariances $\Cov \left(X_{B_i}
 , X_{B_j}\right) = |B_i \cap B_j|$.  The explicit sets $B_i$ are for
-use in the theoretical analysis.
+use in analysis.
 
 \item {\bf Scale Invariance.} The model is invariant under rescaling,
 replacing $S$ by $[0,\lambda]$ and $B_i$ by $\lambda B_i$.  Therefore,
@@ -705,12 +704,11 @@ the variables $X_B$ are bounded by $1$) is not relevant.
 choice of an event $A$ and Borel sets $B_i$.
 This might be done in several ways: a) by choosing them in advance,
 according to some criterion; b) estimating the parameters $\P(A)$,
-$|B_i|$ and $|B_i \cap B_j|$ from the data; c) using a Bayesian model
+$|B_i|$ and $|B_i \cap B_j|$ from data; c) using a Bayesian model
 with a prior distribution on the unknown parameters.  This paper
-focuses mostly on (a) and (b) but discusses (c) shortly in
+focuses mostly on a) and b) but discusses c) shortly in
 Section~\ref{discussion}.  Section \ref{extremizing} provides one
-result, namely Proposition~\ref{positiveProbThm}, on the general
-model, holding for any (nonrandom) choices of the sets $B_i$.
+result, namely Proposition~\ref{positiveProbThm} that holds for any (nonrandom) choices of the sets $B_i$.
 \label{item:specific}
 
 
@@ -720,54 +718,53 @@ model, holding for any (nonrandom) choices of the sets $B_i$.
 
 \item {\bf Choice of Target Event.}  There is one substantive
 assumption in this model, namely the choice of the half-space $\{ X_S
-> 0 \}$ for the target event $A$.  Changing the target event results
-in a non-isomorphic model. The current choice of the half-space
+> 0 \}$ for the event $A$.  Changing this event results
+in a non-isomorphic model. The current choice
 implies a prior probability $\P(A) = 1/2$, which seems as
 uninformative as possible and therefore provides a natural starting
-point. Specifying a prior distribution for $A$ cannot be avoided as
+point. Note that specifying a prior distribution for $A$ cannot be avoided as
 long as the model depends on a probability space. As was mentioned in
 Section \ref{PIFintro}, this includes essentially any probability
 model for forecast aggregation.
+\label{item:choice}
 
 \item {\bf Centering.} One could choose a non-central half-space $\{
-X_S > t \}$ for $A$, where $t \neq 0$.  This would make the prior
-probability of $A$ different from $1/2$.  This paper focuses on the
+X_S > t \}$ with $t \neq 0$ for the event $A$.  This would make the prior
+probability of $A$ different from $1/2$.  The current paper focuses on the
 centered model for simplicity but also for the following reason.  The
 Gaussian assumption is most often true in practice when the
-observations are centered.  Therefore, for example, if the electorate
+observations are centered.  For example, if the electorate
 is broken into a dozen demographic segments, the portion of voters in
 each segment that vote for a given candidate does not follow a
 Gaussian distribution, but the difference between this portion and the
 historically expected or predicted portion may.  A centered partial
 information model is then quite realistic when forecasting the event
 of a positive deviation.  The political futures website, Intrade,
-during its operation, was in fact well stocked with centered events,
-such as the event that the number of representatives elected from a
-given party would exceed a threshold (the threshold being adjusted to
-bring this probability near $1/2$).  Sports betting websites operate
+during its operation, was in fact well stocked with centered events. For instance, the website might have inquired whether 
+ the number of representatives elected from a
+given party would exceed a threshold that had been adjusted to
+bring the prior probability near $1/2$.  Sports betting websites also operate
 almost exclusively in this mode.
 \label{item:centered}
 \end{enumerate}
 
 \subsection{Preliminary Observations}
 \label{prelim}
- It is helpful to begin the introduction of the Gaussian partial
-information model by considering only two forecasters.  That is,
-consider Forecasters $1$ and $2$ who see respective $\delta_1$ and
-$\delta_2$ portions of the Gaussian process.  Let $\rho$ denote the
-size of the overlap of the two information sets. Then,
+It is helpful to begin the introduction of the Gaussian model by first considering only two forecasters.  Suppose Forecasters $1$ and $2$ observe respective $\delta_1$ and
+$\delta_2$ portions of the Gaussian process.  If $\rho$ denotes the
+size of the overlap in their information sets, then 
 \begin{align*}
 |B_1| &= \delta_1\\
 |B_2| &= \delta_2\\
 |B_1 \cap B_2| &= \rho
 \end{align*}
-\begin{figure}[htbp]
+\begin{figure}[t]
 %   \hspace{-2em}
    \includegraphics[width = \textwidth]{N=2} % requires the graphicx package
    \caption{Illustration of the Gaussian partial information model with $2$ forecasters.}
    \label{diagram2}
 \end{figure}
-Figure \ref{diagram2} illustrates this setup.  In this diagram the
+Figure \ref{diagram2} illustrates this setup.  In this diagram, the
 Gaussian process has been partitioned into four parts based on the
 forecasters' information sets:
 \begin{align*}
@@ -776,18 +773,15 @@ forecasters' information sets:
  V &= X_{B_2 / B_1}
 & W &= X_{(B_1 \cup B_2)^c}
 \end{align*}
-This partition illustrates the nature of the information pool provided
-by the Gaussian process. In particular,
+This partition illustrates the additive nature of the information pool. In particular,
 \begin{align*}
 X_{B_1} &= U + M\\
 X_{B_2} &= M + V\\
 X_S &= U+M+V+W,
 \end{align*}
-where $U, V, M, W$ are independent Gaussians with respective variances
-$\delta_1-\rho$, $\delta_2-\rho$, $\rho$, $1+\rho-\delta_1 -
-\delta_2$.  The random variable $X_{B_i}$ summarizes the information
-known and used by Forecaster $i$.
- The joint distribution of $X_{S}$, $X_{B_1}$, and $X_{B_2}$ is a
+where $U, V, M, W$ are independent Gaussian random variables with respective variances
+$\delta_1-\rho$, $\delta_2-\rho$, $\rho$, and $1+\rho-\delta_1 -
+\delta_2$. The joint distribution of $X_{S}$, $X_{B_1}$, and $X_{B_2}$ is a
 multivariate Gaussian distribution.  That is,
 \begin{align}
 \left(\begin{matrix} X_S \\ X_{B_1}\\ X_{B_2} \end{matrix}\right) 
@@ -798,14 +792,13 @@ multivariate Gaussian distribution.  That is,
 \delta_2 & \rho & \delta_2
  \end{matrix}\right)\right) \label{twoforecasters}
 \end{align}
-Given that $X_S$ has mean zero, the prior probability for the event is
-$\P(X_S > 0) = \P(A) = 1/2$.  As was mentioned above in Remark
-(\ref{item:centered}), this can be easily adjusted to any probability
+Given that $X_S$ has mean zero, the prior probability for the event $A$ is
+$\P(X_S > 0) = \P(A) = 1/2$. This can be easily adjusted to any probability
 $\tilde{p}$ by letting $A = \{ X_S > \Phi^{-1}(1-\tilde{p}) \}$.  This
 paper, however, focuses on the centered model with prior probability
-$1/2$.
+$1/2$ (see Remarks (\ref{item:choice}) and (\ref{item:centered}) above). .
 
-\begin{figure}[htbp]
+\begin{figure}[t]
    \includegraphics[width = \textwidth]{N=N} % requires the graphicx package
    \caption{Illustration of the Gaussian partial information model with $N$ forecasters.}
    \label{diagramN}
@@ -814,8 +807,9 @@ $1/2$.
 Consider now $N$ forecasters. Let $|B_i| = \delta_i$ be the amount of
 information known by Forecaster $i$ for $i = 1, \dots, N$, and $|B_i
 \cap B_j| = \rho_{ij} = \rho_{ji}$ be the information overlap between
-Forecasters $i$ and $j$ with $i \neq j$.
-Expression~(\ref{twoforecasters}) generalizes to the vector
+Forecasters $i$ and $j$. A possible scenario of this general case is illustrated in Figure \ref{diagramN}. Note that $B_i$ does not have to be a contiguous segment of the unit
+interval.  Instead, each forecaster can know any Borel measurable
+subset of the full information.  The multivariate Gaussian distribution (\ref{twoforecasters}) generalizes to the vector
 $\left(X_{S}, X_{B_1}, X_{B_2}, \dots, X_{B_N}\right)$ as follows.
 \begin{align}
 \left(\begin{matrix} X_S \\ X_{B_1}\\ \vdots \\ X_{B_N} \end{matrix}\right) &\sim \mathcal{N}\left( \left(\begin{matrix} 
@@ -834,10 +828,7 @@ $\left(X_{S}, X_{B_1}, X_{B_2}, \dots, X_{B_N}\right)$ as follows.
 \delta_N & \rho_{N,1} & \rho_{N,2} & \dots & \delta_N\\ 
  \end{array}\right)\right)  \label{Nforecasters}
 \end{align}
-This case is illustrated in Figure \ref{diagramN}.  It is important to
-notice that $B_i$ does not have to be a contiguous segment of the unit
-interval.  Instead, each forecaster can know any Borel measurable
-subset of the full information.  Given that the information structure
+ Given that the information structure
 is described by the sub-matrix $\Sigma_{22}$, learning about the
 information among the $N$ forecasters is equivalent to estimating a
 covariance matrix under several restrictions.  In particular, the
@@ -847,7 +838,7 @@ the matrix $\Sigma_{22}$ is called \textit{coherent}.  Coherence
 clearly requires that $0 \leq \rho_{ij} \leq \delta_i \leq 1$ for all $i \neq j$.  These
 conditions, however, are not sufficient. The parameters are heavily linked to each other and form a highly constrained space. To develop some intuition of this complexity, it is helpful to illustrate the parameter interdependencies with a simple example. 
 \begin{example}
-Consider $N = 3$ forecasters with $\delta_i =  0.5$, $i = 1, 2, 3$.  If $\rho_{12} = 0.25$, then Forecasters 1 and 2 cover $|B_1 \cup B_2| = 0.75$ of the full information. This is enough to restrict the remaining parameters $\rho_{13}$ and $\rho_{23}$ beyond simply $0 \leq \rho_{j3} \leq 0.5$, $j = 1, 2$. To see this, observe that the sum $\rho_{13} + \rho_{23}$ is maximized when Forecaster 3 knows the same information as, say, Forecaster 1. In this case, $\rho_{13} = 0.5$ and  $\rho_{23} = 0.25$. On the other hand, the sum is minimized if Forecaster 3 knows all the remaining information that is not known by Forecasters 1 and 2, but shares the rest of the information with, say, Forecaster 2; that is, $\rho_{13} = 0$ and $\rho_{23} = 0.25$. Therefore  $0.25 \leq \rho_{31} + \rho_{32} \leq 0.75$. 
+Consider three forecasters with $\delta_i =  0.5$ for $i = 1, 2, 3$.  If $\rho_{12} = 0.25$, then Forecasters 1 and 2 observe $|B_1 \cup B_2| = 0.75$ of the full information. This is enough to restrict the remaining parameters $\rho_{13}$ and $\rho_{23}$ beyond $0 \leq \rho_{j3} \leq 0.5$ for $j = 1, 2$. To see this, observe that the sum $\rho_{13} + \rho_{23}$ is maximized when Forecaster 3 knows the same information as, say, Forecaster 1. In this case, $\rho_{13} = 0.5$ and  $\rho_{23} = 0.25$. On the other hand, the sum is minimized if Forecaster 3 knows all the remaining information that is not known by Forecasters 1 and 2, but shares the rest of the information with, say, Forecaster 2; that is, $\rho_{13} = 0$ and $\rho_{23} = 0.25$. Therefore  $0.25 \leq \rho_{31} + \rho_{32} \leq 0.75$. 
 \end{example}
 In this example, simple triangle inequalities were enough to derive the necessary bounds for the parameters. However, as $N$ gets large, the structures that cannot be described with triangle inequalities anymore. Instead, under any number of forecasters $N$, the space of coherent information structures can be expressed as a convex hull of $2^N$ points. This description is provided in the following proposition. The proof of this and any other propositions are deferred to the Appendix.
 
