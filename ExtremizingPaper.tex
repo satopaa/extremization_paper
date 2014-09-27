@@ -343,7 +343,7 @@ future research.
 
 \section{Prior Work on Aggregation}
 \label{sec:prior}
-Prior work on forecast aggregation has focused largely on two frameworks that make different assumptions about the source of heterogeneity among the forecasts.  These approaches are discussed in the following
+Prior work on forecast aggregation has focused largely on two frameworks that make different assumptions about the source of forecast heterogeneity.  These approaches are discussed in the following
 subsections.
 
 \subsection{The Interpreted Signal Framework}
@@ -365,23 +365,18 @@ diversity''.  This is a very reasonable assumption that has been analyzed and
 utilized in many other settings.  For example,
 ~\citet{parunak2013characterizing} demonstrate that optimal
 aggregation of interpreted forecasts is not constrained to the
-convex hull of the forecasts;~\citet{broomell2009experts} analyze
+convex hull of the forecasts; \citet{broomell2009experts} analyze
 inter-forecaster correlation under the assumption that the cues can be
 mapped to the individual forecasts via different linear regression
-functions.
-
-\textcolor{red}{Cite Julia's work}
+functions; \cite{degroot1991optimal} assume that each forecaster first observes a random quantity $X_i$ and then reports $\P(A | X_i)$, 
+where $\boldsymbol{X} = (X_1, \dots, X_N)$ has density $g(\boldsymbol{X} | A)$. 
+They first derive the optimal aggregator when $X_i$ are conditionally independent and then proceed to determine the optimal weights for a linear opinion pool when $X_i$ are not conditionally independent. However, \cite{Ranjan08} prove that any (non-trivially) weighted average of calibrated forecasts is necessarily uncalibrated and too close to the naive baseline forecast (typically at $0.5$).
 
 %Some preliminary steps have been made towards a more concrete model by, for example, assuming
 %conditional independence of the $x_i$, \cite{}, but
 %lacking a distributional model. 
 
-The interpreted signal framework, as proposed, is relatively abstract. 
-Our partial information model formalizes the intuition behind it, and
-allows quantitative predictions. In the absence of a quantitative
-interpreted signal model, prior applications have typically explained forecast heterogeneity  with standard statistical models. These models are different formalizations of  the
-\textit{measurement error framework} that is described in the next
-subsection.
+To the best of our knowledge, no previous study, however, has provided a general framework for linking the quantity of interest with the interpreted forecasts. Therefore the interpreted signal framework, as proposed, has remained relatively abstract. In response, our partial information framework formalizes the intuition behind it, allows quantitative predictions, and provides a flexible construction that can be adapted to a broad range of forecasting setups. 
 
 %
 %The interpreted signal framework, when formalized, more or less
@@ -395,8 +390,8 @@ subsection.
 
 \subsection{The Measurement Error Framework}
 \label{ss:measurement}
-
-The measurement error framework generates forecast heterogeneity purely from a probability distribution. More specifically, the framework assumes a ``true'' probability
+In the absence of a quantitative
+interpreted signal model, prior applications have typically explained forecast heterogeneity  with standard statistical models. These models are different formalizations of  the \textit{measurement error framework} that generates forecast heterogeneity purely from a probability distribution. More specifically, the framework assumes a ``true'' probability
 $\theta$  for the future event to be predicted. This probability, which can be interpreted as the  forecast made by an ideal forecaster, is then measured by the individual forecasters with mean-zero idiosyncratic error.  This is typically
 formalized by modeling each forecast as an independent draw from a common
 probability distribution that is centered at $\theta$. Therefore the underlying probability model is just the 
@@ -828,6 +823,7 @@ $\left(X_{S}, X_{B_1}, X_{B_2}, \dots, X_{B_N}\right)$ as follows.
 \delta_N & \rho_{N,1} & \rho_{N,2} & \dots & \delta_N\\ 
  \end{array}\right)\right)  \label{Nforecasters}
 \end{align}
+
  Given that the information structure
 is described by the sub-matrix $\Sigma_{22}$, learning about the
 information among the forecasters is equivalent to estimating a
@@ -1279,7 +1275,7 @@ is a scale parameter.  This figure plots $\log(x_0)$ for $N = 2$ and $\log(x_{mi
         \label{LevelplotsOracle}
 \end{figure}
 
-Figure \ref{LevelplotsOracle} shows $\log(x_0)$ and $\log(x_{min})$ for $N = 2$ and $N = 10$, respectively, under all plausible combinations of $\delta$ and $\lambda$. High values have been censored to keep the scale manageable.  Note that the results presented in Figure \ref{xOracle2} are completely general, apart from the assumption $\delta_1 = \delta_2$. Relaxing this assumption does not change the qualitative nature of the results. Overall, these plots show that heavier extremizing is required when $\delta$ and $N$
+Figure \ref{LevelplotsOracle} shows $\log(x_0)$ and $\log(x_{min})$ for $N = 2$ and $N = 10$, respectively, under all plausible combinations of $\delta$ and $\lambda$. High values have been censored to keep the scale manageable.  Note that the results presented in Figure \ref{xOracle2} are completely general, apart from the assumption $\delta_1 = \delta_2$. Relaxing this assumption does not change the qualitative nature of the results. Overall, heavier extremizing is required when $\delta$ and $N$
 are high but $\lambda$ is low. Given that $\delta'$ increases in
 $\delta$ and $N$ but decreases in $\lambda$, the amount of extremizing
 can be expected to increase in the total amount of information among
