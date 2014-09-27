@@ -1444,12 +1444,12 @@ where
 \end{align*}
 These expressions can be found directly from the formulas of
 the conditional multivariate Gaussian distribution (see, 
-e.g.,~\citealt[Result~5.2.10, page~156]{ravishanker2001first}). 
-This then leads to a probability aggregator that depends on 
-$\Sigma_{22}$.  More specifically, the revealed aggregator is
+e.g., \citealt{ravishanker2001first}). 
+%\citealt[Result~5.2.10, page~156]{ravishanker2001first}). 
+The revealed aggregator then becomes
 \begin{eqnarray}
-p'' & = & \P\left(A  | \boldsymbol{X}\right)  \nonumber \\
-%%%& = & \P\left(X_{S} > 0 | \boldsymbol{X}\right) \nonumber \\
+p'' & = & \P\left(A  | \F''\right)  \nonumber \\
+& = & \P\left(X_{S} > 0 | \boldsymbol{X}\right) \nonumber \\
 %&=& \Phi\left( \frac{\Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X} - \Phi^{-1}(1-\tilde{p})}
 %   {\sqrt{1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}}}\right) 
 &=& \Phi\left( \frac{\Sigma_{12} \Sigma_{22}^{-1} \boldsymbol{X}}
@@ -1467,13 +1467,12 @@ p'' & = & \P\left(A  | \boldsymbol{X}\right)  \nonumber \\
 %\end{align*}
 % where $\tilde{p} = \P(A)$ is the prior probability discussed in Section \ref{prelim} and 
  where $\boldsymbol{X} =
-\Phi^{-1}(\boldsymbol{p})\sqrt{1-\Sigma_{12}}$. To make practical use
-of this computation, we need values for the entries of $\Sigma_{22}$.
-As  was discussed in Remark (\ref{item:specific}) in
-Section~\ref{ss:Gaussian}, this may be done in one of three ways: by
+\Phi^{-1}(\boldsymbol{p})\sqrt{1-\Sigma_{12}}$. A practical application
+of this computation, however, requires values for the entries of $\Sigma_{22}$.
+As  was discussed earlier in Remark (\ref{item:specific}), the information structure can be estimated in one of three ways: by
 assumption, by estimation, or in a Bayesian manner. If one is to
 assume a structure, the most natural and non-informative choice is the
-symmetric one. This is the topic in the next subsection.
+symmetric one discussed in Section \ref{compound}. The next subsection analyzes the revealed aggregator (\ref{GeneralAggregator}) under this structure.
 
 %\textcolor{red}{Discuss here Julia's first paper. Hypothesis: the aggregator does not drop out a person whose $B_1 \subset B_2$ unless $B_3$ is completely separate. In a sense, in such a case the first forecaster does not provide anything beyond the second forecaster. This is not surprising. }
 
