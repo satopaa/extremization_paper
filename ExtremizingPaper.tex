@@ -674,7 +674,7 @@ any other set could have been used. The unit interval, however, is a
 natural starting point that provides an alternative interpretation of $|B_j|$ as marginal probabilities for some $N$ events, $|B_i \cap B_j|$ as their pairwise joint probabilities, $|B_i \cap B_j
 \cap B_k|$ as their three-way joint probabilities,
 and so forth.  This interpretation is particularly useful in analysis as it links the
-information structure to many known results in combinatorics and geometry. This paper discusses one such connection in Proposition \ref{CorrelationPolytope} and another in Section \ref{compound}. Second, there is
+information structure to many known results in combinatorics and geometry. This paper discusses one such connection in Proposition \ref{CorrelationPolytope} and another in Section \ref{oracular}. Second, there is
 no sense of time or ranking of information within the
 pool. Instead, the pool is a collection of information, where each
 piece of information has an {\em a priori} equal chance to contribute
@@ -859,8 +859,7 @@ where $\text{conv}\{\cdot\}$ denotes the convex hull and $\COR(N)$ is known as t
 polytope or the boolean quadric polytope. The correlation polytope is described by $2^N$
 vertices in dimension $\text{dim}(\COR(N)) = \binom{N+1}{2}$.
 \end{proposition}
-The correlation polytope is known to have a very complex
-$\mathcal{H}$-representation, i.e. a description in terms of a finite
+The correlation polytope is known to have a very complex description in terms of a finite
 number of half-spaces (\citealt{padberg1989boolean, ziegler2000lectures}). Complete descriptions of the facets of $\COR(N)$ are known for $N \leq 7$ and conjectured for  $\COR(8)$ and $\COR(9)$ (\citealt{ziegler2000lectures, christofsmapo, pitowsky1991correlation}). For instance, $\COR(2)$ is described with
 \begin{align*}
 \begin{cases}
@@ -877,19 +876,19 @@ and $\COR(3)$ with
  \delta_1 + \delta_2 + \delta_3 - \rho_{12} - \rho_{13} - \rho_{23} \leq 1
 \end{cases}
 \end{align*}
-for $i,j,k \in \{1,2,3\}$ such that $i \neq j$, $i \neq k$, and $j \neq k$. After this the $\mathcal{H}$-representation of $\COR(N)$ becomes increasingly complex. For instance, $\COR(5)$ is known to have 56 facets while $\COR(9)$ has at least 12,246,651,158,320 facets. In fact, because the unconstrained quadratic
+for $i,j,k \in \{1,2,3\}$ such that $i \neq j$, $i \neq k$, and $j \neq k$. After this, the inequality representation of $\COR(N)$ becomes increasingly complex. For instance, $\COR(5)$ is known to have 56 facets while $\COR(9)$ has at least 12,246,651,158,320 facets. In fact, because the unconstrained quadratic
 0-1 problem is NP-hard, it is probably hopeless to find a complete
 list of linear inequalities to describe $\COR(N)$ under general $N$
-(\citealt{deza1997geometry}). Fortunately, previous literature has introduced both linear and semidefinite relaxations of $\COR(N)$ (see, e.g., \citealt{laurent1997connections}). Such relaxations together with modern optimization techniques and sufficient data allow the general information structure to be estimated efficiently. This, however, is not in the scope of this paper and is therefore left for subsequent work. 
+(\citealt{deza1997geometry}). Fortunately, previous literature has introduced both linear and semidefinite relaxations of $\COR(N)$ (see, e.g., \citealt{laurent1997connections}). Such relaxations together with modern optimization techniques and sufficient data can be used to estimate the general information structure very efficiently. This, however, is not in the scope of this paper and is therefore left for subsequent work. 
 
 
 The next step is
 to link the pool of information with the probability forecasts. Given that $X_S | X_{B_i} \sim \mathcal{N}\left(X_{B_i}, 1-\delta_j\right)$, the probability estimate reported by Forecaster $i$ is
-\begin{align*}
-p_i &= \P\left(A | \mathcal{F}_{i}\right)\\
- &= \P\left(X_S > 0 | X_{B_i}\right)\\
- &= \Phi\left( \frac{X_{B_i}}{\sqrt{1-\delta_i}}\right) 
-\end{align*}
+\begin{align}
+p_i &= \P\left(A | \mathcal{F}_{i}\right) \nonumber \\
+ &= \P\left(X_S > 0 | X_{B_i}\right) \nonumber \\
+ &= \Phi\left( \frac{X_{B_i}}{\sqrt{1-\delta_i}}\right) \label{indFore}
+\end{align}
 This forecast is a conditional expectation of $\one_A$ given $\mathcal{F}_i$ and hence  calibrated. Its marginal distribution can be computed by first denoting the probit score with $P_{i} := \Phi^{-1}(p_i) = X_{B_i}/\sqrt{1-\delta_i}$. The Jacobian for the map $P_{i} \to \phi(P_i)$ is
 \begin{eqnarray*}
 J(P_i) &=& (2\pi)^{-1/2} \exp \left( - P_i^2/2   \right) 
@@ -925,7 +924,7 @@ points 0 and~1.}
 
 \section{Probability Extremizing}
 \label{extremizing}
-This section first introduces the oracular aggregator $p'$ under the
+This section first introduces the oracular aggregator $p'$ for the
 Gaussian model and then uses it to study
 extremizing of the probit opinion pool $\probit$. The probit opinion 
 pool  was chosen for the analysis because a) it is arguably more
@@ -933,7 +932,8 @@ reasonable than the simple average $\bar{p}$; and b) it is very
 similar to the logarithmic opinion pool $\plog$ but results in cleaner
 analytic expressions. Even though the results are mainly targeted at forecasting practitioners, the discussion serves as an illustration on how the oracular aggregator can be used to benchmark and understand other aggregation techniques. 
 
-\subsection{General Information Structure}
+\subsection{Oracular Aggregator for the Gaussian Model}
+\label{oracular}
 %We show that, under two specific Gaussian partial 
 %information models, the oracle, on average,
 %extremizes the probit aggregator. 
@@ -963,30 +963,58 @@ Gaussian distribution~(\ref{Nforecasters}) gives
  \end{array}\right)\right), \label{oracleN}
 \end{align}
 where $X_{B'}$ is the information known to the oracle and $\delta' =
-|B'|$.  Therefore the oracular aggregator under the Gaussian model is
+|B'|$. Similarly to a single forecaster's probability estimate in (\ref{indFore}), the oracular aggregator becomes
  \begin{align*}
 p' = \P(X_S > 0 |  \mathcal{F}') 
    &= \Phi\left( \frac{X_{B'}}{\sqrt{1-\delta'}} \right)
 \end{align*}
 
-Given that no aggregator can improve upon $p'$, it provides a
-benchmark for quantifying how much extremizing should be performed
-under any given information structure. This can be made more specific by first recalling that a
-probability $p$ is extremized by another probability $q$ if and only
+Given that $p'$ is generally not observed, $\delta'$ cannot be estimated directly but must be computed based on the forecasters' information $\Sigma_{22}$ instead. The value of $\delta'$, however, is not uniquely determined by $\Sigma_{22}$ unless $N = 2$. 
+%The a key quantity in analyzing other probability aggregators is the oracle's amount of information $\delta'$. Generally this value is determined by $\Sigma_{22}$ only when $N = 2$.
+Fortunately, it can be bounded in terms of $\Sigma_{22}$ for general $N$ by  referring to the historical Boole Problem (\citealt{boole1854investigation}): 
+
+\begin{quote}
+\textbf{Boole Problem.} Consider $N$ events $A_i$ for $i = 1, \dots, N$. Denote the marginal probabilities  with $p_i := \P(A_i)$ and the joint probabilities with $p_{ij} := \P(A_i \cap A_j)$. What is the best estimation of $\P(A_1 \cup \dots \cup A_N)$ in terms of $p_i$'s and $p_{ij}$'s?
+\end{quote}
+As was mentioned earlier in Remark (\ref{item:pool}), representing the pool of information with the unit interval $S = [0,1]$ allows us to interpret $\delta_i$'s as marginal probabilities for some $N$ events and $\rho_{ij}$'s as their joint probabilities. Therefore  any previously suggested answer to the Boole Problem can be used to bound $\delta'$. For instance, \cite{deza1997geometry} derive the bounds
+%according to \cite{deza1997geometry}  several authors, including \cite{chung1941probability, dawson1967inequality, galambos1977bonferroni}, 
+%\cite{galambos1977bonferroni}
+%discuss the lower bound
+\begin{align*}
+%\delta'_{min} := 
+%\frac{2}{m+1} \sum_{i=1}^N \delta_i - \frac{2}{m(m+1)} \sum_{1 \leq i < j \leq N} \rho_{ij}   \leq \delta',
+%\delta'_{min} := 
+\frac{N \sum_{i=1}^N \delta_i - 2 \sum_{1 \leq i < j \leq N} \rho_{ij}}{\lfloor \frac{N+1}{2} \rfloor \lceil \frac{N+1}{2} \rceil }  \leq \delta' \leq \frac{N \sum_{i=1}^N \delta_i - 2 \sum_{1 \leq i < j \leq N} \rho_{ij}}{N} 
+%:= \delta'_{max}
+\end{align*}
+and also provide an excellent overview of other existing upper and lower bounds. 
+%where 
+%\begin{align*}
+%m  &= \left\lfloor 2   \left( \sum_{1 \leq i < j \leq N} \rho_{ij} \right) \bigg/ \left(  \sum_{i=1}^N \delta_i \right) \right\rfloor + 1
+%\end{align*}
+%According to \cite{dawson1967inequality}
+%%, who analyze the same result but without the extremal property, 
+%this lower bound can be attained and hence cannot be improved.
+% For more information,  \cite{deza1997geometry} provide an excellent overview of upper and other lower bounds. 
+Such results make $p'$ a tangible benchmark that can be used to analyze other aggregators under different information structures $\Sigma_{22}$. Approximating or bounding $\delta'$, however, is not always necessary. This is illustrated in the following subsections that do not approximate $\delta'$ but instead use known relations among the parameters in (\ref{oracleN}) to develop intuition about probability extremizing. 
+
+\subsection{General Information Structure}
+ A
+probability $p$ is said to be \textit{extremized} by another probability $q$ if and only
 if $q$ is closer to $0$ when $p \leq 0.5$ and closer to $1$ when $p
-\geq 0.5$. Equivalently, $q$ extremizes $p$ if and only if its probit score $\Phi^{-1}(q)$ is on the same side but further away from zero than $\Phi^{-1}(p)$. The amount of (multiplicative) extremization can then be quantified with the {\em probit extremization ratio} defined as the ratio
- $\alpha(q,p) := \Phi^{-1}(q) / \Phi^{-1} (p)$. This section focuses on the special case
+\geq 0.5$. Equivalently, $q$ extremizes $p$ if and only if its probit score $\Phi^{-1}(q)$ is on the same side but further away from zero than $\Phi^{-1}(p)$. The amount of (multiplicative) extremization can then be quantified with the {\em probit extremization ratio} defined as 
+ $\alpha(q,p) := \Phi^{-1}(q) / \Phi^{-1} (p)$. Given that no aggregator can improve upon the oracular aggregator, $p'$ provides an ideal
+reference point for analyzing extremization. Therefore, of particular interest is the special case
 \begin{align}
 \alpha(p', \probit)  = \frac{P'}{\frac{1}{N}\sum_{i=1}^N P_{i}}, \label{alpha}
 \end{align}
 where $P' = \Phi^{-1}(p')$. From now on, unless otherwise stated, expression (\ref{alpha}) is referred simply with
 $\alpha$. 
 Under this definition, $\probit$
-requires extremization if and only if $\alpha > 1$, and the larger $\alpha$ is, the more $\probit$ should be extremized. Note that $\alpha$ a random quantity that spans the entire real line;
-that is, it is possible to find a set of probability forecasts and a
-distribution of information for any possible value of $\alpha \in
+requires extremization if and only if $\alpha > 1$, and the larger $\alpha$ is, the more $\probit$ should be extremized. Note that $\alpha$ is a random quantity that spans the entire real line;
+that is, it is possible to find a set of forecasts and an information structure for any possible value of $\alpha \in
 \mathbb{R}$.  Evidently, extremizing is not guaranteed to always
-improve the probit opinion pool.  To understand when extremizing is
+improve $\probit$.  To understand when extremizing is
 likely to be beneficial, it is necessary to derive the probability
 distribution of $\alpha$.  First, given that
 \begin{align*}
@@ -1031,23 +1059,23 @@ Cauchy distribution. This leads to the following proposition.
 \label{positiveProbThm}
 The law of the extremization ratio $\alpha$ is a Cauchy with
 parameters $x_0$ and $\gamma$, where the location parameter $x_0$ is
-at least~1, equality occurring only when $\delta_i = \delta'$ for all
-$i = 1, \dots, N$. Consequently, if $\delta_i \neq \delta'$ for some
-$i = 1, \dots, N$, then the probability that the probit opinion pool $\probit$
-requires extremizing is $\P(\alpha > 1 | \Sigma_{22}, \delta')$ which
+at least~1, equality occurring only when $\delta_i = \delta_j$ for all
+$i \neq j$. Consequently, if $\delta_i \neq \delta_j$ for some
+$i \neq j$, then the probability that the probit opinion pool $\probit$
+requires extremizing is $\P\left(\alpha > 1 | \Sigma_{22}, \delta'\right)$ which
 is strictly greater than $1/2$.
 \end{proposition}
 \noindent
 This proposition shows that, on any non-trivial problem, a small
 perturbation in the direction of extremizing is more likely to improve
-the probit opinion pool than to degrade it.  This partially explains
+$\probit$ than to degrade it.  This partially explains
 why extremizing aggregators perform well on large sets of real-world
 prediction problems.  It may be unsurprising after the fact, but the
 forecasting literature is still full of articles that perform
-probability averaging without extremizing.  The next two sections
-examine sub-cases in which more detailed computations of the oracular
-aggregator can be performed. This sheds light on extremization in many
-real-world forecasting setups.
+probability averaging without extremizing. The next two subsections examine special cases in which more detailed computations can be performed.
+
+%If qualitative analysis is sufficient, it may be possible to avoid bound approximations by focusing on how $\delta'$ changes as a function of other parameters instead. For instance, $\delta'$ increases in $N$ and $\delta_{i}$ but decreases in $\rho_{ij}$. These partial effects are utilized in Section \ref{compound}. The next subsection, on the other hand, examines two special cases in which the oracular aggregator coincides with the revealed aggregator. The main goal is to shed light on extremization in
+%real-world forecasting setups.
 
 \subsection{Fully- and Non-Overlapping Information}
 \label{disjoint}
@@ -1067,6 +1095,8 @@ measurement error framework, which essentially describes the
 forecasters as making numerous small mistakes while applying the same
 procedure to the same data (recall Section \ref{ss:measurement}),
 results in averaging-based aggregators.
+
+
 
 
 
@@ -1149,27 +1179,6 @@ sharing among the forecasters.
 
 \subsection{Partially Overlapping Information}
 \label{compound}
-A key quantity in analyzing extremizing is the oracle's amount of information $\delta'$. This value, however, can be only
-determined from $\Sigma_{22}$ when $N = 2$. In this case, $\delta' = \delta_1 + \delta_2 - \rho_{12}$. Fortunately, $\delta'$ can be bounded for general $N$ by referring to the historical Boole Problem (\citealt{boole1854investigation}): 
-
-\begin{quote}
-Consider $N$ events $A_i$ for $i = 1, \dots, N$. Denote the marginal probabilities  with $p_i := \P(A_i)$ and the joint probabilities with $p_{ij} := \P(A_i \cap A_j)$. What is the best estimation of $\P(A_1 \cup \dots \cup A_N)$ in terms of $p_i$'s and $p_{ij}$'s?
-\end{quote}
-As was mentioned earlier in Remark (\ref{item:pool}), representing the pool of information with the unit interval $S = [0,1]$ allows us to interpret $\delta_i$'s as marginal probabilities for some $N$ events and $\rho_{ij}$'s as their joint probabilities. Therefore any approximation to the Boole Problem can be used to bound $\delta'$.  Fortunately, many such bounds have been suggested in the past. For
-instance, 
-%according to \cite{deza1997geometry}  several authors, including \cite{chung1941probability, dawson1967inequality, galambos1977bonferroni}, 
-\cite{galambos1977bonferroni}
-discuss the lower bound
-\begin{align*}
-\delta'_{min} := \frac{2}{m+1} \sum_{i=1}^N \delta_i - \frac{2}{m(m+1)} \sum_{1 \leq i < j \leq N} \rho_{ij}   \leq \delta',
-%\delta'_{min} := \frac{N \sum_{i=1}^N \delta_i - 2 \sum_{1 \leq i < j \leq N} \rho_{ij}}{\lfloor \frac{N+1}{2} \rfloor \lceil \frac{N+1}{2} \rceil }  \leq \delta' \leq \frac{N \sum_{i=1}^N \delta_i - 2 \sum_{1 \leq i < j \leq N} \rho_{ij}}{N} := \delta'_{max}
-\end{align*}
-where 
-\begin{align*}
-m  &= \left\lfloor 2   \left( \sum_{1 \leq i < j \leq N} \rho_{ij} \right) \bigg/ \left(  \sum_{i=1}^N \delta_i \right) \right\rfloor + 1
-\end{align*}
-According to \cite{dawson1967inequality}, who analyze the same result but without the extremal property, this lower bound can be attained and hence cannot be improved. See \cite{deza1997geometry} for an excellent overview of upper and other lower bounds. 
-
 %In this section, however, only a lower bound is of interest because it facilitates the analysis of the modal amount of extremization under general $N$.
 
 %where
@@ -1181,22 +1190,24 @@ According to \cite{dawson1967inequality}, who analyze the same result but withou
 %\rho_{12}$ when $N=2$. In this section, the lower bound is of particular interest because
 %it allows the modal amount of extremization to be bounded from below under general $N$. See \citealt{deza1997geometry} for the further discussion of these and other
 %bounds.
+%
+%\textcolor{red}{It is not really to make this visualizable but to bring this on a higher level. }
 
-This main goal of this subsection is to develop intuition by visualizing extremization as a function of information overlap. The first step is to reduce the number of parameters in $\Sigma_{22}$. One natural approach is to assume that the
+This section develops high-level intuition about extremization as a function of information overlap. The first step is to reduce the number of parameters in $\Sigma_{22}$. A natural approach is to assume that the
 information sets have the same size and that the amount of overlap
 between any two sets is constant, i.e., $|B_{1}| = \dots =
 |B_{N}|$ and $|B_{i} \cap B_{j}| = |B_{h} \cap B_{k}|$ for all $i \neq
 j$ and $h \neq k$.
 %Here, we compare $\probit$ to the %oracular aggregator; in Section~\ref{compound2} 
 %we compare the revealed aggregator to the probit opinion pool.  
-This would hold in expectation if, for example, the
+This structure would hold if, for example, the
 forecasters sampled information sources from a common distribution.
 %The resulting form of $\Sigma_{22}$ is called \textit{compound
 %symmetric}. 
-Incorporating these assumptions in the multivariate Gaussian distribution
-(\ref{oracleN}) gives
+As a result, the multivariate Gaussian distribution
+(\ref{oracleN}) reduces to
 % $\rho \in [\max \{(N-T)/(T(N-1)), 0\},1] = A_\rho$. 
-\begin{align*}
+\begin{align}
 \left(\begin{matrix} X_{S} \\ X_{B'}\\ X_{B_1}\\ \vdots \\ X_{B_N} \end{matrix}\right) &\sim \mathcal{N}\left( 
  \boldsymbol{0}, 
 % \left(\begin{matrix} 
@@ -1211,16 +1222,15 @@ Incorporating these assumptions in the multivariate Gaussian distribution
 \delta& \delta & \lambda\delta & \delta & \dots & \lambda\delta  \\ 
 \vdots &\vdots & \vdots & \vdots & \ddots & \vdots  \\ 
 \delta &\delta & \lambda\delta & \lambda\delta & \dots & \delta\\ 
- \end{array}\right)\right)
-\end{align*}
+ \end{array}\right)\right) \label{symmetric}
+\end{align}
 where $\delta$ is the amount of information known by a forecaster and
-$\lambda$ is the proportion of this information that is shared with another forecaster.  
+$\lambda$ is the proportion of this information that is shared with another forecaster. 
 
-To ensure that
-$\Sigma_{22}$ is coherent, the overlap parameter $\lambda$ must be constrained. 
-First, $\lambda \leq 1$ because under any combination of $\delta$ and $N$ all
-forecasters may know the same information. Second, note that 
-information overlap is unavoidable when $\delta > 1/N$ and that minimum
+The overlap parameter $\lambda$ must be constrained in order to ensure a coherent information structure.
+First, the upper bound is $\lambda \leq 1$ because under any combination of $\delta$ and $N$ the
+forecasters may know the exact same information. Second, 
+information overlap is unavoidable when $\delta > 1/N$, and minimum
 sharing occurs when all information is known either to everyone or
 to a single forecaster.  In other words, if $\delta > 1/N$ and
 $B_{i} \cap B_j = B$ with $|B| = \lambda \delta$ for all $i \neq j$,
@@ -1233,9 +1243,7 @@ coherent if and only if
    \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right), 
    \label{rhoDomain}
 \end{align}
-where the open upper bound on $\lambda$ ensures a non-singular $\Sigma_{22}$.
-
-Under these simplifications, the extremization ratio (\ref{alpha})
+where the open upper bound on $\lambda$ ensures a non-singular $\Sigma_{22}$. Under these simplifications, the extremization ratio (\ref{alpha})
 becomes
 \begin{align*}
 \alpha &= \frac{X_{B'}}{\frac{1}{N}\sum_{j=1}^N X_{B_j}} \sqrt{\frac{1-\delta}{1-\delta'}} \sim \text{Cauchy}(x_0, \gamma)
@@ -1244,59 +1252,65 @@ becomes
 \begin{align*}
 x_0 &= \frac{N}{1+(N-1)\lambda}  \sqrt{\frac{1-\delta}{1-\delta'}} &&& \text{ and } &&& \gamma &=  \sqrt{\frac{N(\delta' + \delta' \lambda (N-1) - \delta N)}{\delta (\lambda (N-1) + 1)^2}}\sqrt{\frac{1-\delta}{1-\delta'}}
 \end{align*}
-The location parameter $x_0$ can be lower bounded by replacing
-$\delta'$ with $\delta'_{min}$ when $N > 2$. Making this substitution and recalling
-Proposition \ref{positiveProbThm} gives us
-\begin{align}
-x_{min} := \max\left\{ \frac{N}{1+(N-1)\lambda}  \sqrt{\frac{1-\delta}{1-\delta'_{min}}}, 1 \right\} \leq x_0 \label{bound}
-\end{align}
+%The location parameter $x_0$ can be lower bounded by replacing
+%$\delta'$ with $\delta'_{min}$ when $N > 2$. Making this substitution and recalling
+%Proposition \ref{positiveProbThm} gives us
+%\begin{align}
+%x_{min} := \max\left\{ \frac{N}{1+(N-1)\lambda}  \sqrt{\frac{1-\delta}{1-\delta'_{min}}}, 1 \right\} \leq x_0 \label{bound}
+%\end{align}
 
 \begin{figure}[t]
-\hspace{-1.2em}
-    \centering
-%    \begin{subfigure}[b]{0.3\textwidth}
-%        \includegraphics[width=\textwidth, height = \textwidth]{lwdbound}
-%\caption{$N = 2$}	
-%\label{xOracle2}
-%    \end{subfigure}%
-    \begin{subfigure}[b]{0.48\textwidth}
-        \includegraphics[width=\textwidth, height = \textwidth]{ExtremeX0N2}
-\caption{$N = 2$}	
-\label{xOracle2}
-    \end{subfigure}%
-    \begin{subfigure}[b]{0.48\textwidth}
-        \includegraphics[width=\textwidth, height = \textwidth]{ExtremeX0N10}
-\caption{$N = 10$}	
-\label{xOracle10}
-    \end{subfigure}%
-    \caption{ The extremization ratio follows a 
-Cauchy$(x_0, \gamma)$, where $x_0$ is a location parameter and $\gamma$ 
-is a scale parameter.  This figure plots $\log(x_0)$ for $N = 2$ and $\log(x_{min})$ for $N = 10$ forecasters.}
+%\centering
+%%\hspace*{2em}  $\log(\alpha)$
+%\hspace*{1.2em} 	\includegraphics[width=0.973\textwidth, height = 3em]{colorkey} % requires the graphicx package
+%\hspace{-1.2em}
+        \centering
+        \begin{subfigure}[b]{0.49\textwidth}
+                \includegraphics[width=\textwidth, height = \textwidth]{ExtremeX0}
+\caption{$\log(x_0)$}	
+\label{xOracle}
+        \end{subfigure}%
+%\hspace{0.6em}
+%        \begin{subfigure}[b]{0.33\textwidth}
+%                \includegraphics[width= 0.95\textwidth, height = \textwidth]{ExtremeGamma}
+%\caption{$\gamma$}
+%\label{gammaOracle}
+%        \end{subfigure}
+%\hspace{1.3em}
+        \begin{subfigure}[b]{0.49\textwidth}
+                \includegraphics[width=\textwidth, height = \textwidth]{Probs}
+\caption{$\P(\alpha \geq 1 | \Sigma_{22})$}
+\label{probOracle}
+        \end{subfigure}
+
+        \caption{ The amount of extremizing follows a Cauchy$(x_0, \gamma)$, where $x_0$ is a location parameter and $\gamma$ is a scale parameter. This figure considers  $N = 2$ experts and shows $\log(x_0)$ and $\P(\alpha \geq 1 | \Sigma_{22})$ under all plausible combinations of $\delta$ and $\lambda$. No approximation is needed as $\delta'$ is uniquely determined by $\Sigma_{22}$ when $N = 2$.}
         \label{LevelplotsOracle}
 \end{figure}
 
-Figure \ref{LevelplotsOracle} shows $\log(x_0)$ and $\log(x_{min})$ for $N = 2$ and $N = 10$, respectively, under all plausible combinations of $\delta$ and $\lambda$. High values have been censored to keep the scale manageable.  Note that the results presented in Figure \ref{xOracle2} are completely general, apart from the assumption $\delta_1 = \delta_2$. Relaxing this assumption does not change the qualitative nature of the results. Overall, heavier extremizing is required when $\delta$ and $N$
-are high but $\lambda$ is low. Given that $\delta'$ increases in
-$\delta$ and $N$ but decreases in $\lambda$, the amount of extremizing
-can be expected to increase in the total amount of information among
-the forecasters $\delta'$.  This, however, does not provide a full
+Recall that $\delta'$ increases in $N$ and $\delta$ but decreases in $\lambda$. More specifically, as $\delta \to 1$, $\delta' \to 1$ but at a faster rate as long as $\lambda < 1$ and $N$ are fixed. Therefore $x_0$ generally increases in $N$ and $\delta$ but decreases in $\lambda$; or alternatively, the amount of extremizing
+can be expected to increase in $\delta'$.  Furthermore, as the Cauchy distribution is symmetric around $x_0$, the probability $\P(\alpha \geq 1 | \Sigma_{22})$ behaves similarly to $x_0$ and hence also increases in $\delta'$. 
+%The rate of increase, however, is not the same as for $x_0$ because it also depends on $\gamma$. 
+Figure \ref{LevelplotsOracle} illustrates these relations by plotting both $\log(x_0)$ and $\P(\alpha \geq 1 | \Sigma_{22})$ for $N = 2$ forecasters under all plausible combinations of $\delta$ and $\lambda$. High values have been censored to keep the scale manageable. Note that the results are completely general for the two-forecaster case, apart from the assumption $\delta_1 = \delta_2$. Relaxing this assumption, however, does not change the qualitative nature of the results.
+%, namely that extremizing tends to increase in $\delta$ but decrease in $\lambda$.
+% Assuming symmetric information among $N = 10$ forecasters, however, is more constraining. In addition, Figure \ref{xOracle10} describes the lower bound $x_{min}$ instead of the exact location $x_0$. Despite these limitations, it illustrates that extremizing can be expected to increase in $N$. 
+
+
+The total amount of information among the forecasters $\delta'$, however, does not provide a full
 explanation of extremizing.  Information diversity is also an
 important yet separate determinant.  To see this,
-consider Figure \ref{xOracle2} and observe that fixing $\delta'$ to
-some constant defines a curve $\lambda = 2 - \delta'/\delta$. For
+reconsider Figure \ref{LevelplotsOracle} and observe that fixing $\delta'$ to
+some constant defines a curve $\lambda = 2 - \delta'/\delta$ on the two plots. For
 instance, letting $\delta' = 1$ gives the boundary curve on the right
-side of the plot.  This curve then shifts inwards and rotates slightly
+side of each plot.  This curve then shifts inwards and rotates slightly
 counterclockwise as $\delta'$ decreases.  At the top end of each such curve
 all forecasters know and share the total information, i.e. $\delta =
 \delta'$ and $\lambda = 1.0$.  At the bottom end, on the other hand,
 the forecasters partition the total information, i.e. $\delta =
 \delta'/2$, and share nothing, i.e. $\lambda = 0.0$.  Given that
-moving down along these curves increases both information diversity and
-$x_0$, we conclude that information diversity is an important
-determinant of extremizing together with the group's total amount of
-information. This observation can guide practitioners towards proper extremization
-because many aspects of a prediction setting can be
-related to these two factors. For instance, extremization can be
+moving down along these curves increases information diversity and
+$x_0$, both information diversity and the total amount of
+information in the group are important 
+ determinants of extremizing. This observation can guide practitioners towards proper extremization by linking  application specific aspects of the prediction problem to the two aforementioned determinants. For instance, extremization can be
 expected to increase in factors such as number of forecasters,
 subject-matter expertise, and human diversity, but to decrease in
 collaboration, sharing of resources, and problem difficulty.
@@ -1411,9 +1425,9 @@ general Gaussian model. By further assuming
 exchangeability among the forecasts, the revealed aggregator can be
 applied to any single pool of probabilities. After proving some
 properties of this aggregator, it is
-tested on real-world forecasts of one-time events. This a)
+tested on real-world forecasts of one-time events. This
 illustrates one approach to estimating the information structures in
-practice; and b) provides some empirical evidence in favor of the
+practice, and also provides some empirical evidence in favor of the
 partial information model.
 % We then apply 
 %this to the symmetric case, for which the oracular aggregator 
@@ -1608,7 +1622,7 @@ non-random quantity
 where
 $$\gamma = \frac{N}{(N-1)\lambda +1},$$
 \item[$(ii)$] the revealed aggregator $p''$ extremizes the probit
-opinion pool $\probit$ as long as $p_j \neq p_i$ for some $j \neq i$,
+opinion pool $\probit$ as long as $p_i \neq p_j$ for some $i \neq j$,
 and
 \item[$(iii)$] the revealed aggregator $p''$ can leave the convex hull
 of the individual probability forecasts.
@@ -1627,7 +1641,7 @@ underlying model.
 
 \subsection{Real-World Forecasting Data}
 \label{realData}
-The Good Judgment Project (GJP) ( \citealt{mellers2014psychological,
+The Good Judgment Project (GJP) (\citealt{mellers2014psychological,
 ungar2012good}) is a research study that since 2011 has recruited
 thousands of forecasters from professional societies, research
 centers, and alumni associations.  These forecasters are given
@@ -1893,7 +1907,8 @@ Therefore
 \begin{align*}
 N \sum_{i=1}^N \frac{\delta_i}{\sqrt{(1-\delta_i)(1-\delta')}} \geq \sum_{i=1}^N \frac{\delta_i}{1-\delta_i} + 2 \sum_{i,j: i<j} \frac{\rho_{ij}}{\sqrt{(1-\delta_j)(1-\delta_i)}},
 \end{align*}
-which gives that $x_0 \geq 1$. Given that the Cauchy distribution is symmetric around $x_0$, it must be the case that $\P(\alpha \geq 1 | \Sigma_{22}, \delta') \geq 0.5$. Based on (\ref{ProofIneq1}) and (\ref{ProofIneq2}), the location $x_0 = 1$ only when all the forecasters know the same information, i.e. when $\delta_i = \delta'$ for all $i = 1, \dots, N$. Under this particular setting, the amount of extremizing $\alpha$ is non-random and always equal to $1.0$. Therefore $\P(\alpha \geq 1 | \Sigma_{22}, \delta') = 1.0$.  Any deviation from this particular information structure makes $\alpha$ stochastic, $x_0 > 1$, and hence $\P(\alpha \geq 1 | \Sigma_{22}, \delta') > 0.5$. If the forecasters' information sets partition the full information, the sum of their probits is always on the correct side of $0.0$. At the same time the oracle deterministically outputs the correct outcome. Consequently, $\alpha = +\infty$ and $\P(\alpha \geq 1 | \Sigma_{22}, \delta') = 1$. Thus $\P(\alpha > 1 | \Sigma_{22}, \delta') \in (0.5, 1.0]$ when $\delta_i \neq \delta'$ for some $i = 1, \dots, N$. \qed
+which gives that $x_0 \geq 1$. Given that the Cauchy distribution is symmetric around $x_0$, it must be the case that $\P(\alpha \geq 1 | \Sigma_{22}, \delta') \geq 0.5$. Based on (\ref{ProofIneq1}) and (\ref{ProofIneq2}), the location $x_0 = 1$ only when all the forecasters know the same information, i.e. when $\delta_i = \delta_j$ for all $i \neq j$. Under this particular setting, the amount of extremizing $\alpha$ is non-random and always equal to $1.0$. Therefore $\P(\alpha \geq 1 | \Sigma_{22}, \delta') = 1.0$.  Any deviation from this particular information structure makes $\alpha$ random, $x_0 > 1$, and hence $\P(\alpha \geq 1 | \Sigma_{22}, \delta') > 0.5$. Therefore marginalizing out $\Sigma_{22}$ and $\delta'$ with respect to any distribution that is not a point mass at $\delta_i = \delta_j$ for all $i \neq j$, gives $\P(\alpha \geq 1) > 0.5$. \qed
+%If the forecasters' information sets partition the full information, the sum of their probits is always on the correct side of $0.0$. At the same time the oracle deterministically outputs the correct outcome. Consequently, $\alpha = +\infty$ and $\P(\alpha \geq 1 | \Sigma_{22}, \delta') = 1$. Thus $\P(\alpha > 1 | \Sigma_{22}, \delta') \in (0.5, 1.0]$ when $\delta_i \neq \delta'$ for some $i = 1, \dots, N$. \qed
 %\noindent
 %\textit{Proof of Proposition \ref{positiveThmVote}.} Let $\boldsymbol{d} = \frac{1}{N}\left((1-\delta_1)^{-1/2}, (1-\delta_2)^{-1/2}, \dots, (1-\delta_N)^{-1/2}\right)'$. Assume without loss of generality that $\bar{P} > 0$. Then the average probit forecast is extremized if
 %\begin{align}
