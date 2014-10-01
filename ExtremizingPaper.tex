@@ -317,9 +317,8 @@ In practice, however, information comes to the
 aggregator only via the forecasts $\{p_i : i = 1, \dots, N\}$. Given that $\F'$ generally cannot be constructed from these forecasts alone, no practically feasible aggregator can be expected to perform as well as the oracular aggregator.  Therefore a more achievable benchmark is given by the \textit{revealed} aggregator $p'' := \E (\one_A \|
 \F'')$, where $\F''$ is the $\sigma$-field generated (or revealed) by the forecasts
 $\{ p_i : i = 1, \dots, N \}$. This benchmark minimizes
-the expectation of any proper loss function (\citealt{Ranjan08}), and,
-unlike the oracular aggregator, can be applied in practice. For this
-reason, the revealed aggregator is the relevant estimator in each specific partial information model.
+the expectation of any proper loss function (\citealt{Ranjan08}), and, is calibrated because it is a conditional expectation of $\one_A$. Similarly, $p''$ and $p_i$ are also  calibrated. Unlike the oracular aggregator, however, $p''$ can be applied in practice. For this
+reason, the revealed aggregator is the relevant estimator in each specific partial information model. 
 
 %The {\em general partial information model} 
 %is precisely the model described in the foregoing paragaphs.  
@@ -889,7 +888,8 @@ p_i &= \P\left(A | \mathcal{F}_{i}\right) \nonumber \\
  &= \P\left(X_S > 0 | X_{B_i}\right) \nonumber \\
  &= \Phi\left( \frac{X_{B_i}}{\sqrt{1-\delta_i}}\right) \label{indFore}
 \end{align}
-This forecast is a conditional expectation of $\one_A$ given $\mathcal{F}_i$ and hence  calibrated. Its marginal distribution can be computed by first denoting the probit score with $P_{i} := \Phi^{-1}(p_i) = X_{B_i}/\sqrt{1-\delta_i}$. The Jacobian for the map $P_{i} \to \phi(P_i)$ is
+%This forecast is a conditional expectation of $\one_A$ given $\mathcal{F}_i$ and hence  calibrated. Its
+The marginal distribution of $p_i$ can be computed by first denoting the probit score with $P_{i} := \Phi^{-1}(p_i) = X_{B_i}/\sqrt{1-\delta_i}$. The Jacobian for the map $P_{i} \to \phi(P_i)$ is
 \begin{eqnarray*}
 J(P_i) &=& (2\pi)^{-1/2} \exp \left( - P_i^2/2   \right) 
 \end{eqnarray*}
@@ -1423,8 +1423,7 @@ exchangeability among the forecasts, the revealed aggregator can be
 applied to any single pool of probabilities. After proving some
 properties of this aggregator, it is
 tested on real-world forecasts of one-time events. This
-illustrates one approach to estimating the information structures in
-practice, and also provides some empirical evidence in favor of the
+illustrates one approach to estimating the information structures, and also provides some empirical evidence in favor of the
 partial information model.
 % We then apply 
 %this to the symmetric case, for which the oracular aggregator 
@@ -1449,7 +1448,7 @@ where
  \bar{\Sigma}&= \Sigma_{11} - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21} 
  = 1 - \Sigma_{12} \Sigma_{22}^{-1} \Sigma_{21}   \, .
 \end{align*}
-These expressions can be found directly from the formulas of
+These expressions follow directly from the formulas of
 the conditional multivariate Gaussian distribution (see, 
 e.g., \citealt{ravishanker2001first}). 
 %\citealt[Result~5.2.10, page~156]{ravishanker2001first}). 
@@ -1474,16 +1473,11 @@ p'' & = & \P\left(A  | \F''\right)  \nonumber \\
 %\end{align*}
 % where $\tilde{p} = \P(A)$ is the prior probability discussed in Section \ref{prelim} and 
  where $\boldsymbol{X} =
-\Phi^{-1}(\boldsymbol{p})\sqrt{1-\Sigma_{12}}$. A practical application
-of this computation, however, requires values for the entries of $\Sigma_{22}$.
+\Phi^{-1}(\boldsymbol{p})\sqrt{1-\Sigma_{12}}$. Applying this aggregator in practice, however, requires values for the entries of $\Sigma_{22}$.
 As  was discussed earlier in Remark (\ref{item:specific}), the information structure can be estimated in one of three ways: by
 assumption, by estimation, or in a Bayesian manner. If one is to
 assume a structure, the most natural and non-informative choice is the
-symmetric one discussed in Section \ref{compound}. The next subsection analyzes the revealed aggregator (\ref{GeneralAggregator}) under this structure.
-
-\textcolor{red}{It might be worthwhile to state somewhere that all aggregators are conditional expectations, which are always calibrated.}
-
-%\textcolor{red}{Discuss here Julia's first paper. Hypothesis: the aggregator does not drop out a person whose $B_1 \subset B_2$ unless $B_3$ is completely separate. In a sense, in such a case the first forecaster does not provide anything beyond the second forecaster. This is not surprising. }
+symmetric structure discussed in Section \ref{compound}. The next subsection analyzes the revealed aggregator (\ref{GeneralAggregator}) under this simplification.
 
 
 %\section{Version 1}
@@ -1498,78 +1492,9 @@ low-information environment where there is no historical or
 self-report data to distinguish the forecasters.  The averaging
 aggregators described in Section~\ref{sec:prior}, for instance, are
 symmetric. Therefore, to the extent that they reflect an underlying
-model, the model assumes exchangeability.
+model, the model assumes exchangeability. 
 
-%Under the Gaussian partial information model, this implies that the
-%forecasters' information sets have the same size and that the amount
-%of overlap between any two information sets is constant, i.e.,
-%$|B_{1}| = \dots = |B_{N}|$ and $|B_{i} \cap B_{j}| = |B_{h} \cap
-%B_{k}|$ for all $i \neq j$ and $h \neq k$.  
-%%Here, we compare $\probit$ to the %oracular aggregator; in Section~\ref{compound2} 
-%%we compare the revealed aggregator to the probit opinion pool.  
-%The information structure $\Sigma_{22}$ is called \textit{compound
-%symmetric}.  This structure would hold, for example, if the
-%forecasters sample information sources from a common distribution.
-%Plugging this structure in the multivariate Gaussian distribution (\ref{Nforecasters}) gives
-%\begin{align*}
-%%\label{eq:symmetric}
-%\left(\begin{matrix} X_{S} \\ X_{B_1}\\ \vdots \\ X_{B_N} 
-%   \end{matrix}\right) 
-%  &\sim \mathcal{N}\left( \boldsymbol{0}, \left(\begin{matrix} 
-%\Sigma_{11} & \Sigma_{12}\\
-%\Sigma_{21} & \Sigma_{22}\\
-% \end{matrix}\right) 
-% =
-% \left(\begin{array}{c|cccc}
-%1 & \delta & \delta & \dots & \delta  \\ \hline
-%%\delta' & \delta' & \delta & \delta & \dots & \delta  \\ \hline
-%\delta  &\delta & \lambda\delta & \dots & \lambda\delta   \\ 
-%\delta & \lambda\delta & \delta & \dots & \lambda\delta  \\ 
-%\vdots & \vdots & \vdots & \ddots & \vdots  \\ 
-%\delta  & \lambda\delta & \lambda\delta & \dots & \delta\\ 
-% \end{array}\right)\right),
-%\end{align*}
-%where $\delta$ is the amount of information known by a forecaster and
-%$\lambda$ is the proportion of information
-%known to one forecaster that is also known to another single
-%forecaster.  %This minor change of parametrization %was made for the sake of simplifying some of the following expressions.  
-%To ensure that
-%$\Sigma_{22}$ is coherent, a restriction must be placed on $\lambda$.
-%First, given that under any combination of $\delta$ and $N$ all
-%forecasters may know the exact same information, the value of
-%$\lambda$ is bounded from above by $1$. Second, observe that
-%information overlap is unavoidable when $\delta > 1/N$.  The minimum
-%sharing occurs when all information is either known by everyone or
-%private to a single forecaster.  In other words, if $\delta > 1/N$ and
-%$B_{i} \cap B_j = B$ with $|B| = \lambda \delta$ for all $i \neq j$,
-%the value of $\lambda$ is minimized when $\lambda\delta + N(\delta -
-%\delta\lambda) = 1$.  Therefore the lower bound for $\lambda$ is $\max
-%\left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}$, and $\Sigma_{22}$ is
-%coherent if and only if
-%\begin{align}
-%\delta \in [0,1] &&  \lambda &\in \left[  
-%   \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right), 
-%   \label{rhoDomain}
-%\end{align}
-%where the strict upper bound on $\lambda$ ensures that
-%$\Sigma_{22}$ is not singular.  
-%In the following discussion, 
-%however, this technical restriction is ignored and the case 
-%$\lambda = 1$ is analyzed as a limiting case.
-%Plugging these simplifications in (\ref{alpha}) gives 
-%\begin{align*}
-%\alpha &= \frac{X_{B'}}{\frac{1}{N}\sum_{j=1}^N X_{B_j}} 
-%  \sqrt{\frac{1-\delta}{1-\delta'}} 
-%\end{align*}
-%This follows a $\text{Cauchy}(x_0, \gamma)$ distribution with
-%\begin{align*}
-%x_0 &= \frac{N}{1+(N-1)\lambda}  \sqrt{\frac{1-\delta}{1-\delta'}}\\[2ex]
-%  \gamma &=  \sqrt{\frac{N(\delta' + \delta' \lambda (N-1) - \delta N)}
-%  {\delta (\lambda (N-1) + 1)^2}}\sqrt{\frac{1-\delta}{1-\delta'}}
-%\end{align*}
-
-
-Under the Gaussian partial information model, this implies a compound
+Under the Gaussian model, exchangeability suggests a
 symmetric information structure (see Section \ref{compound}). The
 general form of the revealed aggregator~(\ref{GeneralAggregator}) then
 simplifies to
@@ -1579,15 +1504,15 @@ p''
   \sum_{i=1}^N X_{B_i} }{\sqrt{1- \frac{N\delta}{(N-1)\lambda +1} }}  
   \right), \label{CompoundAggre}
 \end{align}
-where  $X_{B_i} =
+where $\delta$ is the amount of information known by a forecaster, 
+$\lambda$ is the shared proportion of this information, and $X_{B_i} =
 \Phi^{-1}(p_i)\sqrt{1-\delta}$. 
 %Recall from section \ref{compound} that $\delta \in [0,1]$ can be 
 %interpreted as the average amount of information known by an forecaster, 
 %and $\lambda$ is the average proportion of the known information shared 
 %between any two forecasters. 
 The domain restriction (\ref{rhoDomain}) ensures that the term under
-the square-root in (\ref{CompoundAggre}) is always non-negative. In
-this case the revealed aggregator is not as good as the oracular
+the square-root in (\ref{CompoundAggre}) is always non-negative. This version of the revealed aggregator is not as good as the oracular
 aggregator. In fact, the former is a conditional expectation of the latter.
 
 Given these interpretations, it may at first seem surprising that the
@@ -1604,7 +1529,7 @@ Appendix.  Besides exchangeability, the revealed aggregator
 (\ref{CompoundAggre}) is based on very different modeling assumptions
 than the averaging aggregators described in
 Section~\ref{sec:prior}. The following proposition summarizes some of
-the key properties of the revealed aggregator (\ref{CompoundAggre}).
+its key properties.
 
 \begin{proposition} \label{positiveThm}
 Under symmetric information, 
@@ -1629,7 +1554,7 @@ of the individual probability forecasts.
 \end{proposition}
 This proposition suggest that the revealed aggregator
 (\ref{CompoundAggre}) is appropriate for combining probability
-forecasts. To test this claim, the next subsection applies it to a set
+forecasts. The next subsection tests this claim by applying the revealed aggregator (\ref{CompoundAggre}) to a set
 of real-world forecasts. The aggregation is done one problem at a time
 without assuming any other information besides the probability
 forecasts themselves. That is, the outcomes of the events are not
@@ -1641,14 +1566,12 @@ underlying model.
 \subsection{Real-World Forecasting Data}
 \label{realData}
 The Good Judgment Project (GJP) (\citealt{mellers2014psychological,
-ungar2012good}) is a research study that since 2011 has recruited
+ungar2012good}) is a research study that has recruited
 thousands of forecasters from professional societies, research
-centers, and alumni associations.  These forecasters are given
-questions about future international political events, estimate the
-probability of each event, and update their predictions when they feel
-the probabilities have changed.  The forecasters know that their
-probability estimates are assessed for accuracy using Brier scores (a
-squared error loss function).  In addition to receiving \$150 for
+centers, and alumni associations since the year of 2011.  The forecasters estimate
+probabilities of future international political events.  They know that their
+probability estimates are assessed for accuracy using the Brier scores, i.e. the
+squared error loss function.  In addition to receiving \$150 for
 meeting minimum participation requirements that do not depend on
 prediction accuracy, the forecasters receive status rewards for their
 performance via leader-boards displaying Brier scores for the top 20
@@ -1658,13 +1581,12 @@ super-forecasters work in groups to make highly accurate predictions
 on the same events as the rest of the forecasters.
 
 This section illustrates the revealed aggregator (\ref{CompoundAggre})
-on forecasts made by the super-forecasters. These forecasters were
-chosen to the group of super-forecasters during the first year of the
-GJP. Our evaluation, however, only uses forecasts that were made
-during the second year. Therefore, the individual forecasts are
-likely, but not guaranteed, to be relatively good. This group
-consisted of 44 super-forecasters making predictions about 123
-geopolitical events with two possible outcomes. For instance, some of
+on forecasts made by the super-forecasters during the second year of the GJP. These forecasters were
+elected to the group of super-forecasters during the first year of the project. 
+%Our evaluation, however, only uses forecasts that were made
+%during the second year. 
+Therefore, the individual forecasts are
+likely, but not guaranteed, to be relatively good. During the second year, there were 44 super-forecasters making predictions about 123 events with two possible outcomes. For instance, some of
 the questions were
 \begin{quote}\textit{
 Will France withdraw at least 500 troops from Mali before 10 April 2013?
@@ -1674,24 +1596,20 @@ and
 Will a banking union be approved in the EU council before 1 March 2013? 
 }
 \end{quote}
- The forecasters were allowed to update their forecasts as long as the
-questions were active. Some questions were active longer than
+ The forecasters were allowed to update their predictions as long as the
+questions remained active. Some questions were active longer than the
 others. In fact, the number of active days ranged from 3 to 284 days,
-with a mean of 96 days. This paper, however, does not focus on dynamic
-data. Therefore we only considered each forecaster's most
-recent forecast in the first three days of a problem because this is
-when most uncertainty is present.  
+with a mean of 96 days. The super-forecasters tended to update their predictions quite frequently. However, given that this paper does not focus on dynamic
+data, only the most recent prediction made within the first three days of each problem is considered.  
 In the resulting
 dataset, the number of forecasts per event ranged from 17 to 34
 forecasts, with a mean of 24.2 forecasts. To avoid infinite log-odds
-and probit scores, extreme forecasts $p_i = 0$ and $1$ have been
+and probit scores, extreme forecasts $p_i = 0$ and $1$ were
 censored to $p_i = 0.001$ and $0.999$, respectively.
  
  
-The results are presented in terms of the mean Brier scores (BS),
-i.e. the quadratic loss. To make this more concrete, consider $K$
-problems and let $p_k$ be the aggregate forecast for the event $Y_k$,
-where $k = 1, \dots, K$. Then,
+The results are presented in terms of the mean Brier scores (BS). More specifically, consider $K$
+events and let $p_k$ be the aggregate forecast for event $Y_k$. Then,
  \begin{align*}
 BS &= \frac{1}{K} \sum_{k=1}^K (p_k - Y_k)^2
  \end{align*}
@@ -1701,7 +1619,7 @@ that the aggregate forecast can only take discrete values $f_j \in
 [0,1]$ with $j = 1, \dots, J$. Let $n_j$ be the number of times $f_j$
 occurs, and denote the empirical frequency of the corresponding events
 with $o_j$.  Let $\bar{o}$ be the overall empirical frequency of
-occurrence, i.e. $\bar{o} = \frac{1}{K} \sum_{k=1}^K Y_k$. Then the
+occurrence, i.e. $\bar{o} = \frac{1}{K} \sum_{k=1}^K Y_k$. Under these definitions, the
 mean Brier score decomposes into
  \begin{align*}
 BS &= REL - RES + UNC\\
@@ -1709,8 +1627,7 @@ BS &= REL - RES + UNC\\
  \end{align*}
  Small values of the reliability term suggest improved
 calibration. The resolution term, on the other hand, describes how far
-the aggregate forecasts are from the naive forecast given by the
-average $\bar{o}$ (equal to $0.187$ in our case). The typical goal is
+the aggregate forecasts are from the naive forecast $\bar{o}$ (equal to $0.187$ in our case). Typically the goal is
 to seek for an aggregate forecast that maximizes resolution subject to
 being calibrated (see, e.g., \citealt{gneiting2007probabilistic}). The
 uncertainty term quantifies overall uncertainty among the events and
@@ -1737,13 +1654,13 @@ $\bar{p}$ & 0.1306 & 0.0351 & 0.0565 & 0.1520 \\
 Table \ref{BrierTable} shows the Briers scores for the average
 forecast $\bar{p}$, logarithmic opinion pool $\plog$, probit opinion
 pool $\probit$, and the revealed aggregator under symmetric
-information $p''$. No empirical approaches were considered for two
-reasons: a) they do not reflect an actual model of forecasts, and b)
+information $p''$. Empirical approaches were not considered for two
+reasons: a) they do not reflect an actual model of forecasts; and b)
 they require a training set with known outcomes and hence cannot be
 applied to one-time events. As can be seen in Table \ref{BrierTable},
-the average forecast $\bar{p}$ is clearly the worst performing aggregator. As
+the average forecast $\bar{p}$ presents the worst performance. As
 discussed earlier, the two opinion pools, $\probit$ and $\plog$, are
-very similar. Consequently, they present almost identical scores. Even
+very similar. Consequently, they have almost identical scores. Even
 though the revealed aggregator is the least resolved, it presents
 greatly improved calibration and, therefore, achieves the lowest Brier
 score among all the aggregators. This is certainly an encouraging
@@ -1834,7 +1751,7 @@ performing aggregators.
 
 
 \section*{Acknowledgments} 
-This research was supported in part by NSF grant \# DMS-1209117 and in part by a research contract to the University
+This research was supported in part by NSF grant \# DMS-1209117 and a research contract to the University
 of Pennsylvania and the University of California from the Intelligence
 Advanced Research Projects Activity (IARPA) via the Department of
 Interior National Business Center contract number D11PC20061. The
