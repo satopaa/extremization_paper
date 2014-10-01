@@ -827,7 +827,7 @@ $\left(X_{S}, X_{B_1}, X_{B_2}, \dots, X_{B_N}\right)$ as follows.
 is described by the sub-matrix $\Sigma_{22}$, learning about the
 information among the forecasters is equivalent to estimating a
 covariance matrix under several restrictions.  In particular, the
-information in matrix $\Sigma_{22}$ must be describable by a diagram
+information matrix $\Sigma_{22}$ must be describable by a diagram
 such as Figure \ref{diagramN}. If this is the case,
 the matrix $\Sigma_{22}$ is called \textit{coherent}.  Coherence
 clearly requires that $0 \leq \rho_{ij} \leq \delta_i \leq 1$ for all $i \neq j$.  These
@@ -841,7 +841,7 @@ conditions, however, are not sufficient. The parameters are heavily linked to ea
 %\end{example}
 %In this example, simple triangle inequalities were enough to derive the necessary bounds for the parameters. However, as $N$ gets large, the structures that cannot be described with triangle inequalities anymore. 
 %Instead, under any number of forecasters $N$, the space of coherent information structures can be expressed as a convex hull of $2^N$ points. This description is provided in the following proposition. 
-The following proposition describes the space of coherent information structures as convex hull of $2^N$ vertices.
+The following proposition describes the space of coherent information structures as a convex hull of $2^N$ vertices.
  The proof of this and other propositions are deferred to the Appendix.
 
 \begin{proposition}
@@ -875,7 +875,7 @@ and $\COR(3)$ with
  \delta_1 + \delta_2 + \delta_3 - \rho_{12} - \rho_{13} - \rho_{23} \leq 1
 \end{cases}
 \end{align*}
-for $i,j,k \in \{1,2,3\}$ such that $i \neq j$, $i \neq k$, and $j \neq k$. After this, the inequality representation of $\COR(N)$ becomes increasingly complex. For instance, $\COR(5)$ is known to have 56 facets while $\COR(9)$ has at least 12,246,651,158,320 facets. In fact, because the unconstrained quadratic
+for $i,j,k \in \{1,2,3\}$ such that $i \neq j$, $i \neq k$, and $j \neq k$. After this, $\COR(N)$ becomes increasingly complex. For instance, $\COR(5)$ is known to have 56 facets while $\COR(9)$ has at least 12,246,651,158,320 facets. In fact, because the unconstrained quadratic
 0-1 problem is NP-hard, it is probably hopeless to find a complete
 list of linear inequalities to describe $\COR(N)$ under general $N$
 (\citealt{deza1997geometry}). Fortunately, previous literature has introduced both linear and semidefinite relaxations of $\COR(N)$ (see, e.g., \citealt{laurent1997connections}). Such relaxations together with modern optimization techniques and sufficient data can be used to estimate the general information structure very efficiently. This, however, is not in the scope of this paper and is therefore left for subsequent work. 
@@ -903,9 +903,7 @@ the marginal density for $p_i$ is
 This distribution has very intuitive behavior. In particular, it is uniform on $[0,1]$ if the forecaster knows half of the
 information, i.e. $\delta_i = 1/2$.  It is
 unimodal with a minimum at $p_i = 1/2$ when $\delta_i > 1/2$ and a
-maximum at $p_i = 1/2$ when $\delta_i < 1/2$.  As $\delta_i \to 0$ (no
-information), $p_i$ converges to a point mass at $1/2$
-(non-informative forecast) and as $\delta_i \to 1$, $p_i$ converges to
+maximum at $p_i = 1/2$ when $\delta_i < 1/2$.  As $\delta_i \to 0$, $p_i$ converges to a point mass at $1/2$, and as $\delta_i \to 1$, $p_i$ converges to
 a correct forecast, whose distribution has atoms of weight $1/2$ at
 zero and one. Therefore a forecaster with no information ``withdraws'' from the problem by reporting $0.5$ while a forecaster with full information always predicts the correct outcome. Figure \ref{marginals} illustrates the marginal
 distribution when $\delta_i$ is equal to $0.3$, $0.5$, and $0.7$.
