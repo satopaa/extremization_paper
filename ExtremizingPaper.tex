@@ -869,7 +869,7 @@ number of half-spaces (\citealt{padberg1989boolean, ziegler2000lectures}). Compl
 \end{align*}
 and $\COR(3)$ with 
 \begin{align*}
-\hspace{5em}\begin{cases}
+\hspace{5.5em}\begin{cases}
  0 \leq \rho_{ij} \leq \min(\delta_i, \delta_j)\\
  \delta_i + \delta_j - \rho_{ij} \leq 1\\
  \delta_i - \rho_{ij} - \rho_{ik} + \rho_{jk} \geq 0\\
@@ -882,8 +882,8 @@ list of linear inequalities to describe $\COR(N)$ under general $N$
 (\citealt{deza1997geometry}). Fortunately, previous literature has introduced both linear and semidefinite relaxations of $\COR(N)$ (see, e.g., \citealt{laurent1997connections}). Such relaxations together with modern optimization techniques and sufficient data can be used to estimate the general information structure very efficiently. This, however, is not in the scope of this paper and is therefore left for subsequent work. 
 
 
-The next step is
-to link the pool of information with the probability forecasts. Given that $X_S | X_{B_i} \sim \mathcal{N}\left(X_{B_i}, 1-\delta_j\right)$, the probability estimate reported by Forecaster $i$ is
+The final step in developing the Gaussian model is
+to link the pool of information with the probability forecasts. Given that $X_S | X_{B_i} \sim \mathcal{N}\left(X_{B_i}, 1-\delta_j\right)$, the $i$th Forecaster's probability estimate is
 \begin{align}
 p_i &= \P\left(A | \mathcal{F}_{i}\right) \nonumber \\
  &= \P\left(X_S > 0 | X_{B_i}\right) \nonumber \\
@@ -963,20 +963,19 @@ Gaussian distribution~(\ref{Nforecasters}) gives
  \end{array}\right)\right), \label{oracleN}
 \end{align}
 where $X_{B'}$ is the information known to the oracle and $\delta' =
-|B'|$. Similarly to a single forecaster's probability estimate in (\ref{indFore}), the oracular aggregator becomes
+|B'|$. The oracular aggregator is then nothing more than the probability forecast made by the oracle. That is,
  \begin{align*}
 p' = \P(X_S > 0 |  \mathcal{F}') 
    &= \Phi\left( \frac{X_{B'}}{\sqrt{1-\delta'}} \right)
 \end{align*}
 
-Given that $p'$ is generally not observed, $\delta'$ cannot be estimated directly but must be computed based on the forecasters' information $\Sigma_{22}$ instead. The value of $\delta'$, however, is not uniquely determined by $\Sigma_{22}$ unless $N = 2$. 
-%The a key quantity in analyzing other probability aggregators is the oracle's amount of information $\delta'$. Generally this value is determined by $\Sigma_{22}$ only when $N = 2$.
-Fortunately, it can be bounded in terms of $\Sigma_{22}$ for general $N$ by  referring to the historical Boole Problem (\citealt{boole1854investigation}): 
+This aggregator provides a reference point that allows us to identify information structures under which other aggregation techniques perform relatively well. In particular, if an aggregator is likely to be near $p'$ under a given $\Sigma_{22}$, then that information structure reflects favorable conditions for the aggregator. Such a direct comparison, however, requires an estimate of $\delta'$ in terms of $\Sigma_{22}$. Generally, $\delta'$ is uniquely determined by $\Sigma_{22}$ only when $N = 2$. 
+The value of $\delta'$, however, can be bounded under any $N$ by first referring to the historical Boole Problem (\citealt{boole1854investigation}): 
 
 \begin{quote}
 \textbf{Boole Problem.} Consider $N$ events $A_i$ for $i = 1, \dots, N$. Denote the marginal probabilities  with $p_i := \P(A_i)$ and the joint probabilities with $p_{ij} := \P(A_i \cap A_j)$. What is the best estimation of $\P(A_1 \cup \dots \cup A_N)$ in terms of $p_i$'s and $p_{ij}$'s?
 \end{quote}
-As was mentioned earlier in Remark (\ref{item:pool}), representing the pool of information with the unit interval $S = [0,1]$ allows us to interpret $\delta_i$'s as marginal probabilities for some $N$ events and $\rho_{ij}$'s as their joint probabilities. Therefore  any previously suggested answer to the Boole Problem can be used to bound $\delta'$. For instance, \cite{deza1997geometry} derive the bounds
+As was mentioned earlier in Remark (\ref{item:pool}), representing the pool of information with the unit interval $S = [0,1]$ allows us to interpreted $\delta_i$'s as marginal probabilities for some $N$ events and $\rho_{ij}$'s as their joint probabilities. Therefore  any previously suggested answer to the Boole Problem can be used to bound $\delta'$ in terms of $\Sigma_{22}$. For instance, \cite{deza1997geometry} derive the bounds
 %according to \cite{deza1997geometry}  several authors, including \cite{chung1941probability, dawson1967inequality, galambos1977bonferroni}, 
 %\cite{galambos1977bonferroni}
 %discuss the lower bound
@@ -984,10 +983,10 @@ As was mentioned earlier in Remark (\ref{item:pool}), representing the pool of i
 %\delta'_{min} := 
 %\frac{2}{m+1} \sum_{i=1}^N \delta_i - \frac{2}{m(m+1)} \sum_{1 \leq i < j \leq N} \rho_{ij}   \leq \delta',
 %\delta'_{min} := 
-\frac{N \sum_{i=1}^N \delta_i - 2 \sum_{1 \leq i < j \leq N} \rho_{ij}}{\lfloor \frac{N+1}{2} \rfloor \lceil \frac{N+1}{2} \rceil }  \leq \delta' \leq \frac{N \sum_{i=1}^N \delta_i - 2 \sum_{1 \leq i < j \leq N} \rho_{ij}}{N} 
+\frac{N \sum_{i=1}^N \delta_i - 2 \sum_{1 \leq i < j \leq N} \rho_{ij}}{\left\lfloor \frac{N+1}{2} \right\rfloor \left\lceil \frac{N+1}{2} \right\rceil }  \leq \delta' \leq \frac{N \sum_{i=1}^N \delta_i - 2 \sum_{1 \leq i < j \leq N} \rho_{ij}}{N} 
 %:= \delta'_{max}
 \end{align*}
-and also provide an excellent overview of other existing upper and lower bounds. 
+and provide an excellent overview of other existing upper and lower bounds. 
 %where 
 %\begin{align*}
 %m  &= \left\lfloor 2   \left( \sum_{1 \leq i < j \leq N} \rho_{ij} \right) \bigg/ \left(  \sum_{i=1}^N \delta_i \right) \right\rfloor + 1
@@ -996,13 +995,12 @@ and also provide an excellent overview of other existing upper and lower bounds.
 %%, who analyze the same result but without the extremal property, 
 %this lower bound can be attained and hence cannot be improved.
 % For more information,  \cite{deza1997geometry} provide an excellent overview of upper and other lower bounds. 
-Such results make $p'$ a tangible benchmark that can be used to analyze other aggregators under different information structures $\Sigma_{22}$. Approximating or bounding $\delta'$, however, is not always necessary. This is illustrated in the following subsections that do not approximate $\delta'$ but instead use known relations among the parameters in (\ref{oracleN}) to develop intuition about probability extremizing. 
+Such results make $p'$ a tangible benchmark that can be used to analyze other aggregators under different information structures $\Sigma_{22}$. Approximating or bounding $\delta'$, however, is not always necessary. This is illustrated in the following subsections that do not approximate $\delta'$ but instead use known relations among the model parameters to develop intuition about probability extremizing. 
 
 \subsection{General Information Structure}
- A
-probability $p$ is said to be \textit{extremized} by another probability $q$ if and only
+This section begins the analysis of probability extremizing by making some preliminary observations under the general information structure. First, however, recall that a probability $p$ is said to be \textit{extremized} by another probability $q$ if and only
 if $q$ is closer to $0$ when $p \leq 0.5$ and closer to $1$ when $p
-\geq 0.5$. Equivalently, $q$ extremizes $p$ if and only if its probit score $\Phi^{-1}(q)$ is on the same side but further away from zero than $\Phi^{-1}(p)$. The amount of (multiplicative) extremization can then be quantified with the {\em probit extremization ratio} defined as 
+\geq 0.5$. This translates to the probit scores as follows: $q$ extremizes $p$ if and only if  $\Phi^{-1}(q)$ is on the same side but further away from zero than $\Phi^{-1}(p)$. The amount of (multiplicative) extremization can then be quantified with the {\em probit extremization ratio} defined as 
  $\alpha(q,p) := \Phi^{-1}(q) / \Phi^{-1} (p)$. Given that no aggregator can improve upon the oracular aggregator, $p'$ provides an ideal
 reference point for analyzing extremization. Therefore, of particular interest is the special case
 \begin{align}
@@ -1079,14 +1077,16 @@ probability averaging without extremizing. The next two subsections examine spec
 
 \subsection{Fully- and Non-Overlapping Information}
 \label{disjoint}
-This section examines two limiting cases: a) the forecasters share
+This section examines two extreme cases: a) the forecasters share
 no information; and b) the forecasters share all their
-information. In both cases the revealed aggregator coincides with the oracular aggregator. First, however, consider the latter case where all the information
-sets are the same, i.e. $B_{i} = B_j$ for all $i \neq j$. Consequently, all
-the probability forecasts $\{p_i : i = 1, \dots, N\}$ are the same,
-and the probit opinion pool, the oracular aggregator, and the revealed
-aggregator equal to this common probability forecast. Therefore no
-extremization is needed. Given that the oracular forecast varies
+information. First, consider the latter case where all the information
+sets are the same, i.e. $B_{i} = B_j$ for all $i \neq j$. Consequently, $p_i = p_j$ for all $i \neq j$, and hence $p' = p'' = \probit$.
+%all
+%the probability forecasts $\{p_i : i = 1, \dots, N\}$ are the same,
+%and the probit opinion pool, the oracular aggregator, and the revealed
+%aggregator equal to this common probability forecast. 
+Therefore no
+extremization is needed. Given that the oracular aggregator varies
 smoothly over the space of information structures, averaging
 techniques, such as the probit opinion pool, can be expected to work
 well when the forecasts are based on very similar sources of
@@ -1100,38 +1100,36 @@ results in averaging-based aggregators.
 
 
 
-Next, consider the second case, where the forecasters' information
+Next, consider the second case where the forecasters' information
 sets do not overlap, i.e. $|B_{i} \cap B_{j}| = 0$ for all $i \neq j$. Such
 an information structure is likely to arise if a team of forecasters
 strategically decide to access and study disjoint sources of
 information. The resulting information structure $\Sigma_{22}$ is
 diagonal, and hence coherent if and only if $\sum_{i=1}^N \delta_i
-\leq 1$. In this case, the additive nature of the Gaussian process gives $\delta' = \sum_{i=1}^N \delta_i$ and $X_{B'} = \sum_{i=1}^N X_{B_i}$. Consequently, the revealed aggregator coincides with the oracular aggregator. That is,
+\leq 1$. In this case, the additive nature of the Gaussian process gives $\delta' = \sum_{i=1}^N \delta_i$ and $X_{B'} = \sum_{i=1}^N X_{B_i}$. Consequently, the revealed and  the oracular aggregator coincide. That is,
 %Given that under non-overlapping information 
 %$\delta' = \sum_{j=1}^N \delta_j$ and $X_{B'} = \sum_{j=1}^N X_{B_j}$, 
  \begin{align*}
 p' &= p'' =  \Phi\left( \frac{\sum_{i=1}^N X_{B_i}}
   {\sqrt{1- \sum_{i=1}^N \delta_i}} \right) 
 \end{align*}
-This aggregator can be described in two steps: The first step consists
-of voting, or range voting to be more specific (see, e.g.,
+This aggregator can be described in two steps: First, the numerator conducts voting, or range voting to be more specific (see, e.g.,
 \citealt{fishkin1997voice}), where the votes are weighted according to
-the importance of the forecasters' private information. This is
-performed by the summation in the numerator. If this sum falls below
+the importance of the forecasters' private information.  If this sum falls below
 $0.0$ (or above $0.0$), the consensus believes that the event will not
-happen (or will happen). The second step is made by the
-denominator that extremizes the consensus according to the total
+happen (or will happen). Second, the
+denominator extremizes the consensus according to the total
 amount of information in the group. For instance, if the forecasters
 know all the information, i.e. $\sum_{i=1}^N \delta_i = 1$, their vote
 deterministically indicates whether the event $A$ happens or not. This
 technique clearly leads to very extreme aggregate forecasts. Therefore
 more extreme techniques, such as voting, can be expected to work well
-if the forecasters use very different information sets.
+if the forecasters use widely different information sets.
 
 %Combining this with our earlier discussion leads to the following observation.
 In summary, the analysis suggests a spectrum of aggregators indexed by
 the information overlap.  The optimal aggregator undergoes a smooth
-transformation from averaging to summing of the probit forecasts as
+transformation from averaging to voting as
 the information overlap decreases from full overlap towards the point
 of no overlap.
 %This is summarized in the following observation.
@@ -1153,8 +1151,7 @@ where the general level of overlap can be said to be high or low.  For
 instance, predictions from a group of forecasters working together or in
 close collaboration can be averaged while predictions from a diverse
 group of forecasters working independently of each other should be
-aggregated via more extreme techniques such as voting (see
-\citealt{parunak2013characterizing} for a discussion on voting-like techniques). This spectrum is particularly clear in the next section
+aggregated via more extreme techniques such as voting. This spectrum is particularly clear in the next section
 that visualizes the intermediate scenarios with partial information
 sharing among the forecasters.
 
@@ -1194,18 +1191,16 @@ sharing among the forecasters.
 %\textcolor{red}{It is not really to make this visualizable but to bring this on a higher level. }
 
 This section develops high-level intuition about extremization as a function of information overlap. The first step is to reduce the number of parameters in $\Sigma_{22}$. A natural approach is to assume that the
-information sets have the same size and that the amount of overlap
-between any two sets is constant, i.e., $|B_{1}| = \dots =
-|B_{N}|$ and $|B_{i} \cap B_{j}| = |B_{h} \cap B_{k}|$ for all $i \neq
-j$ and $h \neq k$.
+information sets have the same size and that the amount of pairwise overlap
+is constant.
 %Here, we compare $\probit$ to the %oracular aggregator; in Section~\ref{compound2} 
 %we compare the revealed aggregator to the probit opinion pool.  
 This structure would hold if, for example, the
 forecasters sampled information sources from a common distribution.
 %The resulting form of $\Sigma_{22}$ is called \textit{compound
 %symmetric}. 
-As a result, the multivariate Gaussian distribution
-(\ref{oracleN}) reduces to
+More specifically, the multivariate Gaussian distribution
+(\ref{oracleN}) becomes
 % $\rho \in [\max \{(N-T)/(T(N-1)), 0\},1] = A_\rho$. 
 \begin{align}
 \left(\begin{matrix} X_{S} \\ X_{B'}\\ X_{B_1}\\ \vdots \\ X_{B_N} \end{matrix}\right) &\sim \mathcal{N}\left( 
@@ -1225,12 +1220,14 @@ As a result, the multivariate Gaussian distribution
  \end{array}\right)\right) \label{symmetric}
 \end{align}
 where $\delta$ is the amount of information known by a forecaster and
-$\lambda$ is the proportion of this information that is shared with another forecaster. 
+$\lambda$ is the shared proportion of this information; that is, $|B_{i}| =
+\delta$ and $|B_{i} \cap B_{j}| = \lambda \delta$ for all $i \neq
+j$.
 
-The overlap parameter $\lambda$ must be constrained in order to ensure a coherent information structure.
-First, the upper bound is $\lambda \leq 1$ because under any combination of $\delta$ and $N$ the
-forecasters may know the exact same information. Second, 
-information overlap is unavoidable when $\delta > 1/N$, and minimum
+
+Domain restrictions must be placed on $\delta$ and $\lambda$ to ensure a coherent $\Sigma_{22}$. Clearly, any $\delta \in [0,1]$ is plausible. Conditional on such $\delta$, however, the overlap parameter $\lambda$ must be within a subinterval of $[0,1]$. First, the upper bound of this subinterval is always $1$ because the 
+forecasters may know the exact same information under any $\delta$ and $N$. Second, to derive the lower bound, note that  
+information overlap is unavoidable when $\delta > 1/N$, and that minimum
 sharing occurs when all information is known either to everyone or
 to a single forecaster.  In other words, if $\delta > 1/N$ and
 $B_{i} \cap B_j = B$ with $|B| = \lambda \delta$ for all $i \neq j$,
@@ -1239,11 +1236,12 @@ the value of $\lambda$ is minimized when $\lambda\delta + N(\delta -
 \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}$, and $\Sigma_{22}$ is
 coherent if and only if
 \begin{align}
-\delta \in [0,1] &&  \lambda &\in \left[  
-   \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right), 
+\delta \in [0,1] &&  \lambda | \delta &\in \left[  
+   \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right] 
    \label{rhoDomain}
 \end{align}
-where the open upper bound on $\lambda$ ensures a non-singular $\Sigma_{22}$. Under these simplifications, the extremization ratio (\ref{alpha})
+%where the open upper bound on $\lambda$ ensures a non-singular $\Sigma_{22}$.
+Under these simplifications, the extremization ratio (\ref{alpha})
 becomes
 \begin{align*}
 \alpha &= \frac{X_{B'}}{\frac{1}{N}\sum_{j=1}^N X_{B_j}} \sqrt{\frac{1-\delta}{1-\delta'}} \sim \text{Cauchy}(x_0, \gamma)
@@ -1279,39 +1277,38 @@ x_0 &= \frac{N}{1+(N-1)\lambda}  \sqrt{\frac{1-\delta}{1-\delta'}} &&& \text{ an
 %\hspace{1.3em}
         \begin{subfigure}[b]{0.49\textwidth}
                 \includegraphics[width=\textwidth, height = \textwidth]{Probs}
-\caption{$\P(\alpha \geq 1 | \Sigma_{22})$}
+\caption{$\P(\alpha > 1 | \Sigma_{22})$}
 \label{probOracle}
         \end{subfigure}
 
-        \caption{ The amount of extremizing follows a Cauchy$(x_0, \gamma)$, where $x_0$ is a location parameter and $\gamma$ is a scale parameter. This figure considers  $N = 2$ experts and shows $\log(x_0)$ and $\P(\alpha \geq 1 | \Sigma_{22})$ under all plausible combinations of $\delta$ and $\lambda$. No approximation is needed as $\delta'$ is uniquely determined by $\Sigma_{22}$ when $N = 2$.}
+        \caption{ The amount of extremizing follows a Cauchy$(x_0, \gamma)$, where $x_0$ is a location parameter and $\gamma$ is a scale parameter. This figure considers  $N = 2$ experts and shows $\log(x_0)$ and $\P(\alpha > 1 | \Sigma_{22})$ under all plausible combinations of $\delta$ and $\lambda$. No approximation is needed as $\delta'$ is uniquely determined by $\Sigma_{22}$ when $N = 2$.}
         \label{LevelplotsOracle}
 \end{figure}
 
-Recall that $\delta'$ increases in $N$ and $\delta$ but decreases in $\lambda$. More specifically, as $\delta \to 1$, $\delta' \to 1$ but at a faster rate as long as $\lambda < 1$ and $N$ are fixed. Therefore $x_0$ generally increases in $N$ and $\delta$ but decreases in $\lambda$; or alternatively, the amount of extremizing
-can be expected to increase in $\delta'$.  Furthermore, as the Cauchy distribution is symmetric around $x_0$, the probability $\P(\alpha \geq 1 | \Sigma_{22})$ behaves similarly to $x_0$ and hence also increases in $\delta'$. 
-%The rate of increase, however, is not the same as for $x_0$ because it also depends on $\gamma$. 
-Figure \ref{LevelplotsOracle} illustrates these relations by plotting both $\log(x_0)$ and $\P(\alpha \geq 1 | \Sigma_{22})$ for $N = 2$ forecasters under all plausible combinations of $\delta$ and $\lambda$. High values have been censored to keep the scale manageable. Note that the results are completely general for the two-forecaster case, apart from the assumption $\delta_1 = \delta_2$. Relaxing this assumption, however, does not change the qualitative nature of the results.
+The rest of this section analyzes the location $x_0$ and how it changes as a function of the model parameters. The analysis is hindered by the generally unknown form of the dependence between $\delta'$ and the other parameters $N$, $\delta$, and $\lambda$. However, given that $\delta'$ is defined as $\delta' = |\cup_{i=1}^N B_i|$, its value  increases in $N$ and $\delta$ but decreases in $\lambda$. In particular, as $\delta \to 1$, the value of $\delta'$ converges to $1$ at least as fast as $\delta$ because  $\delta' \geq \delta$. Therefore the term $\sqrt{(1-\delta)/(1-\delta')}$ and, consequently, $x_0$ increase in $\delta$. Similarly, $x_0$ can be shown to increase in $N$ but to decrease in $\lambda$. Therefore $x_0$ and $\delta'$ move together, and the amount of extremizing
+can be expected to increase in $\delta'$.  As the Cauchy distribution is symmetric around $x_0$, the probability $\P(\alpha > 1 | \Sigma_{22})$ behaves similarly to $x_0$ and also increases in $\delta'$.  
+%The rate of increase, however, is not the same because it also depends on $\gamma$.  
+Figure \ref{LevelplotsOracle} illustrates these relations by plotting both $\log(x_0)$ and $\P(\alpha > 1 | \Sigma_{22})$ for $N = 2$ forecasters under all plausible combinations of $\delta$ and $\lambda$. High values have been censored to keep the scale manageable. Note that the results are completely general for the two-forecaster case, apart from the assumption $\delta_1 = \delta_2$. Relaxing this assumption does not change the qualitative nature of the results.
 %, namely that extremizing tends to increase in $\delta$ but decrease in $\lambda$.
 % Assuming symmetric information among $N = 10$ forecasters, however, is more constraining. In addition, Figure \ref{xOracle10} describes the lower bound $x_{min}$ instead of the exact location $x_0$. Despite these limitations, it illustrates that extremizing can be expected to increase in $N$. 
 
 
+
 The total amount of information among the forecasters $\delta'$, however, does not provide a full
 explanation of extremizing.  Information diversity is also an
-important yet separate determinant.  To see this,
-reconsider Figure \ref{LevelplotsOracle} and observe that fixing $\delta'$ to
-some constant defines a curve $\lambda = 2 - \delta'/\delta$ on the two plots. For
+important yet separate determinant.  To see this, observe that fixing $\delta'$ to
+some constant defines a curve $\lambda = 2 - \delta'/\delta$ on the two plots in  Figure \ref{LevelplotsOracle}. For
 instance, letting $\delta' = 1$ gives the boundary curve on the right
 side of each plot.  This curve then shifts inwards and rotates slightly
-counterclockwise as $\delta'$ decreases.  At the top end of each such curve
+counterclockwise as $\delta'$ decreases.  At the top end of each curve
 all forecasters know and share the total information, i.e. $\delta =
 \delta'$ and $\lambda = 1.0$.  At the bottom end, on the other hand,
 the forecasters partition the total information, i.e. $\delta =
 \delta'/2$, and share nothing, i.e. $\lambda = 0.0$.  Given that
-moving down along these curves increases information diversity and
+moving down along these curves simultaneously increases information diversity and
 $x_0$, both information diversity and the total amount of
-information in the group are important 
- determinants of extremizing. This observation can guide practitioners towards proper extremization by linking  application specific aspects of the prediction problem to the two aforementioned determinants. For instance, extremization can be
-expected to increase in factors such as number of forecasters,
+information among the forecasters are important yet separate determinants of  extremizing. This observation can guide practitioners towards proper extremization because  many  application specific aspects of the prediction problem can be linked to these two determinants. For instance, extremization can be
+expected to increase in number of forecasters,
 subject-matter expertise, and human diversity, but to decrease in
 collaboration, sharing of resources, and problem difficulty.
 
@@ -1483,6 +1480,8 @@ As  was discussed earlier in Remark (\ref{item:specific}), the information struc
 assumption, by estimation, or in a Bayesian manner. If one is to
 assume a structure, the most natural and non-informative choice is the
 symmetric one discussed in Section \ref{compound}. The next subsection analyzes the revealed aggregator (\ref{GeneralAggregator}) under this structure.
+
+\textcolor{red}{It might be worthwhile to state somewhere that all aggregators are conditional expectations, which are always calibrated.}
 
 %\textcolor{red}{Discuss here Julia's first paper. Hypothesis: the aggregator does not drop out a person whose $B_1 \subset B_2$ unless $B_3$ is completely separate. In a sense, in such a case the first forecaster does not provide anything beyond the second forecaster. This is not surprising. }
 
@@ -1927,7 +1926,7 @@ which gives that $x_0 \geq 1$. Given that the Cauchy distribution is symmetric a
 &=    \frac{\frac{N\sqrt{1-\delta}}{(N-1)\lambda +1} 
    }{\sqrt{1- \frac{N\delta}{(N-1)\lambda +1} }}, \label{CompoundAlpha}
 \end{align}
-which simplifies to the given expression after substituting in $\gamma$. This quantity does not depend on any $X_{B_i}$ and is therefore non-random.
+which simplifies to the given expression after substituting in $\gamma$. Given that this quantity does not depend on any $X_{B_i}$, it is non-random.
 
 \item[(ii)] For a given $\delta$, the amount of extremizing $\alpha$ is minimized when $(N-1)\lambda +1$ is maximized. This happens as $\lambda \uparrow 1$. Plugging this into (\ref{CompoundAlpha}) gives
 \begin{align*}
