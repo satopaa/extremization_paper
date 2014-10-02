@@ -1670,81 +1670,77 @@ improvements.
 
 \section{Discussion}
 \label{discussion}
-This paper introduced a probability model for event forecasts made by
+This paper introduced a probability model for predictions made by
 a group of forecasters.  The model allows for interpretation of some
-of the existing work on forecast aggregation and also sheds light on
+of the existing work on forecast aggregation and also clarifies
 empirical approaches such as the {\em ad hoc} practice of
 extremization.  The general model is more plausible on the micro-level
-than any other model has been to date. Under this model, we provided
-some general results. For instance, we showed that the
+than any other model has been to date. Under this model, some 
+some general results were provided. For instance, the
 \textit{oracular aggregator} is more likely to give a forecast that is
 more extreme than one of the common benchmark forecasts, namely the
 probit opinion pool (Proposition~\ref{positiveProbThm}).  Even though
 no real world aggregator has access to all the information of the
-oracle, the result illuminates why extremization is almost certainly
-called for.  We also performed more detailed analyses under various
+oracle, this result explains why extremization is almost certainly
+called for.  More detailed analyses  were performed under several
 specific model specifications such as zero and complete information
-overlap (Section~\ref{disjoint}), and full symmetry of the information
-structure (Section~\ref{compound}).  Even though the zero and complete
+overlap (Section~\ref{disjoint}), and fully symmetric information (Section~\ref{compound}).  Even though the zero and complete
 information overlap models are not realistic, except under a very
-narrow set of circumstances, they form logical extremes that shed
-light on what drives good aggregation. The symmetric model is somewhat
-more realistic.  Based on its analysis, we constructed graphs that
-illuminated the effect of model parameters on the optimal amount of
-extremization (Figure~\ref{LevelplotsOracle}).  We also considered the
+narrow set of circumstances, they form logical extremes that illustrate the main drivers of good aggregation. The symmetric model is somewhat
+more realistic. It depends only on two parameters and therefore allows us to visualize the effect of model parameters on the optimal amount of
+extremization (Figure~\ref{LevelplotsOracle}).  Finally, the
 {\em revealed aggregator}, which is the best in-practice aggregation
-under the partial information model.  We derived a general formula for
-this aggregator (Equation~\ref{GeneralAggregator}), as well as its
+under the partial information model, was discussed. A general formula for
+this aggregator (Equation~\ref{GeneralAggregator}) as well as its
 specific formula under the assumption of symmetric information
-(Equation~\ref{CompoundAggre}). This specific form was shown to 
-outperform the common averaging aggregators on real-world forecasts 
-of one-time events. 
+(Equation~\ref{CompoundAggre}) were derived. The specific form was applied to real-world forecasts 
+of one-time events and shown to 
+outperform other commonly used aggregators. 
 
 It is interesting to relate our discussion to the many empirical
-studies conducted by the Good Judgment Project (see Section
-\ref{realData} for a brief introduction of the project).  Generally
+studies conducted by the Good Judgment Project (GJP) (see Section
+\ref{realData} for a brief introduction to the project).  Generally
 extremizing has been found to improve the average aggregates
 (\citealt{mellers2014psychological, satopaa, satopaa2014probability}).
 The average forecast of a team of super-forecasters, however, often
-requires very little or no extremizing.  This can explained by the
-partial information model as follows.  The super-forecasters are
-highly knowledgeable (i.e. they have a high $\delta$) and they also
-work in groups (i.e. they have a high $\rho$ and $\lambda$).  In
+requires very little or no extremizing.  This can be explained as follows.  The super-forecasters are
+highly knowledgeable (i.e. they have a high $\delta$) and
+work in groups (i.e. they have a high $\rho$ and $\lambda$).  Therefore, in
 Figure \ref{LevelplotsOracle} they are situated around the upper-right
 corners where almost no extremizing is required.  In other words,
-there is very little usable information not already used in each
+there is very little usable information that is not already used in each
 forecast.  Their forecasts are highly convergent and are likely to be
 already very near the oracular forecast.  The GJP forecast data also
 includes self-assessments of expertise.  Not surprisingly, the greater
 the self-assessed expertise, the less extremizing appears to have been
-required.  This is consistent with our interpretation that high values
-of $\delta$ and $\lambda$ lead to a lower extremization parameter.
+required (\citealt{satopaa}).  This is consistent with our interpretation that high values
+of $\delta$ and $\lambda$ lead to a lower extremization ratio.
 
 The partial information framework offers many future research
-directions.  One involves estimation of parameters.  It seems likely
-that use of this model together with good procedures for estimating
-the information overlap among two or more forecasters can lead to many
-improvements in probability aggregations. Given a stream of forecasts
+directions.  One involves estimation of parameters.  The model together with good procedures for estimating
+the information overlap among two or more forecasters is likely to lead to many
+improvements in probability aggregation. Given a stream of forecasts
 of reasonable length, it is possible to estimate $|B_i|$ and $|B_i
-\cap B_j|$ with a maximum likelihood procedure akin to details
-described in Appendix. In principle, the size of $B_i$ can be
-estimated from the distribution of the forecasts $p_{ij}$ and the size
-of $B_i \cap B_j$ from correlations between the $i$th and $j$th
-forecast streams.  Estimation of higher order intersections seems more
+\cap B_j|$ with a maximum likelihood procedure akin to the details
+described in the Appendix. That is, in principle, $|B_i|$ can be
+estimated from the distribution of the stream $p_{ij}$ and $|B_i \cap B_k|$ from the correlation of the two streams $p_{ij}$ and $p_{kj}$.  Estimation of higher order intersections, however, seems more
 dubious.  Computations with $N=3$ show that, at least in some cases,
 higher order intersections are not relevant to the revealed
 aggregator.  Theoretical results on the significance or insignificance
 of higher order intersections in the information overlap structure
 would be desirable.
 
-Another promising avenue is the Bayesian approach.  Two forecasters
-whose forecasts are very similar or perhaps identical are more likely
-to have very similar information sets.  In a Bayesian model, one would
-expect more extremization from the probit opinion pool when the set of
-forecasts is varied than when it is relatively homogeneous.  We have
-work in progress analyzing a Bayesian model, but there are many, many
-reasonable priors on information structures.  This avenue should
-certainly be pursued and the results tested against other high
+In many applications with small or moderately sized datasets, Bayesian methods have been found to be superior to the likelihood-based alternatives. Given that the number of forecasts on a single event is typically quite small, the Bayesian approach is another promising direction for future research. Currently, we have
+work in progress analyzing a Bayesian model but there are many, many
+reasonable priors on the information structures. 
+%Generally, two forecasters
+%with very similar or even identical predictions are more likely
+%to have very similar information sets. 
+% In a Bayesian model, one would
+%expect more extremization from the probit opinion pool when the set of
+%forecasts is varied than when it is relatively homogeneous.
+ This avenue should
+certainly be pursued further, and the results tested against other high
 performing aggregators.
 
 
