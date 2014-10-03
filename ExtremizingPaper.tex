@@ -963,7 +963,7 @@ The value of $\delta'$, however, can be bounded under any $N$ by first referring
 \begin{quote}
 \textbf{Boole Problem.} Consider $N$ events $A_i$ for $i = 1, \dots, N$. Denote the marginal probabilities  with $p_i := \P(A_i)$ and the joint probabilities with $p_{ij} := \P(A_i \cap A_j)$. What is the best estimation of $\P(A_1 \cup \dots \cup A_N)$ in terms of $p_i$'s and $p_{ij}$'s?
 \end{quote}
-As was mentioned earlier in Remark (\ref{item:pool}), representing the pool of information with the unit interval $S = [0,1]$ allows us to interpreted $\delta_i$'s as marginal probabilities for some $N$ events and $\rho_{ij}$'s as their joint probabilities. Therefore  any previously suggested answer to the Boole Problem can be used to bound $\delta'$ in terms of $\Sigma_{22}$. For instance, \cite{deza1997geometry} derive the bounds
+As was mentioned earlier in Remark (\ref{item:pool}), representing the pool of information with the unit interval $S = [0,1]$ allows us to interpret $\delta_i$'s as marginal probabilities for some $N$ events and $\rho_{ij}$'s as their joint probabilities. Therefore  any previously suggested answer to the Boole Problem can be used to bound $\delta'$ in terms of $\Sigma_{22}$. For instance, \cite{deza1997geometry} derive the bounds
 %according to \cite{deza1997geometry}  several authors, including \cite{chung1941probability, dawson1967inequality, galambos1977bonferroni}, 
 %\cite{galambos1977bonferroni}
 %discuss the lower bound
@@ -988,7 +988,7 @@ Such results make $p'$ a tangible benchmark that can be used to analyze other ag
 \subsection{General Information Structure}
 This section begins the analysis of probability extremizing by making some preliminary observations under the general information structure. First, however, recall that a probability $p$ is said to be \textit{extremized} by another probability $q$ if and only
 if $q$ is closer to $0$ when $p \leq 0.5$ and closer to $1$ when $p
-\geq 0.5$. This translates to the probit scores as follows: $q$ extremizes $p$ if and only if  $\Phi^{-1}(q)$ is on the same side but further away from zero than $\Phi^{-1}(p)$. The amount of (multiplicative) extremization can then be quantified with the {\em probit extremization ratio} defined as 
+\geq 0.5$. This translates to the associated probit scores as follows: $q$ extremizes $p$ if and only if  $\Phi^{-1}(q)$ is on the same side but further away from zero than $\Phi^{-1}(p)$. The amount of (multiplicative) extremization can then be quantified with the {\em probit extremization ratio} defined as 
  $\alpha(q,p) := \Phi^{-1}(q) / \Phi^{-1} (p)$. Given that no aggregator can improve upon the oracular aggregator, $p'$ provides an ideal
 reference point for analyzing extremization. Therefore, of particular interest is the special case
 \begin{align}
@@ -997,7 +997,9 @@ reference point for analyzing extremization. Therefore, of particular interest i
 where $P' = \Phi^{-1}(p')$. From now on, unless otherwise stated, expression (\ref{alpha}) is referred simply with
 $\alpha$. 
 Under this definition, $\probit$
-requires extremization if and only if $\alpha > 1$, and the larger $\alpha$ is, the more $\probit$ should be extremized. Note that $\alpha$ is a random quantity that spans the entire real line;
+requires extremization if and only if $\alpha > 1$, and the larger $\alpha$ is, the more $\probit$ should be extremized. 
+
+Note that $\alpha$ is a random quantity that spans the entire real line;
 that is, it is possible to find a set of forecasts and an information structure for any possible value of $\alpha \in
 \mathbb{R}$.  Evidently, extremizing is not guaranteed to always
 improve $\probit$.  To understand when extremizing is
@@ -1187,8 +1189,8 @@ This structure would hold if, for example, the
 forecasters sampled information sources from a common distribution.
 %The resulting form of $\Sigma_{22}$ is called \textit{compound
 %symmetric}. 
-More specifically, the multivariate Gaussian distribution
-(\ref{oracleN}) becomes
+As a result, the multivariate Gaussian distribution
+(\ref{oracleN}) simplifies to
 % $\rho \in [\max \{(N-T)/(T(N-1)), 0\},1] = A_\rho$. 
 \begin{align}
 \left(\begin{matrix} X_{S} \\ X_{B'}\\ X_{B_1}\\ \vdots \\ X_{B_N} \end{matrix}\right) &\sim \mathcal{N}\left( 
@@ -1213,8 +1215,8 @@ $\lambda$ is the shared proportion of this information; that is, $|B_{i}| =
 j$.
 
 
-Domain restrictions must be placed on $\delta$ and $\lambda$ to ensure a coherent $\Sigma_{22}$. Clearly, any $\delta \in [0,1]$ is plausible. Conditional on such $\delta$, however, the overlap parameter $\lambda$ must be within a subinterval of $[0,1]$. First, the upper bound of this subinterval is always $1$ because the 
-forecasters may know the exact same information under any $\delta$ and $N$. Second, to derive the lower bound, note that  
+Domain restrictions must be placed on $\delta$ and $\lambda$ to ensure a coherent $\Sigma_{22}$. Clearly, any $\delta \in [0,1]$ is plausible. Conditional on such $\delta$, however, the overlap parameter $\lambda$ must be within a subinterval of $[0,1]$. The upper bound of this subinterval is always $1$ because the 
+forecasters may know the exact same information under any $\delta$ and $N$. To derive the lower bound, note that  
 information overlap is unavoidable when $\delta > 1/N$, and that minimum
 sharing occurs when all information is known either to everyone or
 to a single forecaster.  In other words, if $\delta > 1/N$ and
@@ -1273,7 +1275,7 @@ x_0 &= \frac{N}{1+(N-1)\lambda}  \sqrt{\frac{1-\delta}{1-\delta'}} &&& \text{ an
         \label{LevelplotsOracle}
 \end{figure}
 
-The rest of this section analyzes the location $x_0$ and how it changes as a function of the model parameters. The analysis is hindered by the generally unknown form of the dependence between $\delta'$ and the other parameters $N$, $\delta$, and $\lambda$. However, given that $\delta'$ is defined as $\delta' = |\cup_{i=1}^N B_i|$, its value  increases in $N$ and $\delta$ but decreases in $\lambda$. In particular, as $\delta \to 1$, the value of $\delta'$ converges to $1$ at least as fast as $\delta$ because  $\delta' \geq \delta$. Therefore the term $\sqrt{(1-\delta)/(1-\delta')}$ and, consequently, $x_0$ increase in $\delta$. Similarly, $x_0$ can be shown to increase in $N$ but to decrease in $\lambda$. Therefore $x_0$ and $\delta'$ move together, and the amount of extremizing
+The rest of this section examines how the location $x_0$ changes as a function of the model parameters. The analysis is hindered by the generally unknown form of the dependence between $\delta'$ and the other parameters $N$, $\delta$, and $\lambda$. However, given that $\delta'$ is defined as $\delta' = |\cup_{i=1}^N B_i|$, its value  increases in $N$ and $\delta$ but decreases in $\lambda$. In particular, as $\delta \to 1$, the value of $\delta'$ converges to $1$ at least as fast as $\delta$ because  $\delta' \geq \delta$. Therefore the term $\sqrt{(1-\delta)/(1-\delta')}$ and, consequently, $x_0$ increase in $\delta$. Similarly, $x_0$ can be shown to increase in $N$ but to decrease in $\lambda$. Therefore $x_0$ and $\delta'$ move together, and the amount of extremizing
 can be expected to increase in $\delta'$.  As the Cauchy distribution is symmetric around $x_0$, the probability $\P(\alpha > 1 | \Sigma_{22})$ behaves similarly to $x_0$ and also increases in $\delta'$.  
 %The rate of increase, however, is not the same because it also depends on $\gamma$.  
 Figure \ref{LevelplotsOracle} illustrates these relations by plotting both $\log(x_0)$ and $\P(\alpha > 1 | \Sigma_{22})$ for $N = 2$ forecasters under all plausible combinations of $\delta$ and $\lambda$. High values have been censored to keep the scale manageable. Note that the results are completely general for the two-forecaster case, apart from the assumption $\delta_1 = \delta_2$. Relaxing this assumption does not change the qualitative nature of the results.
@@ -1469,7 +1471,7 @@ symmetric structure discussed in Section \ref{compound}. The next subsection ana
 
 
 %\section{Version 1}
-\subsection{Aggregation under Symmetric Information}
+\subsection{Symmetric Information}
 \label{compound2}
 %In this section we assume symmetry, meaning that ${\bf X}$ and
 %$\Sigma$ are given by~\eqref{eq:symmetric}.  This assumption
@@ -1556,7 +1558,7 @@ underlying model.
 The Good Judgment Project (GJP) (\citealt{mellers2014psychological,
 ungar2012good}) is a research study that has recruited
 thousands of forecasters from professional societies, research
-centers, and alumni associations since the year of 2011.  The forecasters estimate
+centers, and alumni associations since 2011.  The forecasters estimate
 probabilities of future international political events.  They know that their
 probability estimates are assessed for accuracy using the Brier scores, i.e. the
 squared error loss function.  In addition to receiving \$150 for
@@ -1590,9 +1592,9 @@ others. In fact, the number of active days ranged from 3 to 284 days,
 with a mean of 96 days. The super-forecasters tended to update their predictions quite frequently. However, given that this paper does not focus on dynamic
 data, only the most recent prediction made within the first three days of each problem is considered.  
 In the resulting
-dataset, the number of forecasts per event ranged from 17 to 34
+dataset, the number of forecasts per event range from 17 to 34
 forecasts, with a mean of 24.2 forecasts. To avoid infinite log-odds
-and probit scores, extreme forecasts $p_i = 0$ and $1$ were
+and probit scores, extreme forecasts $p_i = 0$ and $1$ are
 censored to $p_i = 0.001$ and $0.999$, respectively.
  
  
@@ -1647,12 +1649,12 @@ reasons: a) they do not reflect an actual model of forecasts; and b)
 they require a training set with known outcomes and hence cannot be
 applied to one-time events. As can be seen in Table \ref{BrierTable},
 the average forecast $\bar{p}$ presents the worst performance. As
-discussed earlier, the two opinion pools, $\probit$ and $\plog$, are
+discussed earlier, the two opinion pools $\probit$ and $\plog$ are
 very similar. Consequently, they have almost identical scores. Even
 though the revealed aggregator is the least resolved, it presents
-greatly improved calibration and, therefore, achieves the lowest Brier
+greatly improved calibration and therefore achieves the lowest Brier
 score among all the aggregators. This is certainly an encouraging
-result. It is important to note, however, that the revealed aggregator
+result. It is important to note that the revealed aggregator
 under the symmetric information is only the first attempt in partial
 information aggregation. More elaborate information structures and
 estimation procedures are very likely to lead to many further
@@ -1668,7 +1670,7 @@ extremization.  The general model is more plausible on the micro-level
 than any other model has been to date. Under this model, some 
 some general results were provided. For instance, the
 \textit{oracular aggregator} is more likely to give a forecast that is
-more extreme than one of the common benchmark forecasts, namely the
+more extreme than one of the common benchmark aggregates, namely the
 probit opinion pool (Proposition~\ref{positiveProbThm}).  Even though
 no real world aggregator has access to all the information of the
 oracle, this result explains why extremization is almost certainly
