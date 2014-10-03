@@ -106,7 +106,7 @@ more important than measurement noise.  This paper presents a novel
 framework that models the heterogeneity arising from forecasters that use 
 partially overlapping information sources, and applies that model to 
 the task of aggregating the probabilities given by a group of forecasters 
-who forecast whether an event will occur or not. Our model describes 
+who predict whether an event will occur or not. Our model describes 
 the distribution of information across forecasters in terms of easily
 interpretable parameters and shows how the optimal amount
 of \textit{extremizing} of the average probability forecast (shifting
@@ -123,9 +123,9 @@ Averaging; Probability Forecasting; Wisdom of Crowds
 
 \subsection{The Forecast Aggregation Problem}
 Event forecasting is the science of giving probability estimates for future events.  The classical examples can be found in meteorology
-\citep{sanders1963subjective}, where the scientists are often
+\citep{sanders1963subjective}, where the scientists are
 interested in accurate probability predictions of different weather
-phenomena such as rain in the next few days.  The practice, however, has now
+phenomena such as rain in the next few days.  The practice, however, is not only found in meteorology anymore but has 
 spread to many other fields as well. This includes medical diagnosis
 and prognosis \citep{wilson1998prediction,pepe2003statistical,
 o2006uncertain}, estimation of credit default
@@ -137,11 +137,10 @@ for the decision-maker who wants to decide, for instance, what to pack
 for tomorrow's family outing or whether to advice against all travel
 to Egypt.
 
-Often the decision-maker has access to several different
-forecasts on the same event. For instance, one forecast might depend on news broadcasting in the United States while the other
-is based on local news in Egypt. Many investigators have shown that combining the individual probabilities into a single consensus forecast typically improves predictive performance and hence improves decision making \citep{clemen1989combining,
+The decision-maker, however, may have access to several different forecasts on the same event. For instance, one forecast might draw its information from news broadcasting in the United States while the other
+is based on local news in Egypt. Many investigators have shown that combining multiple probability forecasts into a single consensus forecast typically improves predictive performance and hence can improve decision making \citep{clemen1989combining,
 armstrong2001combining}. Unfortunately, there are many different ways to combine the forecasts, and the choice of the combination
-rule can have a large impact on the predictive quality of the final
+rule largely determines the predictive quality of the final
 aggregate forecast.  
 %Analyzing and developing improved rules is the main motivation of 
 This motivates \textit{forecast aggregation} that
@@ -153,17 +152,17 @@ and theoretical.  The empirical approach is akin to machine
 learning. Given a training set with multiple forecasts on events with
 known outcomes, the decision-maker experiments with different
 aggregation techniques and chooses the one (and potentially any
-parameter values) that yield the best performance on the training set.
+parameter values) that yields the best performance on the training set.
 The theoretical approach, on the other hand, first constructs a
 probability model and then computes the optimal aggregation procedure
 under the assumptions of the model.  This may involve estimating model
 parameters from the forecasts.
 
-Both approaches are important.  Procedures based on theory that do not
+Both approaches are important.  Theory-based procedures that do not
 perform well in practice are ultimately of limited use.  On the other
-hand, an empirical approach without theoretical underpinnings lack
+hand, an empirical approach without theoretical underpinnings lacks
 both credibility (why should we believe it?)  and guidance (in which
-direction can we look for improvement?).  As we will discuss below,
+direction can we look for improvement?).  As will be discussed below,
 the history of forecast aggregation to date is largely
 empirical\footnote{Not only the approaches in
 Section~\ref{ss:empirical} but also the approaches described in
@@ -173,7 +172,7 @@ empirical.}.  The main contribution of this paper is to introduce a plausible
 theoretical framework for forecast aggregation.  This framework allows
 us to interpret existing aggregation procedures and illuminate aspects
 that can be improved. For instance, the
-framework is used to shed light on the practice of {\em probability
+framework is used to understand the practice of {\em probability
 extremizing}, i.e. shifting an average aggregate closer to its nearest
 extreme. This is an empirical technique that has been widely used to
 improve the predictive performance of many simple aggregators such as
@@ -194,7 +193,7 @@ occurrence of $p$ (see, e.g., \citealt{degroot1983comparison}). For
 instance, consider all events that the forecaster believes to occur
 with probability 0.6. If the forecaster is calibrated, 60\% of
 these events will actually end up occurring. The same, of course, has
-to be true across all probabilities -- not just 0.6.  
+to be true across all probability forecasts -- not just 0.6.  
 In the lingo of
 estimation, this is equivalent to being conditionally unbiased.
 
@@ -226,7 +225,7 @@ Before delving into the problem of forecast aggregation, it is useful
 to briefly discuss the problem of assessing and improving a single
 forecast stream.  The most common methodology is to use a loss
 function.  Letting $\one_A$ denote the indicator function of the event
-$A$ being forecast, the loss function is a penalty $L(p , \one_A)$
+$A$ being forecast, the loss function is a penalty $L(p , \one_A)$,
 where $p$ is the forecasted probability.  A loss function is said to
 be {\em revealing} or {\em proper} if the Bayesian optimal strategy is
 to tell the truth.  In other words, if the subjective probability
@@ -261,7 +260,7 @@ functions.
 
 \subsection{The Partial Information Framework}
 \label{PIFintro}
-This section introduces the partial information framework at the most general level. Similarly to any probability model for forecast aggregation, the construction begins with
+This section introduces the partial information framework at the most general level. The construction of any probability model for forecast aggregation must begin with
  a probability space $(\Omega, \F , \P)$ and a
 measurable event $A \in \F$ to be forecasted.  In any Bayesian setup,
 with a proper loss function, it is more or less tautological that a
@@ -306,7 +305,7 @@ For any such setup, the partial information framework distinguishes two benchmar
 $p' := \E (\one_A \| \F')$, where $\F'$ is the $\sigma$-field
 generated by the union of the information sets $\{ \F_i : i = 1, \dots,
 N\}$. Given that it is not possible to improve beyond using all the information available
-to the forecasters, the oracular aggregator represents the theoretical optimum and is therefore a
+to the forecasters, the oracular aggregator represents a theoretical optimum and is therefore a
 reasonable upper bound on estimation efficiency. Note that if a forecaster chooses to discard
 some of the available information, then, for the purposes of aggregation,
 that information may as well not exist. Any
@@ -317,8 +316,8 @@ In practice, however, information comes to the
 aggregator only via the forecasts $\{p_i : i = 1, \dots, N\}$. Given that $\F'$ generally cannot be constructed from these forecasts alone, no practically feasible aggregator can be expected to perform as well as the oracular aggregator.  Therefore a more achievable benchmark is given by the \textit{revealed} aggregator $p'' := \E (\one_A \|
 \F'')$, where $\F''$ is the $\sigma$-field generated (or revealed) by the forecasts
 $\{ p_i : i = 1, \dots, N \}$. This benchmark minimizes
-the expectation of any proper loss function (\citealt{Ranjan08}), and, is calibrated because it is a conditional expectation of $\one_A$. Similarly, $p''$ and $p_i$ are also  calibrated. Unlike the oracular aggregator, however, $p''$ can be applied in practice. For this
-reason, the revealed aggregator is the relevant estimator in each specific partial information model. 
+the expectation of any proper loss function (\citealt{Ranjan08}). Furthermore, just like any conditional expectation of $\one_A$ given a sub-$\sigma$-field, the revealed aggregator is calibrated. Similarly, $p'$ and $p_i$ are also calibrated. Unlike the oracular aggregator, however, $p''$ can be applied in practice. For this
+reason, it is the relevant estimator in each specific partial information model. 
 
 %The {\em general partial information model} 
 %is precisely the model described in the foregoing paragaphs.  
@@ -328,7 +327,7 @@ reason, the revealed aggregator is the relevant estimator in each specific parti
 
 \subsection{Organization of the Paper}
 
-The next section reviews some prior work on forecast aggregation and compares it to the partial information framework.
+The next section reviews some prior work on forecast aggregation and relates it to the partial information framework.
 Section~\ref{sec:model} discusses illuminating examples and
 motivates our subsequent choices of specific partial information
 models.  Section~\ref{extremizing} compares the oracular aggregator with the average probit score, thereby explaining the
@@ -342,8 +341,7 @@ future research.
 
 \section{Prior Work on Aggregation}
 \label{sec:prior}
-Prior work on forecast aggregation has focused largely on two frameworks that make different assumptions about the source of forecast heterogeneity.  These approaches are discussed in the following
-subsections.
+Prior work on forecast aggregation has focused largely on two frameworks that make different assumptions about the source of forecast heterogeneity.  These approaches are discussed in the next subsections.
 
 \subsection{The Interpreted Signal Framework}
 \label{ss:inerpreted}
@@ -368,14 +366,13 @@ convex hull of the forecasts; \citet{broomell2009experts} analyze
 inter-forecaster correlation under the assumption that the cues can be
 mapped to the individual forecasts via different linear regression
 functions; \cite{degroot1991optimal} assume that each forecaster first observes a random quantity $X_i$ and then reports $\P(A | X_i)$, 
-where $\boldsymbol{X} = (X_1, \dots, X_N)$ has density $g(\boldsymbol{X} | A)$. 
-They first derive the optimal aggregator when $X_i$ are conditionally independent and then proceed to determine the optimal weights for a linear opinion pool when $X_i$ are not conditionally independent. However, \cite{Ranjan08} prove that any (non-trivially) weighted average of calibrated forecasts is necessarily uncalibrated and too close to the naive baseline forecast (typically at $0.5$).
+where $\boldsymbol{X} = (X_1, \dots, X_N)$ has density $g(\boldsymbol{X} | A)$. They first acknowledge that without a distributional model the optimal aggregator cannot be formed. Instead of constructing a plausible model, they proceed to analyze a particular form of aggregation, namely the linear opinion pool. \cite{Ranjan08}, however, prove that any linear opinion pool of calibrated forecasts is necessarily uncalibrated and too close to the naive baseline forecast (typically at $0.5$).
 
 %Some preliminary steps have been made towards a more concrete model by, for example, assuming
 %conditional independence of the $x_i$, \cite{}, but
 %lacking a distributional model. 
 
-To the best of our knowledge, no previous study, however, has provided a general framework for linking the quantity of interest with the interpreted forecasts. Therefore the interpreted signal framework, as proposed, has remained relatively abstract. In response, our partial information framework formalizes the intuition behind it, allows quantitative predictions, and provides a flexible construction that can be adapted to a broad range of forecasting setups. 
+To the best of our knowledge, no previous study has provided a general framework that links the quantity of interest with the interpreted forecasts. Therefore the interpreted signal framework, as proposed, has remained relatively abstract. In response, our partial information framework formalizes the intuition behind it, allows quantitative predictions, and provides a flexible construction that can be adapted to a broad range of forecasting setups. 
 
 %
 %The interpreted signal framework, when formalized, more or less
@@ -390,14 +387,13 @@ To the best of our knowledge, no previous study, however, has provided a general
 \subsection{The Measurement Error Framework}
 \label{ss:measurement}
 In the absence of a quantitative
-interpreted signal model, prior applications have typically explained forecast heterogeneity  with standard statistical models. These models are different formalizations of  the \textit{measurement error framework} that generates forecast heterogeneity purely from a probability distribution. More specifically, the framework assumes a ``true'' probability
-$\theta$  for the future event to be predicted. This probability, which can be interpreted as the  forecast made by an ideal forecaster, is then measured by the individual forecasters with mean-zero idiosyncratic error.  This is typically
-formalized by modeling each forecast as an independent draw from a common
-probability distribution that is centered at $\theta$. Therefore the underlying probability model is just the 
+interpreted signal model, prior applications have typically explained forecast heterogeneity  with standard statistical models. These models are different formalizations of  the \textit{measurement error framework} that generates forecast heterogeneity purely from a probability distribution. The framework assumes a ``true'' probability
+$\theta$  for the future event to be predicted. This probability, which can be interpreted as the  forecast made by an ideal forecaster, is then measured by the individual forecasters with mean-zero idiosyncratic error.  Therefore each forecast as an independent draw from a common
+probability distribution centered at $\theta$, and the underlying probability model is just the 
 classical statistical model for measurement with i.i.d. mean zero error. 
-Consequently, the average probability,
+Consequently, the average probability
 $$\pb := \frac{1}{N}\sum_{i=1}^N
-p_i,$$
+p_i$$
 is unbiased for $\theta$ and has the least
 variance.
 
@@ -508,10 +504,8 @@ extremizing techniques.
 Not only does this leave something to be desired from an explanatory
 point of view, these approaches are also subject to the problems of
 machine learning, such as overfitting.  For example, the amount of 
-extremizing is typically learned by optimizing a
-scoring rule over a separate training set
-(see~\citealt{Gneiting04strictlyproper} for a discussion on scoring
-rules).  This requires repeated realizations
+extremizing is typically learned by minimizing a
+proper loss function over a separate training set. This requires repeated realizations
 of a single event and therefore cannot be applied to a single event with an unknown outcome. Overall, while {\em ad hoc}
 extremization works to some degree, such techniques provide little
 insight beyond the amount of extremizing itself. Most importantly, they do not point
@@ -557,11 +551,11 @@ forecast is $2/3$.  If they are seeing different evidence,
 then clearly the combined evidence should give an aggregate forecast
 somewhat greater than $2/3$.  To make the situation more concrete, consider a basket containing a fair coin and a two-headed coin. The forecasters are asked to predict whether a coin chosen at random is in fact
 two-headed. Before making their predictions, each forecaster observes the result of a single flip of
-the chosen coin.  If they see HEADS, then the correct
-Bayesian probability estimate is $2/3$.  If both forecasters see the
-result of the same coin flip, then the optimal aggregate forecast
+the chosen coin.  Suppose the flip comes out HEADS. Based on this information, the correct Bayesian probability estimate is  $2/3$.
+ Now, if both forecasters see the
+result of the same coin flip, the optimal aggregate forecast
  is again $2/3$. On the other hand, if they observe different (presumably
-independent) coin flips, then the optimal aggregate forecast 
+independent) coin flips, the optimal aggregate forecast 
 is $4/5$.
 \end{example}
 In this example, it is not possible to distinguish between the two different information structures simply based on the given predictions. If the forecasters had participated in a long sequence of independent replications of the given task, it may have been possible to eventually ascertain whether they have the same information or not. Similarly, if their forecasts had disagreed, it would have been easy to conclude that they did not observe the same coin flip.  However, in the given situation, there
@@ -581,12 +575,12 @@ b/4, \mu (B,0) = (1-b)/4$, and so forth. Define two events
  S_1 &= \{A,0),(A,1),(B,0),(B,1) \}\\
  S_2 &= \{A,0),(A,1),(C,0),(C,1) \}
 \end{align*}
-In other words, $S_1$ is the event that the first coordinate is
+Therefore, $S_1$ is the event that the first coordinate is
 $A$ or $B$, and $S_2$ is the event that the first coordinate
-is $A$ or $C$. Suppose that Forecasters $1$ and $2$ observe $S_1$
+is $A$ or $C$. Suppose Forecasters $1$ and $2$ observe $S_1$
 and $S_2$, respectively. Therefore the $i$th Forecaster's information set is
 given by the $\sigma$-field $\F_i$ containing $S_i$ and its
-complement. Given that $S_1$ and $S_2$ are independent, the $\sigma$-fields $\F_1$ and $\F_2$ are also independent. Now, let
+complement. These two $\sigma$-fields are independent. Now, let
 $G$ be the event that the second coordinate is~1.  Forecaster~1
 reports $p_1 = \P(G | \mathcal{F}_1) = (a+b)/2$ if $S_1$ occurs;
 otherwise, $p_1 = (c+d)/2$.  Forecaster~2, on the other hand, reports
@@ -610,7 +604,7 @@ assumptions that yield plausible yet generic information structures.
 
 \subsection{Gaussian Partial Information Model}
 \label{ss:Gaussian}
-The general partial information framework can be abstracted by first constructing a pool of information particles. Each particle, which can be interpreted as the smallest unit of information, is either positive or negative. The positive particles provide evidence in favor of the event $A$. 
+The general partial information framework can be abstracted by constructing a pool of information particles. Each particle, which can be interpreted as the smallest unit of information, is either positive or negative. The positive particles provide evidence in favor of the event $A$. 
 %For instance, a subset of positive particles may represent a news article with  evidence that $A$ is likely to happen. 
 In the contrary, the negative particles provide evidence against $A$. Therefore, if the overall sum (integral) of the positive particles is larger than that of the negative particles', the event $A$ happens; otherwise, it does not. Each forecaster, however, observes only the sum of some subset of the particles. Based on this sum, the forecaster makes a probability estimate for the event $A$. This is made concrete in the following model that  represents the pool of information with the unit interval and generates the information particles from a Gaussian process. 
 
@@ -627,11 +621,10 @@ define the corresponding $\sigma$-field as $\F_i := \sigma (X_{B_i})$. Forecaste
 \end{quote}
 
 This model can be interpreted and motivated by recalling the interpreted signal
-model of~\citet{broomell2009experts}, in which the forecasters
-use different linear functions of the cues that influence the future event to be predicted.  In other words,
+model of~\citet{broomell2009experts}. Under this model, 
 Forecaster~$i$ forms an opinion based on $L_i (Z_1 , \ldots , Z_r)$,
-where each $L_i$ is a linear function of some observable quantities
-$Z_1 , \ldots , Z_r$.  Proposing a linear model for subjective
+where each $L_i$ is a linear function of some observable quantities or ``cues''
+$Z_1 , \ldots , Z_r$ that influence the future event to be predicted.  Proposing a linear model for subjective
 interpretation seems quite natural and is in fact the only such
 postulate we know to have been suggested for interpreted signals.  If
 the observables (or any linear combination of them) are independent
@@ -673,7 +666,7 @@ any other set could have been used. The unit interval, however, is a
 natural starting point that provides an alternative interpretation of $|B_j|$ as marginal probabilities for some $N$ events, $|B_i \cap B_j|$ as their pairwise joint probabilities, $|B_i \cap B_j
 \cap B_k|$ as their three-way joint probabilities,
 and so forth.  This interpretation is particularly useful in analysis as it links the
-information structure to many known results in combinatorics and geometry. This paper discusses one such connection in Proposition \ref{CorrelationPolytope} and another in Section \ref{oracular}. Second, there is
+information structure to many known results in combinatorics and geometry. This paper discusses such connections in Proposition \ref{CorrelationPolytope} and in Section \ref{oracular}. Second, there is
 no sense of time or ranking of information within the
 pool. Instead, the pool is a collection of information, where each
 piece of information has an {\em a priori} equal chance to contribute
@@ -744,9 +737,8 @@ almost exclusively in this mode.
 
 \subsection{Preliminary Observations}
 \label{prelim}
-It is helpful to begin the introduction of the Gaussian model by first considering only two forecasters.  Suppose Forecasters $1$ and $2$ observe respective $\delta_1$ and
-$\delta_2$ portions of the Gaussian process.  If $\rho$ denotes the
-size of the overlap in their information sets, then 
+This subsection provides the remaining details of the Gaussian model. First, consider only two Forecasters $1$ and $2$ who observe respective $\delta_1$ and
+$\delta_2$ portions of the Gaussian process such that the overlap in their information sets has size $\rho$. That is,
 \begin{align*}
 |B_1| &= \delta_1\\
 |B_2| &= \delta_2\\
@@ -788,9 +780,9 @@ multivariate Gaussian distribution.  That is,
 \end{align}
 Given that $X_S$ has mean zero, the prior probability for the event $A$ is
 $\P(X_S > 0) = \P(A) = 1/2$. This can be easily adjusted to any probability
-$\tilde{p}$ by letting $A = \{ X_S > \Phi^{-1}(1-\tilde{p}) \}$.  This
-paper, however, focuses on the centered model with prior probability
-$1/2$ (see Remarks (\ref{item:choice}) and (\ref{item:centered}) above). .
+$\tilde{p}$ by letting $A = \{ X_S > \Phi^{-1}(1-\tilde{p}) \}$.  However, as was mentioned earlier in Remarks (\ref{item:choice}) and (\ref{item:centered}), this
+paper focuses on the centered model with prior probability
+$1/2$. 
 
 \begin{figure}[t]
    \includegraphics[width = \textwidth]{N=N} % requires the graphicx package
@@ -799,11 +791,9 @@ $1/2$ (see Remarks (\ref{item:choice}) and (\ref{item:centered}) above). .
 \end{figure}
 
 Consider now $N$ forecasters. Let $|B_i| = \delta_i$ be the amount of
-information known by Forecaster $i$ for $i = 1, \dots, N$, and $|B_i
+information known by Forecaster $i$ and $|B_i
 \cap B_j| = \rho_{ij} = \rho_{ji}$ be the information overlap between
-Forecasters $i$ and $j$. A possible scenario of this general case is illustrated in Figure \ref{diagramN}. Note that $B_i$ does not have to be a contiguous segment of the unit
-interval.  Instead, each forecaster can know any Borel measurable
-subset of the full information.  The multivariate Gaussian distribution (\ref{twoforecasters}) generalizes to the vector
+Forecasters $i$ and $j$. The multivariate Gaussian distribution (\ref{twoforecasters}) then naturally generalizes for the vector
 $\left(X_{S}, X_{B_1}, X_{B_2}, \dots, X_{B_N}\right)$ as follows.
 \begin{align}
 \left(\begin{matrix} X_S \\ X_{B_1}\\ \vdots \\ X_{B_N} \end{matrix}\right) &\sim \mathcal{N}\left( \left(\begin{matrix} 
@@ -823,15 +813,15 @@ $\left(X_{S}, X_{B_1}, X_{B_2}, \dots, X_{B_N}\right)$ as follows.
  \end{array}\right)\right)  \label{Nforecasters}
 \end{align}
 
- Given that the information structure
-is described by the sub-matrix $\Sigma_{22}$, learning about the
+One possible scenario of this general case is illustrated in Figure \ref{diagramN}. Note that $B_i$ does not have to be a contiguous segment of the unit
+interval.  Instead, each forecaster can know any Borel measurable
+subset of the full information. Under the Gaussian model, however, the sub-matrix $\Sigma_{22}$ is sufficient for the information structure. Therefore the exact identities of the Borel sets do not matter, and learning about the
 information among the forecasters is equivalent to estimating a
-covariance matrix under several restrictions.  In particular, the
-information matrix $\Sigma_{22}$ must be describable by a diagram
-such as Figure \ref{diagramN}. If this is the case,
+covariance matrix under several restrictions.  In particular, if the
+information in $\Sigma_{22}$ can be translated into a diagram
+such as Figure \ref{diagramN},
 the matrix $\Sigma_{22}$ is called \textit{coherent}.  Coherence
-clearly requires that $0 \leq \rho_{ij} \leq \delta_i \leq 1$ for all $i \neq j$.  These
-conditions, however, are not sufficient. The parameters are heavily linked to each other and form a highly constrained space. 
+clearly requires that $0 \leq \rho_{ij} \leq \delta_i \leq 1$ for all $i \neq j$.  This, however, is not sufficient. The parameters are heavily linked to each other and form a highly constrained space. 
 %For instance,  consider three forecasters with $\delta_i =  0.5$ for $i = 1, 2, 3$. If $\rho_{12} = 0.25$, then $0.25 \leq \rho_{31} + \rho_{32} \leq 0.75$. This can be verified easily with a diagram such as Figure \ref{diagramN}. But as $N$ grows large, visual inspections of 
 %
 %Unfortunately, for a general $N$, the constraints cannot be obtained via triangle inequalities anymore. Instead, under any number of forecasters $N$, the space of coherent information structures can be expressed as a convex hull of $2^N$ points. This description is provided in the following proposition. 
@@ -900,12 +890,12 @@ the marginal density for $p_i$ is
 &= \sqrt{\frac{1-\delta_i}{\delta_i}} \exp 
    \left\{ \Phi^{-1}(p_i)^2 \left(1-\frac{1}{2 \delta_i} \right) \right\} 
 \end{align*}
-This distribution has very intuitive behavior. In particular, it is uniform on $[0,1]$ if the forecaster knows half of the
+This distribution has very intuitive behavior: It is uniform on $[0,1]$ if the forecaster knows half of the
 information, i.e. $\delta_i = 1/2$.  It is
 unimodal with a minimum at $p_i = 1/2$ when $\delta_i > 1/2$ and a
 maximum at $p_i = 1/2$ when $\delta_i < 1/2$.  As $\delta_i \to 0$, $p_i$ converges to a point mass at $1/2$, and as $\delta_i \to 1$, $p_i$ converges to
 a correct forecast, whose distribution has atoms of weight $1/2$ at
-zero and one. Therefore a forecaster with no information ``withdraws'' from the problem by reporting $0.5$ while a forecaster with full information always predicts the correct outcome. Figure \ref{marginals} illustrates the marginal
+zero and one. Therefore a forecaster with no information ``withdraws'' from the problem by predicting $1/2$ while a forecaster with full information always predicts the correct outcome with absolute certainty. Figure \ref{marginals} illustrates the marginal
 distribution when $\delta_i$ is equal to $0.3$, $0.5$, and $0.7$.
 
 \begin{figure}[t]
