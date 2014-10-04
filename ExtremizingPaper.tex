@@ -134,7 +134,7 @@ this year \citep{tetlock2005expert}. Accurate forecasts on events like these are
 for tomorrow's family outing or whether to advice against all travel
 to Egypt.
 
-Often the decision-maker has access to more than one different forecast on the same event. In such cases, instead of trying to guess which prediction is more accurate, the decision-maker should bring together the strengths of the different forecasters by combining their predictions into a single consensus forecast. There is strong empirical evidence that such an aggregate is often more accurate than any of the individual forecasts \citep{clemen1989combining,
+Often the decision-maker, however, has access to more than one different forecast on the same event. In such cases, instead of trying to guess which prediction is more accurate, the decision-maker should bring together the strengths of the different forecasters by combining their predictions into a single consensus forecast. There is strong empirical evidence that such an aggregate tends to be more accurate than any of the individual forecasts \citep{clemen1989combining,
 armstrong2001combining}. Unfortunately, the forecasts can be combined in many different ways, and the choice of the combination
 rule can largely determine the predictive quality of the final
 aggregate.  
@@ -165,34 +165,32 @@ empirical.}.
 The main contribution of this paper is a plausible
 theoretical framework for forecast aggregation.  This framework allows
 us to interpret existing aggregation procedures and illuminate aspects
-that can be improved. For instance, the
-framework is used to understand the practice of {\em probability
+that can be improved. To illustrate, the
+framework is used to clarify the practice of {\em probability
 extremizing}, i.e. shifting an average aggregate closer to its nearest
 extreme. This is an empirical technique that has been widely used to
 improve the predictive performance of many simple aggregators such as
-the average probability. The framework is also applied to a
+the average probability. Lastly, the framework is applied to a
 specific model under which the optimal aggregator can be computed.
 
 \subsection{Bias, Noise, and Forecast Assessment}
 \label{BiasNoise}
-For the sake of theoretical development, it is convenient to represent the target event with an
+For the sake of theoretical development,  represent the target event with an
 indicator function that equals one or zero depending whether the event
-happens or not, respectively. Each probability forecast is then an
-estimator of this indicator.  Therefore, as is the case with
-all estimators, their deviation from the truth can be broken into two
+happens or not, respectively. Each probability forecast is then nothing but an
+estimator of this function, and, as is the case with
+all estimators, its deviation from the truth can be broken into two
 pieces: bias and noise.  In the forecasting literature, a forecaster
 is said to be {\em calibrated} if, in the long run, events associated
-with a forecast $p \in [0,1]$ have an empirical frequency of
-occurrence of $p$ (see, e.g., \citealt{degroot1983comparison}). For
+with a forecast $p \in [0,1]$ occur with an empirical frequency of $p$ (see, e.g., \citealt{degroot1983comparison}). For
 instance, consider all events that the forecaster believes to occur
-with probability 0.6. If the forecaster is calibrated, 60\% of
+with probability $0.65$. If the forecaster is calibrated, $65$\% of
 these events will actually end up occurring. The same, of course, has
-to be true across all probability forecasts -- not just 0.6.  
+to be true across all probability forecasts -- not just $0.65$.  
 In the lingo of
 estimation, this is equivalent to being conditionally unbiased.
 
-Non-expert populations are typically not calibrated. There are,
-however, many subpopulations of experts that are highly
+Even though non-expert populations are typically not calibrated, there are many subpopulations of experts that are highly
 calibrated. For instance, meteorologists performing probabilistic
 weather forecasting have been found to be calibrated
 (\citealt{murphy1977reliability}); experienced tournament bridge
@@ -239,7 +237,7 @@ sophisticated forecasters operates under a proper loss function,
 the assumption of calibrated forecasts is, to some degree,
 self-fulfilling.  Forecasters can improve their long run performance
 by calibrating their forecasts via training and active
-feedback (\citealt{o2006uncertain}). Forecasters with competitive
+feedback \citep{o2006uncertain}. Forecasters with competitive
 motivation, sophistication, and historical data will probably do so. Secondly, the
 assessment of the aggregated forecast is not uni-dimensional any more
 than is the assessment of an individual forecast.  In order to compare
@@ -253,7 +251,7 @@ functions.
 
 \subsection{The Partial Information Framework}
 \label{PIFintro}
-This section introduces the partial information framework at the most general level. As is the case with any probability model for forecast aggregation, the construction must begin with
+This section introduces the partial information framework at the most general level. Similarly to any probability model for forecast aggregation, the construction must begin with
  a probability space $(\Omega, \F , \P)$ and a
 measurable event $A \in \F$ to be forecasted.  In any Bayesian setup,
 with a proper loss function, it is more or less tautological that a
@@ -264,9 +262,8 @@ forecasters. In particular, it posits the existence of $N$
 information sets $\F_i \subseteq \F$ such that Forecaster~$i$
 reports $p_i = \E (\one_A \| \F_i)$.
 
-The information sets contain only information actually used by the
-forecasters. Therefore, if Forecaster $i$ uses a simple rule, the
-information set $\F_i$ may not be the full $\sigma$-field of
+These information sets only contain information actually used by the
+forecasters. Therefore, if Forecaster $i$ uses a simple rule, the set $\F_i$ may not be the full $\sigma$-field of
 information available to the forecaster but rather a smaller
 $\sigma$-field corresponding to the information actually used by the
 rule.  For example, when forecasting the re-election of the president,  a forecaster obeying the dictum ``it's the economy,
@@ -274,14 +271,14 @@ stupid!''  might be assigned a $\sigma$-field containing only economic
 indicators.  This is reminiscent of a forecasting algorithm that only uses
 a similarly restricted subset of information. Therefore
 any heterogeneity in the forecasts stems purely from
-\textit{information diversity}.  Any further details must come from
-assumptions on the structure of the information sets $\{ \F_i : i = 1,
-\dots, N\}$.  %%%In Section~?? we explore in detail a particular such structure.
+\textit{information diversity}.  
 
-To illustrate, suppose that the forecasters are asked to predict a sequence of events
+Any further details must come from the
+assumptions on the structure of the information sets $\{ \F_i : i = 1,
+\dots, N\}$. To illustrate, suppose that the forecasters are asked to predict a sequence of events
 $\{ A_1, A_2 , \ldots \}$. The general framework only assumes that
 Forecaster~$i$ uses some $\sigma$-field $\F_{ij}$ to make a
-probability forecast for event $A_j$.  Further aspects of the problem
+probability forecast for the event $A_j$.  Further aspects of the problem
 are reflected by the structure of the collection $\{ \F_{ij} \}$.  For
 example, if the events are sequenced in time, then the information
 sets $\{ \F_{ij} : j = 1 , 2, 3, \ldots \}$ are likely to form an
@@ -297,7 +294,7 @@ different inter-dependencies among the information sets.
 For any such setup, the partial information framework distinguishes two benchmarks for aggregation efficiency.  The first is the {\em oracular} aggregator
 $p' := \E (\one_A \| \F')$, where $\F'$ is the $\sigma$-field
 generated by the union of the information sets $\{ \F_i : i = 1, \dots,
-N\}$. Given that it is not possible to improve beyond using all the information available
+N\}$. Given that aggregation cannot be improved beyond using all the information available
 to the forecasters, the oracular aggregator represents a theoretical optimum and is therefore a
 reasonable upper bound on estimation efficiency. Note that if a forecaster chooses to discard
 some of the available information, then, for the purposes of aggregation,
@@ -306,10 +303,10 @@ information that is not in $\F'$ represents randomness inherent in the
 outcome.
 
 In practice, however, information comes to the
-aggregator only via the forecasts $\{p_i : i = 1, \dots, N\}$. Given that $\F'$ generally cannot be constructed from these forecasts alone, no practically feasible aggregator can be expected to perform as well as the oracular aggregator.  Therefore a more achievable benchmark is given by the \textit{revealed} aggregator $p'' := \E (\one_A \|
+aggregator only through the forecasts $\{p_i : i = 1, \dots, N\}$. Given that $\F'$ generally cannot be constructed from these forecasts alone, no practically feasible aggregator can be expected to perform as well as $p'$.  Therefore a more achievable benchmark is the \textit{revealed} aggregator $p'' := \E (\one_A \|
 \F'')$, where $\F''$ is the $\sigma$-field generated (or revealed) by the forecasts
 $\{ p_i : i = 1, \dots, N \}$. This benchmark minimizes
-the expectation of any proper loss function (\citealt{Ranjan08}). Furthermore, just like any conditional expectation of $\one_A$ given a sub-$\sigma$-field, the revealed aggregator is calibrated. Similarly, $p'$ and $p_i$ are also calibrated. Unlike the oracular aggregator, however, $p''$ can be applied in practice and is therefore the relevant estimator in each specific partial information model. 
+the expectation of any proper loss function (\citealt{Ranjan08}). Furthermore, just like any conditional expectation of $\one_A$ given a sub-$\sigma$-field, the revealed aggregator is calibrated. In a similar vein, $p'$ and $p_i$ are also calibrated. Unlike the oracular aggregator, however, $p''$ can be applied in practice and is therefore the relevant estimator in each specific partial information model. 
 
 %The {\em general partial information model} 
 %is precisely the model described in the foregoing paragaphs.  
