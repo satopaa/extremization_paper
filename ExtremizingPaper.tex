@@ -1695,21 +1695,23 @@ the self-assessed expertise, the less extremizing appears to have been
 required (\citealt{satopaa}).  This is consistent with our interpretation that high values
 of $\delta$ and $\lambda$ lead to a lower extremization ratio.
 
-The partial information framework offers many future research
-directions.  One involves estimation of parameters.  A partial information model together with good procedures for estimating
+The partial information framework offers many directions for future research.  One involves estimation of parameters.  The model together with good procedures for estimating
 the information overlap among two or more forecasters is likely to lead to many
-improvements in probability aggregation. Given a stream of forecasts
-of reasonable length, it is possible to estimate $|B_i|$ and $|B_i
-\cap B_j|$ with a maximum likelihood procedure akin to the details
-described in the Appendix. That is, in principle, $|B_i|$ can be
-estimated from the distribution of the stream $p_{ij}$ and $|B_i \cap B_k|$ from the correlation of the two streams $p_{ij}$ and $p_{kj}$.  Estimation of higher order intersections, however, seems more
+improvements in probability aggregation. 
+%Given a stream of forecasts
+%of reasonable length, it is possible to estimate $|B_i|$ and $|B_i
+%\cap B_j|$ with a maximum likelihood procedure akin to the details
+%described in the Appendix. 
+In principle, $|B_i|$ can be
+estimated from the distribution of the probability stream $\{p_{ij} : j = 1, 2, \dots, K\}$ of reasonable length $K$. Similarly, $|B_i \cap B_k|$ can be estimated from the correlation of the two streams $\{p_{ij} : j = 1, 2, \dots, K\}$ and $\{p_{kj} : j = 1, 2, \dots, K\}$.  Estimation of higher order intersections, however, seems more
 dubious.  Computations with $N=3$ show that, at least in some cases,
 higher order intersections are not relevant to the revealed
 aggregator.  Theoretical results on the significance or insignificance
 of higher order intersections in the information overlap structure
 would be desirable. 
 
-In many applications with small or moderately sized datasets, Bayesian methods have been found to be superior to the likelihood-based alternatives. Given that the number of forecasts on a single event is typically quite small, the Bayesian approach is another promising direction for future research. Currently, we have
+
+Another promising avenue is the Bayesian approach. In many applications with small or moderately sized datasets, Bayesian methods have been found to be superior to the likelihood-based alternatives. Therefore, given that the number of forecasts on a single event is typically quite small, a Bayesian approach is likely to improve prediction accuracy on one-time events. Currently, we have
 work in progress analyzing a Bayesian model but there are many, many
 reasonable priors on the information structures. 
 %Generally, two forecasters
