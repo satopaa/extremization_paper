@@ -167,7 +167,7 @@ theoretical framework for forecast aggregation.  This framework allows
 us to interpret existing aggregation procedures and illuminate aspects
 that can be improved. To illustrate, the
 framework is used to clarify the practice of {\em probability
-extremizing}, i.e. shifting an average aggregate closer to its nearest
+extremizing}, i.e.,shifting an average aggregate closer to its nearest
 extreme. This is an empirical technique that has been widely used to
 improve the predictive performance of many simple aggregators such as
 the average probability. Lastly, the framework is applied to a
@@ -354,16 +354,18 @@ aggregation of interpreted forecasts is not constrained to the
 convex hull of the forecasts; \citet{broomell2009experts} analyze
 inter-forecaster correlation under the assumption that the cues can be
 mapped to the individual forecasts via different linear regression
-functions; \cite{degroot1991optimal} assume that each forecaster first observes a random quantity $X_i$ and then reports $\P(A | X_i)$, 
-where $\boldsymbol{X} = (X_1, \dots, X_N)$ has density $g(\boldsymbol{X} | A)$. They first acknowledge that without a distributional model the optimal aggregator cannot be formed. Instead of constructing a plausible model, they proceed to analyze a particular form of aggregation, namely the linear opinion pool. \cite{Ranjan08}, however, prove that any linear opinion pool of calibrated forecasts is necessarily both uncalibrated and under-confident. 
+functions; \citet{degroot1991optimal} assume that each forecaster first observes a random quantity $X_i$ and then reports $\P(A | X_i)$, 
+where $\boldsymbol{X} = (X_1, \dots, X_N)$ has density $g(\boldsymbol{X} | A)$. They first acknowledge that without a distributional model on $\boldsymbol{X}$ the optimal aggregator cannot be formed. Instead of constructing a plausible model, however, they proceed to analyze a particular form of aggregation, namely the linear opinion pool. Unfortunately, almost two decades after their work, any linear opinion pool of calibrated forecasts was shown to be necessarily uncalibrated and under-confident \citep{Ranjan08}
 
 %Some preliminary steps have been made towards a more concrete model by, for example, assuming
 %conditional independence of the $x_i$, \cite{}, but
 %lacking a distributional model. 
 
-To the best of our knowledge, no previous work has provided a general framework that links the interpreted forecasts to their target quantity. Therefore the interpreted signal framework, as proposed, has remained relatively abstract. 
+Nonetheless, to the best of our knowledge, no previous work has discussed a formal framework that explicitly links the interpreted forecasts to their target quantity. Consequently, the interpreted signal framework, as proposed, has remained relatively abstract. 
 %The interpreted signal framework, when formalized, more or less implies the partial information framework.
-The partial information framework, however, formalizes the intuition behind it, allows quantitative predictions, and provides a flexible construction that can be adapted to a broad range of forecasting setups. 
+%The present paper, however, formalizes the intuition behind it. 
+%The interpreted signal framework, when formalized, more or less implies the partial information framework. 
+The partial information framework, however, formalizes the intuition behind it, allows quantitative predictions, and provides a flexible construction that can be adopted to a broad range of forecasting setups. 
 
 %
 %The interpreted signal framework, when formalized, more or less
@@ -423,17 +425,17 @@ First, these \textit{averaging aggregators} target the mean of
 (potentially transformed) probability forecasts. The correct target,
 however, is the event indicator $\one_A$ that lies on the boundary of
 the sample space. Important properties, such as calibration, cannot be
-expected from an aggregator based on a model that not does link the observations and the correct quantity
+expected from an aggregator that is based on a model that does not explicitly link the observations and the correct quantity
 of interest.
 
 Second, the introduction of a nonlinear transformation biases the
 estimator.  Therefore neither $\plog$ nor $\probit$ produces a
 calibrated forecast. Exactly how problematic this is depends on
 whether the bias is very small relative to noise or other
-adjustments.  The direction of the bias can sometimes be
+adjustments. In some cases the direction of the bias can be
 determined. For instance, \citet{Ranjan08} prove that any convex
-combination of calibrated forecasts will be under-confident, that is,
-too close to $0.5$. This result applies to the averaging aggregators that are by nature different convex combinations of the
+combination of calibrated forecasts is under-confident, i.e.,
+too close to $0.5$. This applies to the averaging aggregators that are by nature different convex combinations of the
 forecasts.
 
 A third and more serious disadvantage is the implausibility of the
@@ -449,13 +451,13 @@ the forecasters are all in principle trying to apply the same
 procedures to the same data but are making numerous small mistakes.
 
 A fourth disadvantage is that the averaging aggregators do not often perform
-very well in practice. For one thing, any transformed average is constrained to
-the convex hull of the individual forecasts, hence contradicting the
-interpreted signal framework (\citealt{parunak2013characterizing}).  Empirically, one sees
-for many data sets that an aggregator restricted to the convex hull
-will be far from optimal. \cite{hong2009interpreted} also demonstrate that the standard
-assumption of conditional independence induces a specific and highly
-unrealistic structure on interpreted forecasts.
+very well in practice. For one thing,  \citet{hong2009interpreted} demonstrate that the standard
+assumption of conditional independence poses a specific and highly
+unrealistic structure on interpreted forecasts. Any transformed average is also constrained to
+the convex hull of the individual forecasts, hence further contradicting the
+interpreted signal framework \citep{parunak2013characterizing}.  Empirically, one sees
+for many datasets that an aggregator restricted to the convex hull
+will be far from optimal. 
 
 \subsection{Empirical Approaches}
 \label{ss:empirical}
@@ -471,7 +473,7 @@ nearer extreme (either zero or one).  For instance,~\citet{Ranjan08}
 propose transforming the (potentially weighted) $\pb$ with the CDF of a
 beta distribution.  If both the shape and scale of this beta
 distribution are equal and constrained to be at least~1.0, the
-aggregator extremizes $\bar{p}$ and has some attractive theoretical
+aggregator extremizes $\pb$ and has some attractive theoretical
 properties~\citep{Wallsten2001}.  ~\citet{satopaa} use a logistic
 regression model to derive an aggregator that extremizes the average
 log-odds.  ~\citet{baron2014two} give two intuitive justifications for
@@ -879,7 +881,7 @@ the marginal density for $p_i$ is
    \left\{ \Phi^{-1}(p_i)^2 \left(1-\frac{1}{2 \delta_i} \right) \right\} 
 \end{align*}
 This distribution has very intuitive behavior: it is uniform on $[0,1]$ if the forecaster knows half of the
-information, i.e. $\delta_i = 1/2$, but becomes 
+information, i.e.,$\delta_i = 1/2$, but becomes 
 unimodal with a minimum (or a maximum) at $p_i = 1/2$ when $\delta_i > 1/2$ (or $\delta < 1/2$, respectively).  As $\delta_i \to 0$, $p_i$ converges to a point mass at $1/2$. On the other hand, as $\delta_i \to 1$, $p_i$ converges to
 a correct forecast whose distribution has atoms of weight $1/2$ at
 zero and one. Therefore a forecaster with no information ``withdraws'' from the problem by predicting a non-informative probability $1/2$ while a forecaster with full information always predicts the correct outcome with absolute certainty. Figure \ref{marginals} illustrates the marginal
@@ -891,7 +893,7 @@ distribution when $\delta_i$ is equal to $0.3$, $0.5$, and $0.7$.
 
  \includegraphics[width= 0.55\textwidth]{Marginals}
    \caption{The marginal distribution of $p_i$ under different levels of 
-$\delta_i$.  The more the forecaster knows, i.e. the higher $\delta_i$ is, 
+$\delta_i$.  The more the forecaster knows, i.e.,the higher $\delta_i$ is, 
 the more the probability forecasts are concentrated around the extreme 
 points 0 and~1.}
 \label{marginals}
@@ -1098,7 +1100,7 @@ $0.0$ (or above $0.0$), the consensus believes that the event will not
 happen (or will happen). Second, the
 denominator extremizes the consensus according to the total
 amount of information in the group. For instance, if the forecasters
-know all the information, i.e. $\sum_{i=1}^N \delta_i = 1$, their vote
+know all the information, i.e.,$\sum_{i=1}^N \delta_i = 1$, their vote
 deterministically indicates whether the event $A$ happens or not. This
 aggregator clearly leads to very extreme forecasts. Therefore
 more extreme techniques, such as voting, can be expected to work well
@@ -1279,10 +1281,10 @@ some constant defines a curve $\lambda = 2 - \delta'/\delta$ on the two plots in
 instance, letting $\delta' = 1$ gives the boundary curve on the right
 side of each plot.  This curve then shifts inwards and rotates slightly
 counterclockwise as $\delta'$ decreases.  At the top end of each curve
-all forecasters know and share the total information, i.e. $\delta =
+all forecasters know and share the total information, i.e.,$\delta =
 \delta'$ and $\lambda = 1.0$.  At the bottom end, on the other hand,
-the forecasters partition the total information, i.e. $\delta =
-\delta'/2$, and share nothing, i.e. $\lambda = 0.0$.  Given that
+the forecasters partition the total information, i.e.,$\delta =
+\delta'/2$, and share nothing, i.e.,$\lambda = 0.0$.  Given that
 moving down along these curves simultaneously increases information diversity and
 $x_0$, both information diversity and the total amount of
 information among the forecasters are important yet separate determinants of  extremizing. This observation can guide practitioners towards proper extremization because  many  application specific aspects of the prediction problem can be linked to these two determinants. For instance, extremization can be
@@ -1361,10 +1363,10 @@ collaboration, sharing of resources, and problem difficulty.
 %gives the boundary curve on the right side of each plot.  This curve
 %then shifts inwards and rotates slightly counterclockwise as $\delta'$
 %decreases.  At the top end of each curve all forecasters know and
-%share the total information, i.e. $\delta = \delta'$ and $\lambda =
+%share the total information, i.e.,$\delta = \delta'$ and $\lambda =
 %1.0$.  At the bottom end, on the other hand, the forecasters partition
-%the total information, i.e. $\delta = \delta'/2$, and share nothing,
-%i.e. $\lambda = 0.0$.  Given that moving down along the curve
+%the total information, i.e.,$\delta = \delta'/2$, and share nothing,
+%i.e.,$\lambda = 0.0$.  Given that moving down along the curve
 %increases both information diversity and the modal amount of
 %extremizing, information diversity is an important determinant of
 %extremizing together with the group's total amount of information.
@@ -1547,7 +1549,7 @@ ungar2012good}) is a research study that has recruited
 thousands of forecasters from professional societies, research
 centers, and alumni associations since 2011.  The forecasters estimate
 probabilities of future international political events.  They know that their
-probability estimates are assessed for accuracy using the Brier scores, i.e. the
+probability estimates are assessed for accuracy using the Brier scores, i.e.,the
 squared error loss.  In addition to receiving \$150 for
 meeting minimum participation requirements that do not depend on
 prediction accuracy, the forecasters receive status rewards for their
@@ -1596,7 +1598,7 @@ that the aggregate forecast can only take discrete values $f_j \in
 [0,1]$ with $j = 1, \dots, J$. Let $n_j$ be the number of times $f_j$
 occurs, and denote the empirical frequency of the corresponding events
 with $o_j$.  Let $\bar{o}$ be the overall empirical frequency of
-occurrence, i.e. $\bar{o} = \frac{1}{K} \sum_{k=1}^K Y_k$. Under these definitions, the
+occurrence, i.e.,$\bar{o} = \frac{1}{K} \sum_{k=1}^K Y_k$. Under these definitions, the
 mean Brier score decomposes into
  \begin{align*}
 BS &= REL - RES + UNC\\
@@ -1796,7 +1798,7 @@ Therefore
 \begin{align*}
 N \sum_{i=1}^N \frac{\delta_i}{\sqrt{(1-\delta_i)(1-\delta')}} \geq \sum_{i=1}^N \frac{\delta_i}{1-\delta_i} + 2 \sum_{i,j: i<j} \frac{\rho_{ij}}{\sqrt{(1-\delta_j)(1-\delta_i)}},
 \end{align*}
-which gives that $x_0 \geq 1$. Given that the Cauchy distribution is symmetric around $x_0$, it must be the case that $\P(\alpha \geq 1 | \Sigma_{22}, \delta') \geq 0.5$. Based on (\ref{ProofIneq1}) and (\ref{ProofIneq2}), the location $x_0 = 1$ only when all the forecasters know the same information, i.e. when $\delta_i = \delta_j$ for all $i \neq j$. Under this particular setting, the amount of extremizing $\alpha$ is non-random and always equal to $1.0$. Therefore $\P(\alpha \geq 1 | \Sigma_{22}, \delta') = 1.0$.  Any deviation from this particular information structure makes $\alpha$ random, $x_0 > 1$, and hence $\P(\alpha \geq 1 | \Sigma_{22}, \delta') > 0.5$. Therefore marginalizing out $\Sigma_{22}$ and $\delta'$ with respect to any distribution that is not a point mass at $\delta_i = \delta_j$ for all $i \neq j$, gives $\P(\alpha \geq 1) > 0.5$. \qed
+which gives that $x_0 \geq 1$. Given that the Cauchy distribution is symmetric around $x_0$, it must be the case that $\P(\alpha \geq 1 | \Sigma_{22}, \delta') \geq 0.5$. Based on (\ref{ProofIneq1}) and (\ref{ProofIneq2}), the location $x_0 = 1$ only when all the forecasters know the same information, i.e.,when $\delta_i = \delta_j$ for all $i \neq j$. Under this particular setting, the amount of extremizing $\alpha$ is non-random and always equal to $1.0$. Therefore $\P(\alpha \geq 1 | \Sigma_{22}, \delta') = 1.0$.  Any deviation from this particular information structure makes $\alpha$ random, $x_0 > 1$, and hence $\P(\alpha \geq 1 | \Sigma_{22}, \delta') > 0.5$. Therefore marginalizing out $\Sigma_{22}$ and $\delta'$ with respect to any distribution that is not a point mass at $\delta_i = \delta_j$ for all $i \neq j$, gives $\P(\alpha \geq 1) > 0.5$. \qed
 %If the forecasters' information sets partition the full information, the sum of their probits is always on the correct side of $0.0$. At the same time the oracle deterministically outputs the correct outcome. Consequently, $\alpha = +\infty$ and $\P(\alpha \geq 1 | \Sigma_{22}, \delta') = 1$. Thus $\P(\alpha > 1 | \Sigma_{22}, \delta') \in (0.5, 1.0]$ when $\delta_i \neq \delta'$ for some $i = 1, \dots, N$. \qed
 %\noindent
 %\textit{Proof of Proposition \ref{positiveThmVote}.} Let $\boldsymbol{d} = \frac{1}{N}\left((1-\delta_1)^{-1/2}, (1-\delta_2)^{-1/2}, \dots, (1-\delta_N)^{-1/2}\right)'$. Assume without loss of generality that $\bar{P} > 0$. Then the average probit forecast is extremized if
