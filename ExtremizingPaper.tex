@@ -381,19 +381,18 @@ The partial information framework, however, formalizes the intuition behind it, 
 \label{ss:measurement}
 In the absence of a quantitative
 interpreted signal model, prior applications have typically explained forecast heterogeneity  with standard statistical models. These models are different formalizations of  the \textit{measurement error framework} that generates forecast heterogeneity purely from a probability distribution. The framework assumes a ``true'' probability
-$\theta$  for the future event to be predicted. This probability, which can be interpreted as the  forecast made by an ideal forecaster, is then measured by the individual forecasters with mean-zero idiosyncratic error.  Therefore each forecast is an independent draw from a common
+$\theta$  for the future event to be predicted. This probability, interpreted as the  forecast made by an ideal forecaster, is somehow measured by the individual forecasters with mean-zero idiosyncratic error.  Therefore each forecast is an independent draw from a common
 probability distribution centered at $\theta$, and the underlying probability model is just the 
-classical statistical model for measurement with i.i.d. mean zero error. 
-Consequently, the average probability
+classical statistical model for measurement with i.i.d. mean zero error.  Consequently, the average probability
 $$\pb := \frac{1}{N}\sum_{i=1}^N
 p_i$$
 is unbiased for $\theta$ and has the least
-variance.
+variance. 
 
-Different versions of this approach alter the quantity that is supposedly
+Different versions of the measurement error framework alter the quantity that is supposedly
 measured without bias. If instead, for example, the true log-odds
 $\log\left\{\theta/(1-\theta)\right\}$ have been measured without
-bias, the average log-odds will be an unbiased estimator. Transforming
+bias, the average log-odds is an unbiased estimator. Transforming
 this average back into an estimate for $\theta$ yields the {\em
 logarithmic opinion pool}
 $$\plog := \frac{\exp \left [ \frac{1}{N} \sum_{i=1}^N
@@ -402,12 +401,11 @@ $$\plog := \frac{\exp \left [ \frac{1}{N} \sum_{i=1}^N
 ]} $$ This aggregator has been analyzed and utilized by many
 investigators (see, e.g., \citealt{dawid1995coherent, Genest,
 bacharach1975group}). Another alternative for the target quantity is
-the true probit score $\Phi^{-1}(\theta)$, where $\Phi$ represents the
+the true probit score $\Phi^{-1}(\theta)$, where $\Phi(\cdot)$ is the
 cumulative distribution function (CDF) of a standard Gaussian
 distribution. This choice gives the {\em probit opinion pool}
 $$\probit := \Phi \left\{ \frac{1}{N} \sum_{i=1}^N \Phi^{-1}
    (p_i) \right \} $$
-
 % In this case, the underlying probability model assumes that the forecasters are able
 %to observe  the true probit score with i.i.d. mean zero error.
 %%%The probit transformation is favored in economics, while other disciplines
@@ -416,29 +414,29 @@ $$\probit := \Phi \left\{ \frac{1}{N} \sum_{i=1}^N \Phi^{-1}
 %%%versus ease of interpretation: the log-odds are considered more
 %%%interpretable, while probit can be more convienient if reported
 %%%forecasts are already standardized.
-These aggregators illustrate the main advantage of the measurement
+These \textit{averaging aggregators} illustrate the main advantage of the measurement
 error framework: simplicity.  The formula for a new aggregator is
 obtained in a straightforward manner by transforming, averaging, and
 transforming back.  The underlying probability model is also simple
-and very familiar.  There are, however, a number of disadvantages.
-First, these \textit{averaging aggregators} target the mean of
+and very familiar.  
+
+Unfortunately, there are a number of disadvantages. First, the averaging aggregators target the mean of
 (potentially transformed) probability forecasts. The correct target,
 however, is the event indicator $\one_A$ that lies on the boundary of
-the sample space. Important properties, such as calibration, cannot be
-expected from an aggregator that is based on a model that does not explicitly link the observations and the correct quantity
-of interest.
+the sample space. Therefore, given that a measurement error model does not incorporate an explicit link between the forecasts and the correct quantity of interest, namely $\one_A$, important properties such as calibration cannot be expected from the resulting aggregators. 
+
 
 Second, the introduction of a nonlinear transformation biases the
 estimator.  Therefore neither $\plog$ nor $\probit$ produces a
 calibrated forecast. Exactly how problematic this is depends on
-whether the bias is very small relative to noise or other
-adjustments. In some cases the direction of the bias can be
-determined. For instance, \citet{Ranjan08} prove that any convex
-combination of calibrated forecasts is under-confident, i.e.,
-too close to $0.5$. This applies to the averaging aggregators that are by nature different convex combinations of the
-forecasts.
+whether the bias is small relative to noise or other
+adjustments. In some cases,  the direction of the bias can be determined. In particular, \citet{Ranjan08} show that any convex
+combination of calibrated forecasts is both uncalibrated and under-confident, i.e.,
+too close to $1/2$. 
+%This applies to the averaging aggregators that are by nature different convex combinations of the
+%forecasts.
 
-A third and more serious disadvantage is the implausibility of the
+Third, a more serious disadvantage is the implausibility of the
 underlying model. Relying on a true probability $\theta$ is vulnerable to
 many philosophical debates, and even if one eventually manages to
 convince one's self of the existence of such a quantity, it is
@@ -450,11 +448,11 @@ measurement error model does not; at best, it forces us to imagine that
 the forecasters are all in principle trying to apply the same
 procedures to the same data but are making numerous small mistakes.
 
-A fourth disadvantage is that the averaging aggregators do not often perform
+Fourth, the averaging aggregators do not often perform
 very well in practice. For one thing,  \citet{hong2009interpreted} demonstrate that the standard
 assumption of conditional independence poses a specific and highly
-unrealistic structure on interpreted forecasts. Any transformed average is also constrained to
-the convex hull of the individual forecasts, hence further contradicting the
+unrealistic structure on interpreted forecasts. Any averaging aggregator is also constrained to
+the convex hull of the individual forecasts, which further contradicts the
 interpreted signal framework \citep{parunak2013characterizing}.  Empirically, one sees
 for many datasets that an aggregator restricted to the convex hull
 will be far from optimal. 
