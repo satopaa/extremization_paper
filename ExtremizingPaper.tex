@@ -122,26 +122,24 @@ Averaging; Probability Forecasting; Wisdom of Crowds
 \section{Introduction and Overview}
 
 \subsection{The Forecast Aggregation Problem}
-Event forecasting is the science of giving probability estimates for future events.  Even though the classical examples can be found in meteorology
-\citep{sanders1963subjective}, where the interest is typically in predicting different weather
-phenomena such as rain in the next few days, the practice has 
+Event forecasting is the science of giving probability estimates for future events.  Even though the classical examples are meteorological
+\citep{sanders1963subjective}, predicting for example weather rain will occur in a given time period, the practice has 
 spread to many other fields as well. This includes medical diagnosis
 and prognosis \citep{wilson1998prediction,pepe2003statistical,
 o2006uncertain}, estimation of credit default
 \citep{kramer2006evaluating}, and predicting political and
 socio-economic events such as who will win
-the next Congolese election, or whether war will break out in Egypt
-this year \citep{tetlock2005expert}. Accurate probability forecasts are particularly important to the decision-maker who must decide, for instance, what to pack
+the next Congolese election or whether war will break out in Egypt
+this year \citep{tetlock2005expert}. Accurate forecasts on events like these are particularly important to the decision-maker, who must decide, for instance, what to pack
 for tomorrow's family outing or whether to advice against all travel
 to Egypt.
 
-The decision-maker, however, may have access to several different forecasts on the same event. For instance, one forecast might draw its information from news broadcasting in the United States while the other
-is based on local news in Egypt. Instead of trying to guess which one of the forecasts is more accurate, the decision-maker should combine the forecasts because, based on much past research, an aggregate forecast is typically more accurate than the individual forecasts \citep{clemen1989combining,
-armstrong2001combining}. Unfortunately, there are many different ways to combine the forecasts, and the choice of the combination
-rule can largely affect the predictive quality of the final
+Often the decision-maker has access to more than one different forecast on the same event. In such cases, instead of trying to guess which prediction is more accurate, the decision-maker should bring together the strengths of the different forecasters by combining their predictions into a single consensus forecast. There is strong empirical evidence that such an aggregate is often more accurate than any of the individual forecasts \citep{clemen1989combining,
+armstrong2001combining}. Unfortunately, the forecasts can be combined in many different ways, and the choice of the combination
+rule can largely determine the predictive quality of the final
 aggregate.  
 %Analyzing and developing improved rules is the main motivation of 
-This motivates the problem of  \textit{forecast aggregation} that aims to combine multiple forecasts into a single
+This is the principal motivation for the problem of  \textit{forecast aggregation} that aims to combine multiple forecasts into a single
 forecast with optimal properties.
 
 There are two general approaches to forecast aggregation: empirical
@@ -153,19 +151,18 @@ parameter values) that yields the best performance on the training set.
 The theoretical approach, on the other hand, first constructs a
 probability model and then computes the optimal aggregation procedure
 under the assumptions of the model.  This may involve estimating model
-parameters from the forecasts.
-
-Both approaches are important.  Theory-based procedures that do not
+parameters from the forecasts. Both of these approaches are important.  Theory-based procedures that do not
 perform well in practice are ultimately of limited use.  On the other
 hand, an empirical approach without theoretical underpinnings lacks
 both credibility (why should we believe it?)  and guidance (in which
-direction can we look for improvement?).  As will be discussed below,
-the history of forecast aggregation to date is largely
+direction can we look for improvement?). As will be discussed below, the history of forecast aggregation to date is largely
 empirical\footnote{Not only the approaches in
 Section~\ref{ss:empirical} but also the approaches described in
 Section~\ref{ss:measurement}, to which we have provided theoretical
 underpinnings, have been pursued in a manner that is largely
-empirical.}.  The main contribution of this paper is to introduce a plausible
+empirical.}. 
+
+The main contribution of this paper is a plausible
 theoretical framework for forecast aggregation.  This framework allows
 us to interpret existing aggregation procedures and illuminate aspects
 that can be improved. For instance, the
@@ -173,7 +170,7 @@ framework is used to understand the practice of {\em probability
 extremizing}, i.e. shifting an average aggregate closer to its nearest
 extreme. This is an empirical technique that has been widely used to
 improve the predictive performance of many simple aggregators such as
-the average probability. Finally, the framework is applied to a
+the average probability. The framework is also applied to a
 specific model under which the optimal aggregator can be computed.
 
 \subsection{Bias, Noise, and Forecast Assessment}
@@ -221,9 +218,8 @@ therefore isolating the task to one of noise reduction.
 Before delving into the problem of forecast aggregation, it is useful
 to briefly discuss the problem of assessing and improving a single
 forecast stream.  The most common methodology is to use a loss
-function.  Letting $\one_A$ denote the indicator function of the event
-$A$ being forecast, the loss function is a penalty $L(p , \one_A)$,
-where $p$ is the forecasted probability.  A loss function is said to
+function. If $\one_A$ is the indicator function of the target event
+$A$ and $p$ is the forecasted probability, then the loss function is a penalty $L(p , \one_A)$.  A loss function is said to
 be {\em revealing} or {\em proper} if the Bayesian optimal strategy is
 to tell the truth.  In other words, if the subjective probability
 estimate is $p$, then $t = p$ should minimize the expected loss $p
