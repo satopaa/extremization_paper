@@ -117,8 +117,8 @@ information overlap.  Our model thus gives a more principled
 understanding of the historically {\it ad hoc} practice of extremizing
 average forecasts.\\
 \\
-\textit{Keywords:} Expert Beliefs; Gaussian Process; Information Aggregation and Diversity; Model
-Averaging; Probability Forecasting; Wisdom of Crowds
+\textit{Keywords:} Expert Beliefs; Gaussian Process; Information Aggregation; Model
+Averaging; Probability Modeling
 \end{abstract}
 
 \section{Introduction and Overview}
@@ -146,7 +146,7 @@ forecast with optimal properties.
 
 There are two general approaches to forecast aggregation: empirical
 and theoretical.  The empirical approach is akin to machine
-learning. Given a training set with multiple forecasts on events with
+learning: given a training set with multiple forecasts on events with
 known outcomes, the decision-maker experiments with different
 aggregation techniques and chooses the one (and potentially any
 parameter values) that yields the best performance on the training set.
@@ -165,10 +165,11 @@ underpinnings, have been pursued in a manner that is largely
 empirical.}. 
 
 The main contribution of this paper is a plausible
-theoretical framework for forecast aggregation. It is named the \textit{partial information framework} because it assumes forecast heterogeneity to stem from differing information sets. The framework allows
+theoretical framework for forecast aggregation. The framework is named the \textit{partial information framework} because it assumes forecast heterogeneity to stem from different information sources. For instance, one forecast might draw its information from television news in the United States
+while the other is based on local news in Egypt.
+ The framework allows
 us to interpret existing aggregation procedures and illuminate aspects
-that can be improved. In this paper, the
-framework is used to clarify the practice of {\em probability
+that can be improved. In this paper, it is used to clarify the practice of {\em probability
 extremizing}, i.e., shifting an average aggregate closer to its nearest
 extreme. This is an empirical technique that has been widely used to
 improve the predictive performance of many simple aggregators such as
@@ -183,7 +184,7 @@ happens or not, respectively. Each probability forecast is then nothing but an
 estimator of this function. Therefore, as is the case with
 all estimators, its deviation from the truth can be broken into two
 pieces: bias and noise. A forecaster
-is conditionally unbiased if, in the long run, events associated
+is considered conditionally unbiased if, in the long run, events associated
 with a forecast $p \in [0,1]$ occur with an empirical frequency of $p$ (see, e.g., \citealt{degroot1983comparison}). For
 instance, consider all events that the forecaster believes to occur
 with probability $0.65$. If the forecaster is calibrated, $65$\% of
@@ -196,11 +197,11 @@ to be true across all probability forecasts -- not just $0.65$.  In the forecast
 Even though non-expert populations are typically not calibrated, there are many subpopulations of experts that are highly
 calibrated. For instance, meteorologists performing probabilistic
 weather forecasting have been found to be calibrated
-(\citealt{murphy1977reliability}); experienced tournament bridge
+\citep{murphy1977reliability}; experienced tournament bridge
 players were highly calibrated in predicting whether a contract would
-be made (\citealt{keren1987facing}); and bookmakers generally give
-calibrated forecasts on sports events (\citealt{dowie1976efficiency,
-yates1985conditional}). If the decision-maker is left with poorly
+be made \citep{keren1987facing}; and bookmakers generally give
+calibrated forecasts on sports events \citep{dowie1976efficiency,
+yates1985conditional}. If the decision-maker is left with poorly
 calibrated forecasts, they can, in principle, be corrected by
 translating the forecast $p$ into the forecast $\pt$ where $\pt$ is
 the historical proportion of times the event occurs when $p$ is
@@ -221,7 +222,7 @@ to briefly discuss the problem of assessing and improving a single
 forecast stream.  The most common methodology uses a loss
 function. If $\one_A$ is the indicator function of the target event
 $A$ and $p$ is the forecasted probability, then the loss function is a penalty $L(p , \one_A)$.  A loss function is said to
-be {\em revealing} or {\em proper} if the Bayesian optimal strategy is
+be {\em proper} if the Bayesian optimal strategy is
 to tell the truth.  In other words, if the subjective probability
 estimate is $p$, then $t = p$ should minimize the expected loss $p
 L(t,1) + (1-p) L(t,0)$.  This expected loss is a one dimensional
@@ -247,7 +248,7 @@ than is the assessment of an individual forecast.  In order to compare
 different aggregation procedures, a scoring rule must be chosen.  In
 practice, the Brier score is the most common choice, perhaps because
 of its simplicity, its convenient decomposition into three
-interpretable parts (See Section \ref{realData}), or because of the
+interpretable parts (see Section \ref{realData}), or because of the
 paramount status of variance in the statistical literature. This paper concentrates on minimizing the variance of the aggregators, though
  much of the discussion holds under general proper loss
 functions.
@@ -306,9 +307,9 @@ In practice, however, information comes to the
 aggregator only through the forecasts $\{p_i : i = 1, \dots, N\}$. Given that $\F'$ generally cannot be constructed from these forecasts alone, no practically feasible aggregator can be expected to perform as well as $p'$.  Therefore a more achievable benchmark is the \textit{revealed} aggregator $p'' := \E (\one_A \|
 \F'')$, where $\F''$ is the $\sigma$-field generated (or revealed) by the forecasts
 $\{ p_i : i = 1, \dots, N \}$. This benchmark minimizes
-the expectation of any proper loss function (\citealt{Ranjan08}) and can be applied in practice. For this reason it is the relevant estimator in each specific partial information model. 
+the expectation of any proper loss function \citep{Ranjan08} and can be applied in practice. For this reason it is the relevant estimator in each specific partial information model. 
 
-These benchmarks and the individual forecasts are constructed with a simple rule: take a conditional expectation of $\one_A$ given some sub-$\sigma$-field. Such conditional estimators are always calibrated. In particular, the revealed aggregator is calibrated if the individual forecasts are calibrated.  This should be viewed as a minimum criterion for noise-reducing aggregation. Aggregators that satisfy this property differ and can be evaluated on their ability to combine information from the individual sources. An aggregator that efficiently combines this information typically produces an estimate that is closer to $\one_A$ and hence has a lower proper loss.  
+Both of these benchmarks and also the individual forecasts are conditional expectations of $\one_A$ given different sub-$\sigma$-fields. Such conditional estimators are always calibrated. In particular, the revealed aggregator is calibrated if the individual forecasts are calibrated.  This should be viewed as a minimum criterion for noise-reducing aggregation. Aggregators that satisfy this property differ and can be evaluated on their ability to combine information from the individual sources. An aggregator that efficiently combines this information typically produces an estimate that is closer to $\one_A$ and hence has a lower proper loss.  
 
 %Therefore the framework responds to \citet{Ranjan08} who proved that all convex combinations of calibrated forecasts are necessarily uncalibrated. This result invalidated theoretical justification of many commonly used aggregators and urged a .
 
@@ -359,8 +360,9 @@ aggregation of interpreted forecasts is not constrained to the
 convex hull of the forecasts; \citet{broomell2009experts} analyze
 inter-forecaster correlation under the assumption that the cues can be
 mapped to the individual forecasts via different linear regression
-functions; \citet{degroot1991optimal} discuss a setup where each forecaster first observes a random quantity $X_i$ and then reports $\P(A | X_i)$, 
-where $\boldsymbol{X} = (X_1, \dots, X_N)$ has density $g(\boldsymbol{X} | A)$. They  acknowledge that without a distributional model on $\boldsymbol{X}$ the optimal aggregator cannot be formed. Instead of constructing a plausible model, they proceed to analyze a particular form of aggregation, namely the linear opinion pool. Unfortunately, any linear opinion pool of calibrated forecasts is known to be both uncalibrated and under-confident \citep{Ranjan08}
+functions; \citet{degroot1991optimal} discuss a setup where each forecaster first observes a random quantity $X_i$ and then reports $\P(A | X_i)$. They  acknowledge that without a distributional model on $X_i$'s the optimal aggregator cannot be formed. Instead of constructing a plausible model, they proceed to analyze a particular form of aggregation, namely the linear opinion pool. 
+
+%Any linear opinion pool of calibrated forecasts, however, is today known to be both uncalibrated and under-confident \citep{Ranjan08}.
 
 %Some preliminary steps have been made towards a more concrete model by, for example, assuming
 %conditional independence of the $x_i$, \cite{}, but
@@ -435,9 +437,10 @@ Second, the introduction of a nonlinear transformation biases the
 estimator.  Therefore neither $\plog$ nor $\probit$ produces a
 calibrated forecast. Exactly how problematic this is depends on
 whether the bias is small relative to noise or other
-adjustments. In some cases,  the direction of the bias can be determined. In particular, as was mentioned earlier, \citet{Ranjan08} show that any convex
-combination of calibrated forecasts is both uncalibrated and under-confident, i.e., 
-too close to $1/2$. 
+adjustments. In some cases,  the direction of the bias can be determined. For instance, any convex
+combination of calibrated forecasts is known to be both uncalibrated and under-confident, i.e., too close to $1/2$ \citep{Ranjan08}.
+%, i.e., 
+%too close to $1/2$. 
 %This applies to the averaging aggregators that are by nature different convex combinations of the
 %forecasts.
 
@@ -684,7 +687,7 @@ the variables $X_B$ are bounded by $1$) is not relevant.
 choice of an event $A$ and Borel sets $B_i$.
 This might be done in several ways: a) by choosing them in advance,
 according to some criterion; b) estimating the parameters $\P(A)$,
-$|B_i|$ and $|B_i \cap B_j|$ from data; c) using a Bayesian model
+$|B_i|$, and $|B_i \cap B_j|$ from data; or c) using a Bayesian model
 with a prior distribution on the unknown parameters.  This paper
 focuses mostly on a) and b) but discusses c) shortly in
 Section~\ref{discussion}.  Section \ref{extremizing} provides one
@@ -731,7 +734,7 @@ almost exclusively in this mode.
 \subsection{Preliminary Observations}
 \label{prelim}
 The remaining details of the Gaussian model are best described by first considering only two Forecasters $1$ and $2$ . Suppose they observe respective $\delta_1$ and
-$\delta_2$ portions of the Gaussian process such that their information overlap has size $\rho$. That is,
+$\delta_2$ portions of the Gaussian process and that their information overlap has size $\rho$. That is,
 \begin{align*}
 |B_1| &= \delta_1\\
 |B_2| &= \delta_2\\
@@ -761,7 +764,7 @@ X_S &= U+M+V+W,
 where $U, V, M, W$ are independent Gaussian random variables with respective variances
 $\delta_1-\rho$, $\delta_2-\rho$, $\rho$, and $1+\rho-\delta_1 -
 \delta_2$. The joint distribution of $X_{S}$, $X_{B_1}$, and $X_{B_2}$ is a
-multivariate Gaussian distribution. More specifically,
+multivariate Gaussian distribution:
 \begin{align}
 \left(\begin{matrix} X_S \\ X_{B_1}\\ X_{B_2} \end{matrix}\right) 
  &\sim \mathcal{N}\left(
@@ -842,7 +845,7 @@ polytope or the boolean quadric polytope. The correlation polytope is described 
 vertices in dimension $\text{dim}(\COR(N)) = \binom{N+1}{2}$.
 \end{proposition}
 The correlation polytope is known to have a very complex description in terms of a finite
-number of half-spaces (\citealt{padberg1989boolean, ziegler2000lectures}). Complete descriptions of the facets of $\COR(N)$ are known for $N \leq 7$ and conjectured for  $\COR(8)$ and $\COR(9)$ (\citealt{ziegler2000lectures, christofsmapo, pitowsky1991correlation}). For instance, 
+number of half-spaces \citep{padberg1989boolean, ziegler2000lectures}. Complete descriptions of the facets of $\COR(N)$ are known for $N \leq 7$ and conjectured for  $\COR(8)$ and $\COR(9)$ \citep{ziegler2000lectures, christofsmapo, pitowsky1991correlation}. For instance, 
 \begin{align*}
 \COR(2) &= 
 \left\{ \Sigma_{22} : 
@@ -875,10 +878,10 @@ number of half-spaces (\citealt{padberg1989boolean, ziegler2000lectures}). Compl
 % \delta_1 + \delta_2 + \delta_3 - \rho_{12} - \rho_{13} - \rho_{23} \leq 1
 %\end{cases}
 %\end{align*}
-for $i,j,k \in \{1,2,3\}$ such that $i \neq j$, $i \neq k$, and $j \neq k$. After this, $\COR(N)$ becomes increasingly complex. For instance, $\COR(5)$ is known to have 56 facets while $\COR(9)$ has at least 12,246,651,158,320 facets. In fact, because the unconstrained quadratic
+for $i,j,k \in \{1,2,3\}$ such that $i \neq j$, $i \neq k$, and $j \neq k$. After this, $\COR(N)$ becomes overwhelmingly complex. For instance, $\COR(5)$ is known to have 56 facets while $\COR(9)$ has at least 12,246,651,158,320 facets. In fact, because the unconstrained quadratic
 0-1 problem is NP-hard, it is probably hopeless to find a complete
 list of linear inequalities to describe $\COR(N)$ under general $N$
-(\citealt{deza1997geometry}). Fortunately, previous literature has introduced both linear and semidefinite relaxations of $\COR(N)$ (see, e.g., \citealt{laurent1997connections}). Such relaxations together with modern optimization techniques and sufficient data can be used to estimate the general information structure very efficiently. This, however, is not in the scope of this paper and is therefore left for subsequent work. 
+\citep{deza1997geometry}. Fortunately, previous literature has introduced both linear and semidefinite relaxations of $\COR(N)$ (see, e.g., \citealt{laurent1997connections}). Such relaxations together with modern optimization techniques and sufficient data can be used to estimate the general information structure very efficiently. This, however, is not in the scope of this paper and is therefore left for subsequent work. 
 
 
 The final step in developing the Gaussian model is
@@ -889,7 +892,7 @@ p_i &= \P\left(A | \mathcal{F}_{i}\right) \nonumber \\
  &= \Phi\left( \frac{X_{B_i}}{\sqrt{1-\delta_i}}\right) \label{indFore}
 \end{align}
 %This forecast is a conditional expectation of $\one_A$ given $\mathcal{F}_i$ and hence  calibrated. Its
-The marginal distribution of $p_i$ can be computed by first denoting the probit score with $P_{i} := \Phi^{-1}(p_i) = X_{B_i}/\sqrt{1-\delta_i}$. The Jacobian for the map $P_{i} \to \phi(P_i)$ is
+The marginal distribution of $p_i$ can be computed by first denoting the probit score with $P_{i} := \Phi^{-1}(p_i) = X_{B_i}/\sqrt{1-\delta_i}$. The Jacobian for the map $P_{i} \to \Phi(P_i)$ is
 \begin{eqnarray*}
 J(P_i) &=& (2\pi)^{-1/2} \exp \left( - P_i^2/2   \right) 
 \end{eqnarray*}
@@ -902,7 +905,7 @@ the marginal density for $p_i$ becomes
 \end{align*}
 This distribution has very intuitive behavior: it is uniform on $[0,1]$ if the forecaster knows half of the
 information, i.e.,  $\delta_i = 1/2$, but becomes 
-unimodal with a minimum (or a maximum) at $p_i = 1/2$ when $\delta_i > 1/2$ (or $\delta < 1/2$, respectively).  As $\delta_i \to 0$, the forecast $p_i$ converges to a point mass at $1/2$. On the other hand, as $\delta_i \to 1$, $p_i$ converges to
+unimodal with a minimum (or a maximum) at $p_i = 1/2$ when $\delta_i > 1/2$ (or $\delta_i < 1/2$, respectively).  As $\delta_i \to 0$, the forecast $p_i$ converges to a point mass at $1/2$. On the other hand, as $\delta_i \to 1$, $p_i$ converges to
 a correct forecast whose distribution has atoms of weight $1/2$ at
 zero and one. Therefore a forecaster with no information ``withdraws'' from the problem by predicting a non-informative probability $1/2$ while a forecaster with full information always predicts the correct outcome with absolute certainty. Figure \ref{marginals} illustrates the marginal
 distribution when $\delta_i$ is equal to $0.3$, $0.5$, and $0.7$.
@@ -962,7 +965,8 @@ Gaussian distribution~(\ref{Nforecasters}) gives
 where $X_{B'}$ is the information known to the oracle and $\delta' =
 |B'|$. The oracular aggregator is then nothing more than the probability forecast made by the oracle. That is,
  \begin{align*}
-p' = \P(X_S > 0 |  \mathcal{F}') 
+p' &= \P(A |  \mathcal{F}')\\
+ &= \P(X_S > 0 |  X_{B'})\\
    &= \Phi\left( \frac{X_{B'}}{\sqrt{1-\delta'}} \right)
 \end{align*}
 
@@ -996,8 +1000,8 @@ Such results make $p'$ a tangible benchmark that can be used to analyze other ag
 \subsection{General Information Structure}
 %This section begins the analysis of probability extremizing by making some preliminary observations under the general information structure. First, however, recall that 
 A probability $p$ is said to be \textit{extremized} by another probability $q$ if and only
-if $q$ is closer to $0$ when $p \leq 0.5$ and closer to $1$ when $p
-\geq 0.5$. This translates to the probit scores as follows: $q$ extremizes $p$ if and only if  $\Phi^{-1}(q)$ is on the same side but further away from zero than $\Phi^{-1}(p)$. The amount of (multiplicative) extremization can then be quantified with the {\em probit extremization ratio} defined as 
+if $q$ is closer to $0$ when $p \leq 1/2$ and closer to $1$ when $p
+\geq 1/2$. This translates to the probit scores as follows: $q$ extremizes $p$ if and only if  $\Phi^{-1}(q)$ is on the same side but further away from zero than $\Phi^{-1}(p)$. The amount of (multiplicative) extremization can then be quantified with the {\em probit extremization ratio} defined as 
  $\alpha(q,p) := \Phi^{-1}(q) / \Phi^{-1} (p)$. Given that no aggregator can improve upon the oracular aggregator, it provides an ideal
 reference point for analyzing extremization. Therefore, of particular interest is the case
 \begin{align}
@@ -1226,7 +1230,7 @@ $\lambda$ is the shared proportion of this information; that is, $|B_{i}| =
 j$.
 
 
-Domain restrictions must be placed on $\delta$ and $\lambda$ to ensure a coherent $\Sigma_{22}$. Clearly, any $\delta \in [0,1]$ is plausible. Conditional on such $\delta$, however, the overlap parameter $\lambda$ must be within a subinterval of $[0,1]$. The upper bound is always $1$ because the 
+Domain restrictions must be placed on $\delta$ and $\lambda$ to ensure a coherent $\Sigma_{22}$. Clearly, any $\delta \in [0,1]$ is plausible. Conditional on such $\delta$, however, the overlap parameter $\lambda$ must be within a subinterval of $[0,1]$. The upper bound of this subinterval is always $1$ because the 
 forecasters may know the exact same information under any $\delta$ and $N$. To derive the lower bound, note that  
 information overlap is unavoidable when $\delta > 1/N$, and that minimum
 sharing occurs when all information is known either to everyone or
@@ -1237,7 +1241,8 @@ the value of $\lambda$ is minimized when $\lambda\delta + N(\delta -
 \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}$, and $\Sigma_{22}$ is
 coherent if and only if
 \begin{align}
-\delta \in [0,1] &&  \lambda | \delta &\in \left[  
+\delta \in [0,1]  \hspace{0.2in} \mbox{ and } 
+  \hspace{0.2in}   \lambda | \delta &\in \left[  
    \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right] 
    \label{rhoDomain}
 \end{align}
@@ -1517,7 +1522,7 @@ Given these interpretations, it may at first seem surprising that the
 values of $\delta$ and $\lambda$ can be estimated in practice.
 Intuitively, the estimation relies on two key aspects of the model: a)
 the further the forecast is from the non-informative prior (typically
-at $0.5$), the more informed the forecaster is likely to be (see
+at $1/2$), the more informed the forecaster is likely to be (see
 Figure~\ref{marginals}); and b) the more similar any two forecasts
 are, the more information overlap the corresponding forecasters are
 likely to have. This provides enough leverage to estimate the
@@ -1705,7 +1710,7 @@ It is interesting to relate our discussion to the many empirical
 studies conducted by the Good Judgment Project (GJP) (see Section
 \ref{realData} for a brief introduction to the project).  Generally
 extremizing has been found to improve the average aggregates
-(\citealt{mellers2014psychological, satopaa, satopaa2014probability}).
+\citep{mellers2014psychological, satopaa, satopaa2014probability}.
 The average forecast of a team of super-forecasters, however, often
 requires very little or no extremizing.  This can be explained as follows.  The super-forecasters are
 highly knowledgeable (high $\delta$) individuals who work
@@ -1717,7 +1722,7 @@ forecast.  Their forecasts are highly convergent and are likely to be
 already very near the oracular forecast.  The GJP forecast data also
 includes self-assessments of expertise.  Not surprisingly, the greater
 the self-assessed expertise, the less extremizing appears to have been
-required (\citealt{satopaa}).  This is consistent with our interpretation that high values
+required \citep{satopaa}.  This is consistent with our interpretation that high values
 of $\delta$ and $\lambda$ suggest lower extremization.
 
 The partial information framework offers many directions for future research.  One involves estimation of parameters.  The model together with good procedures for estimating
@@ -1735,7 +1740,7 @@ dubious. In some cases the higher order intersections have been found to be irre
 %aggregator. 
 Theoretical results on the significance or insignificance
 of higher order intersections under the partial information framework
-would be desirable. Note that the Gaussian model cannot incorporate intersections beyond the second order. Therefore, if higher order intersections turn out to be relevant for aggregation, it may be necessary to develop a different, more complex partial information model. 
+would be desirable. Unfortunately, the Gaussian model cannot incorporate intersections beyond the second order. Therefore, if higher order intersections turn out to be relevant for aggregation, it may be necessary to develop a different, more complex partial information model. 
 
 Another promising avenue is the Bayesian approach. In many applications with small or moderately sized datasets, Bayesian methods have been found to be superior to the likelihood-based alternatives. Therefore, given that the number of forecasts on a single event is typically quite small, a Bayesian approach is likely to improve prediction accuracy on one-time events. Currently, we have
 work in progress analyzing a Bayesian model but there are many, many
@@ -1783,7 +1788,7 @@ or implied, of IARPA, DoI/NBC, or the U.S. Government.
 % \\
 %\noindent
 \subsubsection{Proof of Proposition \ref{CorrelationPolytope}.}
-Denote the set of all coherent information structures $\Sigma_{22}$ with $\mathcal{Q}_N$. Consider $\mathcal{Q}_N \ni \Sigma_{22}$ that is defined by the Borel sets $\{ B_i : i = 1, \dots, N\}$.  Therefore its information can be represented in a diagram. Keeping the diagram representation in mind, the unit interval $S$ can be partitioned into $2^N$ disjoint parts
+Denote the set of all coherent information structures with $\mathcal{Q}_N$. Consider $\Sigma_{22} \in \mathcal{Q}_N$ and its associated Borel sets $\{ B_i : i = 1, \dots, N\}$.  Given that $\Sigma_{22}$ is coherent, its information can be represented in a diagram. Keeping the diagram representation in mind, partition the unit interval $S$ into $2^N$ disjoint parts
 \begin{align*}
 C_\v := \cup_{i \in \v} B_i \setminus \cup_{i \notin \v} B_i,
 \end{align*}
@@ -1824,7 +1829,7 @@ Therefore
 \begin{align*}
 N \sum_{i=1}^N \frac{\delta_i}{\sqrt{(1-\delta_i)(1-\delta')}} \geq \sum_{i=1}^N \frac{\delta_i}{1-\delta_i} + 2 \sum_{i,j: i<j} \frac{\rho_{ij}}{\sqrt{(1-\delta_j)(1-\delta_i)}},
 \end{align*}
-which gives that $x_0 \geq 1$. Given that the Cauchy distribution is symmetric around $x_0$, it must be the case that $\P(\alpha \geq 1 | \Sigma_{22}, \delta') \geq 0.5$. Based on (\ref{ProofIneq1}) and (\ref{ProofIneq2}), the location $x_0 = 1$ only when all the forecasters know the same information, i.e., when $\delta_i = \delta_j$ for all $i \neq j$. Under this particular setting, the amount of extremizing $\alpha$ is non-random and always equal to $1.0$. Therefore $\P(\alpha \geq 1 | \Sigma_{22}, \delta') = 1.0$.  Any deviation from this particular information structure makes $\alpha$ random, $x_0 > 1$, and hence $\P(\alpha \geq 1 | \Sigma_{22}, \delta') > 0.5$. Therefore marginalizing out $\Sigma_{22}$ and $\delta'$ with respect to any distribution that is not a point mass at $\delta_i = \delta_j$ for all $i \neq j$, gives $\P(\alpha \geq 1) > 0.5$. \qed
+which gives that $x_0 \geq 1$. Given that the Cauchy distribution is symmetric around $x_0$, it must be the case that $\P(\alpha > 1 | \Sigma_{22}, \delta') \geq 1/2$. Based on (\ref{ProofIneq1}) and (\ref{ProofIneq2}), the location $x_0 = 1$ only when all the forecasters know the same information, i.e., when $\delta_i = \delta_j$ for all $i \neq j$. Under this particular setting, the amount of extremizing $\alpha$ is non-random and always equal to $1.0$. Therefore $\P(\alpha > 1 | \Sigma_{22}, \delta') = 1.0$.  Any deviation from this particular information structure makes $\alpha$ random, $x_0 > 1$, and hence $\P(\alpha > 1 | \Sigma_{22}, \delta') > 1/2$. Therefore marginalizing out $\Sigma_{22}$ and $\delta'$ with respect to any distribution that is not a point mass at $\delta_i = \delta_j$ for all $i \neq j$, gives $\P(\alpha > 1) > 1/2$. \qed
 %If the forecasters' information sets partition the full information, the sum of their probits is always on the correct side of $0.0$. At the same time the oracle deterministically outputs the correct outcome. Consequently, $\alpha = +\infty$ and $\P(\alpha \geq 1 | \Sigma_{22}, \delta') = 1$. Thus $\P(\alpha > 1 | \Sigma_{22}, \delta') \in (0.5, 1.0]$ when $\delta_i \neq \delta'$ for some $i = 1, \dots, N$. \qed
 %\noindent
 %\textit{Proof of Proposition \ref{positiveThmVote}.} Let $\boldsymbol{d} = \frac{1}{N}\left((1-\delta_1)^{-1/2}, (1-\delta_2)^{-1/2}, \dots, (1-\delta_N)^{-1/2}\right)'$. Assume without loss of generality that $\bar{P} > 0$. Then the average probit forecast is extremized if
@@ -1914,12 +1919,12 @@ which simplifies to the given expression after substituting in $\gamma$. Given t
 %%\subsection*{A.3 Estimation of $\delta$ and $\lambda$}
 
 
-This section describes how the maximum likelihood estimates of $\delta$ and $\lambda$ can be found very efficiently. Let $J_N$ represent a $N\times N$ matrix of ones. A matrix $\Sigma$ is compound symmetric if it can be expressed in the form $\Sigma = I_NA + J_NB$ for some constants $A$ and $B$. The inverse matrix (if it exists) and any scalar multiple of a compound symmetric matrix $\Sigma$ are also compound symmetric (\citealt{dobbin2005sample}). More specifically, for some constant $c$,
+This section describes how the maximum likelihood estimates of $\delta$ and $\lambda$ can be found very efficiently. Let $J_N$ represent a $N\times N$ matrix of ones. A matrix $\Sigma$ is compound symmetric if it can be expressed in the form $\Sigma = I_NA + J_NB$ for some constants $A$ and $B$. The inverse matrix (if it exists) and any scalar multiple of a compound symmetric matrix $\Sigma$ are also compound symmetric \citep{dobbin2005sample}. More specifically, for some constant $c$,
 \begin{align}
 c \Sigma &= I_N(cA) + J_N(cB) \nonumber\\
 \Sigma^{-1} &= I_N\frac{1}{A} - J_N \frac{B}{A(A+NB)} \label{CSInv}
 \end{align}
-See the supplementary material of \citet{dobbin2005sample} for the first identity. Based on these observations, denote 
+Based on these observations, denote 
 \begin{align}
 Cov(\boldsymbol{X}) &= \Sigma_{22} = I_N A_X + J_N  B_X \nonumber\\
 Cov(\boldsymbol{P}) &= \Sigma_{P} = \Sigma_{22}/(1-\delta) = I_N A_P + J_N  B_P \label{SigmaP}\\
@@ -1939,7 +1944,7 @@ the density for  $\boldsymbol{p} = (p_1, p_2, \dots, p_N)'$ becomes
 &\propto& \left|\Sigma_{P}\right|^{-1/2} \exp\left[ -\frac{1}{2} \boldsymbol{P}' \Sigma_{P}^{-1} \boldsymbol{P}  \right],
 %&=& \frac{(1-\delta)^{N/2}}{\sqrt{ \left|\Sigma_{22}\right|}} \exp\left[ -\frac{1}{2} \Phi^{-1}(\boldsymbol{p})' \left\{ (1-\delta) \Sigma_{22}^{-1} - I_N \right\} \Phi^{-1}(\boldsymbol{p})  \right],
 \end{eqnarray*}
-where $\boldsymbol{P} = \Phi^{-1}(\boldsymbol{p})$. Let  $S_P = \boldsymbol{P}\boldsymbol{P}'$ be the (rank one) sample covariance matrix of $\boldsymbol{P}$. The log-likelihood reduces to
+where $\boldsymbol{P} = \Phi^{-1}(\boldsymbol{p})$. Let  $S_P = \boldsymbol{P}\boldsymbol{P}'$ be the (rank one) sample covariance matrix of $\boldsymbol{P}$. The log-likelihood then reduces to
 \begin{align*}
 \log  f\left(\boldsymbol{p} | \delta, \lambda \right) &\propto -\log \det \Sigma_P - \tr\left(S_P^{-1} \Sigma_P \right) 
 \end{align*}
@@ -1949,7 +1954,7 @@ This log-likelihood is not concave in $\Sigma_P$.  It is, however, a concave fun
  \text{subject to } & \nonumber \delta \in [0,1] \nonumber \\
  & \lambda \in \left[  \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right) \nonumber
 \end{align}
-Unfortunately, the feasible region is not convex (see, e.g., Figure \ref{probOracle}) but can be made convex by re-expressing the problem. First, let $\rho = \delta\lambda$ denote the amount of information known by a forecaster; that is, let $A_X = (\delta - \rho)$ and $B_X = \rho$. Solving the problem in terms of $\delta$ and $\rho$ is equivalent to the original problem (\ref{origProblem}) but subject to 
+Unfortunately, the feasible region is not convex (see, e.g., Figure \ref{LevelplotsOracle}) but can be made convex by re-expressing the problem: First, let $\rho = \delta\lambda$ denote the amount of information known by a forecaster; that is, let $A_X = (\delta - \rho)$ and $B_X = \rho$. Solving the problem in terms of $\delta$ and $\rho$ is equivalent to minimizing the original objective (\ref{origProblem}) but subject to 
 \begin{align*}
 %\begin{cases}
 &0 \leq \rho \leq \delta\\
@@ -2074,8 +2079,8 @@ The first term of the objective is both convex and non-decreasing. The second te
 
 
 %\bibliographystyle{Chicago}
-\bibliographystyle{plainnat}
-%\bibliographystyle{apalike}
+%\bibliographystyle{plainnat}
+\bibliographystyle{apalike}
 \bibliography{biblio}		% expects file ''myrefs.bib''
 
 
