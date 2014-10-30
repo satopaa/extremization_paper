@@ -31,7 +31,7 @@
 \usepackage{sectsty}
 \usepackage{bbm}
 
-
+\renewcommand{\refname}{REFERENCES}
 \newcommand{\myN}{\hbox{N\hspace*{-.9em}I\hspace*{.4em}}}
 \newcommand{\myZ}{\hbox{Z}^+}
 \newcommand{\myR}{\hbox{R}}
@@ -52,7 +52,7 @@
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 
-%\renewcommand{\abstractname}{}
+\renewcommand{\abstractname}{}
 \def\pb{\overline{p}}
 \def\pt{\tilde{p}}
 \def\one{\mathbbm{1}}
@@ -75,7 +75,7 @@
 %%%%%% Begin document with header and title %%%%%%%%%
 
 %\title{Combining Probability Forecasts and Understanding Probability Extremizing through Information Diversity}
-\title{\vspace{-4em}Modeling Probability Forecasts via Information Diversity}
+\title{\vspace{-0em} \Large Modeling Probability Forecasts via Information Diversity}
 %\author{Ville A. Satop\"a\"a}
 %\author[2]{Robin Pemantle\thanks{pemantle@math.upenn.edu}}
 %\thanks{Research supported by NSF award \# DMS-1209117}
@@ -117,7 +117,8 @@ The authors would like to thank Edward George and Shane Jensen for helpful discu
 %\pagestyle{myheadings}
 %\markboth{Understanding Probability Extremizing}{Satop\"a\"a et al.}
 \begin{abstract}
-Randomness in scientific estimation is generally 
+\singlespace
+\textbf{Abstract.} Randomness in scientific estimation is generally 
 assumed to arise from unmeasured or uncontrolled factors. However, 
 when combining subjective probability estimates, heterogeneity
 stemming from people's cognitive or information diversity is often
@@ -150,9 +151,7 @@ Averaging; Noise Reduction; Probabilistic Forecasting
 \subsection{The Forecast Aggregation Problem}
 Event forecasting is the science of giving probability estimates for future events.  Even though the classical examples are meteorological
 \citep{sanders1963subjective}, predicting for example weather rain will occur in a given time period, the practice has 
-spread to many other fields as well. This includes medical diagnosis
-and prognosis \citep{wilson1998prediction,pepe2003statistical,
-o2006uncertain}, estimation of credit default
+spread to many other fields as well. This includes medical diagnosis  \citep{pepe2003statistical}, estimation of credit default
 \citep{kramer2006evaluating}, and predicting political and
 socio-economic events such as who will win
 the next Congolese election or whether war will break out in Egypt
@@ -160,8 +159,7 @@ this year \citep{tetlock2005expert}. Accurate forecasts on events like these are
 for tomorrow's family outing or whether to advise against all travel
 to Egypt.
 
-The decision-maker, however, may have access to more than one different forecast on the same event. In such cases, instead of trying to guess which prediction is more accurate, the decision-maker should bring together the strengths of the different forecasters by combining their predictions into a single consensus forecast. There is strong empirical evidence that such an aggregate tends to be more accurate than any of the individual forecasts \citep{clemen1989combining,
-armstrong2001combining}. Unfortunately, the forecasts can be combined in many different ways, and the choice of the combination
+The decision-maker, however, may have access to more than one different forecast on the same event. In such cases, instead of trying to guess which prediction is more accurate, the decision-maker should bring together the strengths of the different forecasters by combining their predictions into a single consensus forecast. There is strong empirical evidence that such an aggregate tends to be more accurate than any of the individual forecasts \citep{armstrong2001combining}. Unfortunately, the forecasts can be combined in many different ways, and the choice of the combination
 rule can largely determine the predictive quality of the final
 aggregate.  
 %Analyzing and developing improved rules is the main motivation of 
@@ -209,23 +207,29 @@ estimator of this function. Therefore, as is the case with
 all estimators, its deviation from the truth can be broken into two
 pieces: bias and noise. A forecaster
 is considered conditionally unbiased if, in the long run, events associated
-with a forecast $p \in [0,1]$ occur with an empirical frequency of $p$ (see, e.g., \citealt{degroot1983comparison}). For
-instance, consider all events that the forecaster believes to occur
-with probability $0.65$. If the forecaster is conditionally unbiased, $65$\% of
-these events will actually end up occurring. The same, of course, has
-to be true across all probability forecasts -- not just $0.65$.  In the forecasting literature, this condition is called \textit{calibration}.
+with a forecast $p \in [0,1]$ occur with an empirical frequency of $p$. 
+%For
+%instance, consider all events that the forecaster believes to occur
+%with probability $0.65$. If the forecaster is conditionally unbiased, $65$\% of
+%these events will actually end up occurring. The same, of course, has
+%to be true across all probability forecasts -- not just $0.65$.  
+In the forecasting literature, this condition is called \textit{calibration}.
 
 %In the lingo of
 %estimation, this is equivalent to being conditionally unbiased.
 
-Even though non-expert populations are typically not calibrated, there are many subpopulations of experts that are highly
-calibrated. For instance, meteorologists performing probabilistic
-weather forecasting have been found to be calibrated
-\citep{murphy1977reliability}; experienced tournament bridge
-players were highly calibrated in predicting whether a contract would
-be made \citep{keren1987facing}; and bookmakers generally give
-calibrated forecasts on sports events \citep{dowie1976efficiency,
-yates1985conditional}. If the decision-maker is left with poorly
+Non-expert populations are typically not calibrated. There are, however,  many subpopulations of experts that are highly
+calibrated. For instance, meteorologists,
+%performing probabilistic
+%weather forecasting have been found to be calibrated
+\citep{murphy1977reliability}, experienced tournament bridge
+players 
+%were highly calibrated in predicting whether a contract would
+%be made 
+\citep{keren1987facing}, and sports bookmakers
+% generally give
+%calibrated forecasts on sports events 
+\citep{dowie1976efficiency} have been found to be calibrated. If the decision-maker is left with poorly
 calibrated forecasts, they can, in principle, be corrected by
 translating the forecast $p$ into the forecast $\pt$ where $\pt$ is
 the historical proportion of times the event occurs when $p$ is
@@ -257,15 +261,15 @@ minimizing the quadratic loss function $(p - \one_A)^2$, also known as
 the {\em Brier score}, gives the estimator with the least variance. On
 the other hand, minimizing the entropy loss $\log (1 / |p -
 \one_{A^c}|)$ reveals the estimator that best avoids forecasting an
-incorrect event with near certainty (see, e.g., \citealt{HwPe1997}
-for a discussion of proper loss functions).
+incorrect event with near certainty. See  \cite{HwPe1997}
+for a discussion of proper loss functions.
 
 The point of this brief review is two-fold.  First, when a group of
 sophisticated forecasters operates under a proper loss function,
 the assumption of calibrated forecasts is, to some degree,
 self-fulfilling.  Forecasters can improve their long run performance
 by calibrating their forecasts via training and active
-feedback \citep{o2006uncertain}. Forecasters with competitive
+feedback. Forecasters with competitive
 motivation, sophistication, and historical data will probably do so. Secondly, the
 assessment of the aggregated forecast is not uni-dimensional any more
 than is the assessment of an individual forecast.  In order to compare
@@ -411,9 +415,9 @@ The partial information framework, however, formalizes the intuition behind it, 
 \label{ss:measurement}
 In the absence of a quantitative
 interpreted signal model, prior applications have typically explained forecast heterogeneity  with standard statistical models. These models are different formalizations of  the \textit{measurement error framework} that generates forecast heterogeneity purely from a probability distribution. The framework assumes a ``true'' probability
-$\theta$  for the future event to be predicted. This probability, interpreted as the  forecast made by an ideal forecaster, is then somehow measured by the individual forecasters with mean-zero idiosyncratic error.  Therefore each forecast is an independent draw from a common
-probability distribution centered at $\theta$, and the underlying probability model is just the 
-classical statistical model for measurement with i.i.d. mean zero error.  Consequently, the average probability $\pb := \left(\sum_{i=1}^N
+$\theta$, interpreted as the forecast made by an ideal forecaster, for the future event to be predicted. This probability is then somehow measured by the individual forecasters with mean-zero idiosyncratic error.  Therefore each forecast is an independent draw from a common
+probability distribution centered at $\theta$, and the underlying probability model is just the classical statistical model for measurement with i.i.d. mean zero error.  
+Consequently, the average probability $\pb := \left(\sum_{i=1}^N
 p_i \right) / N$ is unbiased for $\theta$ and has the least
 variance. 
 
@@ -428,10 +432,10 @@ $$\plog := \frac{\exp \left [ \frac{1}{N} \sum_{i=1}^N
 \frac{1}{N} \sum_{i=1}^N \log \left\{p_i / (1-p_i)\right\} \right
 ]} $$ This aggregator has been analyzed and utilized by many
 investigators (see, e.g., \citealt{dawid1995coherent, Genest,
-bacharach1975group}). Another alternative for the target quantity is
+bacharach1975group}). Alternatively, the target quantity could be
 the true probit score $\Phi^{-1}(\theta)$, where $\Phi(\cdot)$ is the
 cumulative distribution function (CDF) of a standard Gaussian
-distribution. This choice gives the {\em probit opinion pool}
+distribution. This gives the {\em probit opinion pool}
 $$\probit := \Phi \left\{ \frac{1}{N} \sum_{i=1}^N \Phi^{-1}
    (p_i) \right \} $$
 % In this case, the underlying probability model assumes that the forecasters are able
@@ -448,25 +452,24 @@ obtained in a straightforward manner by transforming, averaging, and
 transforming back.  The underlying probability model is also simple
 and very familiar.  
 
-Unfortunately, there are a number of disadvantages. First, the averaging aggregators target the mean of
-(potentially transformed) probability forecasts. The correct target,
-however, is the event indicator $\one_A$ that lies on the boundary of
-the sample space. Therefore, given that a measurement error model does not incorporate an explicit link between the forecasts and the correct quantity of interest, namely $\one_A$, important properties such as calibration cannot be expected from the resulting aggregators. 
-
-
-Second, the introduction of a nonlinear transformation biases the
+Unfortunately, there are a number of disadvantages. First, the introduction of a nonlinear transformation biases the
 estimator.  Therefore neither $\plog$ nor $\probit$ produces a
 calibrated forecast. Exactly how problematic this is depends on
 whether the bias is small relative to noise or other
-adjustments. In some cases,  the direction of the bias can be determined. For instance, any convex
-combination of calibrated forecasts is known to be both uncalibrated and under-confident, i.e., too close to $1/2$ \citep{Ranjan08}.
+adjustments. Second, the averaging aggregators target the mean of
+(potentially transformed) probability forecasts. The correct target,
+however, is the event indicator $\one_A$ that lies on the boundary of
+the sample space. Therefore, given that a measurement error model does not incorporate an explicit link between the forecasts and the correct quantity of interest, namely $\one_A$, important properties such as calibration cannot be expected from the resulting aggregators. In fact, even if the individual forecasts are calibrated, averaging-based aggregates will be necessary uncalibrated and under-confident, i.e., too close to $1/2$ \citep{Ranjan08}.
+
+%In some cases,  the direction of the bias can be determined. For instance, any convex
+%combination of calibrated forecasts is known to be both uncalibrated and under-confident, i.e., too close to $1/2$ \citep{Ranjan08}.
 %, i.e., 
 %too close to $1/2$. 
 %This applies to the averaging aggregators that are by nature different convex combinations of the
 %forecasts.
 
-Third, a more serious disadvantage is the implausibility of the
-underlying model. Relying on a true probability $\theta$ is vulnerable to
+Third,  the
+underlying model is rather implausible. Relying on a true probability $\theta$ is vulnerable to
 many philosophical debates, and even if one eventually manages to
 convince one's self of the existence of such a quantity, it is
 difficult to believe that the forecasters are actually seeing the
@@ -485,7 +488,7 @@ unrealistic structure on interpreted forecasts. Any averaging aggregator is also
 the convex hull of the individual forecasts, which further contradicts the
 interpreted signal framework \citep{parunak2013characterizing}.  Empirically, one sees
 for many datasets that an aggregator restricted to the convex hull
-will be far from optimal. 
+will be far from optimal.
 
 \subsection{Empirical Approaches}
 \label{ss:empirical}
@@ -587,7 +590,12 @@ optimal aggregate forecast.
 Let $\Omega = \{ A,B,C,D \} \times \{ 0,1 \}$ be a probability space
 with eight points.  Consider a measure $\mu$ that assigns
 probabilities $\mu (A,1) = a/4, \mu (A,0) = (1-a)/4$, $\mu (B,1) =
-b/4, \mu (B,0) = (1-b)/4$, and so forth. Define two events $S_1 = \{(A,0),(A,1),(B,0),(B,1) \}$ and $S_2 = \{(A,0),(A,1),(C,0),(C,1) \}$. Therefore, $S_1$ is the event that the first coordinate is
+b/4, \mu (B,0) = (1-b)/4$, and so forth. Define two events 
+\begin{align*}
+S_1 &= \{(A,0),(A,1),(B,0),(B,1) \}\\
+S_2 &= \{(A,0),(A,1),(C,0),(C,1) \}
+\end{align*}
+Therefore, $S_1$ is the event that the first coordinate is
 $A$ or $B$, and $S_2$ is the event that the first coordinate
 is $A$ or $C$. Consider two forecasters and suppose Forecaster $i$ observes $S_i$. Therefore the $i$th Forecaster's information set is
 given by the $\sigma$-field $\F_i$ containing $S_i$ and its
@@ -747,46 +755,34 @@ almost exclusively in this mode.
 
 \subsection{Preliminary Observations}
 \label{prelim}
-The remaining details of the Gaussian model are best described by first considering only two Forecasters $1$ and $2$ . Suppose they observe respective $\delta_1$ and
-$\delta_2$ portions of the Gaussian process and that their information overlap has size $\rho$. That is, $|B_1| = \delta_1$, $|B_2| = \delta_2$, and $|B_1 \cap B_2| = \rho$.
-\begin{figure}[t]
-%   \hspace{-2em}
-   \includegraphics[width = \textwidth]{N=2} % requires the graphicx package
-   \caption{Illustration of the Gaussian Partial Information Model with $2$ Forecasters.}
-   \label{diagram2}
-\end{figure}
-Figure \ref{diagram2} illustrates this setup.  In this diagram, the
-Gaussian process has been partitioned into four parts based on the
-forecasters' information sets: $U = X_{B_1 / B_2}$, $M = X_{B_1 \cap B_2}$, $V = X_{B_2 / B_1}$, and $W = X_{(B_1 \cup B_2)^c}$. The partition illustrates the additive nature of the information pool. In particular, $X_{B_1} = U + M$,  $X_{B_2} = M + V$, $X_S = U+M+V+W$, where $U, V, M, W$ are independent Gaussian random variables with respective variances
-$\delta_1-\rho$, $\delta_2-\rho$, $\rho$, and $1+\rho-\delta_1 -
-\delta_2$. The joint distribution of $X_{S}$, $X_{B_1}$, and $X_{B_2}$ is a
-multivariate Gaussian distribution:
-\begin{align}
-\left(\begin{matrix} X_S \\ X_{B_1}\\ X_{B_2} \end{matrix}\right) 
- &\sim \mathcal{N}\left(
- \boldsymbol{0},  \left(\begin{matrix} 
-1 & \delta_1 & \delta_2\\
-\delta_1 & \delta_1 &\rho\\
-\delta_2 & \rho & \delta_2
- \end{matrix}\right)\right) \label{twoforecasters}
-\end{align}
-Given that $X_S$ has mean zero, the prior probability for the event $A$ is
-$\P(X_S > 0) = \P(A) = 1/2$. The prior can be easily adjusted to any probability
-$\tilde{p}$ by letting $A = \{ X_S > \Phi^{-1}(1-\tilde{p}) \}$. This
-paper, however, focuses on the centered model with prior probability
-$1/2$ (see Remarks \ref{item:choice} and \ref{item:centered}).
-
-\begin{figure}[t]
-   \includegraphics[width = \textwidth]{N=N} % requires the graphicx package
-   \caption{Illustration of the Gaussian Partial Information Model with $N$ Forecasters.}
-   \label{diagramN}
-\end{figure}
-
-Consider now $N$ forecasters. Let $|B_i| = \delta_i$ be the amount of
+%The remaining details of the Gaussian model are best described by first considering only two Forecasters $1$ and $2$ . Suppose they observe respective $\delta_1$ and
+%$\delta_2$ portions of the Gaussian process and that their information overlap has size $\rho$. That is, $|B_1| = \delta_1$, $|B_2| = \delta_2$, and $|B_1 \cap B_2| = \rho$.
+%\begin{figure}[t]
+%%   \hspace{-2em}
+%   \includegraphics[width = \textwidth]{N=2} % requires the graphicx package
+%   \caption{Illustration of the Gaussian Partial Information Model with $2$ Forecasters.}
+%   \label{diagram2}
+%\end{figure}
+%Figure \ref{diagram2} illustrates this setup.  In this diagram, the
+%Gaussian process has been partitioned into four parts based on the
+%forecasters' information sets: $U = X_{B_1 / B_2}$, $M = X_{B_1 \cap B_2}$, $V = X_{B_2 / B_1}$, and $W = X_{(B_1 \cup B_2)^c}$. The partition illustrates the additive nature of the information pool. In particular, $X_{B_1} = U + M$,  $X_{B_2} = M + V$, $X_S = U+M+V+W$, where $U, V, M, W$ are independent Gaussian random variables with respective variances
+%$\delta_1-\rho$, $\delta_2-\rho$, $\rho$, and $1+\rho-\delta_1 -
+%\delta_2$. The joint distribution of $X_{S}$, $X_{B_1}$, and $X_{B_2}$ is a
+%multivariate Gaussian distribution:
+%\begin{align}
+%\left(\begin{matrix} X_S \\ X_{B_1}\\ X_{B_2} \end{matrix}\right) 
+% &\sim \mathcal{N}\left(
+% \boldsymbol{0},  \left(\begin{matrix} 
+%1 & \delta_1 & \delta_2\\
+%\delta_1 & \delta_1 &\rho\\
+%\delta_2 & \rho & \delta_2
+% \end{matrix}\right)\right) \label{twoforecasters}
+%\end{align}
+Consider $N$ forecasters. Let $|B_i| = \delta_i$ be the amount of
 information known by Forecaster $i$ and $|B_i
 \cap B_j| = \rho_{ij} = \rho_{ji}$ be the size of the information overlap between
-Forecasters $i$ and $j$. The multivariate Gaussian distribution (\ref{twoforecasters}) then naturally generalizes to the vector
-$\left(X_{S}, X_{B_1}, X_{B_2}, \dots, X_{B_N}\right)$ as follows:
+Forecasters $i$ and $j$. The vector
+$\left(X_{S}, X_{B_1}, X_{B_2}, \dots, X_{B_N}\right)$ then follows a multivariate Gaussian distribution:
 \begin{align}
 \left(\begin{matrix} X_S \\ X_{B_1}\\ \vdots \\ X_{B_N} \end{matrix}\right) &\sim \mathcal{N}\left( 
 %\left(\begin{matrix} 
@@ -805,8 +801,40 @@ $\left(X_{S}, X_{B_1}, X_{B_2}, \dots, X_{B_N}\right)$ as follows:
 \delta_N & \rho_{N,1} & \rho_{N,2} & \dots & \delta_N\\ 
  \end{array}\right)\right)  \label{Nforecasters}
 \end{align}
+%Given that $X_S$ has mean zero, the prior probability for the event $A$ is
+%$\P(X_S > 0) = \P(A) = 1/2$. The prior can be easily adjusted to any probability
+%$\tilde{p}$ by letting $A = \{ X_S > \Phi^{-1}(1-\tilde{p}) \}$. This
+%paper, however, focuses on the centered model with prior probability
+%$1/2$ (see Remarks \ref{item:choice} and \ref{item:centered}).
 
-One possible scenario of this general case is illustrated in Figure \ref{diagramN}. Note that $B_i$ does not have to be a contiguous segment of the unit
+\begin{figure}[t]
+        \centering
+        \begin{subfigure}[b]{0.45\textwidth}
+   \includegraphics[width = \textwidth]{N=N} % requires the graphicx package
+   \caption{Illustration of the Gaussian Partial Information Model with $N$ Forecasters.}
+   \label{diagramN}
+\end{subfigure}
+        \begin{subfigure}[b]{0.45\textwidth}
+   \includegraphics[width = \textwidth]{Marginals} % requires the graphicx package
+\caption{The Marginal Distribution of $p_i$ under Different Levels of 
+$\delta_i$.  The more the forecaster knows, i.e., the higher $\delta_i$ is, 
+the more the probability forecasts are concentrated around the extreme 
+points 0 and~1.}
+   \label{diagramN}
+\end{subfigure}
+\caption{Gaussian Partial Information Model.}
+\end{figure}
+%
+%\begin{figure}[t]
+%\centering
+%	\hspace{0em}\includegraphics{LegendMarginal}
+%
+% \includegraphics[width= 0.55\textwidth]{Marginals}
+%   
+%\label{marginals}
+%\end{figure}
+
+One possible distribution of information is illustrated in Figure \ref{diagramN}. Note that $B_i$ does not have to be a contiguous segment of the unit
 interval.  Instead, each forecaster can know any Borel measurable
 subset of the full information. Under the Gaussian model, however, the sub-matrix ${\bf \Sigma_{22}}$ is sufficient for the information structure. Therefore the exact identities of the Borel sets do not matter, and learning about the
 information among the forecasters is equivalent to estimating a
@@ -824,7 +852,7 @@ clearly requires that $0 \leq \rho_{ij} \leq \delta_i \leq 1$ for all $i \neq j$
 %\end{example}
 %In this example, simple triangle inequalities were enough to derive the necessary bounds for the parameters. However, as $N$ gets large, the structures that cannot be described with triangle inequalities anymore. 
 %Instead, under any number of forecasters $N$, the space of coherent information structures can be expressed as a convex hull of $2^N$ points. This description is provided in the following proposition. 
-The following proposition describes the space of coherent information structures as a convex hull of $2^N$ vertices.
+The following proposition describes the space of coherent information structures.
  The proof of this and other propositions are deferred to Appendix A.
 
 \begin{proposition}
@@ -842,15 +870,15 @@ polytope or the boolean quadric polytope. The correlation polytope is described 
 vertices in dimension $\text{dim}(\COR(N)) = \binom{N+1}{2}$.
 \end{proposition}
 The correlation polytope is known to have a very complex description in terms of a finite
-number of half-spaces \citep{padberg1989boolean, ziegler2000lectures}. Complete descriptions of the facets of $\COR(N)$ are known for $N \leq 7$ and conjectured for  $\COR(8)$ and $\COR(9)$ \citep{ziegler2000lectures, christofsmapo, pitowsky1991correlation}. For instance, 
+number of half-spaces. Complete descriptions of the facets of $\COR(N)$ are known for $N \leq 7$ and conjectured for  $\COR(8)$ and $\COR(9)$ \citep{ziegler2000lectures, christofsmapo, pitowsky1991correlation}. For instance, 
 \begin{align*}
-\COR(2) &= 
-\left\{ {\bf\Sigma}_{22} : 
-\begin{array}{ll}
- 0 \leq \rho_{12} \leq \min(\delta_1, \delta_2)\\
- \delta_1 + \delta_2 - \rho_{12} \leq 1
-\end{array}
-\right\}\\
+%\COR(2) &= 
+%\left\{ {\bf\Sigma}_{22} : 
+%\begin{array}{ll}
+% 0 \leq \rho_{12} \leq \min(\delta_1, \delta_2)\\
+% \delta_1 + \delta_2 - \rho_{12} \leq 1
+%\end{array}
+%\right\}\\
 \COR(3) &= 
 \left\{ {\bf\Sigma}_{22} : 
 \begin{array}{ll}
@@ -875,14 +903,14 @@ number of half-spaces \citep{padberg1989boolean, ziegler2000lectures}. Complete 
 % \delta_1 + \delta_2 + \delta_3 - \rho_{12} - \rho_{13} - \rho_{23} \leq 1
 %\end{cases}
 %\end{align*}
-for $i,j,k \in \{1,2,3\}$ such that $i \neq j$, $i \neq k$, and $j \neq k$. After this, $\COR(N)$ becomes overwhelmingly complex. For instance, $\COR(5)$ is known to have 56 facets while $\COR(9)$ has at least 12,246,651,158,320 facets. In fact, because the unconstrained quadratic
+for $i,j,k \in \{1,2,3\}$ such that $i \neq j$, $i \neq k$, and $j \neq k$.  $\COR(5)$ has 56 facets while $\COR(9)$ has at least 12,246,651,158,320 facets. In fact, because the unconstrained quadratic
 0-1 problem is NP-hard, it is probably hopeless to find a complete
 list of linear inequalities to describe $\COR(N)$ under general $N$
 \citep{deza1997geometry}. Fortunately, previous literature has introduced both linear and semidefinite relaxations of $\COR(N)$ (see, e.g., \citealt{laurent1997connections}). Such relaxations together with modern optimization techniques and sufficient data can be used to estimate the general information structure very efficiently. This, however, is not in the scope of this paper and is therefore left for subsequent work. 
 
+The Gaussian process construction exhibits additive behavior that aligns well with the intuition of an information pool. To make this more concrete, consider the partition $\{ C_\v := \cup_{i \in \v} B_i \setminus \cup_{i \notin \v} B_i : \v \subseteq \{1, \dots, N\}\}$. Each member $C_\v$ of this partition represents information known only by the forecasters indexed by $\v$. Therefore $B_i = \bigcup_{i \in \v} C_\v$ and $X_{B_i} = \sum_{i \in \v} X_{C_\v}$, where the union and summation iterate over all subsets $\v$. Therefore each $X_{B_i}$ can be regarded as a sum of information particles in the set $B_i$ and different $X_{B_i}$'s relate to each other in a manner that is consistent with this interpretation. 
 
-The final step in developing the Gaussian model is
-to link the pool of information with the probability forecasts. Given that $X_S | X_{B_i} \sim \mathcal{N}\left(X_{B_i}, 1-\delta_j\right)$, the $i$th Forecaster's probability estimate is
+To link the information pool with the forecasts, note that $X_S | X_{B_i} \sim \mathcal{N}\left(X_{B_i}, 1-\delta_j\right)$. The $i$th Forecaster's probability estimate is then
 \begin{align}
 p_i &= \P\left(A | \mathcal{F}_{i}\right) = \P\left(X_S > 0 | X_{B_i}\right) = \Phi\left( \frac{X_{B_i}}{\sqrt{1-\delta_i}}\right) \label{indFore}
 \end{align}
@@ -900,28 +928,20 @@ a correct forecast whose distribution has atoms of weight $1/2$ at
 zero and one. Therefore a forecaster with no information ``withdraws'' from the problem by predicting a non-informative probability $1/2$ while a forecaster with full information always predicts the correct outcome with absolute certainty. Figure \ref{marginals} illustrates the marginal
 distribution when $\delta_i$ is equal to $0.3$, $0.5$, and $0.7$.
 
-\begin{figure}[t]
-\centering
-	\hspace{0em}\includegraphics{LegendMarginal}
-
- \includegraphics[width= 0.55\textwidth]{Marginals}
-   \caption{The Marginal Distribution of $p_i$ under Different Levels of 
-$\delta_i$.  The more the forecaster knows, i.e., the higher $\delta_i$ is, 
-the more the probability forecasts are concentrated around the extreme 
-points 0 and~1.}
-\label{marginals}
-\end{figure}
+%\begin{figure}[t]
+%\centering
+%	\hspace{0em}\includegraphics{LegendMarginal}
+%
+% \includegraphics[width= 0.55\textwidth]{Marginals}
+%   \caption{The Marginal Distribution of $p_i$ under Different Levels of 
+%$\delta_i$.  The more the forecaster knows, i.e., the higher $\delta_i$ is, 
+%the more the probability forecasts are concentrated around the extreme 
+%points 0 and~1.}
+%\label{marginals}
+%\end{figure}
 
 \section{PROBABILITY EXTREMIZING}
 \label{extremizing}
-This section first introduces the oracular aggregator $p'$ for the
-Gaussian model and then uses it to study
-extremizing of the probit opinion pool $\probit$. The probit opinion 
-pool  was chosen for the analysis because a) it is arguably more
-reasonable than the simple average $\bar{p}$; and b) it is very
-similar to the logarithmic opinion pool $\plog$ but results in cleaner
-analytic expressions. Even though the results are mainly targeted at forecasting practitioners, the discussion serves as an illustration on how the oracular aggregator can be used to benchmark and understand other aggregation techniques. 
-
 \subsection{Oracular Aggregator for the Gaussian Model}
 \label{oracular}
 %We show that, under two specific Gaussian partial 
@@ -930,40 +950,43 @@ analytic expressions. Even though the results are mainly targeted at forecasting
 Recall from Section \ref{PIFintro} that the oracular aggregator is the
 conditional expectation of $\one_A$ given all the information known to the
 forecasters. Under the Gaussian model, this can be
-emulated with an oracle forecaster whose information set is
-$B' := \bigcup_{i=1}^N B_i$.  Appending this to the multivariate
-Gaussian distribution~(\ref{Nforecasters}) gives
-\begin{align}
-\left(\begin{matrix} X_S \\ X_{B'} \\ X_{B_1}\\ \vdots \\ X_{B_N} 
- \end{matrix}\right) &\sim \mathcal{N}\left( 
- \boldsymbol{0}, 
-% \left(\begin{matrix} 
-%\Sigma_{11}' & \Sigma_{12}'\\
-%\Sigma_{21}' & \Sigma_{22}\\
-% \end{matrix}\right) 
-% =
-% 
- \left(\begin{array}{c c| c c cc }
-1 & \delta' & \delta_1 & \delta_2 & \dots & \delta_N  \\ 
-\delta' & \delta' & \delta_1 & \delta_2 & \dots & \delta_N  \\ \hline
-\delta_1& \delta_1 & \delta_1 &\rho_{1,2} & \dots & \rho_{1,N}   \\ 
-\delta_2 & \delta_2 &\rho_{2,1} & \delta_2 & \dots & \rho_{2,N}  \\ 
-\vdots &\vdots & \vdots & \vdots & \ddots & \vdots  \\ 
-\delta_N &\delta_N & \rho_{N,1} & \rho_{N,2} & \dots & \delta_N\\ 
- \end{array}\right)\right), \label{oracleN}
-\end{align}
-where $X_{B'}$ is the information known to the oracle and $\delta' =
-|B'|$. The oracular aggregator is then nothing more than the probability forecast made by the oracle. That is,
+emulated with a hypothetical oracle forecaster whose information set is
+$B' := \bigcup_{i=1}^N B_i$.  
+%Appending this to the multivariate
+%Gaussian distribution~(\ref{Nforecasters}) gives
+%\begin{align}
+%\left(\begin{matrix} X_S \\ X_{B'} \\ X_{B_1}\\ \vdots \\ X_{B_N} 
+% \end{matrix}\right) &\sim \mathcal{N}\left( 
+% \boldsymbol{0}, 
+%% \left(\begin{matrix} 
+%%\Sigma_{11}' & \Sigma_{12}'\\
+%%\Sigma_{21}' & \Sigma_{22}\\
+%% \end{matrix}\right) 
+%% =
+%% 
+% \left(\begin{array}{c c| c c cc }
+%1 & \delta' & \delta_1 & \delta_2 & \dots & \delta_N  \\ 
+%\delta' & \delta' & \delta_1 & \delta_2 & \dots & \delta_N  \\ \hline
+%\delta_1& \delta_1 & \delta_1 &\rho_{1,2} & \dots & \rho_{1,N}   \\ 
+%\delta_2 & \delta_2 &\rho_{2,1} & \delta_2 & \dots & \rho_{2,N}  \\ 
+%\vdots &\vdots & \vdots & \vdots & \ddots & \vdots  \\ 
+%\delta_N &\delta_N & \rho_{N,1} & \rho_{N,2} & \dots & \delta_N\\ 
+% \end{array}\right)\right), \label{oracleN}
+%\end{align}
+%where $X_{B'}$ is the information known to the oracle and $\delta' =
+%|B'|$.
+ The oracular aggregator is then nothing more than the probability forecast made by the oracle. That is,
  \begin{align*}
-p' &= \P(A |  \mathcal{F}') = \P(X_S > 0 |  X_{B'}) = \Phi\left( \frac{X_{B'}}{\sqrt{1-\delta'}} \right)
+p' &= \P(A |  \mathcal{F}') = \P(X_S > 0 |  X_{B'}) = \Phi\left( \frac{X_{B'}}{\sqrt{1-\delta'}} \right),
 \end{align*}
+where $\delta' = |B'|$.
 
-This aggregator provides a reference point that allows us to identify information structures under which other aggregation techniques perform relatively well. In particular, if an aggregator is likely to be near $p'$ under a given ${\bf\Sigma}_{22}$, then that information structure reflects favorable conditions for the aggregator. Such a direct comparison, however, requires a value for $\delta'$ in terms of ${\bf\Sigma}_{22}$. This is always available when $N = 2$. In this case, $\delta' = \delta_1 + \delta_2 - \rho_{12}$. If $N > 2$,  the value of $\delta'$ is generally not uniquely available but can be determined up to an interval. To see this, recall the historical Boole Problem (\citealt{boole1854investigation}): 
-
-\begin{quote}
-\textbf{Boole Problem.} Consider $N$ events $A_i$ for $i = 1, \dots, N$. Denote the marginal probabilities  with $p_i := \P(A_i)$ and the joint probabilities with $p_{ij} := \P(A_i \cap A_j)$. What is the best estimation of $\P(A_1 \cup \dots \cup A_N)$ in terms of $p_i$'s and $p_{ij}$'s?
-\end{quote}
-As was mentioned earlier in Remark (\ref{item:pool}), representing the pool of information with the unit interval $S = [0,1]$ allows us to interpret $\delta_i$'s as marginal probabilities for some $N$ events and $\rho_{ij}$'s as their pairwise joint probabilities. Therefore  any previously suggested answer to the Boole Problem can be used to bound $\delta'$ in terms of ${\bf\Sigma}_{22}$. For instance, \cite{deza1997geometry} derive the bounds
+This aggregator provides a reference point that allows us to identify information structures under which other aggregation techniques perform relatively well. In particular, if an aggregator is likely to be near $p'$ under a given ${\bf\Sigma}_{22}$, then that information structure reflects favorable conditions for the aggregator. Such a direct comparison, however, requires a value for $\delta'$ in terms of ${\bf\Sigma}_{22}$. This is always available when $N = 2$. In this case, $\delta' = \delta_1 + \delta_2 - \rho_{12}$. If $N > 2$,  the value of $\delta'$ is generally not uniquely available but can be determined up to an interval. To see this, recall the historical Boole Problem \citep{boole1854investigation}: For $N$ events $A_i$ for $i = 1, \dots, N$, what is the best estimation of $\P(A_1 \cup \dots \cup A_N)$ in terms of $\P(A_i)$'s and $\P(A_i \cap A_j)$'s?
+%What is the best estimation of 
+%\begin{quote}
+%Consider $N$ events $A_i$ for $i = 1, \dots, N$. Denote the marginal probabilities  with $p_i := \P(A_i)$ and the joint probabilities with $p_{ij} := \P(A_i \cap A_j)$. What is the best estimation of $\P(A_1 \cup \dots \cup A_N)$ in terms of $p_i$'s and $p_{ij}$'s? \citep{boole1854investigation}
+%\end{quote}
+As was mentioned earlier in Remark (\ref{item:pool}), representing the pool of information with the unit interval $S = [0,1]$ allows us to interpret $\delta_i$'s as marginal probabilities for some $N$ events and $\rho_{ij}$'s as their pairwise joint probabilities. Therefore any answer to the Boole Problem can be used to bound $\delta'$ in terms of ${\bf\Sigma}_{22}$. For instance, \cite{deza1997geometry} derive the bounds
 %according to \cite{deza1997geometry}  several authors, including \cite{chung1941probability, dawson1967inequality, galambos1977bonferroni}, 
 %\cite{galambos1977bonferroni}
 %discuss the lower bound
@@ -987,11 +1010,21 @@ Such results make $p'$ a tangible benchmark that can be used to analyze other ag
 
 \subsection{General Information Structure}
 %This section begins the analysis of probability extremizing by making some preliminary observations under the general information structure. First, however, recall that 
+%Even though the results are mainly targeted at forecasting practitioners, the discussion serves as an illustration on how the oracular aggregator can be used to benchmark and understand other aggregation techniques. 
+
 A probability $p$ is said to be \textit{extremized} by another probability $q$ if and only
 if $q$ is closer to $0$ when $p \leq 1/2$ and closer to $1$ when $p
 \geq 1/2$. This translates to the probit scores as follows: $q$ extremizes $p$ if and only if  $\Phi^{-1}(q)$ is on the same side but further away from zero than $\Phi^{-1}(p)$. The amount of (multiplicative) extremization can then be quantified with the {\em probit extremization ratio} defined as 
- $\alpha(q,p) := \Phi^{-1}(q) / \Phi^{-1} (p)$. Given that no aggregator can improve upon the oracular aggregator, it provides an ideal
-reference point for analyzing extremization. Therefore, of particular interest is the case
+ $\alpha(q,p) := \Phi^{-1}(q) / \Phi^{-1} (p)$. 
+ 
+ 
+ Given that no aggregator can improve upon the oracular aggregator, it provides an ideal
+reference point for analyzing extremization. This section specifically uses it to study
+extremizing of the probit opinion pool $\probit$. The probit opinion 
+pool was chosen because a) it is arguably more
+reasonable than the simple average $\bar{p}$; and b) it is very
+similar to the logarithmic opinion pool $\plog$ but results in cleaner
+analytic expressions. Therefore, of particular interest is the case
 \begin{align}
 \alpha(p', \probit)  = \frac{P'}{\frac{1}{N}\sum_{i=1}^N P_{i}}, \label{alpha}
 \end{align}
@@ -1005,39 +1038,7 @@ that is, it is possible to find a set of forecasts and an information structure 
 \mathbb{R}$.  Evidently, extremizing is not guaranteed to always
 improve $\probit$.  To understand when extremizing is
 likely to be beneficial, it is necessary to derive the probability
-distribution of $\alpha$.  First, given that
-\begin{align*}
-P' &\sim \mathcal{N}\left(0, \sigma^2_{1} = 
-  \frac{\delta'}{1-\delta'} \right)\\ \frac{1}{N}\sum_{i=1}^N P_{i} 
-&\sim \mathcal{N}\left(0, \sigma^2_{2} =\frac{1}{N^2} 
-  \left\{ \sum_{i=1}^N \frac{\delta_i}{1-\delta_i} 
-  + 2 \sum_{i,j: i<j} \frac{\rho_{ij}}{\sqrt{(1-\delta_j)(1-\delta_i)}}
-  \right\} \right),
-\end{align*}
-the amount of extremizing $\alpha$ is a ratio of two correlated
-Gaussian random variables.  The Pearson product-moment correlation
-coefficient for them is
-\begin{align*}
-\kappa  &= 
-  \frac{ \sum_{i=1}^N \frac{\delta_i}{\sqrt{1-\delta_i}}}
-  {\sqrt{\delta'  \left\{ \sum_{i=1}^N \frac{\delta_i}{1-\delta_i} + 2 
-  \sum_{i,j: i<j} \frac{\rho_{ij}}{\sqrt{(1-\delta_j)(1-\delta_i)}}\right\}}}
-  \; 
-\end{align*}
-It follows that $\alpha$ has a Cauchy distribution as long as
-$\sigma_1 \neq 1$, $\sigma_2 \neq 1$, or $\kappa \pm 1$ (see, e.g.,
-\citealt{cedilnik2004distribution}).  These
-conditions are very mild under the Gaussian model.
-For instance, if no forecaster knows as much as the oracle, the
-conditions are satisfied.  Consequently, the probability density
-function of $\alpha$ is
-\begin{align*}
-f(\alpha | x_0, \gamma) &= \frac{1}{\pi} 
-  \frac{\gamma}{(\alpha-x_0)^2+\gamma^2}, 
-\end{align*}
-where $x_0 = \kappa \sigma_1/\sigma_2$ and $\gamma = \sqrt{1-\kappa^2}\sigma_1/\sigma_2$. The parameter $x_0$ represents the location (the median and mode) and
-$\gamma$ specifies the scale (half the interquartile range) of the
-Cauchy distribution. This leads to the following proposition.  
+distribution of $\alpha$. This leads to the following proposition.  
 
 \begin{proposition}
 \label{positiveProbThm}
@@ -1048,6 +1049,7 @@ $i \neq j$. Consequently, if $\delta_i \neq \delta_j$ for some
 $i \neq j$, then the probability that the probit opinion pool $\probit$
 requires extremizing is $\P\left(\alpha > 1 | {\bf\Sigma}_{22}, \delta'\right)$ which
 is strictly greater than $1/2$.
+\textcolor{red}{Must add the Cauchy distribution parameter somewhere}
 \end{proposition}
 \noindent
 This proposition shows that, on any non-trivial problem, a small
@@ -1067,72 +1069,80 @@ probability averaging without extremizing. The next two subsections examine spec
 %no information; and b) the forecasters share all their
 %information. First, consider the latter case where all the information
 %sets are the same,
-Assume that the forecasters share all their information, i.e.,   $B_{i} = B_j$ for all $i \neq j$. Consequently, all the forecasts are the same, and $p' = p'' = \probit$.
+If the forecasters share all their information, i.e.,   $B_{i} = B_j$ for all $i \neq j$,  all the forecasts are identical and $p' = p'' = \probit$.
 %all
 %the probability forecasts $\{p_i : i = 1, \dots, N\}$ are the same,
 %and the probit opinion pool, the oracular aggregator, and the revealed
 %aggregator equal to this common probability forecast. 
-Therefore no
-extremization is needed. Given that the oracular aggregator varies
-smoothly over the space of information structures, averaging
-techniques, such as the probit opinion pool, can be expected to work
-well when the forecasts are based on very similar sources of
-information. This result is supported by the fact that the
-measurement error framework, which essentially describes the
-forecasters as making numerous small mistakes while applying the same
-procedure to the same data (recall Section \ref{ss:measurement}),
-results in averaging-based aggregators.
-
-
-
-
-
-Next, consider the other logical extreme where the forecasters share nothing, i.e.,  $|B_{i} \cap B_{j}| = 0$ for all $i \neq j$. Such
-an information structure is likely to arise if a team of forecasters
-strategically decide to access and study disjoint sources of
-information. The resulting information structure ${\bf\Sigma}_{22}$ is
+Consequently, no
+extremization is needed. Next consider the other logical extreme where the forecasters share nothing, i.e.,  $|B_{i} \cap B_{j}| = 0$ for all $i \neq j$.
+% Such
+%an information structure is likely to arise if a team of forecasters
+%strategically decide to access and study disjoint sources of
+%information. 
+The resulting information structure ${\bf\Sigma}_{22}$ is
 diagonal and hence coherent if and only if $\sum_{i=1}^N \delta_i
-\leq 1$. In this case, the additive nature of the Gaussian process gives $\delta' = \sum_{i=1}^N \delta_i$ and $X_{B'} = \sum_{i=1}^N X_{B_i}$. Consequently, the revealed and  the oracular aggregator coincide. That is,
+\leq 1$. In this case, the additive nature of the Gaussian process gives $\delta' = \sum_{i=1}^N \delta_i$ and $X_{B'} = \sum_{i=1}^N X_{B_i}$. Thus, 
 %Given that under non-overlapping information 
 %$\delta' = \sum_{j=1}^N \delta_j$ and $X_{B'} = \sum_{j=1}^N X_{B_j}$, 
  \begin{align*}
 p' &= p'' =  \Phi\left( \frac{\sum_{i=1}^N X_{B_i}}
   {\sqrt{1- \sum_{i=1}^N \delta_i}} \right) 
 \end{align*}
-This aggregator can be described in two steps: First, the numerator conducts voting, or range voting to be more specific (see, e.g.,
-\citealt{fishkin1997voice}), where the votes are weighted according to
-the importance of the forecasters' private information.  If this sum falls below
-$0.0$ (or above $0.0$), the consensus believes that the event will not
-happen (or will happen). Second, the
+This aggregator can be described in two steps: First, the numerator conducts range voting,
+%(see, e.g.,
+%\citealt{fishkin1997voice}),
+ where the votes are weighted according to
+the importance of the forecasters' private information.  
+%If this sum falls below
+%$0.0$ (or above $0.0$), the consensus believes that the event will not
+%happen (or will happen). 
+Second, the
 denominator extremizes the consensus according to the total
-amount of information in the group. For instance, if the forecasters
-know all the information, i.e., $\sum_{i=1}^N \delta_i = 1$, their vote
-deterministically indicates whether the event $A$ happens or not. This
-aggregator clearly leads to very extreme forecasts. Therefore
-more extreme techniques, such as voting, can be expected to work well
-if the forecasters use widely different information sets.
+amount of information in the group. 
+%For instance, if the forecasters
+%know all the information, i.e., $\sum_{i=1}^N \delta_i = 1$, their vote
+%deterministically indicates whether the event $A$ happens or not. 
+This
+aggregator clearly leads to very extreme forecasts. 
 
+
+%Therefore
+%more extreme techniques, such as voting, can be expected to work well
+%if the forecasters use widely different information sets.
+
+Given that the oracular aggregator varies
+smoothly over the space of information structures, the analysis suggests a spectrum of aggregators indexed by
+the information overlap.
+%averaging
+%techniques, such as the probit opinion pool, can be expected to work
+%well when the forecasts are based on very similar sources of
+%information. 
 %Combining this with our earlier discussion leads to the following observation.
-In summary, the analysis suggests a spectrum of aggregators indexed by
-the information overlap.  The optimal aggregator undergoes a smooth
+%In summary, the analysis suggests a spectrum of aggregators indexed by
+%the information overlap.  
+In particular, the optimal aggregator undergoes a smooth
 transformation from averaging to voting as
 the information overlap decreases from full overlap towards the point
-of no overlap.
-%This is summarized in the following observation.
-%%\begin{observation}
-%The information structures index a spectrum of aggregators. 
-That is,
+of no overlap:
 \begin{center}
+\singlespacing
+\vspace{-1em}
 \begin{tabular}{ccc}
 %\stackrel{\text{ \normalsize full information overlap}}{\stackrel{\text{\normalsize no extremization}}{averaging}} && \Leftrightarrow  && \stackrel{\text{ no information overlap}}{\text{full extremization}}
 %high information overlap & \multirow{2}{*}{$\Leftrightarrow$} & low information overlap\\
 high information overlap & & low information overlap\\
 low extremization & {\Large $\Longleftrightarrow$} & high extremization \\
-averaging  & & voting\\
+averaging  & & voting
 \end{tabular}
 \end{center}
+This result is supported by the fact that the
+measurement error framework, which essentially describes the
+forecasters as making numerous small mistakes while applying the same
+procedure to the same data (recall Section \ref{ss:measurement}),
+results in averaging-based aggregators.
 %\end{observation}
-This observation gives qualitative guidance in real-world settings
+The spectrum provides qualitative guidance in real-world settings
 where the general level of overlap can be said to be high or low.  For
 instance, predictions from a group of forecasters working together or in
 close collaboration can be averaged while predictions from a diverse
@@ -1180,37 +1190,40 @@ aggregated via more extreme techniques such as voting. For a concrete illustrati
 
 To analyze the intermediate scenarios with partial information sharing among the forecasters, it is necessary to reduce the number of parameters in ${\bf\Sigma}_{22}$. A natural approach is to assume that the
 information sets have the same size and that the amount of pairwise overlap
-is constant.
+is constant. More specifically, if $\delta$ is the amount of information known by a forecaster and
+$\lambda$ is the shared proportion of this information, then $|B_{i}| =
+\delta$, $|B_{i} \cap B_{j}| = \lambda \delta$ for all $i \neq
+j$, and  ${\bf\Sigma}_{22} = {\bf 1}_N(\delta - \lambda \delta) + {\bf J}_N \lambda \delta$, where ${\bf J}_N$ is $N \times N$ matrix of ones.
 %Here, we compare $\probit$ to the %oracular aggregator; in Section~\ref{compound2} 
 %we compare the revealed aggregator to the probit opinion pool.  
 This structure would hold if, for example, the
 forecasters sampled information sources from a common distribution.
 %The resulting form of ${\bf\Sigma}_{22}$ is called \textit{compound
 %symmetric}. 
-Incorporating these assumptions in the multivariate Gaussian distribution
-(\ref{oracleN}) gives
-% $\rho \in [\max \{(N-T)/(T(N-1)), 0\},1] = A_\rho$. 
-\begin{align}
-\left(\begin{matrix} X_{S} \\ X_{B'}\\ X_{B_1}\\ \vdots \\ X_{B_N} \end{matrix}\right) &\sim \mathcal{N}\left( 
- \boldsymbol{0}, 
-% \left(\begin{matrix} 
-%\Sigma_{11}' & \Sigma_{12}'\\
-%\Sigma_{21}' & {\bf\Sigma}_{22}\\
-% \end{matrix}\right) 
-% =
- \left(\begin{array}{cc|cccc}
-1 & \delta'& \delta & \delta & \dots & \delta  \\ 
-\delta' & \delta' & \delta & \delta & \dots & \delta  \\ \hline
-\delta & \delta &\delta & \lambda\delta & \dots & \lambda\delta   \\ 
-\delta& \delta & \lambda\delta & \delta & \dots & \lambda\delta  \\ 
-\vdots &\vdots & \vdots & \vdots & \ddots & \vdots  \\ 
-\delta &\delta & \lambda\delta & \lambda\delta & \dots & \delta\\ 
- \end{array}\right)\right) \label{symmetric}
-\end{align}
-where $\delta$ is the amount of information known by a forecaster and
-$\lambda$ is the shared proportion of this information; that is, $|B_{i}| =
-\delta$ and $|B_{i} \cap B_{j}| = \lambda \delta$ for all $i \neq
-j$.
+%Incorporating these assumptions in the multivariate Gaussian distribution
+%(\ref{oracleN}) gives
+%% $\rho \in [\max \{(N-T)/(T(N-1)), 0\},1] = A_\rho$. 
+%\begin{align}
+%\left(\begin{matrix} X_{S} \\ X_{B'}\\ X_{B_1}\\ \vdots \\ X_{B_N} \end{matrix}\right) &\sim \mathcal{N}\left( 
+% \boldsymbol{0}, 
+%% \left(\begin{matrix} 
+%%\Sigma_{11}' & \Sigma_{12}'\\
+%%\Sigma_{21}' & {\bf\Sigma}_{22}\\
+%% \end{matrix}\right) 
+%% =
+% \left(\begin{array}{cc|cccc}
+%1 & \delta'& \delta & \delta & \dots & \delta  \\ 
+%\delta' & \delta' & \delta & \delta & \dots & \delta  \\ \hline
+%\delta & \delta &\delta & \lambda\delta & \dots & \lambda\delta   \\ 
+%\delta& \delta & \lambda\delta & \delta & \dots & \lambda\delta  \\ 
+%\vdots &\vdots & \vdots & \vdots & \ddots & \vdots  \\ 
+%\delta &\delta & \lambda\delta & \lambda\delta & \dots & \delta\\ 
+% \end{array}\right)\right) \label{symmetric}
+%\end{align}
+%where $\delta$ is the amount of information known by a forecaster and
+%$\lambda$ is the shared proportion of this information; that is, $|B_{i}| =
+%\delta$ and $|B_{i} \cap B_{j}| = \lambda \delta$ for all $i \neq
+%j$.
 
 
 Domain restrictions must be placed on $\delta$ and $\lambda$ to ensure a coherent ${\bf\Sigma}_{22}$. Clearly, any $\delta \in [0,1]$ is plausible. Conditional on such $\delta$, however, the overlap parameter $\lambda$ must be within a subinterval of $[0,1]$. The upper bound of this subinterval is always $1$ because the 
@@ -1229,23 +1242,24 @@ coherent if and only if
    \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right] 
    \label{rhoDomain}
 \end{align}
+
 %where the open upper bound on $\lambda$ ensures a non-singular ${\bf\Sigma}_{22}$.
-Under these simplifications, the extremization ratio (\ref{alpha})
-becomes
-\begin{align*}
-\alpha &= \frac{X_{B'}}{\frac{1}{N}\sum_{j=1}^N X_{B_j}} \sqrt{\frac{1-\delta}{1-\delta'}} \sim \text{Cauchy}(x_0, \gamma)
-\end{align*}
- with
-\begin{align*}
-x_0 &= \frac{N}{1+(N-1)\lambda}  \sqrt{\frac{1-\delta}{1-\delta'}} &&& \text{ and } &&& \gamma &=  \sqrt{\frac{N(\delta' + \delta' \lambda (N-1) - \delta N)}{\delta (\lambda (N-1) + 1)^2}}\sqrt{\frac{1-\delta}{1-\delta'}}
-\end{align*}
+Under symmetric information, the location parameter of the Cauchy distribution of $\alpha$
+is
+%\begin{align*}
+%\alpha &= \frac{X_{B'}}{\frac{1}{N}\sum_{j=1}^N X_{B_j}} \sqrt{\frac{1-\delta}{1-\delta'}} \sim \text{Cauchy}(x_0, \gamma)
+%\end{align*}
+% with
+%\begin{align*}
+$x_0 = N/(1+(N-1)\lambda)  \sqrt{(1-\delta)/(1-\delta')}$. 
+% &&& \text{ and } &&& \gamma &=  \sqrt{\frac{N(\delta' + \delta' \lambda (N-1) - \delta N)}{\delta (\lambda (N-1) + 1)^2}}\sqrt{\frac{1-\delta}{1-\delta'}}
+%\end{align*}
 %The location parameter $x_0$ can be lower bounded by replacing
 %$\delta'$ with $\delta'_{min}$ when $N > 2$. Making this substitution and recalling
 %Proposition \ref{positiveProbThm} gives us
 %\begin{align}
 %x_{min} := \max\left\{ \frac{N}{1+(N-1)\lambda}  \sqrt{\frac{1-\delta}{1-\delta'_{min}}}, 1 \right\} \leq x_0 \label{bound}
 %\end{align}
-
 \begin{figure}[t]
 %\centering
 %%\hspace*{2em}  $\log(\alpha)$
@@ -1273,8 +1287,7 @@ x_0 &= \frac{N}{1+(N-1)\lambda}  \sqrt{\frac{1-\delta}{1-\delta'}} &&& \text{ an
         \caption{Extremization Ratio under Symmetric Information. The amount of extremizing follows a Cauchy$(x_0, \gamma)$, where $x_0$ is a location parameter and $\gamma$ is a scale parameter. This figure considers  $N = 2$ experts and shows $\log(x_0)$ and $\P(\alpha > 1 | {\bf\Sigma}_{22})$ under all plausible combinations of $\delta$ and $\lambda$. No approximation is needed as $\delta'$ is uniquely determined by ${\bf\Sigma}_{22}$ when $N = 2$.}
         \label{LevelplotsOracle}
 \end{figure}
-
-Of particular interest is the location $x_0$ and how it changes as a function of the model parameters. The analysis is somewhat hindered by the unknown details of the dependence between $\delta'$ and the other parameters $N$, $\delta$, and $\lambda$. However, given that $\delta'$ is defined as $\delta' = |\cup_{i=1}^N B_i|$, its value  increases in $N$ and $\delta$ but decreases in $\lambda$. In particular, as $\delta \to 1$, the value of $\delta'$ converges to $1$ at least as fast as $\delta$ because  $\delta' \geq \delta$. Therefore the term $\sqrt{(1-\delta)/(1-\delta')}$ and, consequently, $x_0$ increase in $\delta$. Similarly, $x_0$ can be shown to increase in $N$ but to decrease in $\lambda$. Therefore $x_0$ and $\delta'$ move together, and the amount of extremizing
+Of particular interest is to understand how this changes as a function of the model parameters. The analysis is somewhat hindered by the unknown details of the dependence between $\delta'$ and the other parameters $N$, $\delta$, and $\lambda$. However, given that $\delta'$ is defined as $\delta' = |\cup_{i=1}^N B_i|$, its value  increases in $N$ and $\delta$ but decreases in $\lambda$. In particular, as $\delta \to 1$, the value of $\delta'$ converges to $1$ at least as fast as $\delta$ because  $\delta' \geq \delta$. Therefore the term $\sqrt{(1-\delta)/(1-\delta')}$ and, consequently, $x_0$ increase in $\delta$. Similarly, $x_0$ can be shown to increase in $N$ but to decrease in $\lambda$. Therefore $x_0$ and $\delta'$ move together, and the amount of extremizing
 can be expected to increase in $\delta'$.  As the Cauchy distribution is symmetric around $x_0$, the probability $\P(\alpha > 1 | {\bf\Sigma}_{22})$ behaves similarly to $x_0$ and also increases in $\delta'$.  
 %The rate of increase, however, is not the same because it also depends on $\gamma$.  
 Figure \ref{LevelplotsOracle} illustrates these relations by plotting both $\log(x_0)$ and $\P(\alpha > 1 | {\bf\Sigma}_{22})$ for $N = 2$ forecasters under all plausible combinations of $\delta$ and $\lambda$. High values have been censored to keep the scale manageable. Note that the results are completely general for the two-forecaster case, apart from the assumption $\delta_1 = \delta_2$. Relaxing this assumption does not change the qualitative nature of the results.
@@ -1402,14 +1415,14 @@ collaboration, sharing of resources, and problem difficulty.
 
 \section{PROBABILITY AGGREGATION}
 \label{aggregation}
-This section first derives the revealed aggregator $p''$ for the
-general Gaussian model. By further assuming
-exchangeability among the forecasts, the revealed aggregator can be
-applied to any single pool of probabilities. After proving some
-properties of this aggregator, it is
-tested on real-world forecasts of one-time events. This
-illustrates one approach to estimating the information structures, and also provides some empirical evidence in favor of the
-partial information model.
+%This section first derives the revealed aggregator $p''$ for the
+%general Gaussian model. By further assuming
+%exchangeability among the forecasts, the revealed aggregator can be
+%applied to any single pool of probabilities. After proving some
+%properties of this aggregator, it is
+%tested on real-world forecasts of one-time events. This
+%illustrates one approach to estimating the information structures, and also provides some empirical evidence in favor of the
+%partial information model.
 % We then apply 
 %this to the symmetric case, for which the oracular aggregator 
 %was discussed in Section~\ref{compound}.  The revealed aggregator, 
@@ -1431,9 +1444,9 @@ coherent overlap structure such that ${\bf\Sigma}_{22}^{-1}$ exists, then $X_{S}
 % \bar{\Sigma}&= \Sigma_{11} - \Sigma_{12} {\bf\Sigma}_{22}^{-1} \Sigma_{21} 
 % = 1 - \Sigma_{12} {\bf\Sigma}_{22}^{-1} \Sigma_{21}   \, 
 %\end{align*}
-These expressions follow directly from the formulas of
-the conditional multivariate Gaussian distribution (see, 
-e.g., \citealt{ravishanker2001first}). 
+%These expressions follow directly from the formulas of
+%the conditional multivariate Gaussian distribution (see, 
+%e.g., \citealt{ravishanker2001first}). 
 %\citealt[Result~5.2.10, page~156]{ravishanker2001first}). 
 The revealed aggregator then becomes
 \begin{align}
@@ -1556,14 +1569,14 @@ elected to the group of super-forecasters during the first year of the project.
 %Our evaluation, however, only uses forecasts that were made
 %during the second year. 
 Therefore, the individual forecasts are
-likely, but not guaranteed, to be relatively good. During the second year, there were 44 super-forecasters making predictions about 123 events with two possible outcomes. For instance, some of
-the questions were \textit{Will France withdraw at least 500 troops from Mali before 10 April 2013?} and \textit{Will a banking union be approved in the EU council before 1 March 2013?}
-
- The forecasters were allowed to update their predictions as long as the
-questions remained active. Some questions were active longer than the
-others. More specifically, the number of active days ranged from 3 to 284 days,
-with a mean of 96 days. The super-forecasters tended to update their predictions quite frequently. Given that this paper does not focus on dynamic
-data, only the most recent prediction made within the first three days of each problem is considered.  
+likely, but not guaranteed, to be relatively good. During the second year, there were 44 super-forecasters making predictions about  123 geopolitical events with two possible outcomes. For instance, some of
+the questions were: ``Will France withdraw at least 500 troops from Mali before 10 April 2013?", and ``Will a banking union be approved in the EU council before 1 March 2013?"  The forecasters were allowed to update their predictions as long as the
+questions remained active. 
+%Some questions were active longer than the
+%others. More specifically, the number of active days ranged from 3 to 284 days,
+%with a mean of 96 days. The super-forecasters tended to update their predictions quite frequently. 
+The number of active days ranged from 3 to 284 days, with a mean of 96 days. 
+Only the most recent prediction made within the first three days of each problem is considered.  
 In the resulting
 dataset, the number of forecasts per event ranged from 17 to 34
 forecasts, with a mean of 24.2 forecasts. To avoid infinite log-odds
@@ -1592,7 +1605,7 @@ BS &= REL - RES + UNC\\
 calibration. The resolution term, on the other hand, describes how far
 the aggregate forecasts are from the naive forecast $\bar{o}$ (equal to $0.187$ in our case). Typically the goal is
 to seek for an aggregate forecast that maximizes resolution subject to
-being calibrated (see, e.g., \citealt{gneiting2007probabilistic}). The
+being calibrated (\citealt{gneiting2007probabilistic}). The
 uncertainty term quantifies overall uncertainty among the events and
 does not depend on the aggregate forecasts.
  
@@ -1716,313 +1729,7 @@ certainly be pursued further, and the results tested against other high
 performing aggregators.
 
 
-%\section*{Acknowledgments} 
-%This research was supported in part by NSF grant \# DMS-1209117 and a research contract to the University
-%of Pennsylvania and the University of California from the Intelligence
-%Advanced Research Projects Activity (IARPA) via the Department of
-%Interior National Business Center contract number D11PC20061. The
-%U.S. Government is authorized to reproduce and distribute reprints for
-%Government purposes notwithstanding any copyright annotation
-%thereon. Disclaimer: The views and conclusions expressed herein are
-%those of the authors and should not be interpreted as necessarily
-%representing the official policies or endorsements, either expressed
-%or implied, of IARPA, DoI/NBC, or the U.S. Government.
 
-%We deeply appreciate the project management skills and work of Terry
-%Murray and David Wayrynen, which went far beyond the call-of-duty on
-%this project.
-
-\appendix
-\section*{APPENDIX A: PROOFS}
-\label{appendixA}
-
-\renewcommand{\thesubsection}{A.\arabic{subsection}}
-%\renewcommand{\thesubsection}{A \Alph{subsection}}
-%\renewcommand{\thechapter}{A\Alph{chapter}}
-
-%\subsection{Proofs}
-%\textit{Proof of Theorem \ref{positiveThmVote}.} Let $\boldsymbol{d} = \frac{1}{N}\left((1-\delta_1)^{-1/2}, (1-\delta_2)^{-1/2}, \dots, (1-\delta_N)^{-1/2}\right)'$. Assume without loss of generality that $\bar{P} > 0$. Then the average probit forecast is extremized if
-%\begin{align}
-% \bar{P}&\leq  \frac{\sum_{j=1}^N X_{B_j}}{\sqrt{1 - \sum_{j=1}^N \delta_j}} &\Leftrightarrow&& 0 \leq  \left\{  \left(1 - \sum_{j=1}^N \delta_j \right)^{-1/2} \boldsymbol{1}_N - \boldsymbol{d}' \right\} \boldsymbol{X} \label{votingproof}
-%\end{align}
-% As $N (1-\delta_j)^{1/2} \geq \left(1 - \sum_{j=1}^N \delta_j \right)^{1/2}$ for all $j = 1, \dots, N$, all the elements of $$\left(1 - \sum_{j=1}^N \delta_j \right)^{-1/2} \boldsymbol{1}_N - \boldsymbol{d}' $$ are non-negative. Therefore the right hand side of (\ref{votingproof}) is always non-negative. \qed
-% \
-% \\
-%\noindent
-\subsection{Proof of Proposition \ref{CorrelationPolytope}.}
-Denote the set of all coherent information structures with $\mathcal{Q}_N$. Consider ${\bf\Sigma}_{22} \in \mathcal{Q}_N$ and its associated Borel sets $\{ B_i : i = 1, \dots, N\}$.  Given that ${\bf\Sigma}_{22}$ is coherent, its information can be represented in a diagram. Keeping the diagram representation in mind, partition the unit interval $S$ into $2^N$ disjoint parts $C_\v := \cup_{i \in \v} B_i \setminus \cup_{i \notin \v} B_i$, where $\v \subseteq \{1, \dots, N\}$ denotes a subset of forecasters and the union is over $i = 1, \dots, N$. Therefore each $C_\v$ represents information known only to the forecasters indexed by $\v$. Given that $\sum_{\v} |C_\v|  = 1$, it is possible to establish a linear function $L$ from the probability simplex
-\begin{align*}
-\Delta_N &:= \conv\{  \boldsymbol{e}_\v : \v \subseteq \{1, \dots, N\} \}\\
-&= \left\{ \boldsymbol{z} \in \mathbb{R}^{2^N} : \boldsymbol{z} \geq \boldsymbol{0}, \boldsymbol{1}'\boldsymbol{z} = 1 \right\}
-\end{align*}
-to the space of coherent information structures $\mathcal{Q}_N$. In particular, the linear function $L: \boldsymbol{z} \in \Delta_N \to {\bf\Sigma}_{22} \in \mathcal{Q}_N$ is defined such that $\rho_{ij} = \sum_{\{i,j\} \subseteq \v} z_\v$ and $\delta_i =  \sum_{i \in \v} z_\v$. Therefore $L(\Delta_N) = \mathcal{Q}_N$. Furthermore, given that $\Delta_N$ is a convex polytope, 
-\begin{align}
-L(\Delta_N) &= \conv\{  L(\boldsymbol{e}_\v) : \v \subseteq \{1, \dots, N\} \} \label{first_step}\\
-&=  \conv \left\{\boldsymbol{x}\boldsymbol{x}' : \boldsymbol{x}  \in \{0,1\}^N \right\} \nonumber\\
-&= \text{COR}(N), \nonumber
-\end{align}
-which gives $\text{COR}(N) = \mathcal{Q}_N$. Equality (\ref{first_step}) follows from the basic properties of convex polytopes (see, e.g., \citealt{mcmullen1971convex}).  Each ${\bf\Sigma}_{22} \in \text{COR}(N)$ has $\frac{N(N+1)}{2} = \binom{n+1}{2}$ parameters and therefore exists in $\binom{n+1}{2}$ dimensions. \qed
-%To show that none of these vertices are interior, assume that some point $X_v = \boldsymbol{x}_v\boldsymbol{x}_v'$, where $x_i = \one_{i \in v}$, is interior. Then $X_v$ has to be a convex combination of $\{X_w : w \neq v\}$. That is, for some constants $\phi_w$ such that $\phi_w \geq 0$ and $\sum_w \phi_w = 1$,  
-%\begin{align*}
-%X_v &= \sum_w \phi_w X_w
-%\end{align*}
-
-
-\subsection{Proof of Proposition \ref{positiveProbThm}.}
-\begin{align*}
-x_0 &= \kappa \frac{\sigma_1}{\sigma_2} \\
- &= \frac{ \sum_{i=1}^N \frac{\delta_i}{\sqrt{1-\delta_i}}}{\sqrt{\delta'  \left\{ \sum_{i=1}^N \frac{\delta_i}{1-\delta_i} + 2 \sum_{i,j: i<j} \frac{\rho_{ij}}{\sqrt{(1-\delta_j)(1-\delta_i)}}\right\}}} \sqrt{\frac{\frac{\delta'}{1-\delta'}}{\frac{1}{N^2} \left\{ \sum_{i=1}^N \frac{\delta_i}{1-\delta_i} + 2 \sum_{i,j: i<j} \frac{\rho_{ij}}{\sqrt{(1-\delta_j)(1-\delta_i)}}\right\} }}\\
-%&=  \frac{N \sum_{j=1}^N \frac{\delta_j}{\sqrt{1-\delta_j}}}{\sqrt{ \left( \sum_{j=1}^N \frac{\delta_j}{1-\delta_j} + 2 \sum_{i,j: i<j} \frac{\rho_{ij}}{\sqrt{(1-\delta_j)(1-\delta_i)}}\right)}} \sqrt{\frac{\frac{1}{1-\delta'}}{ \left( \sum_{j=1}^N \frac{\delta_j}{1-\delta_j} + 2 \sum_{i,j: i<j} \frac{\rho_{ij}}{\sqrt{(1-\delta_j)(1-\delta_i)}}\right) }}\\
-%&=  \frac{N \sum_{j=1}^N \frac{\delta_j}{\sqrt{1-\delta_j}}}{ \sum_{j=1}^N \frac{\delta_j}{1-\delta_j} + 2 \sum_{i,j: i<j} \frac{\rho_{ij}}{\sqrt{(1-\delta_j)(1-\delta_i)}}} \sqrt{\frac{1}{1-\delta'}}\\
-&=  \frac{N \sum_{i=1}^N \frac{\delta_i}{\sqrt{(1-\delta_i)(1-\delta')}}}{ \sum_{i=1}^N \frac{\delta_i}{1-\delta_i} + 2 \sum_{i,j: i<j} \frac{\rho_{ij}}{\sqrt{(1-\delta_j)(1-\delta_i)}}}
-%&\geq  1
-%&=  \frac{\frac{1}{N} \sum_{j=1}^N \frac{\delta_j}{\sqrt{(1-\delta_j)(1-\delta')}}}{\frac{1}{N^2} \left( \sum_{j=1}^N \frac{\delta_j}{1-\delta_j} + 2 \sum_{i,j: i<j} \frac{\rho_{ij}}{\sqrt{(1-\delta_j)(1-\delta_i)}} \right)}\\
-\end{align*}
-Given that all the remaining terms are positive, the location parameter $x_0$ is also positive. Next compare the $N$ terms with a given subindex $i$ in the numerator with the corresponding terms in the denominator. From $\delta' \geq \delta_i \geq \rho_{ij}$ it follows that 
-\begin{align}
-\frac{\delta_i}{1-\delta_i} = \frac{\delta_i}{\sqrt{(1-\delta_i)(1-\delta_i)}} &\leq \frac{\delta_i}{\sqrt{(1-\delta_i)(1-\delta')}} \label{ProofIneq1}\\
- \frac{\rho_{ij}}{\sqrt{(1-\delta_j)(1-\delta_i)}} &\leq \frac{\delta_i}{\sqrt{(1-\delta_i)(1-\delta')}} \label{ProofIneq2}
-\end{align}
-Therefore 
-\begin{align*}
-N \sum_{i=1}^N \frac{\delta_i}{\sqrt{(1-\delta_i)(1-\delta')}} \geq \sum_{i=1}^N \frac{\delta_i}{1-\delta_i} + 2 \sum_{i,j: i<j} \frac{\rho_{ij}}{\sqrt{(1-\delta_j)(1-\delta_i)}},
-\end{align*}
-which gives that $x_0 \geq 1$. Given that the Cauchy distribution is symmetric around $x_0$, it must be the case that $\P(\alpha > 1 | {\bf\Sigma}_{22}, \delta') \geq 1/2$. Based on (\ref{ProofIneq1}) and (\ref{ProofIneq2}), the location $x_0 = 1$ only when all the forecasters know the same information, i.e., when $\delta_i = \delta_j$ for all $i \neq j$. Under this particular setting, the amount of extremizing $\alpha$ is non-random and always equal to $1.0$. Therefore $\P(\alpha > 1 | {\bf\Sigma}_{22}, \delta') = 1.0$.  Any deviation from this particular information structure makes $\alpha$ random, $x_0 > 1$, and hence $\P(\alpha > 1 | {\bf\Sigma}_{22}, \delta') > 1/2$. Therefore marginalizing out ${\bf\Sigma}_{22}$ and $\delta'$ with respect to any distribution that is not a point mass at $\delta_i = \delta_j$ for all $i \neq j$, gives $\P(\alpha > 1) > 1/2$. \qed
-%If the forecasters' information sets partition the full information, the sum of their probits is always on the correct side of $0.0$. At the same time the oracle deterministically outputs the correct outcome. Consequently, $\alpha = +\infty$ and $\P(\alpha \geq 1 | {\bf\Sigma}_{22}, \delta') = 1$. Thus $\P(\alpha > 1 | {\bf\Sigma}_{22}, \delta') \in (0.5, 1.0]$ when $\delta_i \neq \delta'$ for some $i = 1, \dots, N$. \qed
-%\noindent
-%\textit{Proof of Proposition \ref{positiveThmVote}.} Let $\boldsymbol{d} = \frac{1}{N}\left((1-\delta_1)^{-1/2}, (1-\delta_2)^{-1/2}, \dots, (1-\delta_N)^{-1/2}\right)'$. Assume without loss of generality that $\bar{P} > 0$. Then the average probit forecast is extremized if
-%\begin{align}
-% \bar{P}&\leq  \frac{\sum_{j=1}^N X_{B_j}}{\sqrt{1 - \sum_{j=1}^N \delta_j}} &\Leftrightarrow&& 0 \leq  \left\{  \left(1 - \sum_{j=1}^N \delta_j \right)^{-1/2} \boldsymbol{1}_N - \boldsymbol{d}' \right\} \boldsymbol{X} \label{votingproof}
-%\end{align}
-% As $N (1-\delta_j)^{1/2} \geq \left(1 - \sum_{j=1}^N \delta_j \right)^{1/2}$ for all $j = 1, \dots, N$, all the elements of $$\left(1 - \sum_{j=1}^N \delta_j \right)^{-1/2} \boldsymbol{1}_N - \boldsymbol{d}' $$ are non-negative. Therefore the right hand side of (\ref{votingproof}) is always non-negative. \qed
-%\\
-%\\
-\subsection{Proof of Proposition \ref{positiveThm}.}
-
-\begin{enumerate}
-\item[(i)] This follows from direct computation,
-\begin{align}
-\alpha &= \left( \frac{\frac{1}{(N-1)\lambda +1} 
-  \sum_{i=1}^N X_{B_i} }{\sqrt{1- \frac{N\delta}{(N-1)\lambda +1} }} \right) \Big/ \left( \frac{1}{N} \sum_{i=1}^N \frac{X_{B_i}}{\sqrt{1-\delta}} \right) \nonumber \\
-&=    \frac{\frac{N\sqrt{1-\delta}}{(N-1)\lambda +1} 
-   }{\sqrt{1- \frac{N\delta}{(N-1)\lambda +1} }}, \label{CompoundAlpha}
-\end{align}
-which simplifies to the given expression after substituting in $\gamma$. Given that this quantity does not depend on any $X_{B_i}$, it is non-random.
-
-\item[(ii)] For a given $\delta$, the amount of extremizing $\alpha$ is minimized when $(N-1)\lambda +1$ is maximized. This happens as $\lambda \uparrow 1$. Plugging this into (\ref{CompoundAlpha}) gives
-\begin{align*}
-\alpha &= \frac{\frac{N\sqrt{1-\delta}}{(N-1)\lambda +1}}{\sqrt{1- \frac{N\delta}{(N-1)\lambda +1} }}  \downarrow \frac{\sqrt{1-\delta}}{\sqrt{1-\delta }} = 1
-\end{align*}
-\item[(iii)] Assume without loss of generality that $\bar{P} > 0$. If $\max\{p_1, p_2, \dots, p_N \} < 1$, then  setting $\delta = 1/N$ and $\lambda = 0$ gives an aggregate probability $p'' = 1$ that is outside the convex hull of the individual probabilities.
-\qed
-\end{enumerate}
-
-\section*{APPENDIX B: PARAMETER ESTIMATION UNDER SYMMETRIC INFORMATION}
-\label{appendixB}
-%
-%\subsection{Parameter Estimation under Symmetric Information}
-%The information among $N=2$ forecasters is completely characterized by $\delta_1$, $\delta_2$, and $\rho_{12}$. The values of these parameters can be estimated via the maximum likelihood method.  To make this more explicit, observe that the Jacobian for the map $\boldsymbol{P} \to \Phi\left(\boldsymbol{P}\right) = (\Phi(P_1), \Phi(P_2))'$ is
-%\begin{eqnarray*}
-%J(\boldsymbol{P}) &=& (2\pi)^{-1} \exp \left( - \frac{\boldsymbol{P}' \boldsymbol{P}}{2}   \right) 
-%\end{eqnarray*}
-%%
-%%$\boldsymbol{P} \sim \mathcal{N}_N\left(\boldsymbol{0}, {\bf\Sigma}_{22} (1-\delta)^{-1}\right)$ and that
-%Let $t = \Phi^{-1}(1-\tilde{p})$. Then, if $h(\boldsymbol{P})$ denotes the multivariate Gaussian density of $\boldsymbol{P} \sim \mathcal{N}_2\left(-t/\sqrt{1-\boldsymbol{\delta}}, \Sigma_{P}\right)$,
-%%by the Inverse Function Theorem 
-%the density for  $\boldsymbol{p} = (p_1, p_2)'$ becomes
-%\begin{eqnarray*}
-%&& f\left(\boldsymbol{p} | \delta_1, \delta_2, \rho \right) \\
-% &=& h(\boldsymbol{P}) J(\boldsymbol{P})^{-1} \\
-%% \bigg|_{\boldsymbol{P} = \Phi^{-1}(\boldsymbol{p})}\\
-%%&=& \frac{(1-\delta)^{N/2}}{\sqrt{ |{\bf\Sigma}_{22}|}} \exp\left( -\frac{1}{2} \boldsymbol{P}' (1-\delta){\bf\Sigma}_{22}^{-1} \boldsymbol{P} + \frac{\boldsymbol{P}' \boldsymbol{P}}{2}   \right)\\
-%&=& \frac{1}{\sqrt{ \left|\Sigma_{P}\right|}} \exp\left[ -\frac{1}{2} \left[ \left( \boldsymbol{P} + t/\sqrt{1-\boldsymbol{\delta}}\right)' \Sigma_{P}^{-1}  \left(\boldsymbol{P} + t/\sqrt{1-\boldsymbol{\delta}}\right) -  \boldsymbol{P}'\boldsymbol{P}\right] \right],
-%\end{eqnarray*}
-%where $\Phi^{-1}(\boldsymbol{p}) = \boldsymbol{P}$. Assume that the forecasters participated in $K$ problems. If the forecasts given for the $k$th problem are denoted with $\boldsymbol{p}_k$, then the maximum likelihood estimates of $\delta_1$, $\delta_2$, and $\rho$ are obtained from
-%\begin{align*}
-%\left(\hat{\delta}_1, \hat{\delta}_2, \hat{\rho}\right) =& \argmax_{\delta_1, \delta_2, \rho} \sum_{k=1}^K \log  f\left(\boldsymbol{p}_k| \delta_1, \delta_2, \rho \right),\\
-%& \text{s.t. } \nonumber \delta_1, \delta_2 \in [0,1] \text{ and } \rho \in \left[  \max \left\{\delta_1+\delta_2 - 1,  0\right\}, \min \left\{\delta_1, \delta_2 \right\} \right]
-%\end{align*}
-%This works well as long as the forecasters participate in the same set of problems. The forecasters, however, were allowed to choose their problems and therefore generally do not participate in the same set of problems. Disregarding any problems with partial participation would lead to a loss of information. Therefore it is necessary to handle the missing values in some manner. The first step is to assume that the forecasts are missing at random. The likelihood for a unpaired forecast, say $p_j$, then is the marginal likelihood of $p_j$
-%\begin{align*}
-%%&& f\left(p_1 | \delta_1, \delta_2, \rho \right) \\
-% m(p_j | \delta_j) &= \sqrt{\frac{1-\delta_j}{\delta_j}} \exp  \left\{ \frac{\delta_jP_j^2- (1-\delta_j)(P_j + t/\sqrt{1-\delta_j})^2 }{2\delta_j}  \right\},
-%%&=& \frac{1}{\sqrt{ \left|\Sigma_{P}\right|}}  \int_0^1  \exp\left[ -\frac{1}{2} \Phi^{-1}(\boldsymbol{p})'\Lambda \Phi^{-1}(\boldsymbol{p})  \right] dp_2\\
-%%%&=& \frac{1}{\sqrt{ \left|\Sigma_{P}\right|}}   \int_0^1  \exp\left[ -\frac{1}{2} \left( \Phi^{-1}(p_1)^2\Lambda_{11} + \Phi^{-1}(p_1)\Phi^{-1}(p_2)(\Lambda_{12}+\Lambda_{21}) +  \Phi^{-1}(p_2)^2\Lambda_{22} \right) \right] dp_2\\
-%%%&=& \frac{1}{\sqrt{ \left|\Sigma_{P}\right|}}    \exp\left[ -\frac{1}{2}  P_1^2\Lambda_{11} \right]  \int_0^1  \exp\left[ -\frac{1}{2} \left( P_1\Phi^{-1}(p_2)(\Lambda_{12}+\Lambda_{21}) +  \Phi^{-1}(p_2)^2\Lambda_{22} \right) \right] dp_2\\
-%%&=& \frac{1}{\sqrt{ \left|\Sigma_{P}\right|}}    \exp\left[ -\frac{1}{2}  P_1^2\Lambda_{11} \right]  \int_{-\infty}^\infty  \exp\left[ -\frac{1}{2} \left( P_1 P_2(\Lambda_{12}+\Lambda_{21}) +  P_2^2\Lambda_{22} \right) \right] \phi(P_2) dP_2\\
-%%%&=& \frac{1}{\sqrt{ 2\pi \left|\Sigma_{P}\right|}}    \exp\left[ -\frac{1}{2}  P_1^2\Lambda_{11} \right]  \int  \exp\left[ -\frac{1}{2} \left( P_2 P_1 (\Lambda_{12}+\Lambda_{21}) +  P_2^2\Lambda_{22} \right) - \frac{1}{2} P_2^2\right]  dP_2\\
-%%%&=& \frac{1}{\sqrt{ 2\pi \left|\Sigma_{P}\right|}}    \exp\left[ -\frac{1}{2}  P_1^2\Lambda_{11} \right]  \int  \exp\left[ -\frac{1}{2} \left( P_2 P_1 (\Lambda_{12}+\Lambda_{21}) +  P_2^2(\Lambda_{22}+1) \right) \right]  dP_2\\
-%%%&=& \frac{1}{\sqrt{ 2\pi \left|\Sigma_{P}\right|}}    \exp\left[ -\frac{1}{2}  P_1^2\Lambda_{11} \right]  \frac{2.50663 \exp\left(\frac{0.5P_1^2 \Lambda_{12}^2}{\Lambda_{22}+1}\right)}{\sqrt{\Lambda_{22}+1}}\\
-%%&=& \frac{2.50663}{\sqrt{ 2\pi \left|\Sigma_{P}\right|(\Lambda_{22}+1)}}    \exp\left[ -\frac{1}{2}  P_1^2\left( \Lambda_{11} - \frac{\Lambda_{12}^2}{\Lambda_{22}+1}\right) \right] \\
-%%\end{eqnarray*}
-%%Assume that $ \Sigma_{P}^{-1} - B_2$ is invertible and let $\Lambda = ( \Sigma_{P}^{-1} - B_2)^{-1}$. Then,
-%%\begin{eqnarray*}
-%% f\left(p_1 | \delta_1, \delta_2, \rho \right) &=&  2\pi \sqrt{ \frac{|\Lambda|}{|\Sigma_{P}|}} \int_{\mathbb{R}} \frac{1}{2\pi \sqrt{|\Lambda|}} \exp\left( -\frac{1}{2} \boldsymbol{P}' \Lambda^{-1} \boldsymbol{P}  \right) dP_2\\
-%% &=&  2\pi  \sqrt{ \frac{|\Lambda|}{|\Sigma_{P}|}} \phi(p_1 | 0, \Lambda_{11}),
-%\end{align*}
-%where $P_j = \Phi^{-1}(p_j)$. 
-%%where $\Lambda_{11}$ is the $(1,1)$th element of $\Lambda$ and $\phi(\cdot | \mu, \sigma^2)$ represents the probability density function of a normal distribution with mean $\mu$ and variance $\sigma^2$.
-%%By symmetry, the likelihood $f\left(p_2 | \delta_1, \delta_2, \rho \right)$ follows similarly.  
-%Let $\mathcal{K}_{12}$ denote the set of problems in which both forecasters participated. Similarly, let $\mathcal{K}_1$ and $\mathcal{K}_2$ denote the sets of problems in which only Forecaster $1$ and $2$ participated, respectively. The final optimization task then becomes
-%\begin{align*}
-%\left(\hat{\delta}_1, \hat{\delta}_2, \hat{\rho}\right) =& \argmax_{\delta_1, \delta_2, \rho} \left\{ \sum_{k \in \mathcal{K}_{12}} \log  f\left(\boldsymbol{p}_k| \delta_1, \delta_2, \rho \right) +  \sum_{j = 1}^2 \sum_{k \in \mathcal{K}_{j}} \log  m\left(p_j| \delta_j \right)  \right\},\\
-%& \text{s.t. } \nonumber \delta_1, \delta_2 \in [0,1] \text{ and } \rho \in \left[  \max \left\{\delta_1+\delta_2 - 1,  0\right\}, \min \left\{\delta_1, \delta_2 \right\} \right]
-%\end{align*}
-%The feasible set of parameter values is described by the intersection of four half spaces. Therefore this optimization problem can be efficiently solved via generic techniques such as the barrier method (see, e.g., \cite{boyd2009convex} for more information). 
-%%Given that this optimization problem cannot be solved analytically, numerical methods must be used. The feasible set of parameter values is a convex set defined by the intersection of four half-spaces. Therefore the constraints are equivalent to a set of linear inequalities
-%%\begin{align*}
-%%-\rho &\leq 0\\
-%%\delta_1+\delta_2-\rho-1 &\leq 0\\
-%%\rho - \delta_1 &\leq 0\\
-%%\rho - \delta_2 &\leq 0
-%%\end{align*}
-%%and an adaptive barrier method can be used to solve the maximization problem. 
-%%\subsection*{A.3 Estimation of $\delta$ and $\lambda$}
-
-
-This section describes how the maximum likelihood estimates of $\delta$ and $\lambda$ can be found very efficiently. Let ${\bf J}_N$ represent a $N\times N$ matrix of ones. A matrix ${\bf\Sigma}$ is compound symmetric if it can be expressed in the form ${\bf\Sigma} = {\bf I}_NA + {\bf J}_NB$ for some constants $A$ and $B$. The inverse matrix (if it exists) and any scalar multiple of a compound symmetric matrix ${\bf\Sigma}$ are also compound symmetric \citep{dobbin2005sample}. More specifically, for some constant $c$,
-\begin{align}
-c {\bf\Sigma} &= {\bf I}_N(cA) + {\bf J}_N(cB) \nonumber\\
-{\bf\Sigma}^{-1} &= {\bf I}_N\frac{1}{A} - {\bf J}_N \frac{B}{A(A+NB)} \label{CSInv}
-\end{align}
-Based on these observations, denote 
-\begin{align}
-Cov(\boldsymbol{X}) &= {\bf\Sigma}_{22} = {\bf I}_N A_X + {\bf J}_N  B_X \nonumber\\
-Cov(\boldsymbol{P}) &= {\bf\Sigma}_{P} = {\bf\Sigma}_{22}/(1-\delta) = {\bf I}_N A_P + {\bf J}_N  B_P \label{SigmaP}\\
-{\bf\Omega} &= {\bf\Sigma}_{P}^{-1} = {\bf I}_N A_{\bf\Omega} + {\bf J}_N  B_{\bf\Omega} \nonumber
-\end{align}
-
-To set up the optimization problem, observe that the Jacobian for the map $\boldsymbol{P} \to \Phi\left(\boldsymbol{P}\right) = (\Phi(P_1), \Phi(P_2), \dots, \Phi(P_N))'$ is $J(\boldsymbol{P}) = (2\pi)^{-N/2} \exp \left( - \boldsymbol{P}' \boldsymbol{P}/2  \right)$. If $h(\boldsymbol{P})$ denotes the multivariate Gaussian density of $\boldsymbol{P} \sim \mathcal{N}_N\left(\boldsymbol{0}, {\bf\Sigma}_{P}\right)$,
-%by the Inverse Function Theorem 
-the density for  $\boldsymbol{p} = (p_1, p_2, \dots, p_N)'$ becomes
-\begin{eqnarray*}
- f\left(\boldsymbol{p} | \delta, \lambda \right) &=& h(\boldsymbol{P}) J(\boldsymbol{P})^{-1}
-%&=& \frac{(1-\delta)^{N/2}}{\sqrt{ |{\bf\Sigma}_{22}|}} \exp\left( -\frac{1}{2} \boldsymbol{P}' (1-\delta){\bf\Sigma}_{22}^{-1} \boldsymbol{P} + \frac{\boldsymbol{P}' \boldsymbol{P}}{2}   \right)\\
-\propto \left|{\bf\Sigma}_{P}\right|^{-1/2} \exp\left[ -\frac{1}{2} \boldsymbol{P}' {\bf\Sigma}_{P}^{-1} \boldsymbol{P}  \right],
-%&=& \frac{(1-\delta)^{N/2}}{\sqrt{ \left|{\bf\Sigma}_{22}\right|}} \exp\left[ -\frac{1}{2} \Phi^{-1}(\boldsymbol{p})' \left\{ (1-\delta) {\bf\Sigma}_{22}^{-1} - {\bf I}_N \right\} \Phi^{-1}(\boldsymbol{p})  \right],
-\end{eqnarray*}
-where $\boldsymbol{P} = \Phi^{-1}(\boldsymbol{p})$. Let  ${\bf S}_P = \boldsymbol{P}\boldsymbol{P}'$ be the (rank one) sample covariance matrix of $\boldsymbol{P}$. The log-likelihood then reduces to
-\begin{align*}
-\log  f\left(\boldsymbol{p} | \delta, \lambda \right) &\propto -\log \det {\bf\Sigma}_P - \tr\left({\bf S}_P^{-1} {\bf\Sigma}_P \right) 
-\end{align*}
-This log-likelihood is not concave in ${\bf\Sigma}_P$.  It is, however, a concave function of ${\bf\Omega} = {\bf\Sigma}_P^{-1}$. Making this change of variables gives us the following optimization problem:
-\begin{align}
-\text{minimize } & -\log \det {\bf\Omega} + \tr\left({\bf S}_P {\bf\Omega} \right) \label{origProblem} \\
- \text{subject to } & \nonumber \delta \in [0,1] \nonumber \\
- & \lambda \in \left[  \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right) \nonumber
-\end{align}
-Unfortunately, the feasible region is not convex (see, e.g., Figure \ref{LevelplotsOracle}) but can be made convex by re-expressing the problem: First, let $\rho = \delta\lambda$ denote the amount of information known by a forecaster; that is, let $A_X = (\delta - \rho)$ and $B_X = \rho$. Solving the problem in terms of $\delta$ and $\rho$ is equivalent to minimizing the original objective (\ref{origProblem}) but subject to $0 \leq \rho \leq \delta$ and $0 \leq N \delta -\rho(N-1)-1$. Given that this region is an intersection of four half-spaces, it is convex. Furthermore, it can be translated into the corresponding feasible and also convex set of $(A_{\bf\Omega}, B_{\bf\Omega})$ as follows: 
-\begin{align*}
-{\bf\Sigma}_{22} &\in \left\{ {\bf\Sigma}_{22} : 
-\begin{array}{ll}
-0 \leq \rho \leq \delta\\
-0 \leq N\delta -\rho(N-1)-1\\
-\end{array} \right\}\\
-\Leftrightarrow 
-{\bf\Sigma}_{22} &\in \left\{ {\bf\Sigma}_{22} : 
-\begin{array}{ll}
-0 \leq B_X\\
-0 \leq A_X\\
-0 \leq B_X+NA_X-1
-\end{array} \right\}\\
-\Leftrightarrow \hspace{0.2em}
-{\bf\Sigma}_{P} &\in \left\{ {\bf\Sigma}_{P} : 
-\begin{array}{ll}
-0 \leq A_P \leq 1/(N-1)\\
-0 \leq B_P
-\end{array} \right\}\\
-\Leftrightarrow \hspace{0.9em}
- {\bf\Omega} &\in \left\{ {\bf\Omega} : 
-\begin{array}{ll}
-0 \leq A_\Omega -N+1\\
-0 \leq A_\Omega + B_\Omega N\\ 
-0 \leq -B_\Omega
-\end{array} \right\}
-\end{align*}
-From \citet{rao2009linear}, we have that $\log \det ({\bf\Omega}) = N\log A_\Omega + \log \left( 1+ NB_\Omega/A_\Omega \right)$. 
-Plugging this and the feasible region of $(A_\Omega, B_\Omega)$ into the original problem (\ref{origProblem}) gives an equivalent yet convex optimization problem:
-\begin{align*}
-\text{minimize } & -N\log A_\Omega - \log \left( 1+\frac{NB_\Omega}{A_\Omega} \right)  + A_\Omega \tr({\bf S}_P) +B_\Omega \tr({\bf S}_P{\bf J}_N) \\
- \text{subject to } & 0 \leq A_\Omega -N+1\\
-& 0 \leq A_\Omega +B_\Omega N  \\ 
-& 0 \leq -B_\Omega
-\end{align*}
-The first term of the objective is both convex and non-decreasing. The second term is a composition of a convex, non-decreasing function with a function that is concave over the feasible region. Such a composition is known to be convex. The last two terms are affine and hence also convex. Therefore, given that the objective is a sum of convex functions, it is convex in $(A_\Omega, B_\Omega)$. Therefore globally optimal values of $(A_\Omega, B_\Omega)$ can be found very efficiently with interior point algorithms such as the barrier method. There are many open software packages that implement generic versions of these methods. For instance, our implementation used the standard R function \texttt{constrOptim}. Denote optimal values with $(A_\Omega^*, B_\Omega^*)$. They can be traced back to $(\delta, \lambda)$ via (\ref{CSInv}) and (\ref{SigmaP}). The final map simplifies to
-\begin{align*}
-\delta^* &= \frac{B_\Omega^*(N-1) + A_\Omega^*}{A_\Omega^*(1+A_\Omega^*) + B_\Omega^*(N-1+NA_\Omega^*)} &&\text{and}&
-\lambda^* &= \frac{B_\Omega^*(N-1) + A_\Omega^*}{-B_\Omega^*}
-\end{align*}
-%where
-%\begin{align*}
-%R &= A_\Omega^*(1+A_\Omega^*) + B_\Omega^*(N-1+NA_\Omega^*)\\
-%\lambda^* &= 
-%\end{align*}
-
-
-%where $\Phi^{-1}(\boldsymbol{p}) =  (\Phi^{-1}(p_1), \Phi^{-1}(p_2), \dots, \Phi^{-1}(p_N))$. 
-%Given that ${\bf\Sigma}_{22}$ can be written in the form  ${\bf\Sigma}_{22} = B_N (\delta-\lambda\delta) + J_{N \times N} \lambda\delta$
-%where
-%%The determinant and inverse of ${\bf\Sigma}_{22}$ are
-%\begin{align*}
-%\left| {\bf\Sigma}_{22}\right| &= (\delta(1- \lambda))^N \left(1+\frac{N \lambda}{1 - \lambda} \right) \nonumber\\
-%{\bf\Sigma}_{22}^{-1} &= {\bf I}_N \left(\frac{1}{\delta-\lambda\delta} \right) - J_{N \times N} \frac{\lambda}{(1-\lambda)\delta\{1+(N-1) \lambda\}} 
-%\end{align*}
-%See \citet{rao2009linear} and the supplementary material of \citet{dobbin2005sample} for the derivations of the determinant and inverse of ${\bf\Sigma}_{22}$, respectively. The maximum likelihood estimates of $\delta$ and $\lambda$ are then obtained from
-%\begin{align*}
-%\left(\hat{\delta}, \hat{\lambda}\right) =& \argmax_{\lambda, \delta} \log  f\left(\boldsymbol{p}| \delta, \lambda \right),\\
-%& \text{s.t. } \nonumber \delta \in [0,1] \text{ and } \lambda \in \left[  \max \left\{ \frac{N-\delta^{-1}}{N-1}, 0\right\}, 1 \right)
-%\end{align*}
-%%\textcolor{red}{check if this is a convex program}
-%Given that this cannot be solved analytically, numerical methods such as a simple grid-search or the barrier method must be used to find $\hat{\delta}$ and $\hat{\lambda}$. 
-
-% 
-%\subsection*{A.3 Rotating the Calibration Curve}
-%The calibrated probabilities follow
-%\begin{align*}
-%p_{jk} |Y_k &\stackrel{iid}{\sim} \begin{cases}
-%2p_{jk}& \text{ if } Y_k = 1\\
-%2(1-p_{jk})& \text{ if } Y_k = 0,
-%\end{cases}
-%\end{align*}
-%To introduce under- and overconfidence, this density is rotated counter- or clockwise, respectively, by some amount $\theta \in \left[-(\frac{\pi}{2} - \tan^{-1}(2), \tan^{-1}(2)\right]$. 
-%The rotated density for $p_{jk} |Y_k, \theta$ is
-%\begin{align}
-%f(p_{jk} |Y_k, \theta) &=
-%% 1+(-1)^{Y_k}R(\theta)(0.5-p_{jk})
-%\begin{cases}
-%c(\theta)\left[1+R(\theta)(p_{jk}-0.5) \right]& \text{ if } Y_k = 1\\
-%c(\theta)\left[1+R(\theta)(0.5-p_{jk})\right]& \text{ if } Y_k = 0,
-%\end{cases}
-%\label{rotatedDens}
-%\end{align}
-%where 
-%\begin{align*}
-%R(\theta) &= \frac{2\cos(\theta)-\sin(\theta)}{\cos(\theta) + 2\sin(\theta)},
-%\end{align*}
-%and $c(\theta)$ is a normalizing constant that depends on $\theta$.  The domain of $p_{jk}$  also depends on $\theta$. In particular, if $\theta \geq 0$, then $c(\theta) = 1$ and $p_{ij} \in [0,1]$. If, on the other hand, $\theta < 0$, then $c(\theta) = R(\theta)/2$ and $p_{ij} \in [l,u]$, where $l = 0.5-R(\theta)^{-1}$ and $u = 0.5+R(\theta)^{-1}$. Given that $\P(Y_{jk} = 1) = 0.5$, marginalizing out $Y_{jk}$ gives
-%\begin{align*}
-%m(p_{jk} | \theta) &= 0.5f(p_{jk} |Y_k=0, \theta) + 0.5f(p_{jk} |Y_k=1, \theta)\\
-%&= c(\theta)
-%\end{align*}
-%Therefore $p_{jk} | \theta$ is uniform over its domain. It is possible to sample from (\ref{rotatedDens}) using the inverse transform sampling method. More specifically, to make a single draw, begin by generating a uniform random variable $u \sim \mathcal{U}[0,1]$. This can be turned into a draw $p$ from (\ref{rotatedDens}) via the following solution to a second degree polynomial 
-%\begin{align*}
-%p &= \frac{-B+\sqrt{B^2-4AC}}{2A},
-%\end{align*}
-%where 
-%\begin{align*}
-%A &= \begin{cases}
-%(-1)^{1-Y_{jk}} R(\theta)/2 & \text{ if } \theta \geq 0\\
-%(-1)^{1-Y_{jk}} R(\theta)^2/4& \text{ if } \theta < 0
-%\end{cases}\\
-%B &= \begin{cases}
-%1+(-1)^{Y_{jk}} R(\theta)/2 & \text{ if } \theta \geq 0\\
-%R(\theta)/2\left(1- (-1)^{1-Y_{jk}} R(\theta)/2\right)& \text{ if } \theta < 0
-%\end{cases}\\
-%C &= \begin{cases}
-%-u & \text{ if } \theta \geq 0\\
-%-R(\theta)l +R(\theta)^2/4(-1)^{1-Y_{jk}}l(1-l) - u & \text{ if } \theta < 0
-%\end{cases}
-%\end{align*}
 
 
 %\bibliographystyle{Chicago}
