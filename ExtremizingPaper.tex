@@ -52,7 +52,7 @@
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 
-\renewcommand{\abstractname}{}
+%\renewcommand{\abstractname}{}
 \def\pb{\overline{p}}
 \def\pt{\tilde{p}}
 \def\one{{\bf 1}}
@@ -119,7 +119,7 @@ The authors would like to thank Edward George and Shane Jensen for helpful discu
 %\markboth{Understanding Probability Extremizing}{Satop\"a\"a et al.}
 \begin{abstract}
 \singlespace
-\textbf{Abstract.} Randomness in scientific estimation is generally 
+Randomness in scientific estimation is generally 
 assumed to arise from unmeasured or uncontrolled factors. However, 
 when combining subjective probability estimates, heterogeneity
 stemming from people's cognitive or information diversity is often
@@ -137,7 +137,7 @@ understanding of the historically {\it ad hoc} practice of extremizing
 average forecasts.\\
 \\
 \textit{Keywords:} Expert Belief; Gaussian Process; Model
-Averaging; Noise Reduction; Probabilistic Forecasting
+Averaging; Noise Reduction
 \end{abstract}
 
 %\let\thefootnote\relax\footnote{
@@ -186,11 +186,13 @@ underpinnings, have been pursued in a manner that is largely
 empirical.)
 
 The main contribution of this paper is a plausible
-theoretical framework for forecast aggregation. The framework is named the \textit{partial information framework} because it assumes forecast heterogeneity to stem from different information sources. For instance, one forecast might draw its information from television news in the United States
-while the other is based on local news in Egypt.
- The framework allows
-us to interpret existing aggregation procedures and illuminate aspects
-that can be improved. This paper specifically uses it to clarify the practice of {\em probability
+theoretical framework for forecast aggregation called the \textit{partial information framework}. Under this framework, forecast heterogeneity stems from information available to the forecasters and how they decide to use it. For instance, two forecasters may study the same books regarding modern Egypt, but end up utilizing different  portions of the information in their predictions. 
+%one forecast might depend on television news in the United States
+%while the other is based on local news in Egypt. 
+%The framework allows for
+%the possibility that the forecasters have the same information but use it differently. 
+Second, the framework allows us to interpret existing aggregation procedures and illuminate aspects
+that can be improved. This paper specifically aims to clarify the practice of {\em probability
 extremizing}, i.e., shifting an average aggregate closer to its nearest
 extreme. Extremizing is an empirical technique that has been widely used to
 improve the predictive performance of many simple aggregators such as
@@ -199,10 +201,9 @@ specific model under which the optimal aggregator can be computed.
 
 \subsection{Bias, Noise, and Forecast Assessment}
 \label{BiasNoise}
-If the target event is represented with an
-indicator function that equals one or zero depending whether the event
-happens or not, respectively, each probability forecast is nothing but an
-estimator of this function. Therefore, as is the case with
+A probability forecast $p$ is nothing but an
+estimator of an indicator function $\one_A$ that equals one or zero depending whether the target event
+happens or not, respectively. Therefore, as is the case with
 all estimators, its deviation from the truth can be broken into two
 pieces: bias and noise. A forecaster
 is considered conditionally unbiased if, in the long run, events associated
@@ -218,7 +219,7 @@ In the forecasting literature, this condition is called \textit{calibration}.
 %estimation, this is equivalent to being conditionally unbiased.
 
 Non-expert populations are typically not calibrated. There are, however,  many subpopulations of experts that are highly
-calibrated. For instance, meteorologists,
+calibrated. For instance, meteorologists
 %performing probabilistic
 %weather forecasting have been found to be calibrated
 \citep{murphy1977reliability}, experienced tournament bridge
@@ -247,8 +248,7 @@ therefore isolating the task to one of noise reduction.
 Before delving into the problem of forecast aggregation, it is useful
 to briefly discuss the problem of assessing and improving a single
 forecast stream.  The most common methodology uses a loss
-function. If $\one_A$ is the indicator function of the target event
-$A$ and $p$ is the forecasted probability, then the loss function is a penalty $L(p , \one_A)$.  A loss function is said to
+function, i.e., a penalty $L(p , \one_A)$.  A loss function is said to
 be {\em proper} or {\em revealing} if the Bayesian optimal strategy is
 to tell the truth.  In other words, if the subjective probability
 estimate is $p$, then $t = p$ should minimize the expected loss $p
@@ -286,21 +286,26 @@ As is the case with any probability model for forecast aggregation, the construc
  a probability space $(\Omega, \F , \P)$ and a
 measurable event $A \in \F$ to be forecasted.  In any Bayesian setup,
 with a proper loss function, it is more or less tautological that a
-forecaster reports $p = \E (\one_A \| \G)$ where $\G \subseteq \F$ is
-the \textit{information set} used by the forecaster\footnote{If a forecast $p$ is calibrated, i.e., conditionally unbiased, it satisfies $\P(A | p) = p$. This shows constructively that $p$ is of the form $\E(A | \G)$. Therefore, the assumption that $p =  \E(A | \G)$ for some $\G$ is just the assumption that there is a probability model at all, together with the assumption of calibration. \textcolor{red}{Drop this!}}.  The
+forecaster reports $p = \E (\one_A \| \G)$, where $\G \subseteq \F$ is
+the \textit{information set} used by the forecaster. This assumption is not in any way restrictive because for a calibrated forecaster, $\P(A | p) = p$, which shows constructively that $p$ is of the form $\E(A | \G)$. Therefore, the assumption that $p =  \E(A | \G)$ for some $\G$ only requires the existence of a probability model, together with the assumption of calibration. The
 partial information framework extends this idea to $N$
 forecasters. In particular, it posits the existence of $N$
 information sets $\F_i \subseteq \F$ such that Forecaster~$i$
-reports $p_i = \E (\one_A \| \F_i)$. These sets only contain information actually used by the
+reports $p_i = \E (\one_A \| \F_i)$. 
+
+These sets contain only information actually used by the
 forecasters. Therefore, if Forecaster $i$ uses a simple rule, the set $\F_i$ may not be the full $\sigma$-field of
 information available to the forecaster but rather a smaller
 $\sigma$-field corresponding to the information actually used by the
 rule.  For example, when forecasting the re-election of the president,  a forecaster obeying the dictum ``it's the economy,
-stupid!''  might be assigned a $\sigma$-field containing only economic
-indicators.  This is reminiscent of a forecasting algorithm that only uses
-a similarly restricted subset of information. Therefore
-forecast heterogeneity stems purely from
-\textit{information diversity}.  
+stupid!''  might utilize a $\sigma$-field containing only economic
+indicators.  Furthermore, if two forecasters have access to the same $\sigma$-field, they may decide to use different sub-$\sigma$-fields and report differing predictions. 
+%This is reminiscent of a forecasting algorithm that only uses
+%a similarly restricted subset of information. 
+Therefore,
+forecast heterogeneity does not only stem from differences in information available to the forecasters, but also from how they decide to use it.  Note, however, that if a forecaster chooses to discard
+some of the available information, then, for the purposes of aggregation,
+that information may as well not exist and, consequently, $\F_i$ can be interpreted as the full information known to Forecaster $i$.
 
 Any further details must come from the
 assumptions on the structure of the information sets. To illustrate, suppose that the forecasters are asked to predict a sequence of events
@@ -318,20 +323,15 @@ yet intuitive. In fact, it is not difficult to imagine a variety
 of other forecasting setups and how they translate to
 different inter-dependencies among the information sets.
 
-
-For any such setup, the partial information framework distinguishes two benchmarks for aggregation efficiency.  The first is the {\em oracular} aggregator
+The partial information framework distinguishes two benchmarks for aggregation efficiency.  The first is the {\em oracular} aggregator
 $p' := \E (\one_A \| \F')$, where $\F'$ is the $\sigma$-field
-generated by the union of the information sets $\{ \F_i : i = 1, \dots,
-N\}$. Given that aggregation cannot be improved beyond using all the information available
-to the forecasters, the oracular aggregator represents a theoretical optimum and is therefore a
-reasonable upper bound on estimation efficiency. Note that if a forecaster chooses to discard
-some of the available information, then, for the purposes of aggregation,
-that information may as well not exist. Any
+generated by the union of the information sets $\{\F_i : i = 1, \dots, N\}$. Therefore any
 information that is not in $\F'$ represents randomness inherent in the
-outcome.
+outcome. Given that aggregation cannot be improved beyond using all of the forecasters' information, the oracular aggregator represents a theoretical optimum and is therefore a
+reasonable upper bound on estimation efficiency. 
 
 In practice, however, information comes to the
-aggregator only through the forecasts $\{p_i : i = 1, \dots, N\}$. Given that $\F'$ generally cannot be constructed from these forecasts alone, no practically feasible aggregator can be expected to perform as well as $p'$.  Therefore a more achievable benchmark is the \textit{revealed} aggregator $p'' := \E (\one_A \|
+aggregator only through the forecasts $\{p_i : i = 1, \dots, N\}$. Given that $\F'$ generally cannot be constructed from these forecasts alone, no practically feasible aggregator can be expected to perform as well as $p'$.  Therefore, a more achievable benchmark is the \textit{revealed} aggregator $p'' := \E (\one_A \|
 \F'')$, where $\F''$ is the $\sigma$-field generated (or revealed) by the forecasts
 $\{ p_i : i = 1, \dots, N \}$. This benchmark minimizes
 the expectation of any proper loss function \citep{Ranjan08} and can be applied in practice. For this reason it is the relevant estimator in each specific partial information model. 
@@ -795,7 +795,7 @@ $\delta_i$.}
 \end{minipage}
 \end{figure}
  
- The relevant variables $X_{B_1}, \dots, X_{B_N}$, and $X_S$ follow a multivariate Gaussian distribution: 
+This is jointly characterized in the following multivariate Gaussian distribution:
 \begin{align}
 \left(\begin{matrix} X_S \\ X_{B_1}\\ \vdots \\ X_{B_N} \end{matrix}\right) &\sim \mathcal{N}\left( 
 %\boldsymbol{X} &\sim \mathcal{N}\left( 
